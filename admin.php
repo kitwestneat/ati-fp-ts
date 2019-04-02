@@ -11,6 +11,10 @@ add_action('admin_menu', function () {
     $page = add_menu_page('PBH Front Page Admin', 'PBH Front Page Admin', 'manage_options', 'pbh-fp-admin', 'pbh_fp_admin_page');
     add_action("load-$page", function () {
         add_action('admin_enqueue_scripts', function () {
+            // the default forms css screws up the react native stuff
+            wp_deregister_style('forms');
+            wp_register_style('forms', '');
+
             require 'enqueue.php';
         });
     });
