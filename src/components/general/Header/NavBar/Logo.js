@@ -1,7 +1,7 @@
 import React from "react";
 import { View, StyleSheet } from "react-native";
 
-import { HOME_LINK } from "constants/index.js";
+import { HOME_LINK } from "@/constants/index.js";
 
 const LOGO_DIMS = {
   WIDTH: 34.52,

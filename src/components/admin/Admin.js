@@ -2,7 +2,7 @@ import React, { PureComponent } from "react";
 import PageSections from "PageFactory";
 import { Button, View } from "react-native";
 
-import { ResponsiveProvider } from "components/utils";
+import { ResponsiveProvider } from "@/components/utils";
 import { generateFakeData } from "./admin-utils";
 import ModuleListCtl from "./ModuleListCtl";
 import { getListWithKeys } from "./module-list-utils";

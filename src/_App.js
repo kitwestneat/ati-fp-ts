@@ -1,19 +1,19 @@
 // @flow
 
-import React, { PureComponent } from "react";
+import React, { PureComponent } from 'react';
 
 import {
   TagPostsSingleColumn,
   MostRecent,
   Newsletter,
   Trending,
-  Instagram,
-} from "./components/modules";
-import { AppWrap, Header, Main } from "./components/general";
-import { Leaderboard } from "./components/ads";
-import { Row } from "components/primitives";
+  Instagram
+} from './components/modules';
+import { AppWrap, Header, Main } from './components/general';
+import { Leaderboard } from './components/ads';
+import { Row } from '@/components/primitives';
 
-import { getSectionData, getPostArray } from "data.js";
+import { getSectionData, getPostArray } from 'data.js';
 
 class App extends PureComponent {
   render() {
@@ -62,7 +62,5 @@ class App extends PureComponent {
 export default App;
 
 const Section = ({ children, style }) => (
-  <Row style={[{ alignItems: "center", marginTop: 100 }, style]}>
-    {children}
-  </Row>
+  <Row style={[{ alignItems: 'center', marginTop: 100 }, style]}>{children}</Row>
 );

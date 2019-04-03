@@ -1,7 +1,7 @@
 import React, { PureComponent } from "react";
 import { View, StyleSheet } from "react-native";
-import { Text } from "components/primitives";
-import { COLOR_MAP } from "constants/index";
+import { Text } from "@/components/primitives";
+import { COLOR_MAP } from "@/constants/index";
 
 class Title extends PureComponent {
   renderInstagram = () => <Text style={styles.text}>Instagram</Text>;

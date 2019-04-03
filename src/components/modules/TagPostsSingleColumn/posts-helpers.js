@@ -2,8 +2,8 @@
 
 import React from "react";
 
-import { Mrec } from "components/ads";
-import { Post } from "components/modules";
+import { Mrec } from "@/components/ads";
+import { Post } from "@/components/modules";
 
 export const POST_COMPONENTS = {
   LG: props => (

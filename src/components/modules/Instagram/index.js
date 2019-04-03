@@ -1,13 +1,13 @@
 import React, { PureComponent } from "react";
 import { View, StyleSheet } from "react-native";
-import { Container } from "components/primitives";
-import { ModuleBox } from "components/modules";
+import { Container } from "@/components/primitives";
+import { ModuleBox } from "@/components/modules";
 import Carousel from "./Carousel";
 import Title from "./Title";
 import InstagramButton from "./InstagramButton";
 
-import { Responsive } from "components/utils";
-import { BREAKPOINTS } from "constants/index";
+import { Responsive } from "@/components/utils";
+import { BREAKPOINTS } from "@/constants/index";
 
 export default class Instagram extends PureComponent {
   render() {

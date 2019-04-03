@@ -1,6 +1,6 @@
 import React from "react";
 import { View, StyleSheet } from "react-native";
-import { Text } from "components/primitives";
+import { Text } from "@/components/primitives";
 
 const SocialLinks = ({ links }) => {
   return (

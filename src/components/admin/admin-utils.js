@@ -1,5 +1,5 @@
 const faker = require("faker");
-const { CATEGORY_COLOR_MAP } = require("constants/index");
+const { CATEGORY_COLOR_MAP } = require("@/constants/index");
 
 export function queryObj2Str(query) {
   if (typeof query !== "object") {

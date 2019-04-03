@@ -1,7 +1,7 @@
 import React, { PureComponent } from "react";
 import { Text, View, StyleSheet } from "react-native";
 import { FaInstagram } from "react-icons/fa";
-import { COLOR_MAP, ATI_INSTAGRAM_URL } from "constants/index";
+import { COLOR_MAP, ATI_INSTAGRAM_URL } from "@/constants/index";
 
 const FOLLOW_STRING = "FOLLOW US";
 

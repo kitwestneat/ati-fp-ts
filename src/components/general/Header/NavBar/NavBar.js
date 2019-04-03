@@ -1,6 +1,6 @@
 import React, { PureComponent } from "react";
 import { View, StyleSheet } from "react-native";
-import { HEADER_HEIGHT } from "constants/index.js";
+import { HEADER_HEIGHT } from "@/constants/index.js";
 
 export default class NavBar extends PureComponent {
   render() {

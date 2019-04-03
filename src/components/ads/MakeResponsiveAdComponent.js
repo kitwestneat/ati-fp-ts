@@ -1,6 +1,6 @@
-import React, { PureComponent } from "react";
-import { Responsive } from "components/utils";
-import { BREAKPOINTS } from "constants/index";
+import React, { PureComponent } from 'react';
+import { Responsive } from '@/components/utils';
+import { BREAKPOINTS } from '@/constants/index';
 
 const MakeResponsiveAdComponent = ({ MobileAd, DesktopAd }) =>
   class extends PureComponent {

@@ -3,7 +3,7 @@
 import React, { PureComponent } from "react";
 import { StyleSheet, View } from "react-native";
 
-import { Text } from "components/primitives";
+import { Text } from "@/components/primitives";
 
 const COPY = {
   HEADLINE: `Sign up to our newsletter`,
