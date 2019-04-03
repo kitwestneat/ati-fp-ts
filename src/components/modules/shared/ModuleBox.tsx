@@ -2,7 +2,7 @@
 
 import React, { PureComponent, ReactNode } from 'react';
 import { StyleSheet, View, ViewStyle, StyleProp } from 'react-native';
-import { elevation } from '@/constants/index.js';
+import { elevation } from '@/constants';
 import { Pattern } from '@/components/modules';
 
 import { OFFSET_DIRECTION } from '@/types';

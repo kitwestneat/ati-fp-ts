@@ -1,4 +1,4 @@
-export const enum SECTION_TYPES {
+export enum SECTION_TYPES {
   AD = 'ad',
   RECENT = 'recent',
   TAG_TILE_BOX = 'tagTileBox',

@@ -1,6 +1,6 @@
-import React, { PureComponent } from "react";
-import { View, StyleSheet } from "react-native";
-import { HEADER_HEIGHT } from "@/constants/index.js";
+import React, { PureComponent } from 'react';
+import { View, StyleSheet } from 'react-native';
+import { HEADER_HEIGHT } from '@/constants';
 
 export default class NavBar extends PureComponent {
   render() {
@@ -19,21 +19,21 @@ export default class NavBar extends PureComponent {
 
 const styles = StyleSheet.create({
   wrap: {
-    width: "100%",
+    width: '100%',
     height: HEADER_HEIGHT,
-    backgroundColor: "black",
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-    position: "relative",
-    zIndex: 1,
+    backgroundColor: 'black',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    position: 'relative',
+    zIndex: 1
   },
   navGroup: {
-    justifyContent: "center",
+    justifyContent: 'center',
     flexBasis: `${100 / 3}%`,
-    height: "100%",
+    height: '100%'
   },
-  right: { alignItems: "flex-start" },
-  center: { alignItems: "center" },
-  left: { alignItems: "flex-end" },
+  right: { alignItems: 'flex-start' },
+  center: { alignItems: 'center' },
+  left: { alignItems: 'flex-end' }
 });

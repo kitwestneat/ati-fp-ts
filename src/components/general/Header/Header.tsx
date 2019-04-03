@@ -8,7 +8,7 @@ import { Responsive } from '@/components/utils';
 import MobileNav from './MobileNav/MobileNav';
 import DesktopNav from './DesktopNav/DesktopNav';
 
-import { BREAKPOINTS } from '@/constants/index.js';
+import { BREAKPOINTS } from '@/constants';
 
 const HEADER_Z_INDEX = 999;
 

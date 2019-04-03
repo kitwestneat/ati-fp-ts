@@ -13,7 +13,7 @@ import {
   HOME_LINK,
   PBH_NETWORK_LINKS,
   SECTION_SPACING
-} from '@/constants/index.js';
+} from '@/constants';
 
 type Props = {};
 

@@ -1,8 +1,8 @@
-import React, { PureComponent } from "react";
-import { View, StyleSheet } from "react-native";
-import { Text } from "@/components/primitives";
-import { NavBar, SocialLinks, Logo } from "../NavBar/index.js";
-import { TAG_LINKS, SOCIAL_LINKS_STANDARD } from "@/constants/index.js";
+import React, { PureComponent } from 'react';
+import { View, StyleSheet } from 'react-native';
+import { Text } from '@/components/primitives';
+import { NavBar, SocialLinks, Logo } from '../NavBar/index.js';
+import { TAG_LINKS, SOCIAL_LINKS_STANDARD } from '@/constants';
 
 export default class DesktopNav extends PureComponent {
   render() {
@@ -35,14 +35,14 @@ const TagLinks = ({ links }) => {
 
 const styles = StyleSheet.create({
   tagLinks: {
-    flexDirection: "row",
+    flexDirection: 'row'
   },
   linkItem: {
     paddingHorizontal: 15,
-    fontSize: 21,
+    fontSize: 21
   },
   headerText: {
-    color: "white",
-    fontWeight: "400",
-  },
+    color: 'white',
+    fontWeight: '400'
+  }
 });

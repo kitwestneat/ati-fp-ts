@@ -1,11 +1,11 @@
-import React from "react";
-import { View, StyleSheet } from "react-native";
+import React from 'react';
+import { View, StyleSheet } from 'react-native';
 
-import { HOME_LINK } from "@/constants/index.js";
+import { HOME_LINK } from '@/constants';
 
 const LOGO_DIMS = {
   WIDTH: 34.52,
-  HEIGHT: 28,
+  HEIGHT: 28
 };
 
 const Logo = ({ style }) => (
@@ -33,11 +33,11 @@ const styles = StyleSheet.create({
     width: LOGO_DIMS.WIDTH,
     height: LOGO_DIMS.HEIGHT,
     marginHorizontal: 10,
-    alignItems: "center",
-    justifyContent: "center",
-    ...svgOffsetCorrection(),
+    alignItems: 'center',
+    justifyContent: 'center',
+    ...svgOffsetCorrection()
   },
   headerText: {
-    color: "white",
-  },
+    color: 'white'
+  }
 });
