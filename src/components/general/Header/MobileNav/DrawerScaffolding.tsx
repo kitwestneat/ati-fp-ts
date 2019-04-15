@@ -54,7 +54,7 @@ const styles = StyleSheet.create({
     width: '100%'
   },
   wrap: {
-    ...elevation(2),
+    ...(elevation(2) as object),
     position: 'absolute',
     top: 0,
     left: 0,
