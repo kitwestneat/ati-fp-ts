@@ -2,7 +2,6 @@ export enum SECTION_TYPES {
   AD = 'ad',
   RECENT = 'recent',
   TAG_TILE_BOX = 'tagTileBox',
-  TAG_SIDE_RAIL = 'tagSideRail',
   INSTAGRAM = 'instagram',
   NEWSLETTER = 'newsletter',
   TRENDING = 'trending'
