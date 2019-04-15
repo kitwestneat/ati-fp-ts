@@ -3,7 +3,7 @@
 import React from 'react';
 import { TouchableOpacity, StyleSheet, View } from 'react-native';
 
-import { Text } from '@/components/primitives';
+import { Text } from '../../primitives';
 
 const BUTTON_TEXT = 'Sign Up';
 
@@ -13,7 +13,7 @@ type Props = {
 
 const SubmitButton = ({ onPress }: Props) => (
   <TouchableOpacity
-    accessibilityRole='button'
+    accessibilityRole="button"
     accessibilityLabel={'Sign up for ATI newsletter'}
     accessible={true}
     style={styles.buttonWrap}

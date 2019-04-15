@@ -1,17 +1,19 @@
 // @flow
 
-import React, { PureComponent } from 'react';
-import { View as RNView, StyleSheet, ViewStyle, StyleProp } from 'react-native';
+import React, { PureComponent, ComponentType } from 'react';
+import { View as RNView, StyleSheet, ViewStyle, StyleProp, ViewProps } from 'react-native';
+import { LinkProps, WebViewStyle, Omit } from '@/types';
 
 // type ContentPositioning = { centerX?: boolean } | { centerY?: boolean } | { center?: boolean };
 
-type Props = {
-  style?: StyleProp<ViewStyle>;
+type WebViewProps = Omit<ViewProps, 'style'> & LinkProps;
+
+interface Props extends WebViewProps {
+  style?: StyleProp<WebViewStyle>;
   spacer?: number;
-  children: Node;
   row: boolean;
   col: boolean;
-};
+}
 
 class View extends PureComponent<Props> {
   static defaultProps = {
@@ -21,17 +23,17 @@ class View extends PureComponent<Props> {
     style: {}
   };
 
-  getFlexDirection = (): ViewStyle => {
+  getFlexDirection = (): WebViewStyle => {
     const { row, col } = this.props;
     return { flexDirection: col && !row ? 'column' : 'row' };
   };
 
-  getMarginTop = (): ViewStyle => {
+  getMarginTop = (): WebViewStyle => {
     const { spacer } = this.props;
     return { marginTop: spacer };
   };
 
-  getDerivedStyles = (): StyleProp<ViewStyle> => {
+  getDerivedStyles = (): StyleProp<WebViewStyle> => {
     return {
       ...this.getFlexDirection(),
       ...this.getMarginTop()
@@ -41,11 +43,12 @@ class View extends PureComponent<Props> {
   render() {
     const { style, spacer, children, ...rest } = this.props;
     const derivedStyles = this.getDerivedStyles();
+    const RNWView = (RNView as any) as ComponentType<Props>;
 
     return (
-      <RNView style={[styles.row, derivedStyles, style]} {...rest}>
+      <RNWView style={[styles.row, derivedStyles, style]} {...rest}>
         {children}
-      </RNView>
+      </RNWView>
     );
   }
 }

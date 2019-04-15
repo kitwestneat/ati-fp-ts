@@ -1,13 +1,11 @@
-// @flow
+import React, { PureComponent } from 'react';
+import { StyleSheet } from 'react-native';
 
-import React, { PureComponent } from "react";
-import { StyleSheet, View } from "react-native";
-
-import { Text } from "@/components/primitives";
+import { Text, View } from '../../primitives';
 
 const COPY = {
   HEADLINE: `Sign up to our newsletter`,
-  SUB_HEAD: `Just enter your email and stay updated`,
+  SUB_HEAD: `Just enter your email and stay updated`
 };
 
 class Callout extends PureComponent {
@@ -29,15 +27,15 @@ export default Callout;
 
 const styles = StyleSheet.create({
   title: {
-    color: "white",
+    color: 'white',
     fontSize: 30,
     lineHeight: 40,
-    fontWeight: "600",
+    fontWeight: '600'
   },
   instructions: {
-    color: "white",
+    color: 'white',
     fontSize: 24,
     lineHeight: 31,
-    fontWeight: "300",
-  },
+    fontWeight: '300'
+  }
 });

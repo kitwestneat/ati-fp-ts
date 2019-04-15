@@ -1,13 +1,17 @@
 // @flow
 
 import React, { PureComponent } from 'react';
-import { View, StyleSheet, ViewStyle } from 'react-native';
+import { StyleSheet } from 'react-native';
 
-import { Text } from '@/components/primitives';
+import { Text, View } from '@/components/primitives';
 import { PostImage, PostLabel } from '@/components/modules';
+import { LinkProps, WebViewStyle } from '@/types';
+import { PostType } from '@/types';
 
-type Props = {
-  style: ViewStyle;
+export interface OverlayPostProps extends PostType {
+  layoutVariant: 'overlay';
+
+  style: WebViewStyle;
   bottomOverlap: number;
   center: boolean;
   imageSrc: string;
@@ -21,8 +25,9 @@ type Props = {
   categoryColor: string;
   numberOfLines: number;
   link: string;
-};
-class OverlayPost extends PureComponent<Props> {
+}
+
+class OverlayPost extends PureComponent<OverlayPostProps> {
   static defaultProps = {
     center: false,
     isDesktop: false,
@@ -51,7 +56,7 @@ class OverlayPost extends PureComponent<Props> {
       : { fontSize: 20, lineHeight: 24 };
 
     const labelWrapPosition = getLabelWrapPositionStyles(center);
-    const linkProps = link ? { accessibilityRole: 'link', href: link } : {};
+    const linkProps: LinkProps = link ? { accessibilityRole: 'link', href: link } : {};
 
     return (
       <View {...linkProps}>
@@ -73,7 +78,7 @@ class OverlayPost extends PureComponent<Props> {
             <View>
               <Text
                 numberOfLines={numberOfLines}
-                aria-level='2'
+                aria-level="2"
                 style={[
                   styles.titleText,
                   localFontStyles,

@@ -3,7 +3,7 @@
 import React, { PureComponent } from 'react';
 import { View } from 'react-native';
 
-import { Text } from '@/components/primitives';
+import { Text } from '../../primitives';
 
 type Props = {
   fill?: boolean;

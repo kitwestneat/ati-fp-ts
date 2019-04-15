@@ -2,7 +2,7 @@
 
 import React, { PureComponent } from 'react';
 
-import { Grid } from '@/components/primitives';
+import { Grid } from '../../primitives';
 
 import { GRID_COMPONENTS, getComposedComponents } from './posts-helpers';
 import { GridOrder, PostType } from '@/types';

@@ -2,7 +2,7 @@
 
 import React, { PureComponent, ReactNode, ReactElement } from 'react';
 import { View } from 'react-native';
-import { Container } from '@/components/primitives';
+import { Container } from '../../primitives';
 
 type Props = {
   overlap: number;
@@ -52,7 +52,7 @@ class OverlapScaffold extends PureComponent<Props> {
             paddingHorizontal: containerPadding,
             zIndex: 10
           }}
-          type='content'
+          type="content"
         >
           <View
             style={{
@@ -66,7 +66,7 @@ class OverlapScaffold extends PureComponent<Props> {
             marginTop: -overlap,
             paddingHorizontal: containerPadding
           }}
-          type='content'
+          type="content"
         >
           {this.getScaffoldContentByType(OverlapScaffold.Overlap)}
         </Container>

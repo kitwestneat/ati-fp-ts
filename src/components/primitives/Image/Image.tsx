@@ -9,15 +9,15 @@ import {
 
 import { Ratio } from '@/components/primitives';
 
-type Props = {
-  alt: string;
-  width: number;
-  height: number;
-  style: object;
-  source: ImageSourcePropType;
-  src: string;
-  resizeMode: ImageResizeMode;
-};
+interface Props {
+  alt?: string;
+  width?: number;
+  height?: number;
+  style?: object;
+  source?: ImageSourcePropType;
+  src?: string;
+  resizeMode?: ImageResizeMode;
+}
 
 interface Dimension {
   width: number;
@@ -37,13 +37,13 @@ class Image extends PureComponent<Props> {
     resizeMode: 'cover'
   };
 
-  getValueFromStyleProp = (cssProperty: keyof ImageStyle): number =>
+  getValueFromStyleProp = (cssProperty: keyof ImageStyle): number | undefined =>
     this.props.style && ((StyleSheet.flatten(this.props.style) as any)[cssProperty] as number);
 
   getDimensionsFromProps = (): Dimension | null => {
     const { width, height } = this.props;
 
-    return !isNaN(width) && !isNaN(height)
+    return typeof width == 'number' && typeof height == 'number'
       ? {
           width,
           height
@@ -55,7 +55,7 @@ class Image extends PureComponent<Props> {
     const width = this.getValueFromStyleProp('width');
     const height = this.getValueFromStyleProp('height');
 
-    return !isNaN(width) && !isNaN(height)
+    return typeof width == 'number' && typeof height == 'number'
       ? {
           width,
           height

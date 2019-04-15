@@ -5,8 +5,11 @@ import { Text as RNText, StyleSheet, TextProps } from 'react-native';
 import Clamp from './Clamp';
 
 import { FONT_FAMILIES, COLOR_MAP } from '@/constants/index';
+import { LinkProps } from '@/types';
 
-interface Props extends TextProps {
+type WebTextProps = TextProps & LinkProps;
+
+interface Props extends WebTextProps {
   serif?: boolean;
   sansSerif?: boolean;
   numberOfLines?: number;
@@ -22,14 +25,17 @@ class Text extends PureComponent<Props> {
   render() {
     const { numberOfLines, serif, sansSerif, style, children, ...rest } = this.props;
     const fontFamily = this.props.serif ? FONT_FAMILIES.SERIF : FONT_FAMILIES.SANS_SERIF;
+
+    const RNWText = (RNText as any) as React.ComponentType<WebTextProps>;
+
     return numberOfLines ? (
       <Clamp numberOfLines={numberOfLines} {...rest} style={[styles.text, { fontFamily }, style]}>
         {children}
       </Clamp>
     ) : (
-      <RNText {...rest} style={[styles.text, { fontFamily }, style]}>
+      <RNWText {...rest} style={[styles.text, { fontFamily }, style]}>
         {children}
-      </RNText>
+      </RNWText>
     );
   }
 }

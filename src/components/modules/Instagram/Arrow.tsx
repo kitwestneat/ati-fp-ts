@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react';
-import { TouchableOpacity, StyleSheet } from 'react-native';
+import { StyleSheet } from 'react-native';
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
+import { TouchableOpacity } from '@/components/primitives';
 
 // see CarouselSlideRenderControlProps
 interface Props {
@@ -47,8 +48,7 @@ const ARROW_SIZE = 30;
 
 const styles = StyleSheet.create({
   button: {
-    // XXX can't use percentages in react native
-    borderRadius: '50%',
+    borderRadius: ARROW_SIZE / 2,
     backgroundColor: 'black',
     width: ARROW_SIZE,
     height: ARROW_SIZE,

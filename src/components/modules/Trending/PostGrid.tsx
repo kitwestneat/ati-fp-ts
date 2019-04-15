@@ -8,9 +8,9 @@ import { PostProps } from '../shared/Post';
 
 const COMPONENT_TYPES = {
   MD: (props: PostProps) => (
-    <Post layoutVariant='medium' key={props.id} imageWidth={286} imageHeight={286} {...props} />
+    <Post layoutVariant="medium" key={props.id} imageWidth={286} imageHeight={286} {...props} />
   ),
-  SM: (props: PostProps) => <Post layoutVariant='reduced' key={props.id} {...props} />
+  SM: (props: PostProps) => <Post layoutVariant="reduced" key={props.id} {...props} />
 };
 
 type Props = {

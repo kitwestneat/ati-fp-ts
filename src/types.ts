@@ -1,4 +1,5 @@
 import { SECTION_TYPES } from '@/constants';
+import { ViewStyle } from 'react-native';
 
 export enum OFFSET_DIRECTION {
   LEFT = 'left',
@@ -52,3 +53,17 @@ export type AllModuleDataTypes =
   | RecentModuleData;
 
 export type GridOrder = 1 | 2;
+
+export interface LinkProps {
+  accessibilityRole?: 'link';
+  href?: string;
+}
+
+export type Omit<T, K> = Pick<T, Exclude<keyof T, K>>;
+
+export interface WebViewStyle extends Omit<ViewStyle, 'transform'> {
+  transform?: {
+    translateX?: string | number;
+    translateY?: string | number;
+  }[];
+}

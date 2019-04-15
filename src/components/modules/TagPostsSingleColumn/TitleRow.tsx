@@ -1,12 +1,12 @@
 // @flow
 
 import React, { PureComponent } from 'react';
-import { View, StyleSheet } from 'react-native';
+import { StyleSheet } from 'react-native';
 
 import { ModuleTitle } from '@/components/modules';
 import { Leaderboard, MobileMrec } from '@/components/ads';
 
-import { Row } from '@/components/primitives';
+import { Row, View } from '@/components/primitives';
 
 import { SECTION_SPACERS, SECTION_SPACING_VARIANTS } from '@/constants';
 
@@ -52,7 +52,7 @@ class TitleRow extends PureComponent<Props> {
     const { link, title, patternColor } = this.props;
     // XXX should moduletitle get isDesktop?
     return (
-      <View style={{ width: '100%' }} accessibilityRole='link' href={link}>
+      <View style={{ width: '100%' }} accessibilityRole="link" href={link}>
         <ModuleTitle
           title={title}
           patternColor={patternColor}

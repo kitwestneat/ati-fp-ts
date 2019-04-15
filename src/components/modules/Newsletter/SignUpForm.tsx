@@ -3,7 +3,7 @@
 import React, { PureComponent } from 'react';
 import { ActivityIndicator, StyleSheet, View } from 'react-native';
 
-import { Text } from '@/components/primitives';
+import { Text } from '../../primitives';
 
 import { FaCheckCircle, FaExclamationTriangle } from 'react-icons/fa';
 
@@ -49,7 +49,7 @@ class SignUpForm extends PureComponent<Props, State> {
     });
   };
 
-  renderLoading = () => <ActivityIndicator size='large' color='white' />;
+  renderLoading = () => <ActivityIndicator size="large" color="white" />;
 
   renderSuccess = () => (
     <Text style={[styles.successMsg]}>

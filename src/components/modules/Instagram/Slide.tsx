@@ -1,8 +1,8 @@
 // @flow
 
 import React, { PureComponent } from 'react';
-import { View, StyleSheet } from 'react-native';
-import { Text, Image } from '@/components/primitives';
+import { StyleSheet } from 'react-native';
+import { Text, Image, View } from '@/components/primitives';
 
 const SLIDE_SIZE = 306;
 const TEXTBOX_PADDING = {
@@ -43,7 +43,7 @@ class InstagramSlide extends PureComponent<Props> {
           lineHeight: FONT.MOBILE.LINE_HEIGHT
         };
     return (
-      <View style={[styles.wrap]} accessibilityRole='link' href={link}>
+      <View style={[styles.wrap]} accessibilityRole="link" href={link}>
         <Image
           style={styles.image}
           source={{

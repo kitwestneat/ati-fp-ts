@@ -1,19 +1,17 @@
 // @flow
 
 import React, { PureComponent } from 'react';
-import { View, StyleSheet } from 'react-native';
+import { StyleSheet } from 'react-native';
 
 import { PostLabel } from '@/components/modules';
-import { Text } from '@/components/primitives';
+import { Text, View } from '@/components/primitives';
+import { PostType, LinkProps } from '@/types';
 
-export type SmallPostProps = {
-  title: string;
-  categoryName: string;
-  categoryColor: string;
+export interface SmallPostProps extends Partial<PostType> {
+  layoutVariant: 'reduced';
   numberOfLines?: number;
-  link?: string;
   isDesktop?: boolean;
-};
+}
 
 class SmallPost extends PureComponent<SmallPostProps> {
   static defaultProps = {
@@ -27,11 +25,14 @@ class SmallPost extends PureComponent<SmallPostProps> {
       ? { fontSize: 17, lineHeight: 24 }
       : { fontSize: 15, lineHeight: 20 };
 
-    const linkProps = link ? { accessibilityRole: 'link', href: link } : {};
+    const linkProps: LinkProps = link ? { accessibilityRole: 'link', href: link } : {};
 
     return (
       <View style={[styles.postBox]} {...linkProps}>
-        <PostLabel categoryName={categoryName} categoryColor={categoryColor} />
+        <PostLabel
+          categoryName={categoryName || 'DEFAULT'}
+          categoryColor={categoryColor || '#999'}
+        />
         <View style={{ marginTop: 6 }}>
           <Text
             numberOfLines={numberOfLines}

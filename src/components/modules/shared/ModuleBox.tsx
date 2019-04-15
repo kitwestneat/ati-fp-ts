@@ -41,7 +41,7 @@ export default ModuleBox;
 
 const styles = StyleSheet.create({
   box: {
-    ...elevation(1),
+    ...(elevation(1) as object),
     padding: 30,
     width: '100%',
     maxWidth: '100%',

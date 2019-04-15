@@ -1,19 +1,23 @@
 // @flow
 
 import React, { PureComponent } from 'react';
-import { View, StyleSheet } from 'react-native';
+import { StyleSheet } from 'react-native';
 
 import { PostImage } from '@/components/modules';
-import SmallPost, { SmallPostProps } from './SmallPost';
+import SmallPost from './SmallPost';
+import { View } from '@/components/primitives';
+import { LinkProps, PostType } from '@/types';
 
-type Props = {
-  link: string;
+export interface MediumPostProps extends Partial<PostType> {
+  layoutVariant: 'medium';
   imageSrc: string;
   imageWidth: number;
   imageHeight: number;
-} & SmallPostProps;
+  numberOfLines?: number;
+  isDesktop?: boolean;
+}
 
-class MediumPost extends PureComponent<Props> {
+class MediumPost extends PureComponent<MediumPostProps> {
   static defaultProps = {
     style: {},
     imageWidth: 300,
@@ -21,8 +25,9 @@ class MediumPost extends PureComponent<Props> {
   };
 
   render() {
-    const { imageSrc, imageHeight, imageWidth, link, ...rest } = this.props;
-    const linkProps = link ? { accessibilityRole: 'link', href: link } : {};
+    const { imageSrc, imageHeight, imageWidth, link, layoutVariant, ...rest } = this.props;
+    const linkProps: LinkProps = link ? { accessibilityRole: 'link', href: link } : {};
+
     return (
       <View {...linkProps} style={{ flex: 1 }}>
         <PostImage width={imageWidth} height={imageHeight} imageSrc={imageSrc} />
@@ -33,7 +38,7 @@ class MediumPost extends PureComponent<Props> {
             flexGrow: 1
           }}
         >
-          <SmallPost {...rest} />
+          <SmallPost layoutVariant="reduced" {...rest} />
           <View style={styles.postLine} />
         </View>
       </View>
