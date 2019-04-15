@@ -2,6 +2,7 @@
   "name": "ati-fp-ts",
   "version": "0.1.0",
   "private": true,
+  "homepage": "wordpress/wp-content/themes/ati-2018/frontpage",
   "dependencies": {
     "@types/jest": "24.0.11",
     "@types/node": "11.12.2",
@@ -25,7 +26,11 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "pre-build": "cp public/index.html public/_index.html && cp public/root-partial.html public/index.html",
+    "post-build": "cp public/index.html public/root-partial.html && cp public/_index.html public/index.html && ./phpify-fp.sh",
+    "build": "npm run pre-build ; NODE_ENV=dev react-scripts build ; npm run post-build",
+    "deploy": "tar cvzf /tmp/front.tgz build && scp /tmp/front.tgz pbh:/tmp"
   },
   "eslintConfig": {
     "extends": "react-app"
