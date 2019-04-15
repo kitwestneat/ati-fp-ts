@@ -1,12 +1,11 @@
-// @flow
-
-import { Platform, StyleProp, ViewStyle } from 'react-native';
+import { Platform, StyleProp } from 'react-native';
+import { WebViewStyle } from '@/types';
 
 const penumbraOpacity = 0.14;
 const umbraOpacity = 0.2;
 
 interface ElevationsType {
-  [t: string]: StyleProp<ViewStyle>[];
+  [t: string]: StyleProp<WebViewStyle>[];
 }
 
 const ELEVATIONS: ElevationsType = {

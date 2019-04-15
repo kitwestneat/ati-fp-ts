@@ -3,7 +3,12 @@
 import React, { PureComponent, createContext, ReactNode } from 'react';
 import { Dimensions, ScaledSize } from 'react-native';
 
-const { Provider, Consumer } = createContext();
+const { Provider, Consumer } = createContext<ResponsiveChildProps>({
+  width: 0,
+  height: 0,
+  minWidth: () => true,
+  maxWidth: () => true
+});
 
 type Coordinate = [number, number];
 type GetSlope = [Coordinate, Coordinate];
@@ -66,8 +71,7 @@ export class ResponsiveProvider extends PureComponent<Props, ScaledSize> {
           width,
           height,
           minWidth: this.minWidth,
-          maxWidth: this.maxWidth,
-          getLock: this.makeLockFunc()
+          maxWidth: this.maxWidth
         }}
       >
         {this.props.children}

@@ -62,6 +62,7 @@ export interface LinkProps {
 export type Omit<T, K> = Pick<T, Exclude<keyof T, K>>;
 
 export interface WebViewStyle extends Omit<ViewStyle, 'transform'> {
+  boxShadow?: string;
   transform?: {
     translateX?: string | number;
     translateY?: string | number;
