@@ -4,20 +4,17 @@ import React, { PureComponent, ComponentType } from 'react';
 import { View as RNView, StyleSheet, ViewStyle, StyleProp, ViewProps } from 'react-native';
 import { LinkProps, WebViewStyle, Omit } from '@/types';
 
-// type ContentPositioning = { centerX?: boolean } | { centerY?: boolean } | { center?: boolean };
-
 type WebViewProps = Omit<ViewProps, 'style'> & LinkProps;
 
 interface Props extends WebViewProps {
   style?: StyleProp<WebViewStyle>;
   spacer?: number;
-  row: boolean;
-  col: boolean;
+  row?: boolean;
+  col?: boolean;
 }
 
 class View extends PureComponent<Props> {
   static defaultProps = {
-    spacer: 100,
     row: false,
     col: true,
     style: {}
@@ -46,7 +43,7 @@ class View extends PureComponent<Props> {
     const RNWView = (RNView as any) as ComponentType<Props>;
 
     return (
-      <RNWView style={[styles.row, derivedStyles, style]} {...rest}>
+      <RNWView style={[derivedStyles, style]} {...rest}>
         {children}
       </RNWView>
     );
@@ -54,10 +51,3 @@ class View extends PureComponent<Props> {
 }
 
 export default View;
-
-const styles = StyleSheet.create({
-  row: {
-    width: '100%',
-    maxWidth: '100%'
-  }
-});

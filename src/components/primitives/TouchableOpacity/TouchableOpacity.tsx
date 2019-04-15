@@ -3,7 +3,7 @@ import {
   TouchableOpacityProps,
   StyleProp
 } from 'react-native';
-import { PureComponent, ComponentType } from 'react';
+import React, { PureComponent, ComponentType } from 'react';
 import { Omit, WebViewStyle } from '@/types';
 
 interface Props extends Omit<TouchableOpacityProps, 'style'> {
