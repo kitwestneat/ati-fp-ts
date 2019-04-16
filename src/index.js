@@ -17,6 +17,7 @@ function startAdmin(moduleList) {
     document.getElementById("root"),
   );
 }
+window.startAdmin = startAdmin;
 */
 
 if (isDevEnv()) {

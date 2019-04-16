@@ -1,3 +1,5 @@
+import { isDevEnv } from "utils";
+
 let nextKey = 0;
 function getModuleKey() {
   return nextKey++;
@@ -46,4 +48,8 @@ export async function saveList(list) {
     method: "POST",
     body: formData,
   });
+
+  if (isDevEnv()) {
+    return new Promise(resolve => setTimeout(resolve, 10000));
+  }
 }

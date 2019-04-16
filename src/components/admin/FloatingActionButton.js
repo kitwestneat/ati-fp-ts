@@ -24,12 +24,17 @@ export default React.memo(function FloatingActionButton({
   onPress,
   icon,
   index = 0,
+  disabled = false,
 }) {
   const inner = icon || <Text style={styles.fabIcon}>+</Text>;
   const bottom = 20 + 60 * index;
 
   return (
-    <TouchableOpacity style={{ ...styles.fab, bottom }} onPress={onPress}>
+    <TouchableOpacity
+      style={{ ...styles.fab, bottom }}
+      onPress={onPress}
+      disabled={disabled}
+    >
       {inner}
     </TouchableOpacity>
   );
