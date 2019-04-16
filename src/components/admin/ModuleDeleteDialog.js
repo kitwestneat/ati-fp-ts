@@ -1,4 +1,4 @@
-import React, { PureComponent } from "react";
+import React from "react";
 import { Button, Text, View } from "react-native";
 import * as styles from "./styles";
 

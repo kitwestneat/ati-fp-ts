@@ -36,3 +36,14 @@ export function replaceItem(list, newItem, opts = {}) {
 
   return newList;
 }
+
+export async function saveList(list) {
+  const API_ENDPOINT = document.location.href;
+  const formData = new FormData();
+  formData.append("module_list", JSON.stringify(list));
+
+  await fetch(API_ENDPOINT, {
+    method: "POST",
+    body: formData,
+  });
+}

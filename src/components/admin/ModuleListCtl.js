@@ -105,7 +105,7 @@ export default class ModuleListCtl extends PureComponent {
           extraData={watchedState}
           onMoveEnd={({ data }) => updateModuleList({ moduleList: data })}
         />
-        <FloatingActionButton onPress={this.addItem} />
+        <FloatingActionButton onPress={this.addItem} index={1} />
       </View>
     );
   }

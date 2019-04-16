@@ -20,11 +20,16 @@ const styles = {
   },
 };
 
-export default React.memo(function FloatingActionButton({ onPress, icon }) {
+export default React.memo(function FloatingActionButton({
+  onPress,
+  icon,
+  index = 0,
+}) {
   const inner = icon || <Text style={styles.fabIcon}>+</Text>;
+  const bottom = 20 + 60 * index;
 
   return (
-    <TouchableOpacity style={styles.fab} onPress={onPress}>
+    <TouchableOpacity style={{ ...styles.fab, bottom }} onPress={onPress}>
       {inner}
     </TouchableOpacity>
   );

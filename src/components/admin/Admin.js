@@ -1,11 +1,13 @@
 import React, { PureComponent } from "react";
 import PageSections from "PageFactory";
 import { Button, View } from "react-native";
+import { FaSave } from "react-icons/fa";
 
+import FloatingActionButton from "./FloatingActionButton";
 import { ResponsiveProvider } from "@/components/utils";
 import { generateFakeData } from "./admin-utils";
 import ModuleListCtl from "./ModuleListCtl";
-import { getListWithKeys } from "./module-list-utils";
+import { getListWithKeys, saveList } from "./module-list-utils";
 
 export default class Admin extends PureComponent {
   constructor(props) {
@@ -19,6 +21,7 @@ export default class Admin extends PureComponent {
   }
 
   updateModuleList = ({ moduleList }) => this.setState({ moduleList });
+  saveModuleList = () => saveList(this.state.moduleList);
 
   render() {
     const { moduleList, isPreview } = this.state;
@@ -43,6 +46,11 @@ export default class Admin extends PureComponent {
             </ResponsiveProvider>
           </View>
         )}
+        <FloatingActionButton
+          onPress={this.saveModuleList}
+          icon={<FaSave color="white" />}
+          index={0}
+        />
       </View>
     );
   }
