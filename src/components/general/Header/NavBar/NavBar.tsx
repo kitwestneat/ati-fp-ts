@@ -2,7 +2,13 @@ import React, { PureComponent } from 'react';
 import { View, StyleSheet } from 'react-native';
 import { HEADER_HEIGHT } from '@/constants';
 
-export default class NavBar extends PureComponent {
+interface Props {
+  renderRight: () => JSX.Element;
+  renderCenter: () => JSX.Element;
+  renderLeft: () => JSX.Element;
+}
+
+export default class NavBar extends PureComponent<Props> {
   render() {
     const { renderRight, renderCenter, renderLeft } = this.props;
     return (
