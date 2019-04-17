@@ -2,7 +2,7 @@ import React from 'react';
 
 import { Mrec } from '@/components/ads';
 import { Post } from '@/components/modules';
-import { PostType } from '@/types';
+import { PostType, GridOrder } from '@/types';
 
 const GRID_POST_LENGTH = 5;
 
@@ -24,7 +24,7 @@ const POST_COMPONENTS: PostComponentCreatorMap = {
 
 const ORDERS = [['LG', 'MD', 'MD', 'MD', 'AD'], ['MD', 'MD', 'AD', 'MD', 'LG']];
 
-export function mapPostsToGrid(order: 1 | 2, posts: PostType[]) {
+export function mapPostsToGrid(order: GridOrder, posts: PostType[]) {
   const orderSpec = ORDERS[order - 1];
   const postQueue = posts.slice(0);
   if (postQueue.length != GRID_POST_LENGTH) {
