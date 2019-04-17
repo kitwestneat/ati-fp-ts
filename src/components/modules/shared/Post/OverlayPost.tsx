@@ -5,7 +5,7 @@ import { StyleSheet } from 'react-native';
 
 import { Text, View } from '@/components/primitives';
 import { PostImage, PostLabel } from '@/components/modules';
-import { LinkProps, WebViewStyle } from '@/types';
+import { WebAccessibilityProps, WebViewStyle } from '@/types';
 import { PostType } from '@/types';
 
 export interface OverlayPostProps extends PostType {
@@ -56,7 +56,7 @@ class OverlayPost extends PureComponent<OverlayPostProps> {
       : { fontSize: 20, lineHeight: 24 };
 
     const labelWrapPosition = getLabelWrapPositionStyles(center);
-    const linkProps: LinkProps = link ? { accessibilityRole: 'link', href: link } : {};
+    const linkProps: WebAccessibilityProps = link ? { accessibilityRole: 'link', href: link } : {};
 
     return (
       <View {...linkProps}>
@@ -78,7 +78,6 @@ class OverlayPost extends PureComponent<OverlayPostProps> {
             <View>
               <Text
                 numberOfLines={numberOfLines}
-                aria-level="2"
                 style={[
                   styles.titleText,
                   localFontStyles,

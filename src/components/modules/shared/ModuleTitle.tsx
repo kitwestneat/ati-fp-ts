@@ -37,7 +37,12 @@ class ModuleTitle extends PureComponent<Props> {
         {children ? (
           children
         ) : (
-          <Text serif style={[{ fontWeight: '600' }, this.getTextStyles()]}>
+          <Text
+            accessibilityRole="heading"
+            aria-level="2"
+            serif
+            style={[{ fontWeight: '600' }, this.getTextStyles()]}
+          >
             {title}
           </Text>
         )}

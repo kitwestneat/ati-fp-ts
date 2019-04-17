@@ -6,7 +6,7 @@ import { StyleSheet } from 'react-native';
 import { PostImage } from '@/components/modules';
 import SmallPost from './SmallPost';
 import { View } from '@/components/primitives';
-import { LinkProps, PostType } from '@/types';
+import { WebAccessibilityProps, PostType } from '@/types';
 
 export interface MediumPostProps extends Partial<PostType> {
   layoutVariant: 'medium';
@@ -26,7 +26,7 @@ class MediumPost extends PureComponent<MediumPostProps> {
 
   render() {
     const { imageSrc, imageHeight, imageWidth, link, layoutVariant, ...rest } = this.props;
-    const linkProps: LinkProps = link ? { accessibilityRole: 'link', href: link } : {};
+    const linkProps: WebAccessibilityProps = link ? { accessibilityRole: 'link', href: link } : {};
 
     return (
       <View {...linkProps} style={{ flex: 1 }}>

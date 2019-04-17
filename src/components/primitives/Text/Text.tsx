@@ -5,9 +5,9 @@ import { Text as RNText, StyleSheet, TextProps } from 'react-native';
 import Clamp from './Clamp';
 
 import { FONT_FAMILIES, COLOR_MAP } from '@/constants/index';
-import { LinkProps } from '@/types';
+import { WebAccessibilityProps, Omit } from '@/types';
 
-type WebTextProps = TextProps & LinkProps;
+type WebTextProps = Omit<TextProps, 'accessibilityRole'> & WebAccessibilityProps;
 
 interface Props extends WebTextProps {
   serif?: boolean;

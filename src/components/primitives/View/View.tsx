@@ -1,10 +1,10 @@
 // @flow
 
 import React, { PureComponent, ComponentType } from 'react';
-import { View as RNView, StyleSheet, ViewStyle, StyleProp, ViewProps } from 'react-native';
-import { LinkProps, WebViewStyle, Omit } from '@/types';
+import { View as RNView, StyleProp, ViewProps } from 'react-native';
+import { WebAccessibilityProps, WebViewStyle, Omit } from '@/types';
 
-type WebViewProps = Omit<ViewProps, 'style'> & LinkProps;
+type WebViewProps = Omit<ViewProps, 'style' | 'accessibilityRole'> & WebAccessibilityProps;
 
 interface Props extends WebViewProps {
   style?: StyleProp<WebViewStyle>;

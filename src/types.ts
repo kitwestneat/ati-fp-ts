@@ -70,9 +70,10 @@ export interface ModuleSpec {
 
 export type GridOrder = 1 | 2;
 
-export interface LinkProps {
-  accessibilityRole?: 'link';
+export interface WebAccessibilityProps {
+  accessibilityRole?: 'link' | 'heading';
   href?: string;
+  'aria-level'?: string;
 }
 
 export type Omit<T, K> = Pick<T, Exclude<keyof T, K>>;

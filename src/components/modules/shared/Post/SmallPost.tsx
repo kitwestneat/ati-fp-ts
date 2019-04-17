@@ -5,7 +5,7 @@ import { StyleSheet } from 'react-native';
 
 import { PostLabel } from '@/components/modules';
 import { Text, View } from '@/components/primitives';
-import { PostType, LinkProps } from '@/types';
+import { PostType, WebAccessibilityProps } from '@/types';
 
 export interface SmallPostProps extends Partial<PostType> {
   layoutVariant: 'reduced';
@@ -25,7 +25,7 @@ class SmallPost extends PureComponent<SmallPostProps> {
       ? { fontSize: 17, lineHeight: 24 }
       : { fontSize: 15, lineHeight: 20 };
 
-    const linkProps: LinkProps = link ? { accessibilityRole: 'link', href: link } : {};
+    const linkProps: WebAccessibilityProps = link ? { accessibilityRole: 'link', href: link } : {};
 
     return (
       <View style={[styles.postBox]} {...linkProps}>
@@ -34,11 +34,7 @@ class SmallPost extends PureComponent<SmallPostProps> {
           categoryColor={categoryColor || '#999'}
         />
         <View style={{ marginTop: 6 }}>
-          <Text
-            numberOfLines={numberOfLines}
-            aria-level={2}
-            style={[{ fontWeight: '600' }, fontStyles]}
-          >
+          <Text numberOfLines={numberOfLines} style={[{ fontWeight: '600' }, fontStyles]}>
             {title}
           </Text>
         </View>
