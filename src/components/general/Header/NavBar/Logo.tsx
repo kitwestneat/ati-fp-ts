@@ -1,5 +1,6 @@
 import React from 'react';
-import { View, StyleSheet } from 'react-native';
+import { StyleSheet } from 'react-native';
+import { View } from '@/components/primitives';
 
 import { HOME_LINK } from '@/constants';
 
@@ -8,7 +9,7 @@ const LOGO_DIMS = {
   HEIGHT: 28
 };
 
-const Logo = ({ style }) => (
+const Logo = ({ style = {} }) => (
   <View
     accessibilityLabel={HOME_LINK.text}
     accessibilityRole="link"

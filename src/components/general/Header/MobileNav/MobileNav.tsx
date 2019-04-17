@@ -1,14 +1,10 @@
-// @flow
-
 import React, { PureComponent } from 'react';
 
 import MobileNavBar from './MobileNavBar';
 import DrawerAnimationToggle from './DrawerAnimationToggle';
 import MobileNavDrawer from './MobileNavDrawer';
 
-type Props = {};
-
-class MobileNav extends PureComponent<Props> {
+class MobileNav extends PureComponent {
   render() {
     return (
       <DrawerAnimationToggle>

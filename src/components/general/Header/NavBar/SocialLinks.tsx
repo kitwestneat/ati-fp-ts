@@ -1,8 +1,18 @@
-import React from "react";
-import { View, StyleSheet } from "react-native";
-import { Text } from "@/components/primitives";
+import React from 'react';
+import { View, StyleSheet } from 'react-native';
+import { IconType } from 'react-icons/lib/iconBase';
 
-const SocialLinks = ({ links }) => {
+import { Text } from '@/components/primitives';
+
+interface Props {
+  links: {
+    text: string;
+    href: string;
+    iconComponent: IconType;
+  }[];
+}
+
+const SocialLinks = ({ links }: Props) => {
   return (
     <View style={[styles.tagLinks]}>
       {links.map(({ text, href, iconComponent: Icon }) => (
@@ -20,9 +30,9 @@ export default SocialLinks;
 
 const styles = StyleSheet.create({
   tagLinks: {
-    flexDirection: "row",
+    flexDirection: 'row'
   },
   linkItem: {
-    paddingHorizontal: 15,
-  },
+    paddingHorizontal: 15
+  }
 });

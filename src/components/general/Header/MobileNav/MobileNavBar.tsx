@@ -1,12 +1,16 @@
 import React, { PureComponent } from 'react';
 
-import { NavBar, SocialLinks, Logo, HamburgerIcon } from '../NavBar/index.js';
-
 import { SOCIAL_LINKS_REDUCED } from '@/constants';
+import { NavBar, SocialLinks, Logo, HamburgerIcon } from '../NavBar';
 
-export default class MobileNavBar extends PureComponent {
+interface Props {
+  onMenuButtonClick: () => void;
+}
+
+export default class MobileNavBar extends PureComponent<Props> {
   render() {
     const { onMenuButtonClick } = this.props;
+
     return (
       <NavBar
         renderRight={() => <HamburgerIcon onClick={onMenuButtonClick} />}
