@@ -7,10 +7,19 @@ import { LazyView } from '@/components/utils';
 import { Image } from '@/components/primitives';
 import { THUMBER_URL } from '@/constants/index';
 
-class PostImage extends PureComponent {
+interface Props {
+  imageSrc: string;
+  width: number;
+  height: number;
+  contrastOverlay?: boolean;
+}
+
+class PostImage extends PureComponent<Props> {
   render() {
     const { imageSrc, width, height, contrastOverlay } = this.props;
+
     const src = `${THUMBER_URL}/${width}.${height}.${imageSrc}`;
+
     return (
       <LazyView>
         <Image width={width} height={height} src={src} />

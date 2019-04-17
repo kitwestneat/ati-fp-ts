@@ -7,7 +7,7 @@ import SmallPost, { SmallPostProps } from './SmallPost';
 import MediumPost, { MediumPostProps } from './MediumPost';
 import OverlayPost, { OverlayPostProps } from './OverlayPost';
 import { View } from '@/components/primitives';
-import { Omit } from '../../../../types';
+import { Omit } from '@/types';
 
 const LAYOUT_VARIANT = {
   REDUCED: 'reduced',

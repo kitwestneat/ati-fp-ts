@@ -73,6 +73,8 @@ export type GridOrder = 1 | 2;
 export interface WebAccessibilityProps {
   accessibilityRole?: 'link' | 'heading';
   href?: string;
+  target?: string;
+
   'aria-level'?: string;
 }
 

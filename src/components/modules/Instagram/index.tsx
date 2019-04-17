@@ -1,17 +1,23 @@
-import React, { PureComponent } from "react";
-import { View, StyleSheet } from "react-native";
-import { Container } from "@/components/primitives";
-import { ModuleBox } from "@/components/modules";
-import Carousel from "./Carousel";
-import Title from "./Title";
-import InstagramButton from "./InstagramButton";
+import React, { PureComponent } from 'react';
+import { View, StyleSheet } from 'react-native';
+import { Container } from '@/components/primitives';
+import { ModuleBox } from '@/components/modules';
+import Carousel from './Carousel';
+import Title from './Title';
+import InstagramButton from './InstagramButton';
 
-import { Responsive } from "@/components/utils";
-import { BREAKPOINTS } from "@/constants/index";
+import { Responsive } from '@/components/utils';
+import { BREAKPOINTS } from '@/constants/index';
+import { PostType } from '@/types';
 
-export default class Instagram extends PureComponent {
+interface Props {
+  posts: PostType[];
+}
+
+export default class Instagram extends PureComponent<Props> {
   render() {
     const { posts } = this.props;
+
     return (
       <Responsive>
         {({ minWidth }) => {
@@ -41,12 +47,12 @@ export default class Instagram extends PureComponent {
 const styles = StyleSheet.create({
   moduleBox: {
     paddingHorizontal: 75,
-    paddingVertical: 45,
+    paddingVertical: 45
   },
   row: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-    marginBottom: 30,
-  },
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginBottom: 30
+  }
 });
