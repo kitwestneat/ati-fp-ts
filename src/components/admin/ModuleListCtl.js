@@ -1,6 +1,6 @@
 import React, { PureComponent } from "react";
 import { View } from "react-native";
-import DraggableFlatList from "third-party/react-native-draggable-flatlist";
+import DraggableFlatList from "@/third-party/react-native-draggable-flatlist";
 
 import FloatingActionButton from "./FloatingActionButton";
 import ModuleListItem from "./ModuleListItem";

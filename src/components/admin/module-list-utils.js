@@ -1,4 +1,4 @@
-import { isDevEnv } from "utils";
+import { isDevEnv } from "@/utils";
 
 let nextKey = 0;
 function getModuleKey() {

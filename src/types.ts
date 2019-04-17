@@ -19,13 +19,13 @@ export interface ModuleData {
   type: SECTION_TYPES;
 }
 
-export interface RecentModuleData {
-  type: 'recent';
+export interface RecentModuleData extends ModuleData {
+  type: SECTION_TYPES.RECENT;
   posts: PostType[];
 }
 
-export interface TagTileBoxModuleData {
-  type: 'tagTileBox';
+export interface TagTileBoxModuleData extends ModuleData {
+  type: SECTION_TYPES.TAG_TILE_BOX;
   posts: PostType[];
 
   sectionLink: string;
@@ -34,12 +34,17 @@ export interface TagTileBoxModuleData {
   order?: 1 | 2;
 }
 
-export interface NewsletterModuleData {
-  type: 'newsletter';
+export interface NewsletterModuleData extends ModuleData {
+  type: SECTION_TYPES.NEWSLETTER;
 }
 
-export interface TrendingModuleData {
-  type: 'trending';
+export interface InstagramModuleData extends ModuleData {
+  type: SECTION_TYPES.INSTAGRAM;
+  posts: PostType[];
+}
+
+export interface TrendingModuleData extends ModuleData {
+  type: SECTION_TYPES.TRENDING;
 
   sectionLink: string;
   sectionColor: string;
@@ -50,7 +55,18 @@ export type AllModuleDataTypes =
   | TrendingModuleData
   | NewsletterModuleData
   | TagTileBoxModuleData
-  | RecentModuleData;
+  | RecentModuleData
+  | InstagramModuleData;
+
+type ModuleOptsSpec = Omit<AllModuleDataTypes, 'posts'>;
+interface QuerySpec {
+  posts_per_page?: number;
+}
+
+export interface ModuleSpec {
+  module_opts: ModuleOptsSpec;
+  query?: QuerySpec;
+}
 
 export type GridOrder = 1 | 2;
 

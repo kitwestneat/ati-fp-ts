@@ -10,7 +10,7 @@
 
 # production
 /build
-/admin
+/pbh-fp-admin
 
 # misc
 .DS_Store
