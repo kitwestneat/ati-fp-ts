@@ -5,7 +5,7 @@ import { Post } from '@/components/modules';
 import { PostType, GridOrder, Omit } from '@/types';
 import { PostProps } from '../shared/Post';
 
-const GRID_POST_LENGTH = 5;
+const GRID_POST_LENGTH = 4;
 
 type PostComponentAttrMap = {
   [k: string]: Omit<PostProps, keyof PostType>;
