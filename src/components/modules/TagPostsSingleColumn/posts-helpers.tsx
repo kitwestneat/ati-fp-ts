@@ -26,7 +26,7 @@ const ORDERS = [['LG', 'MD', 'MD', 'MD', 'AD'], ['MD', 'MD', 'AD', 'MD', 'LG']];
 
 export function mapPostsToGrid(order: GridOrder, posts: PostType[]) {
   const orderSpec = ORDERS[order - 1];
-  const postQueue = posts.slice(0);
+  const postQueue = posts.slice(0).reverse();
   if (postQueue.length != GRID_POST_LENGTH) {
     console.warn(
       `mapPostsToGrid: grid requires exactly ${GRID_POST_LENGTH} posts, found ${postQueue.length}`
