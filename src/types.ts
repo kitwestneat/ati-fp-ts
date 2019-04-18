@@ -58,8 +58,8 @@ export type AllModuleDataTypes =
   | RecentModuleData
   | InstagramModuleData;
 
-type ModuleOptsSpec = Omit<AllModuleDataTypes, 'posts'>;
-interface QuerySpec {
+export type ModuleOptsSpec = Omit<AllModuleDataTypes, 'posts'>;
+export interface QuerySpec {
   posts_per_page?: number;
 }
 

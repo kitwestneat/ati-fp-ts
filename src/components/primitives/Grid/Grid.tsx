@@ -1,7 +1,7 @@
 // @flow
 
 import React, { PureComponent, ReactElement } from 'react';
-import { View, StyleSheet, ViewStyle, StyleProp } from 'react-native';
+import { View, ViewStyle, StyleProp } from 'react-native';
 import GridSlot from './GridSlot';
 
 type Props = {
