@@ -4,6 +4,7 @@ import { Mrec } from '@/components/ads';
 import { Post } from '@/components/modules';
 import { PostType, GridOrder, Omit } from '@/types';
 import { PostProps } from '../shared/Post';
+import GridSlot from '../../primitives/Grid/GridSlot';
 
 const GRID_POST_LENGTH = 4;
 
@@ -47,8 +48,13 @@ export function mapPostsToGrid(order: GridOrder, posts: PostType[]) {
       }
 
       const attrs = POST_COMPONENT_ATTRS[type];
+      const multiplier = type === 'LG' ? 2 : 1;
 
-      return <Post key={post.id} {...attrs} {...post} />;
+      return (
+        <GridSlot key={post.id} multiplier={multiplier}>
+          <Post {...attrs} {...post} />
+        </GridSlot>
+      );
     })
     .filter(Boolean) as JSX.Element[]; // TS not smart enough to know that boolean removes false values
 }
