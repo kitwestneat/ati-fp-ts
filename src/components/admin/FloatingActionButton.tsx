@@ -3,7 +3,7 @@ import { Text, TouchableOpacity, ViewStyle } from 'react-native';
 
 interface Props {
   onPress: VoidFunction;
-  icon?: React.ElementType;
+  icon?: React.ReactElement;
   index: number;
   disabled?: boolean;
 }
