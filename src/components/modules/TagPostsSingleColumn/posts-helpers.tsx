@@ -2,24 +2,24 @@ import React from 'react';
 
 import { Mrec } from '@/components/ads';
 import { Post } from '@/components/modules';
-import { PostType, GridOrder } from '@/types';
+import { PostType, GridOrder, Omit } from '@/types';
+import { PostProps } from '../shared/Post';
 
 const GRID_POST_LENGTH = 5;
 
-type PostComponentCreatorMap = { [sz: string]: (props: PostType) => JSX.Element };
+type PostComponentAttrMap = {
+  [k: string]: Omit<PostProps, keyof PostType>;
+};
 
 const AD_COMPONENT = Mrec;
-const POST_COMPONENTS: PostComponentCreatorMap = {
-  LG: (props: PostType) => (
-    <Post
-      layoutVariant="overlay"
-      fontStyles={{ fontSize: 24, lineHeight: 30 }}
-      imageWidth={735}
-      imageHeight={430}
-      {...props}
-    />
-  ),
-  MD: (props: PostType) => <Post layoutVariant="medium" {...props} />
+const POST_COMPONENT_ATTRS: PostComponentAttrMap = {
+  LG: {
+    layoutVariant: 'overlay',
+    fontStyles: { fontSize: 24, lineHeight: 30 },
+    imageWidth: 735,
+    imageHeight: 430
+  },
+  MD: { layoutVariant: 'medium' }
 };
 
 const ORDERS = [['LG', 'MD', 'MD', 'MD', 'AD'], ['MD', 'MD', 'AD', 'MD', 'LG']];
@@ -46,9 +46,9 @@ export function mapPostsToGrid(order: GridOrder, posts: PostType[]) {
         return false;
       }
 
-      const Component = POST_COMPONENTS[type];
+      const attrs = POST_COMPONENT_ATTRS[type];
 
-      return <Component key={post.id} {...post} />;
+      return <Post key={post.id} {...attrs} {...post} />;
     })
     .filter(Boolean) as JSX.Element[]; // TS not smart enough to know that boolean removes false values
 }
