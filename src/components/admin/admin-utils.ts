@@ -1,4 +1,4 @@
-import { ModuleSpec, AllModuleDataTypes } from '../../types';
+import { ModuleSpec, AllModuleDataTypes, QuerySpec } from '../../types';
 import { SECTION_TYPES } from '@/constants';
 
 const faker = require('faker');
@@ -19,7 +19,7 @@ export function queryObj2Str(query?: object): string {
 const fromEntries = <T>(entries: [string, T][]) =>
   entries.reduce((acc: { [k: string]: T }, [key, value]) => ((acc[key] = value), acc), {});
 
-export function queryStr2Obj(query: string): object | false {
+export function queryStr2Obj(query: string): QuerySpec | false {
   if (typeof query !== 'string') {
     return false;
   }
