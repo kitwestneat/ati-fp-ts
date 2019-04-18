@@ -8,7 +8,7 @@ import { ResponsiveProvider } from '@/components/utils';
 import { View } from '@/components/primitives';
 import { generateFakeData } from './admin-utils';
 import ModuleListCtl from './ModuleListCtl';
-import { getListWithKeys, saveList } from './module-list-utils';
+import { getListWithKeys, saveList, KeyedModuleSpec } from './module-list-utils';
 import { ModuleSpec } from '@/types';
 
 const SAVING_STATES = {
@@ -18,7 +18,7 @@ const SAVING_STATES = {
 };
 
 interface State {
-  moduleList: ModuleSpec[];
+  moduleList: KeyedModuleSpec[];
   isPreview: boolean;
   savingState: number;
 }
@@ -34,7 +34,7 @@ export default class Admin extends PureComponent<Props, State> {
     super(props);
 
     window.disableLazyLoad = true;
-    const moduleList = getListWithKeys(this.props.moduleList);
+    const moduleList: KeyedModuleSpec[] = getListWithKeys(this.props.moduleList);
 
     // load initial data from props, but ignore after
     this.state = {
@@ -44,7 +44,7 @@ export default class Admin extends PureComponent<Props, State> {
     };
   }
 
-  updateModuleList = ({ moduleList }: { moduleList: ModuleSpec[] }) =>
+  updateModuleList = ({ moduleList }: { moduleList: KeyedModuleSpec[] }) =>
     this.setState({ moduleList });
   saveModuleList = async () => {
     console.log('saving');

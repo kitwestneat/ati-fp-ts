@@ -1,5 +1,6 @@
 import { ModuleSpec, AllModuleDataTypes, QuerySpec } from '../../types';
 import { SECTION_TYPES } from '@/constants';
+import { KeyedModuleSpec } from './module-list-utils';
 
 const faker = require('faker');
 const { CATEGORY_COLOR_MAP } = require('@/constants/index');
@@ -32,8 +33,8 @@ export function queryStr2Obj(query: string): QuerySpec | false {
 
 // FAKERS //
 const DEFAULT_POST_COUNT = 5;
-export function generateFakeData({ module_opts, query }: ModuleSpec): AllModuleDataTypes {
-  if (module_opts.type === SECTION_TYPES.NEWSLETTER) {
+export function generateFakeData({ module_opts, query }: KeyedModuleSpec): AllModuleDataTypes {
+  if (!module_opts || module_opts.type === SECTION_TYPES.NEWSLETTER) {
     return { type: SECTION_TYPES.NEWSLETTER };
   } else if (module_opts.type === SECTION_TYPES.INSTAGRAM) {
     return generateFakeInstagramPosts();
