@@ -17,6 +17,7 @@ type Props = {
   children: ReactNode;
   patternColor?: string;
   offsetDirection?: OFFSET_DIRECTION;
+  transparentBG?: boolean;
 };
 
 class ModuleBox extends PureComponent<Props> {
@@ -25,10 +26,10 @@ class ModuleBox extends PureComponent<Props> {
   };
 
   render() {
-    const { children, patternColor, offsetDirection, style } = this.props;
+    const { children, patternColor, offsetDirection, style, transparentBG } = this.props;
 
     return patternColor ? (
-      <Pattern offsetDirection={offsetDirection} color={patternColor}>
+      <Pattern offsetDirection={offsetDirection} color={patternColor} transparentBG={transparentBG}>
         <Box style={style}>{children}</Box>
       </Pattern>
     ) : (
