@@ -1,7 +1,8 @@
 // @flow
 
 import React, { PureComponent, ReactElement } from 'react';
-import { View, StyleSheet, ViewStyle, StyleProp } from 'react-native';
+import { View, ViewStyle, StyleProp } from 'react-native';
+import GridSlot from './GridSlot';
 
 type Props = {
   style: StyleProp<ViewStyle>;
@@ -17,20 +18,6 @@ class Grid extends PureComponent<Props> {
     itemsPerRow: 3
   };
 
-  getItemStyles = (multiplier = 1) => {
-    const { itemsPerRow, spacer } = this.props;
-
-    // XXX flexBasis can't be a string
-    const styles = StyleSheet.create({
-      item: {
-        flexBasis: `${(100 / itemsPerRow) * multiplier}%`,
-        padding: spacer / 2
-      }
-    });
-
-    return styles.item;
-  };
-
   getListStyles = (): StyleProp<ViewStyle> => {
     const { spacer } = this.props;
 
@@ -42,19 +29,32 @@ class Grid extends PureComponent<Props> {
   };
 
   renderChildren = () => {
-    const { children } = this.props;
-    return React.Children.map(children, child => {
+    const { children, spacer, itemsPerRow } = this.props;
+    const gridSlotProps = {
+      spacer,
+      itemsPerRow
+    };
+
+    return React.Children.map(children, (inChild, i) => {
+      const child = inChild as ReactElement;
       if (!child) {
         return null;
       }
 
-      const multiplier = (child as any).type.name === 'LG' ? 2 : 1;
+      if (typeof child.type === 'string') {
+        console.log('renderChildren: string child', child);
+      }
 
-      return (
-        <View style={this.getItemStyles(multiplier)}>
-          {React.cloneElement(child as ReactElement)}
-        </View>
-      );
+      const name = typeof child.type === 'string' ? child.type : child.type.name;
+      const isGridSlot = name === 'GridSlot';
+      if (isGridSlot) {
+        return React.cloneElement(child, {
+          ...gridSlotProps,
+          ...child.props
+        });
+      }
+
+      return <GridSlot {...gridSlotProps}>{child}</GridSlot>;
     });
   };
 

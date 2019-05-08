@@ -64,8 +64,8 @@ export type AllModuleDataTypes =
   | RecentModuleData
   | InstagramModuleData;
 
-type ModuleOptsSpec = Omit<AllModuleDataTypes, 'posts'>;
-interface QuerySpec {
+export type ModuleOptsSpec = Omit<AllModuleDataTypes, 'posts'>;
+export interface QuerySpec {
   posts_per_page?: number;
 }
 
@@ -77,11 +77,17 @@ export interface ModuleSpec {
 export type GridOrder = 1 | 2;
 
 export interface WebAccessibilityProps {
-  accessibilityRole?: 'link' | 'heading';
+  accessibilityRole?: 'link' | 'heading' | 'button';
+
+  // link
   href?: string;
   target?: string;
 
+  // heading
   'aria-level'?: string;
+
+  // button
+  onClick?: () => void;
 }
 
 export type Omit<T, K> = Pick<T, Exclude<keyof T, K>>;

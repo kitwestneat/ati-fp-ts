@@ -1,5 +1,20 @@
-import { getAdId } from "./getAdId";
-import { AD_FUNCS_MAP } from "../ad-constants";
+import { getAdId } from './getAdId';
+import { AD_FUNCS_MAP } from '../ad-constants';
+
+type AdRegisterFunc = (id: string) => void;
+type AdRegisterFuncMap = { [k: string]: AdRegisterFunc };
+
+// These are defined on the window object as part of the PBH ad api
+interface PbhAdApi {
+  PbhAdUnit_cmd: VoidFunction[];
+  PbhAdUnit_load: VoidFunction[];
+  pbh_start_ads: VoidFunction;
+  pbh_ad_units: {
+    [k: string]: {
+      display: VoidFunction;
+    };
+  };
+}
 
 /**
  * getCreateAdFuncForType
@@ -11,15 +26,16 @@ import { AD_FUNCS_MAP } from "../ad-constants";
  * @param {String} adType - the type of add from the AD_TYPE enum in constants
  * @returns {Function} || {undefined}
  */
-const getCreateAdFuncForType = adType => {
+const getCreateAdFuncForType = (adType: string): AdRegisterFunc | undefined => {
   const adFuncName = AD_FUNCS_MAP[adType];
+  const adFuncMap = (window as any) as AdRegisterFuncMap;
 
-  const adFunc = window[adFuncName];
+  const adFunc = adFuncMap[adFuncName];
   if (adFunc) {
     return adFunc;
   }
 
-  console.error("getCreateAdFuncForType: function not found,", adFunc);
+  console.error(`getCreateAdFuncForType: function ${adFunc} not found`);
 };
 
 /**
@@ -31,7 +47,7 @@ const getCreateAdFuncForType = adType => {
  * @param {String} adType - the type of add from the AD_TYPE enum in constants
  * @returns {String} id
  */
-export const registerAd = adType => {
+export const registerAd = (adType: string): string | undefined => {
   const adFunc = getCreateAdFuncForType(adType);
   if (!adFunc) {
     return;
@@ -53,7 +69,9 @@ export const registerAd = adType => {
  * Used in the App component's componentDidMount method
  */
 export const startAds = () => {
-  registerAdLoadCallback(window.pbh_start_ads);
+  const w = getAdApi();
+
+  registerAdLoadCallback(w.pbh_start_ads);
 };
 
 /**
@@ -63,12 +81,14 @@ export const startAds = () => {
  * queue array.
  * Used in the MakeAdComponent HOC's componentDidMount method
  */
-export const displayAd = adId => {
+export const displayAd = (adId: string) => {
   registerAdCommand(() => {
+    const w = getAdApi();
+
     try {
-      window.pbh_ad_units[adId].display();
+      w.pbh_ad_units[adId].display();
     } catch (e) {
-      console.error("error displaying ad", adId);
+      console.error('error displaying ad', adId);
     }
   });
 };
@@ -80,18 +100,27 @@ export const displayAd = adId => {
  * @param {Function} adFunc
  * @param {String} adId
  */
-const registerIdWithAdFunction = (adFunc, adId) => {
+const registerIdWithAdFunction = (adFunc: Function, adId: string) => {
   registerAdLoadCallback(() => adFunc(adId));
 };
 
-function registerAdLoadCallback(cb) {
-  window.PbhAdUnit_load = window.PbhAdUnit_load || [];
+function registerAdLoadCallback(cb: () => any) {
+  const w = getAdApi();
 
-  window.PbhAdUnit_load.push(cb);
+  w.PbhAdUnit_load = w.PbhAdUnit_load || [];
+
+  w.PbhAdUnit_load.push(cb);
 }
 
-function registerAdCommand(cb) {
-  window.PbhAdUnit_cmd = window.PbhAdUnit_cmd || [];
+function registerAdCommand(cb: () => void) {
+  const w = getAdApi();
 
-  window.PbhAdUnit_cmd.push(cb);
+  w.PbhAdUnit_cmd = w.PbhAdUnit_cmd || [];
+
+  w.PbhAdUnit_cmd.push(cb);
+}
+
+function getAdApi(): PbhAdApi {
+  const w = (window as any) as PbhAdApi;
+  return w;
 }

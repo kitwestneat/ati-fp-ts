@@ -1,8 +1,14 @@
 import React, { PureComponent } from 'react';
 import { View, StyleSheet } from 'react-native';
 import { Text } from '@/components/primitives';
-import { NavBar, SocialLinks, Logo } from '../NavBar/index.js';
+import { NavBar, SocialLinks, Logo } from '../NavBar';
 import { TAG_LINKS, SOCIAL_LINKS_STANDARD } from '@/constants';
+
+interface Links {
+  type: string;
+  text: string;
+  href: string;
+}
 
 export default class DesktopNav extends PureComponent {
   render() {
@@ -16,7 +22,7 @@ export default class DesktopNav extends PureComponent {
   }
 }
 
-const TagLinks = ({ links }) => {
+const TagLinks = ({ links }: { links: Links[] }) => {
   return (
     <View style={[styles.tagLinks]}>
       {links.map(({ type, text, href }) => (
