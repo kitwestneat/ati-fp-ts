@@ -8,8 +8,8 @@ import { OFFSET_DIRECTION } from '@/types';
 
 type Props = {
   color: string;
+  backgroundColor: string;
   offsetDirection: OFFSET_DIRECTION;
-  transparentBG: boolean;
   children: any;
 };
 
@@ -17,7 +17,7 @@ class Pattern extends PureComponent<Props> {
   static defaultProps = {
     offsetDirection: OFFSET_DIRECTION.LEFT,
     color: COLOR_MAP.ORANGE,
-    transparentBG: false,
+    backgroundColor: COLOR_MAP.SITE_BG,
   };
 
   getOffsetStyles = () => {
@@ -36,18 +36,17 @@ class Pattern extends PureComponent<Props> {
   };
 
   getGradient = () => {
-    const { color, transparentBG } = this.props;
-    const bg = COLOR_MAP.SITE_BG;
+    const { color, backgroundColor } = this.props;
+    //const bg = COLOR_MAP.SITE_BG;
     const space = 5;
     const dot = 2;
     const emptyPercent = `${100 - (dot / space) * 100}%`;
-    const bgImageCss = transparentBG ? `radial-gradient(${color} 10%, transparent 45%), radial-gradient(${color} 10%, transparent 45%)` : `linear-gradient(90deg, ${bg} ${emptyPercent}, transparent 1%), linear-gradient(${bg} ${emptyPercent}, transparent 1%)`;
-    const bgColorCss = transparentBG ? 'transparent' : color;
 
     return {
-      backgroundColor: bgColorCss,
+      backgroundColor: backgroundColor,
       backgroundPosition: 'center center',
-      backgroundImage: bgImageCss,
+      //backgroundImage: `linear-gradient(90deg, ${bg} ${emptyPercent}, transparent 1%), linear-gradient(${bg} ${emptyPercent}, transparent 1%)`,
+      backgroundImage: `radial-gradient(${color} 10%, transparent 45%), radial-gradient(${color} 10%, transparent 45%)`,
       backgroundSize: `${space}px ${space}px`
     };
   };
