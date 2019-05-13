@@ -37,15 +37,11 @@ class Pattern extends PureComponent<Props> {
 
   getGradient = () => {
     const { color, backgroundColor } = this.props;
-    //const bg = COLOR_MAP.SITE_BG;
     const space = 5;
-    const dot = 2;
-    const emptyPercent = `${100 - (dot / space) * 100}%`;
 
     return {
       backgroundColor: backgroundColor,
       backgroundPosition: 'center center',
-      //backgroundImage: `linear-gradient(90deg, ${bg} ${emptyPercent}, transparent 1%), linear-gradient(${bg} ${emptyPercent}, transparent 1%)`,
       backgroundImage: `radial-gradient(${color} 10%, transparent 45%), radial-gradient(${color} 10%, transparent 45%)`,
       backgroundSize: `${space}px ${space}px`
     };

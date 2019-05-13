@@ -1,9 +1,8 @@
 // @flow
 
 import React, { PureComponent } from 'react';
-//import PageSections from '@/PageFactory';
+import PageSections from '@/PageFactory';
 import { AppWrap, Header, Footer, Main } from '@/components/general';
-import { Skybox, Floorboard } from '@/components/ads';
 import { startAds } from '@/components/ads/ad-utils';
 import { Section } from '@/components/primitives';
 
@@ -12,7 +11,8 @@ import { SECTION_SPACING_VARIANTS } from '@/constants/index';
 import { InfoBox } from '@/components/modules';
 
 type Props = {
-  data: any;
+  data?: any;
+  tagData: any;
 };
 
 class TagPage extends PureComponent<Props> {
@@ -21,7 +21,7 @@ class TagPage extends PureComponent<Props> {
   }
 
   render() {
-    const { data } = this.props;
+    const { data, tagData } = this.props;
 
     if (!data) {
       throw new Error('cannot load post data');
@@ -32,12 +32,12 @@ class TagPage extends PureComponent<Props> {
         <Header />
         <Main>
             <Section>
-                <InfoBox data={data} />
+                <InfoBox data={tagData} />
             </Section>
 
-            {/* <Section topSpacing={SECTION_SPACING_VARIANTS.LARGE}>
-                <Floorboard />
-            </Section> */}
+            <Section topSpacing={SECTION_SPACING_VARIANTS.LARGE}>
+                <PageSections data={data} />
+            </Section>
         </Main>
         <Footer />
       </AppWrap>
