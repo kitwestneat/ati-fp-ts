@@ -9,8 +9,12 @@ import { Section } from '@/components/primitives';
 
 import { SECTION_SPACING_VARIANTS } from '@/constants/index';
 
+import { Route } from 'react-router-dom';
+import TagPage from '@/TagPage';
+
 type Props = {
   data: any;
+  tagData: any;
 };
 
 class App extends PureComponent<Props> {
@@ -41,6 +45,8 @@ class App extends PureComponent<Props> {
 
           <Footer />
         </Main>
+
+        <Route path='/tag/history' render={() => <TagPage {...this.props}/>} />
       </AppWrap>
     );
   }
