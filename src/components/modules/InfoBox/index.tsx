@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import { StyleSheet, View, Text, ImageBackground, Dimensions, PixelRatio } from 'react-native';
+import { StyleSheet, View, Text, ImageBackground, Dimensions } from 'react-native';
 import { ModuleBox } from '@/components/modules';
 import { Image, Container, HtmlText } from '@/components/primitives';
 import { Responsive } from '@/components/utils';
@@ -13,9 +13,8 @@ interface Props {
 
 type State = {
     readText: string;
-    height: number;
     width: number;
-    imgMobileHeight: number;
+    height: number;
     windowWidth: number;
     imgHeight: number;
 }
@@ -23,9 +22,8 @@ type State = {
 export default class InfoBox extends PureComponent<Props, State> {
     state = {
         readText: 'Read More',
-        height: 0,
         width: 0,
-        imgMobileHeight: 0,
+        height: 0,
         windowWidth: 0,
         imgHeight: 0,
     }
@@ -46,25 +44,26 @@ export default class InfoBox extends PureComponent<Props, State> {
     // Get the dimensions of the element holding the tag description. Use that number to help determine height of the entire InfoBox module. Will need to add additional px to the number obtained by this function.
     // Get the window width. Use that number in conjuction with the tag description dims to determine height of background image. Will need to subtract pts.
     getHeight = (e: any) => {
-        let h = e.nativeEvent.layout.height;
         let w = e.nativeEvent.layout.width;
+        let h = e.nativeEvent.layout.height;
         let windowWidth = Dimensions.get('window').width;
         let imgHeight = (windowWidth * h)/w; 
-        let finalImgHeight = (imgHeight * 100)/windowWidth; // Convert background height to react native's units of measurement for images
+        // Convert background height to react native's units of measurement for images
+        let finalImgHeight = (imgHeight * 100)/windowWidth; 
 
         // On initial render, set state for h x w of description box, screen width, and background image height
         if (this.state.imgHeight === 0) {
             this.setState({ 
-                height: h,
+
                 width: w,
-                imgMobileHeight: h,
+                height: h,
                 windowWidth: windowWidth,
                 imgHeight: finalImgHeight,
             })
-        } else { // When toggling 'read more' just update h x w for description box.
+        } else { // When toggling 'read more/read less' just update h x w for description box.
             this.setState({ 
-                height: h,
                 width: w,
+                height: h,
             })
         }
     }
@@ -75,7 +74,7 @@ export default class InfoBox extends PureComponent<Props, State> {
             <ImageBackground source={{uri: data[0].imageSrc}} 
             style={[styles.imageDesktop]}> 
                 <View style={[styles.infobox, styles.infoboxDesktop]}>
-                    <ModuleBox offsetDirection={OFFSET_DIRECTION.RIGHT} patternColor={COLOR_MAP.PURPLE} backgroundColor={'transparent'} style={{width: '40vw'}}>
+                    <ModuleBox offsetDirection={OFFSET_DIRECTION.RIGHT} patternColor={COLOR_MAP.PURPLE} backgroundColor={'transparent'} style={styles.moduleBoxDesktop}>
                         <View>
                             <Text style={styles.title}>{Capitalize(data[0].tag)}</Text>
                             <HtmlText html={data[0].description} css={htmlTextStyle} />
@@ -88,15 +87,14 @@ export default class InfoBox extends PureComponent<Props, State> {
 
     renderMobile = (isTablet: any) => {
         const { data } = this.props;
-        const { readText, height, width, imgMobileHeight, windowWidth, imgHeight } = this.state;
-        // Determine image height
+        const { readText, height, windowWidth, imgHeight } = this.state;
+        // Determine image height for device
         let imageHeight = isTablet ? imgHeight : (windowWidth > 350 ? Math.floor(imgHeight - 45) : Math.floor(imgHeight - 80));
         let closingPTag = '</p>';
         let indexOfFirstClosingPTag = data[0].description.indexOf(closingPTag);
         // Determine first paragraph of tag descritption
         let descriptionSubstring = data[0].description.substring(0, indexOfFirstClosingPTag + closingPTag.length);
         let toggleDescription = readText === 'Read More' ? descriptionSubstring : data[0].description;
-        console.log("pixel: ", PixelRatio.getPixelSizeForLayoutSize(100));
         return (
             <Container style={{height: `${height + 100}px`}}>
                 <Image source={{uri: data[0].imageSrc}} style={{ width: 100, height: imageHeight }}/>
@@ -127,12 +125,13 @@ export default class InfoBox extends PureComponent<Props, State> {
     }
 }
 
-
 // Capitalize first letter of tag name
 const Capitalize = (str: string) => {
     return str.charAt(0).toUpperCase() + str.slice(1);
     }
 
+// Style for tag description
+// HtmlText component expects an object, not styles created with React Native Stylesheet
 const htmlTextStyle = {
     fontFamily: 'Work Sans, sans-serif',
     fontSize: 17,
@@ -143,7 +142,6 @@ const styles = StyleSheet.create({
     infobox: {
         flex: 1,
         top: '50px',
-        // marginBottom: '100px',
     },
     infoboxDesktop: {
         width: '40vw',
@@ -153,17 +151,15 @@ const styles = StyleSheet.create({
     infoboxMobile: {
         position: 'absolute',
         width: '80vw',
-        // height: 300,
         left: '10vw',
-        // marginBottom: '1em',
-        // minHeight: 500,
         zIndex: 2,
     },
     imageDesktop: {
         width: '100%',
-        // minHeight: 500,
-        // maxHeight: 500,
     },
+    moduleBoxDesktop: {
+        width: '40vw',
+    }, 
     title: {
         fontFamily: 'Libre Baskerville, serif',
         fontSize: 36,
