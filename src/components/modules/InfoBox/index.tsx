@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
-import { StyleSheet, View, Text, ImageBackground, TouchableHighlight } from 'react-native';
+import { StyleSheet, View, Text, ImageBackground, Dimensions, PixelRatio } from 'react-native';
 import { ModuleBox } from '@/components/modules';
-import { Image, Container } from '@/components/primitives';
+import { Image, Container, HtmlText } from '@/components/primitives';
 import { Responsive } from '@/components/utils';
 import { COLOR_MAP } from '@/constants';
 import { BREAKPOINTS } from '@/constants/index';
@@ -13,46 +13,72 @@ interface Props {
 
 type State = {
     readText: string;
-    numberOfLines: number;
     height: number;
+    width: number;
+    imgMobileHeight: number;
+    windowWidth: number;
+    imgHeight: number;
 }
 
 export default class InfoBox extends PureComponent<Props, State> {
     state = {
         readText: 'Read More',
-        numberOfLines: 6,
         height: 0,
+        width: 0,
+        imgMobileHeight: 0,
+        windowWidth: 0,
+        imgHeight: 0,
     }
 
-    toggleReadText = () => {
-        const { readText, numberOfLines } = this.state;
+    private mobileInfoBox = React.createRef;
+
+    toggleReadText = (e: any) => {
+        e.stopPropagation();
+        const { readText } = this.state;
         let toggleText = readText === 'Read Less' ? 'Read More' : 'Read Less';
-        let toggleNumberOfLines = numberOfLines ? 0 : 6; // Zero is to see all the tag description
 
         this.setState({
-            readText: toggleText,
-            numberOfLines: toggleNumberOfLines,
+            readText: toggleText
         })
     }
 
-    // Get the height of the element hlding the tag description
-    // Use that number to help determine height of the entire InfoBox module 
-    // Will need to add additional px to the number obtained by this function
+    // On Layout
+    // Get the dimensions of the element holding the tag description. Use that number to help determine height of the entire InfoBox module. Will need to add additional px to the number obtained by this function.
+    // Get the window width. Use that number in conjuction with the tag description dims to determine height of background image. Will need to subtract pts.
     getHeight = (e: any) => {
-        this.setState({ height: e.nativeEvent.layout.height })
+        let h = e.nativeEvent.layout.height;
+        let w = e.nativeEvent.layout.width;
+        let windowWidth = Dimensions.get('window').width;
+        let imgHeight = (windowWidth * h)/w; 
+        let finalImgHeight = (imgHeight * 100)/windowWidth; // Convert background height to react native's units of measurement for images
+
+        // On initial render, set state for h x w of description box, screen width, and background image height
+        if (this.state.imgHeight === 0) {
+            this.setState({ 
+                height: h,
+                width: w,
+                imgMobileHeight: h,
+                windowWidth: windowWidth,
+                imgHeight: finalImgHeight,
+            })
+        } else { // When toggling 'read more' just update h x w for description box.
+            this.setState({ 
+                height: h,
+                width: w,
+            })
+        }
     }
 
     renderDesktop = () => {
         const { data } = this.props;
-        const { height } = this.state; 
         return (
             <ImageBackground source={{uri: data[0].imageSrc}} 
             style={[styles.imageDesktop]}> 
-                <View style={[styles.infobox, styles.infoboxDesktop, {height: `${height - 10}px`}]}>
+                <View style={[styles.infobox, styles.infoboxDesktop]}>
                     <ModuleBox offsetDirection={OFFSET_DIRECTION.RIGHT} patternColor={COLOR_MAP.PURPLE} backgroundColor={'transparent'} style={{width: '40vw'}}>
-                        <View onLayout={this.getHeight}>
+                        <View>
                             <Text style={styles.title}>{Capitalize(data[0].tag)}</Text>
-                            <Text style={styles.description}>{data[0].description}</Text>
+                            <HtmlText html={data[0].description} css={htmlTextStyle} />
                         </View>
                     </ModuleBox>
                 </View>
@@ -62,26 +88,29 @@ export default class InfoBox extends PureComponent<Props, State> {
 
     renderMobile = (isTablet: any) => {
         const { data } = this.props;
-        const { readText, numberOfLines, height } = this.state;
-        let imageHeight = isTablet ? 40 : 85; // Determine image height for tablet and mobile
+        const { readText, height, width, imgMobileHeight, windowWidth, imgHeight } = this.state;
+        // Determine image height
+        let imageHeight = isTablet ? imgHeight : (windowWidth > 350 ? Math.floor(imgHeight - 45) : Math.floor(imgHeight - 80));
+        let closingPTag = '</p>';
+        let indexOfFirstClosingPTag = data[0].description.indexOf(closingPTag);
+        // Determine first paragraph of tag descritption
+        let descriptionSubstring = data[0].description.substring(0, indexOfFirstClosingPTag + closingPTag.length);
+        let toggleDescription = readText === 'Read More' ? descriptionSubstring : data[0].description;
+        console.log("pixel: ", PixelRatio.getPixelSizeForLayoutSize(100));
         return (
-            <Container style={{height: `${height + 120}px`}}>
+            <Container style={{height: `${height + 100}px`}}>
                 <Image source={{uri: data[0].imageSrc}} style={{ width: 100, height: imageHeight }}/>
                 <View style={[styles.infobox, styles.infoboxMobile]}>
                     <ModuleBox patternColor={COLOR_MAP.PURPLE} backgroundColor={'transparent'}>
-                        <View onLayout={this.getHeight}>
+                        <View onLayout={this.getHeight} ref={this.mobileInfoBox}>
                             <Text style={styles.title} >{Capitalize(data[0].tag)}</Text>
-                            <Text numberOfLines={numberOfLines} ellipsizeMode={'tail'} style={[styles.description]}>
-                                {data[0].description}
-                            </Text>
-                            <TouchableHighlight onPress={this.toggleReadText}>
-                                <Text style={styles.read} >{readText}</Text>
-                            </TouchableHighlight>
+                            <HtmlText html={toggleDescription} css={htmlTextStyle} />
+                            <Text style={styles.read} onPress={this.toggleReadText} >{readText}</Text>
                         </View>
                     </ModuleBox>
                 </View>
             </Container>
-            )
+        )
     }
 
     render() {
@@ -98,37 +127,57 @@ export default class InfoBox extends PureComponent<Props, State> {
     }
 }
 
+
 // Capitalize first letter of tag name
 const Capitalize = (str: string) => {
     return str.charAt(0).toUpperCase() + str.slice(1);
     }
 
+const htmlTextStyle = {
+    fontFamily: 'Work Sans, sans-serif',
+    fontSize: 17,
+    lineHeight: 1.5,
+};
+
 const styles = StyleSheet.create({
     infobox: {
+        flex: 1,
         top: '50px',
-        marginBottom: '100px',
+        // marginBottom: '100px',
     },
     infoboxDesktop: {
         width: '40vw',
+        height: '100%',
         left: '15vw',
     },
     infoboxMobile: {
         position: 'absolute',
         width: '80vw',
+        // height: 300,
         left: '10vw',
+        // marginBottom: '1em',
+        // minHeight: 500,
+        zIndex: 2,
     },
     imageDesktop: {
         width: '100%',
+        // minHeight: 500,
+        // maxHeight: 500,
     },
     title: {
         fontFamily: 'Libre Baskerville, serif',
         fontSize: 36,
         fontWeight: '700',
     },
+    htmlDescription: {
+        fontFamily: 'Work Sans, sans-serif',
+        fontSize: 17,
+        marginTop: 0, 
+        lineHeight: 24,
+    },
     description: {
         fontFamily: 'Work Sans, sans-serif',
         fontSize: 17,
-        marginTop: '1em',
         lineHeight: 24,
     },
     read: {

@@ -38,8 +38,9 @@ class TagPage extends PureComponent<Props> {
             <Section topSpacing={SECTION_SPACING_VARIANTS.LARGE}>
                 <PageSections data={data} />
             </Section>
+        
+            <Footer />
         </Main>
-        <Footer />
       </AppWrap>
     );
   }
