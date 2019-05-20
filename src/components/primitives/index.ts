@@ -7,3 +7,4 @@ export { default as Row } from './Row/Row';
 export { default as Grid } from './Grid/Grid';
 export { default as Section } from './Section/Section';
 export { default as TouchableOpacity } from './TouchableOpacity/TouchableOpacity';
+export { default as HtmlText } from './HtmlText/HtmlText';
