@@ -31,9 +31,9 @@ export default class InfoBox extends PureComponent<Props, State> {
         e.stopPropagation();
         const { isExpanded } = this.state;
 
-        this.setState({
-            isExpanded: !isExpanded
-        })
+        this.setState(prevState => (
+            { isExpanded: !prevState.isExpanded }
+        ))
     }
 
     // On Layout
