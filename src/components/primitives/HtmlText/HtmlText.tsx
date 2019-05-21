@@ -3,7 +3,7 @@
 import React, { PureComponent } from 'react';
 
 interface Props {
-    html: any;
+    html: string;
     // Don't use styles created with React NativeStylesheet. This is a React component. 
     // Think in terms of React inline styles.
     // https://reactjs.org/docs/dom-elements.html#style
