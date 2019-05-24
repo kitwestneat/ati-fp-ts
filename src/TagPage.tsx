@@ -8,11 +8,8 @@ import { Section } from '@/components/primitives';
 
 import { SECTION_SPACING_VARIANTS } from '@/constants/index';
 
-import { InfoBox } from '@/components/modules';
-
 type Props = {
-  data?: any;
-  tagData: any;
+  data: any;
 };
 
 class TagPage extends PureComponent<Props> {
@@ -21,7 +18,7 @@ class TagPage extends PureComponent<Props> {
   }
 
   render() {
-    const { data, tagData } = this.props;
+    const { data } = this.props;
 
     if (!data) {
       throw new Error('cannot load post data');
@@ -31,10 +28,6 @@ class TagPage extends PureComponent<Props> {
       <AppWrap>
         <Header />
         <Main>
-            <Section>
-                <InfoBox data={tagData} />
-            </Section>
-
             <Section topSpacing={SECTION_SPACING_VARIANTS.LARGE}>
                 <PageSections data={data} />
             </Section>

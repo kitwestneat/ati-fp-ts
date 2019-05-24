@@ -52,7 +52,8 @@ export interface TrendingModuleData extends ModuleData {
 }
 
 export interface InfoBoxData extends ModuleData {
-  tag: string;
+  type: SECTION_TYPES.TAG;
+  name: string;
   imageSrc: string;
   description: string;
 }
