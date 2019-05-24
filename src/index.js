@@ -6,11 +6,11 @@ import { BrowserRouter } from 'react-router-dom';
 
 import { isDevEnv } from './utils';
 
-function startFP(data, tagData) {
+function startFP(data) {
   // ReactDOM.render(<App data={data} />, document.getElementById('root'));
   ReactDOM.render(
     <BrowserRouter>
-      <App data={data} tagData={tagData}/>
+      <App data={data} />
     </BrowserRouter>, 
     document.getElementById('root'));
 }
@@ -27,7 +27,6 @@ window.startAdmin = startAdmin;
 */
 
 if (isDevEnv()) {
-  // startFP(window.fp_data);
+  startFP(window.fp_data);
   //startAdmin(window.admin_data);
-  startFP(window.fp_data, window.tag_data);
 }
