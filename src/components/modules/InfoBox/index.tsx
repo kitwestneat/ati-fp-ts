@@ -6,12 +6,6 @@ import { Responsive } from '@/components/utils';
 import { COLOR_MAP, BREAKPOINTS } from '@/constants';
 import { InfoBoxData, OFFSET_DIRECTION } from '@/types';
 
-// interface Props {
-//     data: InfoBoxData[];
-// }
-
-// type Props = { data: InfoBoxData[] };
-
 interface Props extends InfoBoxData {
     name: string;
     imageSrc: string;
@@ -21,12 +15,21 @@ interface Props extends InfoBoxData {
 type State = {
     isExpanded: boolean;
     height: number;
+    paginate: boolean;
 }
 
 export default class InfoBox extends PureComponent<Props, State> {
     state = {
         isExpanded: false,
         height: 0,
+        paginate: false,
+    }
+
+    componentDidMount = () => {
+        let pathname = window.location.pathname;
+        this.setState({
+            paginate: pathname.includes('/page/')
+        })
     }
 
     toggleReadText = (e: any) => {
@@ -42,8 +45,7 @@ export default class InfoBox extends PureComponent<Props, State> {
     // Get the window width. Use that number in conjuction with the tag description dims to determine height of background image. Will need to subtract pts.
     getHeight = (e: any) => {
         const h = e.nativeEvent.layout.height;
-
-        // On layout change, set state for height description box
+        // On layout change, set state for height of description box
         // Needed to help determine the height of the container
         this.setState({ 
             height: h,
@@ -52,15 +54,22 @@ export default class InfoBox extends PureComponent<Props, State> {
 
     renderDesktop = () => {
         const { name, imageSrc,description } = this.props;
+        const { paginate } = this.state;
         return (
-            <ImageBackground source={{uri: imageSrc}} style={[styles.imageDesktop]}> 
+            <ImageBackground source={{uri: imageSrc}} style={[styles.imageDesktop, { marginBottom: paginate ? 0 : 70 }]}> 
                 <Container type='content'>
                     <View style={[styles.infobox, styles.infoboxDesktop]}>
                         <ModuleBox offsetDirection={OFFSET_DIRECTION.RIGHT} patternColor={COLOR_MAP.PURPLE} backgroundColor={'transparent'}>
+                            {paginate ? 
+                            <View>
+                                <Text style={[styles.title, styles.titlePaginate, { padding: '1em' }]}>{capitalize(name)}</Text>
+                            </View> 
+                            :
                             <View>
                                 <Text style={styles.title}>{capitalize(name)}</Text>
                                 <HtmlText html={description} css={htmlTextStyle} />
                             </View>
+                            }
                         </ModuleBox>
                     </View>
                 </Container>
@@ -68,21 +77,27 @@ export default class InfoBox extends PureComponent<Props, State> {
         )
     }
 
-    renderMobile = () => {
+    renderMobile = (isTablet: any) => {
         const { name, imageSrc, description } = this.props;
-        const { isExpanded, height } = this.state;
+        const { isExpanded, height, paginate } = this.state;
         const toggleDescription = !isExpanded ? getDescriptionSubstring(description) : description;
         const toggleExpandText = !isExpanded ? 'Read More' : 'Read Less';
         return (
-            <Container style={{height: `${height + 120}px`, marginBottom: 30}}>
+            <Container style={{height: `${height + 120}px`, minHeight: paginate && isTablet ? 400 : 200, marginBottom: 30 }}>
                 <Image source={{uri: imageSrc}} style={{ width: 180, height: 100 }}/>
-                <View style={[styles.infobox, styles.infoboxMobile]}>
+                <View style={[styles.infobox, styles.infoboxMobile, { top: paginate ? '30px' : '70px'}]}>
                     <ModuleBox patternColor={COLOR_MAP.PURPLE} backgroundColor={'transparent'}>
+                        {paginate ?
+                        <View onLayout={this.getHeight}>
+                            <Text style={[styles.title, styles.titlePaginate]}>{capitalize(name)}</Text>
+                        </View>
+                        :
                         <View onLayout={this.getHeight}>
                             <Text style={styles.title} >{capitalize(name)}</Text>
                             <HtmlText html={toggleDescription} css={htmlTextStyle} />
                             <Text style={styles.read} onPress={this.toggleReadText} >{toggleExpandText}</Text>
                         </View>
+                        }
                     </ModuleBox>
                 </View>
             </Container>
@@ -94,7 +109,8 @@ export default class InfoBox extends PureComponent<Props, State> {
             <Responsive>
                 {({ minWidth }) => {
                     const isDesktop = minWidth(BREAKPOINTS.LG);
-                    return isDesktop ? this.renderDesktop() : this.renderMobile();
+                    const isTablet = minWidth(BREAKPOINTS.MD);
+                    return isDesktop ? this.renderDesktop() : this.renderMobile(isTablet);
                     }
                 }
             </Responsive>
@@ -128,24 +144,26 @@ const styles = StyleSheet.create({
         top: '50px',
     },
     infoboxDesktop: {
-        width: '55%',
+        width: '50%',
         height: '100%',
     },
     infoboxMobile: {
         position: 'absolute',
-        width: '80vw',
-        top: '70px',
+        maxWidth: '80vw',
         left: '10vw',
     },
     imageDesktop: {
         width: '100%',
+        minHeight: 500,
         alignItems: 'center',
-        marginBottom: 70,
     },
     title: {
         fontFamily: 'Libre Baskerville, serif',
         fontSize: 36,
         fontWeight: '700',
+    },
+    titlePaginate: {
+        textAlign: 'center',
     },
     read: {
         color: COLOR_MAP.BLUE,
