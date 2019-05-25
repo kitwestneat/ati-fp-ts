@@ -32,7 +32,7 @@ class App extends PureComponent<Props> {
     const homePageData = data.filter((el:any) => {
       return el.type !== 'tag'
     });
-    
+
     return (
       <AppWrap>
         <Header />
@@ -50,7 +50,8 @@ class App extends PureComponent<Props> {
           <Footer />
         </Main>
 
-        <Route path='/tag/history' render={() => <TagPage {...this.props}/>} />
+        <Route exact path='/tag/history' render={() => <TagPage {...this.props}/>} />
+        <Route path='/tag/history/page' render={() => <TagPage {...this.props}/>} />
       </AppWrap>
     );
   }
