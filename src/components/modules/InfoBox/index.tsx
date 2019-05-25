@@ -52,8 +52,6 @@ export default class InfoBox extends PureComponent<Props, State> {
 
     renderDesktop = () => {
         const { name, imageSrc,description } = this.props;
-        //const { name, imageSrc, description } = getInfo(data);
-        console.log("props: ", this.props);
         return (
             <ImageBackground source={{uri: imageSrc}} style={[styles.imageDesktop]}> 
                 <Container type='content'>
@@ -72,13 +70,12 @@ export default class InfoBox extends PureComponent<Props, State> {
 
     renderMobile = () => {
         const { name, imageSrc, description } = this.props;
-        //const { name, imageSrc, description } = getInfo(data[0]);
         const { isExpanded, height } = this.state;
         const toggleDescription = !isExpanded ? getDescriptionSubstring(description) : description;
         const toggleExpandText = !isExpanded ? 'Read More' : 'Read Less';
         return (
             <Container style={{height: `${height + 120}px`, marginBottom: 30}}>
-                <Image source={{uri: imageSrc}} style={{ width: 190, height: 100 }}/>
+                <Image source={{uri: imageSrc}} style={{ width: 180, height: 100 }}/>
                 <View style={[styles.infobox, styles.infoboxMobile]}>
                     <ModuleBox patternColor={COLOR_MAP.PURPLE} backgroundColor={'transparent'}>
                         <View onLayout={this.getHeight}>
@@ -103,15 +100,6 @@ export default class InfoBox extends PureComponent<Props, State> {
             </Responsive>
         )
     }
-}
-
-// Get tag data 
-const getInfo = (data: any) => {
-    return { 
-        name: data.name,
-        imageSrc: data.imageSrc,
-        description: data.description
-    };
 }
 
 // Capitalize first letter of tag name

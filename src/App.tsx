@@ -29,6 +29,10 @@ class App extends PureComponent<Props> {
       throw new Error('cannot load post data');
     }
 
+    const homePageData = data.filter((el:any) => {
+      return el.type !== 'tag'
+    });
+    
     return (
       <AppWrap>
         <Header />
@@ -37,7 +41,7 @@ class App extends PureComponent<Props> {
             <Skybox />
           </Section>
 
-          <PageSections data={data} />
+          <PageSections data={homePageData} />
 
           <Section topSpacing={SECTION_SPACING_VARIANTS.LARGE}>
             <Floorboard />
