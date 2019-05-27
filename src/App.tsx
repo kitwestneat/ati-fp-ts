@@ -14,7 +14,6 @@ import TagPage from '@/TagPage';
 
 type Props = {
   data: any;
-  tagData: any;
 };
 
 class App extends PureComponent<Props> {
@@ -50,8 +49,7 @@ class App extends PureComponent<Props> {
           <Footer />
         </Main>
 
-        <Route exact path='/tag/history' render={() => <TagPage {...this.props}/>} />
-        <Route path='/tag/history/page' render={() => <TagPage {...this.props}/>} />
+        <Route path='/tag/history' render={() => <TagPage {...this.props}/>} />
       </AppWrap>
     );
   }
