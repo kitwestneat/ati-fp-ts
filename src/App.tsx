@@ -14,7 +14,6 @@ import TagPage from '@/TagPage';
 
 type Props = {
   data: any;
-  tagData: any;
 };
 
 class App extends PureComponent<Props> {
