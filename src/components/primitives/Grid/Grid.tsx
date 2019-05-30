@@ -41,12 +41,8 @@ class Grid extends PureComponent<Props> {
         return null;
       }
 
-      if (typeof child.type === 'string') {
-        console.log('renderChildren: string child', child);
-      }
-
-      const name = typeof child.type === 'string' ? child.type : child.type.name;
-      const isGridSlot = name === 'GridSlot';
+      // can't use child name, minify mangles it
+      const isGridSlot = child.type && (child.type as any).isGridSlot;
       if (isGridSlot) {
         return React.cloneElement(child, {
           ...gridSlotProps,

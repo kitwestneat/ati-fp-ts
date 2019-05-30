@@ -8,6 +8,8 @@ interface Props {
 }
 
 export default class GridSlot extends React.PureComponent<Props> {
+  static isGridSlot = true;
+
   getStyles = () => {
     const { itemsPerRow = 1, spacer = 10, multiplier = 1 } = this.props;
 
