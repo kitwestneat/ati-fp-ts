@@ -84,9 +84,8 @@ class OverlayPost extends PureComponent<OverlayPostProps> {
                   fontStyles,
                   center && { textAlign: 'center' }
                 ]}
-              >
-                {title}
-              </Text>
+                html={title}
+              />
             </View>
           </View>
         </View>

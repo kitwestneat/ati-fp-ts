@@ -34,9 +34,11 @@ class SmallPost extends PureComponent<SmallPostProps> {
           categoryColor={categoryColor || '#999'}
         />
         <View style={{ marginTop: 6 }}>
-          <Text numberOfLines={numberOfLines} style={[{ fontWeight: '600' }, fontStyles]}>
-            {title}
-          </Text>
+          <Text
+            numberOfLines={numberOfLines}
+            style={[{ fontWeight: '600' }, fontStyles]}
+            html={title}
+          />
         </View>
       </View>
     );
