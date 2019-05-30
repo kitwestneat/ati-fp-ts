@@ -24,22 +24,23 @@ const CONFIG_LG: CarouselProps = {
   heightMode: 'first',
   renderBottomCenterControls: undefined,
   renderCenterLeftControls: (props: CarouselSlideRenderControlProps) => (
-    <Arrow dir='prev' {...props} />
+    <Arrow dir="prev" {...props} />
   ),
   renderCenterRightControls: (props: CarouselSlideRenderControlProps) => (
-    <Arrow dir='next' {...props} />
+    <Arrow dir="next" {...props} />
   ),
   cellSpacing: SPACE_BETWEEN_SLIDES.DESKTOP
 };
+const EMPTY_FN = () => {};
 const CONFIG_SM: CarouselProps = {
   frameOverflow: 'visible',
   slidesToShow: 1,
   slidesToScroll: 1,
   wrapAround: true,
   heightMode: 'first',
-  renderBottomCenterControls: undefined,
-  renderCenterLeftControls: undefined,
-  renderCenterRightControls: undefined,
+  renderBottomCenterControls: EMPTY_FN as any,
+  renderCenterLeftControls: EMPTY_FN as any,
+  renderCenterRightControls: EMPTY_FN as any,
   cellSpacing: SPACE_BETWEEN_SLIDES.MOBILE
 };
 
