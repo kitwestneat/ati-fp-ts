@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
-import { IconType } from 'react-icons/lib/iconBase';
+import { IconType } from 'react-icons/lib/cjs/iconBase';
 
 import { Text } from '@/components/primitives';
 
