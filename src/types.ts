@@ -56,6 +56,7 @@ export interface InfoBoxData extends ModuleData {
   name: string;
   imageSrc: string;
   description: string;
+  paginate?: boolean;
 }
 
 export type AllModuleDataTypes =

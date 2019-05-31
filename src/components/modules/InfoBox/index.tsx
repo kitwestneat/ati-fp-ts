@@ -5,31 +5,24 @@ import { Image, Container, HtmlText } from '@/components/primitives';
 import { Responsive } from '@/components/utils';
 import { COLOR_MAP, BREAKPOINTS } from '@/constants';
 import { InfoBoxData, OFFSET_DIRECTION } from '@/types';
+import { isDevEnv } from '../../../utils';
 
 interface Props extends InfoBoxData {
     name: string;
     imageSrc: string;
     description: string;
+    paginate?: boolean;
 }
 
 type State = {
     isExpanded: boolean;
     height: number;
-    paginate: boolean;
 }
 
 export default class InfoBox extends PureComponent<Props, State> {
     state = {
         isExpanded: false,
         height: 0,
-        paginate: false,
-    }
-
-    componentDidMount = () => {
-        let pathname = window.location.pathname;
-        this.setState({
-            paginate: pathname.includes('/page/')
-        })
     }
 
     toggleReadText = (e: any) => {
@@ -52,9 +45,13 @@ export default class InfoBox extends PureComponent<Props, State> {
         })
     }
 
+    isPaginated = () => isDevEnv() ? window.location.pathname.includes('/page/') : this.props.paginate;
+
     renderDesktop = () => {
         const { name, imageSrc,description } = this.props;
-        const { paginate } = this.state;
+        const paginate = this.isPaginated();
+        console.log("paginated: ", paginate);
+        console.log("props: ", this.props);
         return (
             <ImageBackground source={{uri: imageSrc}} style={[styles.imageDesktop, { marginBottom: paginate ? 0 : 70 }]}> 
                 <Container type='content'>
@@ -79,9 +76,10 @@ export default class InfoBox extends PureComponent<Props, State> {
 
     renderMobile = (isTablet: any) => {
         const { name, imageSrc, description } = this.props;
-        const { isExpanded, height, paginate } = this.state;
+        const { isExpanded, height } = this.state;
         const toggleDescription = !isExpanded ? getDescriptionSubstring(description) : description;
         const toggleExpandText = !isExpanded ? 'Read More' : 'Read Less';
+        const paginate = this.isPaginated();
         return (
             <Container style={{height: `${height + 120}px`, minHeight: paginate && isTablet ? 400 : 200, marginBottom: 30 }}>
                 <Image source={{uri: imageSrc}} style={{ width: 180, height: 100 }}/>
