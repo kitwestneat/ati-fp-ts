@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { ModuleBox } from '@/components/modules';
-import { Container, Section } from '@/components/primitives';
+import { Container } from '@/components/primitives';
 import { Responsive } from '@/components/utils';
 import { BREAKPOINTS } from '@/constants';
 import { SplitTagBoxData, PostType, OFFSET_DIRECTION } from '@/types';
