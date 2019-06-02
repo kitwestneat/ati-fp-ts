@@ -5,7 +5,8 @@ export enum SECTION_TYPES {
   INSTAGRAM = 'instagram',
   NEWSLETTER = 'newsletter',
   TRENDING = 'trending',
-  TAG = 'tag'
+  TAG = 'tag',
+  SPLIT_TAG_BOX = 'splitTagBox',
 }
 
 export enum SECTION_SPACING_VARIANTS {

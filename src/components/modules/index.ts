@@ -13,3 +13,4 @@ export { default as Trending } from './Trending';
 export { default as Instagram } from './Instagram';
 
 export { default as InfoBox } from './InfoBox';
+export { default as SplitTagBox } from './SplitTagBox';

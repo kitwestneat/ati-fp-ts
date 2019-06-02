@@ -15,6 +15,7 @@ type Props = {
   title: string;
   link: string;
   isDesktop: boolean;
+  style?: any;
 };
 
 class TitleRow extends PureComponent<Props> {
@@ -37,9 +38,10 @@ class TitleRow extends PureComponent<Props> {
     );
   };
   renderDesktop = () => {
+    const { style } = this.props;
     return (
       <View style={styles.titleRow}>
-        <View style={styles.titleWrap}>{this.renderTitle()}</View>
+        <View style={[styles.titleWrap, style]}>{this.renderTitle()}</View>
 
         <View style={{ flexShrink: 0 }}>
           <Leaderboard />
