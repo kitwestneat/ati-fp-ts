@@ -86,7 +86,7 @@ export interface ModuleSpec {
   query?: QuerySpec;
 }
 
-export type GridOrder = 1 | 2 | 3 | 4;
+export type GridOrder = 1 | 2 | 3;
 
 export interface WebAccessibilityProps {
   accessibilityRole?: 'link' | 'heading' | 'button';

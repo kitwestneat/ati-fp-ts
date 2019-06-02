@@ -26,7 +26,6 @@ const POST_COMPONENT_ATTRS: PostComponentAttrMap = {
 const ORDERS = [
   ['LG', 'MD', 'MD', 'MD', 'AD'], 
   ['MD', 'MD', 'AD', 'MD', 'LG'], 
-  ['MD', 'MD'], 
   ['MD', 'MD', 'MD', 'AD']
 ];
 

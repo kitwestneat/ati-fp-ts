@@ -71,14 +71,14 @@ export default class SplitTagBox extends PureComponent<Props, State> {
                 />
                 {isDesktop ?
                 <View style={[styles.parentContainer, {flexDirection: flexDirection }]}>
-                    <View style={styles.twoPostsBox} >
+                    <View style={styles.twoPostsBox} onLayout={this.getHeight}>
                         <ModuleBox style={{height: twoPostsBoxHeight}} patternColor={split === 'right' ? sectionColor : ''} offsetDirection={OFFSET_DIRECTION.RIGHT}>
-                            <PostGrid posts={twoPosts} order={3} style={styles.flexColumn}></PostGrid>
+                            <PostList posts={twoPosts}></PostList>
                         </ModuleBox>
                     </View>
-                    <View style={styles.threePostsBox} onLayout={this.getHeight}>
+                    <View style={styles.threePostsBox}>
                         <ModuleBox style={{height: threePostsBoxHeight}} patternColor={split === 'left' ? sectionColor : ''} offsetDirection={OFFSET_DIRECTION.RIGHT}>
-                            <PostGrid posts={threePosts} order={4} itemsPerRow={2}></PostGrid>
+                            <PostGrid posts={threePosts} order={3} itemsPerRow={2}></PostGrid>
                         </ModuleBox>
                     </View>
                 </View>
