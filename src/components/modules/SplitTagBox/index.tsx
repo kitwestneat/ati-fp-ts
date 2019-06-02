@@ -111,9 +111,6 @@ const styles = StyleSheet.create({
         marginTop: 30,
         justifyContent: 'space-between',
     },
-    flexColumn: {
-        flexDirection: 'column',
-    },
     twoPostsBox: {
         width: '32%',
     },
