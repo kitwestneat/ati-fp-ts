@@ -3,20 +3,17 @@
 import React, { PureComponent } from 'react';
 import PageSections from '@/PageFactory';
 import { AppWrap, Header, Footer, Main } from '@/components/general';
-import { Skybox, Floorboard } from '@/components/ads';
+import { Skybox } from '@/components/ads';
 import { startAds } from '@/components/ads/ad-utils';
 import { Section } from '@/components/primitives';
 
 import { SECTION_SPACING_VARIANTS } from '@/constants/index';
 
-import { Route } from 'react-router-dom';
-import TagPage from '@/TagPage';
-
 type Props = {
   data: any;
 };
 
-class App extends PureComponent<Props> {
+class TagPage extends PureComponent<Props> {
   componentDidMount() {
     startAds();
   }
@@ -28,10 +25,6 @@ class App extends PureComponent<Props> {
       throw new Error('cannot load post data');
     }
 
-    const homePageData = data.filter((el:any) => {
-      return el.type !== 'tag'
-    });
-
     return (
       <AppWrap>
         <Header />
@@ -40,19 +33,15 @@ class App extends PureComponent<Props> {
             <Skybox />
           </Section>
 
-          <PageSections data={homePageData} />
-
           <Section topSpacing={SECTION_SPACING_VARIANTS.LARGE}>
-            <Floorboard />
+              <PageSections data={data} />
           </Section>
-
+      
           <Footer />
         </Main>
-
-        <Route path='/tag/history' render={() => <TagPage {...this.props}/>} />
       </AppWrap>
     );
   }
 }
 
-export default App;
+export default TagPage;
