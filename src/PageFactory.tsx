@@ -1,5 +1,6 @@
 import React, { PureComponent, Fragment } from 'react';
 import {
+  InfoBox,
   MostRecent,
   TagPostsSingleColumn,
   Instagram,
@@ -16,6 +17,7 @@ interface ComponentMap {
 }
 
 export const SECTION_TYPE_COMPONENT_MAP: ComponentMap = {
+  [SECTION_TYPES.TAG]: InfoBox,
   [SECTION_TYPES.RECENT]: MostRecent,
   [SECTION_TYPES.TAG_TILE_BOX]: TagPostsSingleColumn,
   [SECTION_TYPES.INSTAGRAM]: Instagram,

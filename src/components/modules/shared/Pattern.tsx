@@ -8,6 +8,7 @@ import { OFFSET_DIRECTION } from '@/types';
 
 type Props = {
   color: string;
+  backgroundColor: string;
   offsetDirection: OFFSET_DIRECTION;
   children: any;
 };
@@ -15,7 +16,8 @@ type Props = {
 class Pattern extends PureComponent<Props> {
   static defaultProps = {
     offsetDirection: OFFSET_DIRECTION.LEFT,
-    color: COLOR_MAP.ORANGE
+    color: COLOR_MAP.ORANGE,
+    backgroundColor: COLOR_MAP.SITE_BG,
   };
 
   getOffsetStyles = () => {
@@ -34,16 +36,13 @@ class Pattern extends PureComponent<Props> {
   };
 
   getGradient = () => {
-    const { color } = this.props;
-    const bg = COLOR_MAP.SITE_BG;
+    const { color, backgroundColor } = this.props;
     const space = 5;
-    const dot = 2;
-    const emptyPercent = `${100 - (dot / space) * 100}%`;
 
     return {
-      backgroundColor: color,
+      backgroundColor: backgroundColor,
       backgroundPosition: 'center center',
-      backgroundImage: `linear-gradient(90deg, ${bg} ${emptyPercent}, transparent 1%), linear-gradient(${bg} ${emptyPercent}, transparent 1%)`,
+      backgroundImage: `radial-gradient(${color} 10%, transparent 45%), radial-gradient(${color} 10%, transparent 45%)`,
       backgroundSize: `${space}px ${space}px`
     };
   };

@@ -51,6 +51,14 @@ export interface TrendingModuleData extends ModuleData {
   sectionTitle: string;
 }
 
+export interface InfoBoxData extends ModuleData {
+  type: SECTION_TYPES.TAG;
+  name: string;
+  imageSrc: string;
+  description: string;
+  paginate?: boolean;
+}
+
 export type AllModuleDataTypes =
   | TrendingModuleData
   | NewsletterModuleData
