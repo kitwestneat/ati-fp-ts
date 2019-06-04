@@ -10,7 +10,6 @@ import { GridOrder, PostType } from '@/types';
 type Props = {
   order: GridOrder;
   posts: PostType[];
-  style?: any;
   itemsPerRow?: number;
 };
 
@@ -20,10 +19,10 @@ class PostGrid extends PureComponent<Props> {
   };
 
   render() {
-    const { order, posts, style, itemsPerRow } = this.props;
+    const { order, posts, itemsPerRow } = this.props;
     const postsArray = mapPostsToGrid(order, posts);
 
-    return <Grid spacer={30} style={style} itemsPerRow={itemsPerRow}>{postsArray}</Grid>;
+    return <Grid spacer={30} itemsPerRow={itemsPerRow}>{postsArray}</Grid>;
   }
 }
 
