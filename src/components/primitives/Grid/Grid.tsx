@@ -57,7 +57,7 @@ class Grid extends PureComponent<Props> {
   render() {
     return (
       <View style={[{ position: 'relative' }]}>
-        <View style={[this.getListStyles()]}>{this.renderChildren()}</View>
+        <View style={this.getListStyles()}>{this.renderChildren()}</View>
       </View>
     );
   }

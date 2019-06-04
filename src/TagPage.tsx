@@ -21,6 +21,11 @@ class TagPage extends PureComponent<Props> {
   render() {
     const { data } = this.props;
 
+    const tagPageData = data.filter((el:any) => {
+      const excludedTypes = ['recent', 'tagTileBox', 'instagram', 'newsletter'];
+      return !excludedTypes.includes(el.type);
+    });
+
     if (!data) {
       throw new Error('cannot load post data');
     }
@@ -34,7 +39,7 @@ class TagPage extends PureComponent<Props> {
           </Section>
 
           <Section topSpacing={SECTION_SPACING_VARIANTS.LARGE}>
-              <PageSections data={data} />
+              <PageSections data={tagPageData} />
           </Section>
       
           <Footer />
