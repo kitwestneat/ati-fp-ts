@@ -23,12 +23,16 @@ const POST_COMPONENT_ATTRS: PostComponentAttrMap = {
   MD: { layoutVariant: 'medium' }
 };
 
-const ORDERS = [['LG', 'MD', 'MD', 'MD', 'AD'], ['MD', 'MD', 'AD', 'MD', 'LG']];
+const ORDERS = [
+  ['LG', 'MD', 'MD', 'MD', 'AD'], 
+  ['MD', 'MD', 'AD', 'MD', 'LG'], 
+  ['MD', 'MD', 'MD', 'AD']
+];
 
 export function mapPostsToGrid(order: GridOrder, posts: PostType[]) {
   const orderSpec = ORDERS[order - 1];
   const postQueue = posts.slice(0).reverse();
-  if (postQueue.length != GRID_POST_LENGTH) {
+  if (postQueue.length != GRID_POST_LENGTH && orderSpec.length === 5) {
     console.warn(
       `mapPostsToGrid: grid requires exactly ${GRID_POST_LENGTH} posts, found ${postQueue.length}`
     );
