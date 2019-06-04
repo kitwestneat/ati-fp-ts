@@ -52,7 +52,7 @@ export default class SplitTagBox extends PureComponent<Props, State> {
             console.warn(
               `SplitTagBox: module requires a minimum of 5 posts, found ${posts.length}.`
             );
-          }
+        }
         const twoPosts = posts.slice(0, 2);
         const threePosts = posts.slice(2, 5); // Make sure we stop at 5 posts on Desktop
         const fivePosts = posts.slice(0, 5); // Make sure we stop at 5 posts on Mobile
@@ -63,30 +63,34 @@ export default class SplitTagBox extends PureComponent<Props, State> {
 
         return (
             <Container type='content'>
-                <TitleRow
-                patternColor={sectionColor}
-                link={sectionLink}
-                title={sectionTitle}
-                isDesktop={isDesktop}
-                />
-                {isDesktop ?
-                <View style={[styles.parentContainer, {flexDirection: flexDirection }]}>
-                    <View style={styles.twoPostsBox} onLayout={this.getHeight}>
-                        <ModuleBox style={{height: twoPostsBoxHeight}} patternColor={split === 'right' ? sectionColor : ''} offsetDirection={OFFSET_DIRECTION.RIGHT}>
-                            <PostList posts={twoPosts}></PostList>
+                {posts.length >= 5 &&
+                <View>
+                    <TitleRow
+                    patternColor={sectionColor}
+                    link={sectionLink}
+                    title={sectionTitle}
+                    isDesktop={isDesktop}
+                    />
+                    {isDesktop ?
+                    <View style={[styles.parentContainer, {flexDirection: flexDirection }]}>
+                        <View style={styles.twoPostsBox} onLayout={this.getHeight}>
+                            <ModuleBox style={{height: twoPostsBoxHeight}} patternColor={split === 'right' ? sectionColor : ''} offsetDirection={OFFSET_DIRECTION.RIGHT}>
+                                <PostList posts={twoPosts}></PostList>
+                            </ModuleBox>
+                        </View>
+                        <View style={styles.threePostsBox}>
+                            <ModuleBox style={{height: threePostsBoxHeight}} patternColor={split === 'left' ? sectionColor : ''} offsetDirection={OFFSET_DIRECTION.RIGHT}>
+                                <PostGrid posts={threePosts} order={3} itemsPerRow={2}></PostGrid>
+                            </ModuleBox>
+                        </View>
+                    </View>
+                    :
+                    <View style={[styles.parentContainer, { paddingHorizontal: 15}]}>
+                        <ModuleBox patternColor={sectionColor} offsetDirection={OFFSET_DIRECTION.RIGHT}>
+                            <PostList posts={fivePosts}></PostList>
                         </ModuleBox>
                     </View>
-                    <View style={styles.threePostsBox}>
-                        <ModuleBox style={{height: threePostsBoxHeight}} patternColor={split === 'left' ? sectionColor : ''} offsetDirection={OFFSET_DIRECTION.RIGHT}>
-                            <PostGrid posts={threePosts} order={3} itemsPerRow={2}></PostGrid>
-                        </ModuleBox>
-                    </View>
-                </View>
-                :
-                <View style={[styles.parentContainer, { paddingHorizontal: 15}]}>
-                    <ModuleBox patternColor={sectionColor} offsetDirection={OFFSET_DIRECTION.RIGHT}>
-                        <PostList posts={fivePosts}></PostList>
-                    </ModuleBox>
+                    }
                 </View>
                 }
             </Container>

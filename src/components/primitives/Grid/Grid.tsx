@@ -5,7 +5,7 @@ import { View, ViewStyle, StyleProp } from 'react-native';
 import GridSlot from './GridSlot';
 
 type Props = {
-  style?: any;
+  style: StyleProp<ViewStyle>;
   children: JSX.Element[];
   spacer: number;
   itemsPerRow: number;
@@ -14,6 +14,7 @@ type Props = {
 class Grid extends PureComponent<Props> {
   static defaultProps = {
     spacer: 10,
+    style: {},
     itemsPerRow: 3
   };
 
@@ -58,10 +59,9 @@ class Grid extends PureComponent<Props> {
   };
 
   render() {
-    const { style } = this.props;
     return (
       <View style={[{ position: 'relative' }]}>
-        <View style={[this.getListStyles(), style]}>{this.renderChildren()}</View>
+        <View style={this.getListStyles()}>{this.renderChildren()}</View>
       </View>
     );
   }
