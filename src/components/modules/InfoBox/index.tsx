@@ -50,8 +50,6 @@ export default class InfoBox extends PureComponent<Props, State> {
     renderDesktop = () => {
         const { name, imageSrc,description } = this.props;
         const paginate = this.isPaginated();
-        console.log("paginated: ", paginate);
-        console.log("props: ", this.props);
         return (
             <ImageBackground source={{uri: imageSrc}} style={[styles.imageDesktop, { marginBottom: paginate ? 0 : 70 }]}> 
                 <Container type='content'>

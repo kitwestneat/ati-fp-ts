@@ -59,6 +59,16 @@ export interface InfoBoxData extends ModuleData {
   paginate?: boolean;
 }
 
+export interface SplitTagBoxData extends ModuleData {
+  type: SECTION_TYPES.SPLIT_TAG_BOX,
+  // order: GridOrder;
+  sectionTitle: string;
+  sectionLink: string;
+  sectionColor: string;
+  split?: string;
+  posts: PostType[];
+}
+
 export type AllModuleDataTypes =
   | TrendingModuleData
   | NewsletterModuleData
@@ -76,7 +86,7 @@ export interface ModuleSpec {
   query?: QuerySpec;
 }
 
-export type GridOrder = 1 | 2;
+export type GridOrder = 1 | 2 | 3;
 
 export interface WebAccessibilityProps {
   accessibilityRole?: 'link' | 'heading' | 'button';

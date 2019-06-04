@@ -6,8 +6,6 @@ import { PostType, GridOrder, Omit } from '@/types';
 import { PostProps } from '../shared/Post';
 import GridSlot from '../../primitives/Grid/GridSlot';
 
-const GRID_POST_LENGTH = 4;
-
 type PostComponentAttrMap = {
   [k: string]: Omit<PostProps, keyof PostType>;
 };
@@ -23,14 +21,19 @@ const POST_COMPONENT_ATTRS: PostComponentAttrMap = {
   MD: { layoutVariant: 'medium' }
 };
 
-const ORDERS = [['LG', 'MD', 'MD', 'MD', 'AD'], ['MD', 'MD', 'AD', 'MD', 'LG']];
+const ORDERS = [
+  ['LG', 'MD', 'MD', 'MD', 'AD'], 
+  ['MD', 'MD', 'AD', 'MD', 'LG'], 
+  ['MD', 'MD', 'MD', 'AD']
+];
 
 export function mapPostsToGrid(order: GridOrder, posts: PostType[]) {
   const orderSpec = ORDERS[order - 1];
   const postQueue = posts.slice(0).reverse();
-  if (postQueue.length != GRID_POST_LENGTH) {
+  const orderSpecPostCount = orderSpec.filter(type => type == 'LG' || type== 'MD').length;
+  if (postQueue.length != orderSpecPostCount) {
     console.warn(
-      `mapPostsToGrid: grid requires exactly ${GRID_POST_LENGTH} posts, found ${postQueue.length}`
+      `mapPostsToGrid: grid requires exactly ${orderSpecPostCount} posts, found ${postQueue.length}`
     );
   }
 
