@@ -47,7 +47,6 @@ class OverlapScaffold extends PureComponent<Props> {
 
   render() {
     const { overlap, containerPadding, titleOverlap, titleWidth, isDesktop } = this.props;
-    console.log("overlap scaffold props: ", this.props);
 
     return (
       <>

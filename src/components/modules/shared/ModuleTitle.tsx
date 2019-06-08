@@ -2,7 +2,7 @@
 
 import React, { PureComponent } from 'react';
 
-import { Text, View } from '@/components/primitives';
+import { Text } from '@/components/primitives';
 import { ModuleBox } from '@/components/modules';
 import { COLOR_MAP } from '@/constants';
 import { ViewStyle } from 'react-native';

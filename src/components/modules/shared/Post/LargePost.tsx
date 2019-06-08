@@ -21,7 +21,7 @@ export interface LargePostProps extends Partial<PostType> {
 class LargePost extends PureComponent<LargePostProps> {
   static defaultProps = {
     style: {},
-    imageWidth: 735,
+    imageWidth: 630,
     imageHeight: 250, 
     postLine: true,
   };
