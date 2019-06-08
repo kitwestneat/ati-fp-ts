@@ -6,7 +6,7 @@ import { StyleSheet } from 'react-native';
 import { ModuleTitle } from '@/components/modules';
 import { Leaderboard, MobileMrec } from '@/components/ads';
 
-import { Row, View, Container } from '@/components/primitives';
+import { Row, View } from '@/components/primitives';
 
 import { SECTION_SPACERS, SECTION_SPACING_VARIANTS } from '@/constants';
 
@@ -21,6 +21,7 @@ type Props = {
 class TitleRow extends PureComponent<Props> {
 
   renderMobile = () => {
+    const showPattern = false;
     return (
       <>
         <Row style={{ alignItems: 'center' }}>
@@ -33,7 +34,7 @@ class TitleRow extends PureComponent<Props> {
             paddingHorizontal: 40
           }}
         >
-          {this.renderTitle()}
+          {this.renderTitle(showPattern)}
         </Row>
       </>
     );
@@ -50,13 +51,14 @@ class TitleRow extends PureComponent<Props> {
     );
   };
 
-  renderTitle = () => {
-    const { link, title, patternColor, isDesktop , onLayout } = this.props;
+  renderTitle = (showPattern?: boolean) => {
+    const { link, title, patternColor , onLayout } = this.props;
     // XXX should moduletitle get isDesktop?
     return (
       <View style={{ alignItems: 'flex-start' }} accessibilityRole="link" href={link} >
         <ModuleTitle
           title={title}
+          showPattern={showPattern}
           patternColor={patternColor}
           style={{ minHeight: 110, justifyContent: 'center' }}
           onLayout={onLayout}

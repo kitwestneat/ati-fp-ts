@@ -9,6 +9,7 @@ import { ViewStyle } from 'react-native';
 
 type Props = {
   children?: string;
+  showPattern?: boolean;
   patternColor: string;
   style: ViewStyle;
   title: string;
@@ -18,6 +19,7 @@ type Props = {
 
 class ModuleTitle extends PureComponent<Props> {
   static defaultProps = {
+    showPattern: true,
     color: COLOR_MAP.TEXT_COLOR
   };
 
@@ -32,9 +34,9 @@ class ModuleTitle extends PureComponent<Props> {
   };
 
   render() {
-    const { patternColor, style, children, title, onLayout } = this.props;
+    const { showPattern, patternColor, style, children, title, onLayout } = this.props;
     return (
-      <ModuleBox patternColor={patternColor} style={[this.getBorderTop(), style]} onLayout={onLayout}>
+      <ModuleBox patternColor={showPattern ? patternColor : ''} style={[this.getBorderTop(), style]} onLayout={onLayout}>
         {children ? (
           children
         ) : (
