@@ -18,19 +18,24 @@ const POST_COMPONENT_ATTRS: PostComponentAttrMap = {
     imageWidth: 735,
     imageHeight: 430
   },
+  LG_2: {
+    layoutVariant: 'large',
+    postLine: false,
+  },
   MD: { layoutVariant: 'medium' }
 };
 
 const ORDERS = [
   ['LG', 'MD', 'MD', 'MD', 'AD'], 
   ['MD', 'MD', 'AD', 'MD', 'LG'], 
-  ['MD', 'MD', 'MD', 'AD']
+  ['MD', 'MD', 'MD', 'AD'],
+  ['MD', 'MD', 'MD', 'AD', 'LG_2'], 
 ];
 
 export function mapPostsToGrid(order: GridOrder, posts: PostType[]) {
   const orderSpec = ORDERS[order - 1];
   const postQueue = posts.slice(0).reverse();
-  const orderSpecPostCount = orderSpec.filter(type => type == 'LG' || type== 'MD').length;
+  const orderSpecPostCount = orderSpec.filter(type => type == 'LG' || type == 'LG_2' || type== 'MD').length;
   if (postQueue.length != orderSpecPostCount) {
     console.warn(
       `mapPostsToGrid: grid requires exactly ${orderSpecPostCount} posts, found ${postQueue.length}`
@@ -51,7 +56,7 @@ export function mapPostsToGrid(order: GridOrder, posts: PostType[]) {
       }
 
       const attrs = POST_COMPONENT_ATTRS[type];
-      const multiplier = type === 'LG' ? 2 : 1;
+      const multiplier = type === 'LG' || type === 'LG_2' ? 2 : 1;
 
       return (
         <GridSlot key={post.id} multiplier={multiplier}>

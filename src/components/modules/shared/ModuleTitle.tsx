@@ -2,7 +2,7 @@
 
 import React, { PureComponent } from 'react';
 
-import { Text } from '@/components/primitives';
+import { Text, View } from '@/components/primitives';
 import { ModuleBox } from '@/components/modules';
 import { COLOR_MAP } from '@/constants';
 import { ViewStyle } from 'react-native';
@@ -13,6 +13,7 @@ type Props = {
   style: ViewStyle;
   title: string;
   isDesktop?: boolean;
+  onLayout?: any;
 };
 
 class ModuleTitle extends PureComponent<Props> {
@@ -31,9 +32,9 @@ class ModuleTitle extends PureComponent<Props> {
   };
 
   render() {
-    const { patternColor, style, children, title } = this.props;
+    const { patternColor, style, children, title, onLayout } = this.props;
     return (
-      <ModuleBox patternColor={patternColor} style={[this.getBorderTop(), style]}>
+      <ModuleBox patternColor={patternColor} style={[this.getBorderTop(), style]} onLayout={onLayout}>
         {children ? (
           children
         ) : (

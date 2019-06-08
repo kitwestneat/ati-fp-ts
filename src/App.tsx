@@ -29,7 +29,7 @@ class App extends PureComponent<Props> {
     }
 
     const homePageData = data.filter((el:any) => {
-      const excludedTypes = ['tag', 'splitTagBox'];
+      const excludedTypes = ['tag', 'splitTagBox', 'tagOverlapTitle'];
       return !excludedTypes.includes(el.type);
     });
 
