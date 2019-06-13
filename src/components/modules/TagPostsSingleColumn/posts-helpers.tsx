@@ -12,30 +12,29 @@ type PostComponentAttrMap = {
 
 const AD_COMPONENT = Mrec;
 const POST_COMPONENT_ATTRS: PostComponentAttrMap = {
-  LG: {
+  OV: {
     layoutVariant: 'overlay',
     fontStyles: { fontSize: 24, lineHeight: 30 },
     imageWidth: 735,
     imageHeight: 430
   },
-  LG_2: {
+  LG: {
     layoutVariant: 'large',
-    postLine: false,
   },
   MD: { layoutVariant: 'medium' }
 };
 
 const ORDERS = [
-  ['LG', 'MD', 'MD', 'MD', 'AD'], 
-  ['MD', 'MD', 'AD', 'MD', 'LG'], 
+  ['OV', 'MD', 'MD', 'MD', 'AD'], 
+  ['MD', 'MD', 'AD', 'MD', 'OV'], 
   ['MD', 'MD', 'MD', 'AD'],
-  ['MD', 'MD', 'MD', 'AD', 'LG_2'], 
+  ['MD', 'MD', 'MD', 'AD', 'LG'], 
 ];
 
 export function mapPostsToGrid(order: GridOrder, posts: PostType[]) {
   const orderSpec = ORDERS[order - 1];
   const postQueue = posts.slice(0).reverse();
-  const orderSpecPostCount = orderSpec.filter(type => type == 'LG' || type == 'LG_2' || type== 'MD').length;
+  const orderSpecPostCount = orderSpec.filter(type => type != 'AD').length;
   if (postQueue.length != orderSpecPostCount) {
     console.warn(
       `mapPostsToGrid: grid requires exactly ${orderSpecPostCount} posts, found ${postQueue.length}`

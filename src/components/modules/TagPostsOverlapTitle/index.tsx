@@ -59,7 +59,7 @@ export default class TagPostsOverlapTitle extends PureComponent<Props, State> {
         })
     }
 
-    renderDesktop = (isDesktop: any) => {
+    render() {
         const {
             sectionTitle,
             sectionLink,
@@ -69,56 +69,45 @@ export default class TagPostsOverlapTitle extends PureComponent<Props, State> {
         } = this.props;
 
         const { titleRowWidth } = this.state;
-
-        const secondaryPostsMobile = secondaryPosts.slice(0, 3);
-
-        return (
-            <Container type='content'>
-              <TitleRow
-                patternColor={sectionColor}
-                link={sectionLink}
-                title={sectionTitle}
-                isDesktop={isDesktop}
-                onLayout={this.getWidth}
-              />
-
-              <Row style={{}}>
-                <OverlapScaffold {...this.scaffoldProps(isDesktop)} titleOverlap titleWidth={titleRowWidth} isDesktop={isDesktop}>
-                  <OverlapScaffold.Main>
-                    <Post
-                      layoutVariant='title-overlap'
-                      isDesktop={isDesktop}
-                      center
-                      {...this.MainPostImageProps(isDesktop)}
-                      {...mainPost}
-                    />
-                  </OverlapScaffold.Main>
-
-                  <OverlapScaffold.Overlap>
-                    <ModuleBox offsetDirection={OFFSET_DIRECTION.RIGHT} patternColor={sectionColor}>
-                      {isDesktop ? (
-                        <PostGrid order={order} posts={secondaryPosts} />
-                      ) : (
-                        <PostList posts={isDesktop ? secondaryPosts : secondaryPostsMobile} />
-                      )}
-                    </ModuleBox>
-                  </OverlapScaffold.Overlap>
-                </OverlapScaffold>
-              </Row>
-            </Container>
-          );
-    }
-
-    renderMobile = () => {
-        
-    }
-
-    render() {
         return (
             <Responsive>
             {({ minWidth }) => {
                 const isDesktop = minWidth(BREAKPOINTS.LG);
-                return this.renderDesktop(isDesktop);
+                return (
+                    <Container type='content'>
+                      <TitleRow
+                        patternColor={sectionColor}
+                        link={sectionLink}
+                        title={sectionTitle}
+                        isDesktop={isDesktop}
+                        onLayout={this.getWidth}
+                      />
+        
+                      <Row style={{}}>
+                        <OverlapScaffold {...this.scaffoldProps(isDesktop)} titleOverlap titleWidth={titleRowWidth} isDesktop={isDesktop}>
+                          <OverlapScaffold.Main>
+                            <Post
+                              layoutVariant='title-overlap'
+                              isDesktop={isDesktop}
+                              center
+                              {...this.MainPostImageProps(isDesktop)}
+                              {...mainPost}
+                            />
+                          </OverlapScaffold.Main>
+        
+                          <OverlapScaffold.Overlap>
+                            <ModuleBox offsetDirection={OFFSET_DIRECTION.RIGHT} patternColor={sectionColor}>
+                              {isDesktop ? (
+                                <PostGrid order={order} posts={secondaryPosts} />
+                              ) : (
+                                <PostList posts={secondaryPosts} />
+                              )}
+                            </ModuleBox>
+                          </OverlapScaffold.Overlap>
+                        </OverlapScaffold>
+                      </Row>
+                    </Container>
+                  );
                 }
             }
             </Responsive>

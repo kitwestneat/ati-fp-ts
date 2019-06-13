@@ -11,6 +11,7 @@ type Props = {
   children?: string;
   showPattern?: boolean;
   patternColor: string;
+  backgroundColor?: string;
   style: ViewStyle;
   title: string;
   isDesktop?: boolean;
@@ -34,9 +35,9 @@ class ModuleTitle extends PureComponent<Props> {
   };
 
   render() {
-    const { showPattern, patternColor, style, children, title, onLayout } = this.props;
+    const { showPattern, patternColor, backgroundColor, style, children, title, onLayout } = this.props;
     return (
-      <ModuleBox patternColor={showPattern ? patternColor : ''} style={[this.getBorderTop(), style]} onLayout={onLayout}>
+      <ModuleBox patternColor={showPattern ? patternColor : ''} backgroundColor={backgroundColor} style={[this.getBorderTop(), style]} onLayout={onLayout}>
         {children ? (
           children
         ) : (

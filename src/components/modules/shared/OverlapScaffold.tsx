@@ -50,15 +50,23 @@ class OverlapScaffold extends PureComponent<Props> {
 
     return (
       <>
-        <View style={{ zIndex: 10, flex: 1, flexShrink: 0, width: '100%', alignItems: isDesktop ? 'flex-start' : 'center' }}>
-          {titleOverlap &&
+        <View style={{ 
+            zIndex: 10, 
+            flex: 1, 
+            flexShrink: 0, 
+            width: '100%', 
+            alignItems: titleOverlap && !isDesktop ? 'center' : 'flex-start',
+            marginTop: titleOverlap && !isDesktop ? overlap : 0,
+          }}
+        >
+          {titleOverlap && !isDesktop &&
             <View
               style={{
                 position: 'absolute',
                 backgroundColor: 'white',
-                height: 15, 
+                height: 30, 
                 width: titleWidth,
-                top: -30,
+                top: -45,
                 zIndex: 10,
               }}
             />

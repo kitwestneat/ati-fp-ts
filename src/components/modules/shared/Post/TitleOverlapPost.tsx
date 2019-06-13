@@ -33,7 +33,7 @@ class TitleOverlapPost extends PureComponent<TitleOverlapPostProps> {
     center: false,
     isDesktop: false,
     bottomOverlap: 0,
-    marginTop: -30,
+    marginTop: -45,
   };
 
   render() {

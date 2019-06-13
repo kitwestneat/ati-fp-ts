@@ -15,7 +15,6 @@ export interface LargePostProps extends Partial<PostType> {
   imageHeight: number;
   numberOfLines?: number;
   isDesktop?: boolean;
-  postLine?: boolean;
 }
 
 class LargePost extends PureComponent<LargePostProps> {
@@ -23,11 +22,10 @@ class LargePost extends PureComponent<LargePostProps> {
     style: {},
     imageWidth: 630,
     imageHeight: 250, 
-    postLine: true,
   };
 
   render() {
-    const { imageSrc, imageHeight, imageWidth, link, layoutVariant, postLine, ...rest } = this.props;
+    const { imageSrc, imageHeight, imageWidth, link, layoutVariant, ...rest } = this.props;
     const linkProps: WebAccessibilityProps = link ? { accessibilityRole: 'link', href: link } : {};
 
     return (
@@ -41,7 +39,7 @@ class LargePost extends PureComponent<LargePostProps> {
           }}
         >
           <SmallPost layoutVariant="reduced" {...rest} />
-          <View style={[postLine ? styles.postLine : {}]} />
+          <View style={styles.postLine} />
         </View>
       </View>
     );

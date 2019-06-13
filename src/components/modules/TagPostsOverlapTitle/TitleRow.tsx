@@ -39,6 +39,7 @@ class TitleRow extends PureComponent<Props> {
       </>
     );
   };
+
   renderDesktop = () => {
     return (
       <View style={styles.titleRow}>
@@ -53,19 +54,20 @@ class TitleRow extends PureComponent<Props> {
 
   renderTitle = (showPattern?: boolean) => {
     const { link, title, patternColor , onLayout } = this.props;
-    // XXX should moduletitle get isDesktop?
     return (
       <View style={{ alignItems: 'flex-start' }} accessibilityRole="link" href={link} >
         <ModuleTitle
           title={title}
           showPattern={showPattern}
           patternColor={patternColor}
+          backgroundColor={'transparent'}
           style={{ minHeight: 110, justifyContent: 'center' }}
           onLayout={onLayout}
         />
       </View>
     );
   };
+  
   render() {
     const { isDesktop } = this.props;
     return isDesktop ? this.renderDesktop() : this.renderMobile();
@@ -76,7 +78,8 @@ export default TitleRow;
 
 const styles = StyleSheet.create({
   titleRow: {
-    width: '100%'
+    width: '100%',
+    zIndex: 20,
   },
   titleWrap: {
     marginTop: 60,
