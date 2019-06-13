@@ -18,6 +18,7 @@ type Props = {
   patternColor?: string;
   backgroundColor?: string;
   offsetDirection?: OFFSET_DIRECTION;
+  onLayout?: any;
 };
 
 class ModuleBox extends PureComponent<Props> {
@@ -26,14 +27,14 @@ class ModuleBox extends PureComponent<Props> {
   };
 
   render() {
-    const { children, patternColor, backgroundColor, offsetDirection, style } = this.props;
+    const { children, patternColor, backgroundColor, offsetDirection, style, onLayout } = this.props;
 
     return patternColor ? (
       <Pattern offsetDirection={offsetDirection} color={patternColor} backgroundColor={backgroundColor}>
-        <Box style={style}>{children}</Box>
+        <Box style={style} onLayout={onLayout}>{children}</Box>
       </Pattern>
     ) : (
-      <Box style={style}>{children}</Box>
+      <Box style={style} onLayout={onLayout}>{children}</Box>
     );
   }
 }
@@ -50,6 +51,6 @@ const styles = StyleSheet.create({
   }
 });
 
-const Box = ({ children, style }: { children: ReactNode; style: StyleProp<ViewStyle> }) => (
-  <View style={[styles.box, style]}>{children}</View>
+const Box = ({ children, style, onLayout }: { children: ReactNode; style: StyleProp<ViewStyle>; onLayout?: any }) => (
+  <View style={[styles.box, style]} onLayout={onLayout}>{children}</View>
 );

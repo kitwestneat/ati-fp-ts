@@ -12,6 +12,7 @@ import { Section } from '@/components/primitives';
 
 import { SECTION_TYPES, SMALL_SECTIONS, SECTION_SPACING_VARIANTS } from '@/constants';
 import { ModuleData } from './types';
+import TagPostsOverlapTitle from '@/components/modules/TagPostsOverlapTitle';
 
 interface ComponentMap {
   [t: string]: React.ElementType;
@@ -24,7 +25,8 @@ export const SECTION_TYPE_COMPONENT_MAP: ComponentMap = {
   [SECTION_TYPES.TAG_TILE_BOX]: TagPostsSingleColumn,
   [SECTION_TYPES.INSTAGRAM]: Instagram,
   [SECTION_TYPES.NEWSLETTER]: Newsletter,
-  [SECTION_TYPES.TRENDING]: Trending
+  [SECTION_TYPES.TRENDING]: Trending,
+  [SECTION_TYPES.TAG_OVERLAP_TITLE]: TagPostsOverlapTitle,
 };
 
 interface Props {
