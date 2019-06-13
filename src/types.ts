@@ -31,7 +31,8 @@ export interface TagTileBoxModuleData extends ModuleData {
   sectionLink: string;
   sectionColor: string;
   sectionTitle: string;
-  order?: 1 | 2;
+  // order?: 1 | 2;
+  order?: GridOrder;
 }
 
 export interface NewsletterModuleData extends ModuleData {
@@ -61,7 +62,6 @@ export interface InfoBoxData extends ModuleData {
 
 export interface SplitTagBoxData extends ModuleData {
   type: SECTION_TYPES.SPLIT_TAG_BOX,
-  // order: GridOrder;
   sectionTitle: string;
   sectionLink: string;
   sectionColor: string;

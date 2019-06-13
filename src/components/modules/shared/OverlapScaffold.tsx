@@ -7,11 +7,17 @@ import { Container } from '../../primitives';
 type Props = {
   overlap: number;
   containerPadding: number;
+  titleOverlap?: boolean;
+  titleWidth?: number;
+  isDesktop?: boolean;
 };
 class OverlapScaffold extends PureComponent<Props> {
   static defaultProps = {
     overlap: 0,
-    containerPadding: 0
+    containerPadding: 0,
+    titleOverlap: false,
+    titleWidth: 0,
+    isDesktop: false,
   };
 
   static Main = ({ children }: { children: JSX.Element }) => children;
@@ -34,23 +40,44 @@ class OverlapScaffold extends PureComponent<Props> {
     const MainPost = this.getScaffoldContentByType(OverlapScaffold.Main);
     return React.cloneElement(MainPost, {
       bottomOverlap: this.props.overlap,
-      containerPadding: this.props.containerPadding
+      containerPadding: this.props.containerPadding, 
+      isDesktop: this.props.isDesktop
     });
   };
 
   render() {
-    const { overlap, containerPadding } = this.props;
+    const { overlap, containerPadding, titleOverlap, titleWidth, isDesktop } = this.props;
 
     return (
       <>
-        <View style={{ zIndex: 10, flex: 1, flexShrink: 0, width: '100%' }}>
+        <View style={{ 
+            zIndex: 10, 
+            flex: 1, 
+            flexShrink: 0, 
+            width: '100%', 
+            alignItems: titleOverlap && !isDesktop ? 'center' : 'flex-start',
+            marginTop: titleOverlap && !isDesktop ? overlap : 0,
+          }}
+        >
+          {titleOverlap && !isDesktop &&
+            <View
+              style={{
+                position: 'absolute',
+                backgroundColor: 'white',
+                height: 30, 
+                width: titleWidth,
+                top: -45,
+                zIndex: 10,
+              }}
+            />
+          }
           {this.getMainPost()}
         </View>
         <Container
           style={{
             marginTop: -overlap,
             paddingHorizontal: containerPadding,
-            zIndex: 10
+            zIndex: 10,
           }}
           type="content"
         >

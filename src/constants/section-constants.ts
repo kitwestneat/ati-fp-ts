@@ -7,6 +7,7 @@ export enum SECTION_TYPES {
   TRENDING = 'trending',
   TAG = 'tag',
   SPLIT_TAG_BOX = 'splitTagBox',
+  TAG_OVERLAP_TITLE = 'tagOverlapTitle'
 }
 
 export enum SECTION_SPACING_VARIANTS {
