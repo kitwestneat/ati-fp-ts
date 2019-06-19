@@ -1,18 +1,19 @@
 import React, { PureComponent, Fragment } from 'react';
 import {
   InfoBox,
+  RecentAndTrending,
   SplitTagBox,
   MostRecent,
   TagPostsSingleColumn,
   Instagram,
   Newsletter,
+  TagPostsOverlapTitle,
   Trending
 } from '@/components/modules';
 import { Section } from '@/components/primitives';
 
 import { SECTION_TYPES, SMALL_SECTIONS, SECTION_SPACING_VARIANTS } from '@/constants';
 import { ModuleData } from './types';
-import TagPostsOverlapTitle from '@/components/modules/TagPostsOverlapTitle';
 
 interface ComponentMap {
   [t: string]: React.ElementType;
@@ -20,6 +21,7 @@ interface ComponentMap {
 
 export const SECTION_TYPE_COMPONENT_MAP: ComponentMap = {
   [SECTION_TYPES.TAG]: InfoBox,
+  [SECTION_TYPES.RECENT_AND_TRENDING]: RecentAndTrending,
   [SECTION_TYPES.SPLIT_TAG_BOX]: SplitTagBox,
   [SECTION_TYPES.RECENT]: MostRecent,
   [SECTION_TYPES.TAG_TILE_BOX]: TagPostsSingleColumn,

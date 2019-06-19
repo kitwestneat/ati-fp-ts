@@ -12,21 +12,24 @@ type PostComponentAttrMap = {
 
 const AD_COMPONENT = Mrec;
 const POST_COMPONENT_ATTRS: PostComponentAttrMap = {
-  OV: {
-    layoutVariant: 'overlay',
-    fontStyles: { fontSize: 24, lineHeight: 30 },
-    imageWidth: 735,
-    imageHeight: 430
+  MD_1: {
+    layoutVariant: 'medium',
   },
-  LG: { layoutVariant: 'large' },
-  MD: { layoutVariant: 'medium' }
+  MD_2: {
+    layoutVariant: 'medium',
+    postLine: false,
+  },
+  SM: { 
+    layoutVariant: 'reduced',
+    showImage: true, 
+  }
 };
 
 const ORDERS = [
-  ['OV', 'MD', 'MD', 'MD', 'AD'], 
-  ['MD', 'MD', 'AD', 'MD', 'OV'], 
-  ['MD', 'MD', 'MD', 'AD'],
-  ['MD', 'MD', 'MD', 'AD', 'LG'], 
+  ['MD_1', 'MD_1', 'MD_1', 'MD_1', 'MD_1', 'MD_1', 'MD_1', 'MD_1'],
+  ['MD_1', 'MD_1', 'MD_1', 'MD_1', 'SM', 'SM', 'SM', 'SM'],
+  ['MD_2', 'AD', 'MD_2', 'MD_2', 'MD_2', 'SM', 'SM'],
+  ['SM', 'SM', 'SM', 'SM', 'SM', 'SM']
 ];
 
 export function mapPostsToGrid(order: GridOrder, posts: PostType[]) {
