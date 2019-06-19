@@ -38,7 +38,7 @@ class SmallPost extends PureComponent<SmallPostProps> {
         <View style={{ marginTop: 6, flexDirection: 'row', alignItems: 'center' }}>
           <Text
             numberOfLines={numberOfLines}
-            style={[{ fontWeight: '600', flexGrow: 2 }, fontStyles]}
+            style={[{ fontWeight: '600' }, fontStyles]}
             html={title}
           />
           {showImage &&
