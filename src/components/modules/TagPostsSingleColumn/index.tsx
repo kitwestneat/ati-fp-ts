@@ -9,22 +9,23 @@ import { BREAKPOINTS, CONTAINER_PADDING } from '@/constants/index';
 
 import TitleRow from './TitleRow';
 import PostList from './PostList';
-import PostGrid from './PostGrid';
+import PostGrid from '../shared/PostGrid';
 import { OFFSET_DIRECTION, PostType, GridOrder } from '@/types';
+import SingleColumnGrid from './SingleColumnGrid';
 
 type Props = {
-  order: GridOrder;
+  reverse?: boolean;
   sectionTitle: string;
   sectionLink: string;
   sectionColor: string;
   titleTemplate: string;
   posts: PostType[];
+
+  // XXX deprecated
+  order: GridOrder;
 };
 
 class TagPostsSingleColumn extends PureComponent<Props> {
-  static defaultProps = {
-    order: 1
-  };
   scaffoldProps = (isDesktop: boolean) =>
     isDesktop
       ? {
@@ -54,13 +55,16 @@ class TagPostsSingleColumn extends PureComponent<Props> {
       order,
       posts: [mainPost, ...secondaryPosts]
     } = this.props;
+
+    const reverse = this.props.reverse || +order === 2;
+
     return (
       <Responsive>
         {({ minWidth }) => {
           const isDesktop = minWidth(BREAKPOINTS.LG);
 
           return (
-            <Container type='content'>
+            <Container type="content">
               <TitleRow
                 patternColor={sectionColor}
                 link={sectionLink}
@@ -72,7 +76,7 @@ class TagPostsSingleColumn extends PureComponent<Props> {
                 <OverlapScaffold {...this.scaffoldProps(isDesktop)}>
                   <OverlapScaffold.Main>
                     <Post
-                      layoutVariant='overlay'
+                      layoutVariant="overlay"
                       isDesktop={isDesktop}
                       center
                       {...this.MainPostImageProps(isDesktop)}
@@ -83,7 +87,7 @@ class TagPostsSingleColumn extends PureComponent<Props> {
                   <OverlapScaffold.Overlap>
                     <ModuleBox offsetDirection={OFFSET_DIRECTION.RIGHT} patternColor={sectionColor}>
                       {isDesktop ? (
-                        <PostGrid order={order} posts={secondaryPosts} />
+                        <SingleColumnGrid reverse={reverse} posts={secondaryPosts} />
                       ) : (
                         <PostList posts={secondaryPosts} />
                       )}
