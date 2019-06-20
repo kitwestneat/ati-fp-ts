@@ -7,16 +7,17 @@ import { Container } from '@/components/primitives';
 import { ModuleBox } from '@/components/modules';
 
 import PostList from './PostList';
-import PostGrid from './PostGrid';
+import PostGrid from './TrendingPostGrid';
 
 import TitleSquare from './TitleSquare';
 
 import { Responsive } from '@/components/utils';
 
 import { BREAKPOINTS } from '@/constants/index';
+import { PostType } from '@/types';
 
 type Props = {
-  posts: any;
+  posts: PostType[];
   sectionColor: string;
   sectionLink: string;
   sectionTitle: string;
@@ -27,7 +28,7 @@ class Trending extends PureComponent<Props> {
     const { posts } = this.props;
     return (
       <Container
-        type='content'
+        type="content"
         style={{
           paddingHorizontal: 15,
           alignItems: 'center'
@@ -52,7 +53,7 @@ class Trending extends PureComponent<Props> {
   renderDesktop = (titleSquare: JSX.Element) => {
     const { posts } = this.props;
     return (
-      <Container type='content'>
+      <Container type="content">
         <View
           style={{
             flexDirection: 'row',
