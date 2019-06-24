@@ -35,7 +35,7 @@ class SmallPost extends PureComponent<SmallPostProps> {
           categoryName={categoryName || 'DEFAULT'}
           categoryColor={categoryColor || '#999'}
         />
-        <View style={{ marginTop: 6, flexDirection: 'row', alignItems: 'center' }}>
+        <View style={{ marginTop: 6, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
           <Text
             numberOfLines={numberOfLines}
             style={[{ fontWeight: '600' }, fontStyles]}
