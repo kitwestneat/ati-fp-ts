@@ -20,7 +20,8 @@ export const DEFAULT_POST_COMPONENT_ATTRS: PostComponentAttrMap = {
     layoutVariant: 'large',
     multiplier: 2
   },
-  MD: { layoutVariant: 'medium' }
+  MD: { layoutVariant: 'medium' }, 
+  SM : { layoutVariant: 'reduced' }
 };
 
 export type PostComponentAttrMap = {

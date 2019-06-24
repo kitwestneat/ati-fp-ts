@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import { StyleSheet, View, Text, ImageBackground } from 'react-native';
 import { ModuleBox } from '@/components/modules';
 import { Image, Container, HtmlText } from '@/components/primitives';
-import { Responsive } from '@/components/utils';
+import { Responsive, Capitalize } from '@/components/utils';
 import { COLOR_MAP, BREAKPOINTS } from '@/constants';
 import { InfoBoxData, OFFSET_DIRECTION } from '@/types';
 import { isDevEnv } from '../../../utils';
@@ -57,11 +57,11 @@ export default class InfoBox extends PureComponent<Props, State> {
                         <ModuleBox offsetDirection={OFFSET_DIRECTION.RIGHT} patternColor={COLOR_MAP.PURPLE} backgroundColor={'transparent'}>
                             {paginate ? 
                             <View>
-                                <Text style={[styles.title, styles.titlePaginate, { padding: '1em' }]}>{capitalize(name)}</Text>
+                                <Text style={[styles.title, styles.titlePaginate, { padding: '1em' }]}>{Capitalize(name)}</Text>
                             </View> 
                             :
                             <View>
-                                <Text style={styles.title}>{capitalize(name)}</Text>
+                                <Text style={styles.title}>{Capitalize(name)}</Text>
                                 <HtmlText html={description} css={htmlTextStyle} />
                             </View>
                             }
@@ -85,11 +85,11 @@ export default class InfoBox extends PureComponent<Props, State> {
                     <ModuleBox patternColor={COLOR_MAP.PURPLE} backgroundColor={'transparent'}>
                         {paginate ?
                         <View onLayout={this.getHeight}>
-                            <Text style={[styles.title, styles.titlePaginate]}>{capitalize(name)}</Text>
+                            <Text style={[styles.title, styles.titlePaginate]}>{Capitalize(name)}</Text>
                         </View>
                         :
                         <View onLayout={this.getHeight}>
-                            <Text style={styles.title} >{capitalize(name)}</Text>
+                            <Text style={styles.title} >{Capitalize(name)}</Text>
                             <HtmlText html={toggleDescription} css={htmlTextStyle} />
                             <Text style={styles.read} onPress={this.toggleReadText} >{toggleExpandText}</Text>
                         </View>
@@ -112,11 +112,6 @@ export default class InfoBox extends PureComponent<Props, State> {
             </Responsive>
         )
     }
-}
-
-// Capitalize first letter of tag name
-const capitalize = (str: string) => {
-    return str.charAt(0).toUpperCase() + str.slice(1);
 }
 
 // Return first paragraph of the tag description
