@@ -1,8 +1,8 @@
-import React, { PureComponent } from 'react';
-import { View, StyleSheet } from 'react-native';
 import { Text } from '@/components/primitives';
-import { NavBar, SocialLinks, Logo } from '../NavBar';
-import { TAG_LINKS, SOCIAL_LINKS_STANDARD } from '@/constants';
+import { SOCIAL_LINKS_STANDARD, TAG_LINKS } from '@/constants';
+import React, { PureComponent } from 'react';
+import { StyleSheet, View } from 'react-native';
+import { Logo, NavBar, SocialLinks } from '../NavBar';
 
 interface Links {
   type: string;
@@ -11,7 +11,7 @@ interface Links {
 }
 
 export default class DesktopNav extends PureComponent {
-  render() {
+  public render() {
     return (
       <NavBar
         renderRight={() => <Logo style={{ marginLeft: 15 }} />}

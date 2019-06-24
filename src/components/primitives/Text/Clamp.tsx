@@ -1,30 +1,30 @@
 // @flow
 
 import React, { PureComponent } from 'react';
-import { StyleSheet, Text, View, TextStyle, TextProps, StyleProp } from 'react-native';
+import { StyleProp, StyleSheet, Text, TextProps, TextStyle, View } from 'react-native';
 
-type Props = {
+interface Props {
   numberOfLines: number;
   children: React.ReactNode;
   style: StyleProp<TextStyle>;
-};
+}
 
-type State = {
+interface State {
   isTruncating: boolean;
   containerWidth: number;
   preEllipsisText: string;
   restOfText: string;
-};
+}
 
 export default class Clamp extends PureComponent<Props, State> {
-  state = {
+  public state = {
     isTruncating: false,
     containerWidth: 0,
     preEllipsisText: '',
     restOfText: ''
   };
 
-  handleSingleLineLayout = (event: any) => {
+  public handleSingleLineLayout = (event: any) => {
     const singleLineWidth = event.nativeEvent.layout.width;
     const { numberOfLines, children: text } = this.props;
     const { containerWidth } = this.state;
@@ -52,7 +52,7 @@ export default class Clamp extends PureComponent<Props, State> {
     }));
   };
 
-  handleContainerLayout = ({
+  public handleContainerLayout = ({
     nativeEvent: {
       layout: { width }
     }
@@ -66,7 +66,7 @@ export default class Clamp extends PureComponent<Props, State> {
     }));
   };
 
-  renderTextOnSingleLine = () => {
+  public renderTextOnSingleLine = () => {
     const { numberOfLines, style, ...rest } = this.props;
     return (
       <View style={styles.singleLineContainer}>
@@ -82,7 +82,7 @@ export default class Clamp extends PureComponent<Props, State> {
     );
   };
 
-  render() {
+  public render() {
     const { numberOfLines, ...rest } = this.props;
     const { isTruncating, preEllipsisText, restOfText } = this.state;
 
@@ -99,7 +99,7 @@ export default class Clamp extends PureComponent<Props, State> {
 
 const PreEllipsisLines = ({ text, ...rest }: TextProps & { text: string }) => {
   return (
-    <Text importantForAccessibility='no' {...rest}>
+    <Text importantForAccessibility="no" {...rest}>
       {text}
     </Text>
   );
@@ -129,15 +129,15 @@ const getLineBreakIndex = ({ charsPerLine, text }: { charsPerLine: number; text:
   return text.slice(0, charsPerLine).lastIndexOf(' ');
 };
 
-type getTextProps = {
+interface getTextProps {
   text: string;
   numberOfLines: number;
   averageCharsPerLine: number;
-};
-type getTextReturn = {
+}
+interface getTextReturn {
   preEllipsisText: string;
   restOfText: string;
-};
+}
 const getText = (config: getTextProps): getTextReturn => {
   const { text: fullText, numberOfLines, averageCharsPerLine } = config;
 

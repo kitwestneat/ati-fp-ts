@@ -3,8 +3,8 @@
 import React, { PureComponent } from 'react';
 import { StyleSheet, View } from 'react-native';
 
+import { ModuleBox, OverlapScaffold, Post } from '@/components/modules';
 import { Container } from '@/components/primitives';
-import { Post, ModuleBox, OverlapScaffold } from '@/components/modules';
 import { Responsive } from '@/components/utils';
 
 import PostList from './PostList';
@@ -12,10 +12,10 @@ import PostList from './PostList';
 import { BREAKPOINTS, CONTAINER_PADDING } from '@/constants/index';
 import { PostType } from '@/types';
 
-type Props = { posts: PostType[] };
+interface Props { posts: PostType[] }
 
 class MostRecent extends PureComponent<Props> {
-  renderMobile = () => {
+  public renderMobile = () => {
     const {
       posts: [mainPost, ...secondaryPosts]
     } = this.props;
@@ -23,7 +23,7 @@ class MostRecent extends PureComponent<Props> {
     return (
       <OverlapScaffold containerPadding={CONTAINER_PADDING.MOBILE} overlap={15}>
         <OverlapScaffold.Main>
-          <Post layoutVariant='overlay' {...mainPost} />
+          <Post layoutVariant="overlay" {...mainPost} />
         </OverlapScaffold.Main>
 
         <OverlapScaffold.Overlap>
@@ -35,17 +35,17 @@ class MostRecent extends PureComponent<Props> {
     );
   };
 
-  renderDesktop = () => {
+  public renderDesktop = () => {
     const {
       posts: [mainPost, ...secondaryPosts]
     } = this.props;
     return (
-      <Container type='content'>
+      <Container type="content">
         <ModuleBox patternColor={mainPost.categoryColor}>
           <View style={styles.wrap}>
             <View style={styles.left}>
               <Post
-                layoutVariant='overlay'
+                layoutVariant="overlay"
                 isDesktop={true}
                 imageWidth={700}
                 imageHeight={545}
@@ -61,7 +61,7 @@ class MostRecent extends PureComponent<Props> {
     );
   };
 
-  render() {
+  public render() {
     return (
       <Responsive>
         {({ minWidth }) => {

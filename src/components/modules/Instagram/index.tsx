@@ -1,10 +1,10 @@
-import React, { PureComponent } from 'react';
-import { View, StyleSheet } from 'react-native';
-import { Container } from '@/components/primitives';
 import { ModuleBox } from '@/components/modules';
+import { Container } from '@/components/primitives';
+import React, { PureComponent } from 'react';
+import { StyleSheet, View } from 'react-native';
 import Carousel from './Carousel';
-import Title from './Title';
 import InstagramButton from './InstagramButton';
+import Title from './Title';
 
 import { Responsive } from '@/components/utils';
 import { BREAKPOINTS } from '@/constants/index';
@@ -15,7 +15,7 @@ interface Props {
 }
 
 export default class Instagram extends PureComponent<Props> {
-  render() {
+  public render() {
     const { posts } = this.props;
 
     return (

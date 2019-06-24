@@ -12,14 +12,15 @@ interface Props {
 
 export default class HtmlText extends PureComponent<Props> {
 
-    createMarkup = (html: any) => {
+    public createMarkup = (html: any) => {
         return {__html: html};
     }
 
-    render() {
+    public render() {
         const { html, css } = this.props;
         return (
-            <div dangerouslySetInnerHTML={this.createMarkup(html)} style={css}></div>
-        )
+            
+            <div dangerouslySetInnerHTML={this.createMarkup(html)} style={css}/>
+        );
     }
 }

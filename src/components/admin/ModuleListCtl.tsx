@@ -1,13 +1,13 @@
+import DraggableFlatList from '@/third-party/react-native-draggable-flatlist';
 import React, { PureComponent } from 'react';
 import { View } from 'react-native';
-import DraggableFlatList from '@/third-party/react-native-draggable-flatlist';
 
 import FloatingActionButton from './FloatingActionButton';
-import ModuleListItem from './ModuleListItem';
-import ModuleEditDialog from './ModuleEditDialog';
 import ModuleDeleteDialog from './ModuleDeleteDialog';
+import ModuleEditDialog from './ModuleEditDialog';
+import ModuleListItem from './ModuleListItem';
 
-import { getNewModule, replaceItem, KeyedModuleSpec, ReplaceItemOpts } from './module-list-utils';
+import { getNewModule, KeyedModuleSpec, replaceItem, ReplaceItemOpts } from './module-list-utils';
 import styles from './styles';
 
 interface Props {
@@ -21,12 +21,12 @@ interface State {
 }
 
 export default class ModuleListCtl extends PureComponent<Props, State> {
-  state = {
+  public state = {
     currentlyEditing: -1,
     currentlyDeleting: -1
   };
 
-  addItem = () => {
+  public addItem = () => {
     const { moduleList, updateModuleList } = this.props;
 
     const module: KeyedModuleSpec = getNewModule();
@@ -36,7 +36,7 @@ export default class ModuleListCtl extends PureComponent<Props, State> {
     this.setState({ currentlyEditing: module.key });
   };
 
-  updateItem = (newItem: KeyedModuleSpec, opts?: ReplaceItemOpts) => {
+  public updateItem = (newItem: KeyedModuleSpec, opts?: ReplaceItemOpts) => {
     const { moduleList, updateModuleList } = this.props;
 
     const newList = replaceItem(moduleList, newItem, opts);
@@ -45,12 +45,12 @@ export default class ModuleListCtl extends PureComponent<Props, State> {
     this.closeEdit();
   };
 
-  deleteItem = (item: KeyedModuleSpec) => this.updateItem(item, { doDelete: true });
+  public deleteItem = (item: KeyedModuleSpec) => this.updateItem(item, { doDelete: true });
 
-  closeEdit = () => this.setState({ currentlyEditing: -1 });
-  closeDelete = () => this.setState({ currentlyDeleting: -1 });
+  public closeEdit = () => this.setState({ currentlyEditing: -1 });
+  public closeDelete = () => this.setState({ currentlyDeleting: -1 });
 
-  cancel = (item: KeyedModuleSpec) => {
+  public cancel = (item: KeyedModuleSpec) => {
     // if we were editing a new item, have cancel delete it
     if (item.isNew) {
       this.deleteItem(item);
@@ -59,7 +59,7 @@ export default class ModuleListCtl extends PureComponent<Props, State> {
     this.closeEdit();
   };
 
-  renderItem = ({ item, move, moveEnd }: { item: KeyedModuleSpec; move: any; moveEnd: any }) => {
+  public renderItem = ({ item, move, moveEnd }: { item: KeyedModuleSpec; move: any; moveEnd: any }) => {
     const { currentlyDeleting, currentlyEditing } = this.state;
 
     const isEditing = item.key === currentlyEditing;
@@ -92,7 +92,7 @@ export default class ModuleListCtl extends PureComponent<Props, State> {
     );
   };
 
-  render() {
+  public render() {
     const { moduleList, updateModuleList } = this.props;
     const { currentlyEditing, currentlyDeleting } = this.state;
 

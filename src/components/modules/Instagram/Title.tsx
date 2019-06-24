@@ -1,16 +1,16 @@
-import React, { PureComponent } from 'react';
-import { View, StyleSheet } from 'react-native';
-import { Text } from '../../primitives';
 import { COLOR_MAP } from '@/constants/index';
+import React, { PureComponent } from 'react';
+import { StyleSheet, View } from 'react-native';
+import { Text } from '../../primitives';
 
 interface Props {
   isDesktop: boolean;
 }
 
 class Title extends PureComponent<Props> {
-  renderInstagram = () => <Text style={styles.text}>Instagram</Text>;
+  public renderInstagram = () => <Text style={styles.text}>Instagram</Text>;
 
-  render() {
+  public render() {
     const { isDesktop } = this.props;
 
     return (

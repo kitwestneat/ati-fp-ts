@@ -1,6 +1,6 @@
+import { SECTION_TYPES } from '@/constants';
 import { isDevEnv } from '@/utils';
 import { ModuleSpec } from '../../types';
-import { SECTION_TYPES } from '@/constants';
 
 export interface KeyedModuleSpec extends Partial<ModuleSpec> {
   key: number;

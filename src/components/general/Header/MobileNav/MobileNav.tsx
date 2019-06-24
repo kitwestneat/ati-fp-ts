@@ -1,11 +1,11 @@
 import React, { PureComponent } from 'react';
 
-import MobileNavBar from './MobileNavBar';
 import DrawerAnimationToggle from './DrawerAnimationToggle';
+import MobileNavBar from './MobileNavBar';
 import MobileNavDrawer from './MobileNavDrawer';
 
 class MobileNav extends PureComponent {
-  render() {
+  public render() {
     return (
       <DrawerAnimationToggle>
         {({ toggleDrawer, isDrawerOpen, drawerAnimation }) => {

@@ -1,18 +1,18 @@
-import React, { PureComponent, Fragment } from 'react';
 import {
   InfoBox,
+  Instagram,
+  MostRecent,
+  Newsletter,
   RecentAndTrending,
   SplitTagBox,
-  MostRecent,
-  TagPostsSingleColumn,
-  Instagram,
-  Newsletter,
   TagPostsOverlapTitle,
+  TagPostsSingleColumn,
   Trending
 } from '@/components/modules';
 import { Section } from '@/components/primitives';
+import React, { Fragment, PureComponent } from 'react';
 
-import { SECTION_TYPES, SMALL_SECTIONS, SECTION_SPACING_VARIANTS } from '@/constants';
+import { SECTION_SPACING_VARIANTS, SECTION_TYPES, SMALL_SECTIONS } from '@/constants';
 import { ModuleData } from './types';
 
 interface ComponentMap {
@@ -36,7 +36,7 @@ interface Props {
 }
 
 class PageSections extends PureComponent<Props> {
-  render() {
+  public render() {
     const { data } = this.props;
     return (
       <Fragment>

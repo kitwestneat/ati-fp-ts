@@ -38,15 +38,15 @@ interface State {
 }
 
 export default class LazyView extends React.PureComponent<Props, State> {
-  static onScroll = onScroll;
+  public static onScroll = onScroll;
 
-  state = {
+  public state = {
     lazyViewable: false
   };
 
-  theView: React.RefObject<View>;
-  handle: OnScrollHandle;
-  loaderCalled: boolean;
+  public theView: React.RefObject<View>;
+  public handle: OnScrollHandle;
+  public loaderCalled: boolean;
 
   constructor(props: Props) {
     super(props);
@@ -56,13 +56,13 @@ export default class LazyView extends React.PureComponent<Props, State> {
     this.loaderCalled = false;
   }
 
-  getNames = () => this.props && getNames(this.props.children);
+  public getNames = () => this.props && getNames(this.props.children);
 
-  componentDidMount() {
+  public componentDidMount() {
     this.shouldTrigger();
   }
 
-  measure = () =>
+  public measure = () =>
     new Promise(
       resolve =>
         this.theView.current != null &&
@@ -71,9 +71,9 @@ export default class LazyView extends React.PureComponent<Props, State> {
         )
     );
 
-  defaultLazyLoader = () => this.setState({ lazyViewable: true });
+  public defaultLazyLoader = () => this.setState({ lazyViewable: true });
 
-  shouldTrigger = async () => {
+  public shouldTrigger = async () => {
     if (!this.theView.current) {
       setTimeout(this.shouldTrigger);
       return;
@@ -90,7 +90,7 @@ export default class LazyView extends React.PureComponent<Props, State> {
     }
   };
 
-  render() {
+  public render() {
     const { lazyLoader } = this.props;
     const { lazyViewable } = this.state;
 

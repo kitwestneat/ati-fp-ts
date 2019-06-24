@@ -1,9 +1,9 @@
 // @flow
 
-import React, { PureComponent, ReactNode } from 'react';
-import { StyleSheet, View, ViewStyle, StyleProp } from 'react-native';
-import { elevation } from '@/constants';
 import { Pattern } from '@/components/modules';
+import { elevation } from '@/constants';
+import React, { PureComponent, ReactNode } from 'react';
+import { StyleProp, StyleSheet, View, ViewStyle } from 'react-native';
 
 import { OFFSET_DIRECTION } from '@/types';
 
@@ -12,21 +12,21 @@ import { OFFSET_DIRECTION } from '@/types';
  * padding should be 22 on mobile
  */
 
-type Props = {
+interface Props {
   style?: StyleProp<ViewStyle>;
   children: ReactNode;
   patternColor?: string;
   backgroundColor?: string;
   offsetDirection?: OFFSET_DIRECTION;
   onLayout?: any;
-};
+}
 
 class ModuleBox extends PureComponent<Props> {
-  static defaultProps = {
+  public static defaultProps = {
     offsetDirection: OFFSET_DIRECTION.LEFT
   };
 
-  render() {
+  public render() {
     const { children, patternColor, backgroundColor, offsetDirection, style, onLayout } = this.props;
 
     return patternColor ? (

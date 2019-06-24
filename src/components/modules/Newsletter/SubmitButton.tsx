@@ -1,15 +1,15 @@
 // @flow
 
 import React from 'react';
-import { TouchableOpacity, StyleSheet, View } from 'react-native';
+import { StyleSheet, TouchableOpacity, View } from 'react-native';
 
 import { Text } from '../../primitives';
 
 const BUTTON_TEXT = 'Sign Up';
 
-type Props = {
+interface Props {
   onPress: () => void;
-};
+}
 
 const SubmitButton = ({ onPress }: Props) => (
   <TouchableOpacity

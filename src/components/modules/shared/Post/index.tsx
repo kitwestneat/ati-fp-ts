@@ -1,15 +1,15 @@
 // @flow
 
-import React, { PureComponent, ComponentType } from 'react';
+import React, { ComponentType, PureComponent } from 'react';
 import { StyleSheet } from 'react-native';
 
-import SmallPost, { SmallPostProps } from './SmallPost';
-import MediumPost, { MediumPostProps } from './MediumPost';
-import OverlayPost, { OverlayPostProps } from './OverlayPost';
-import TitleOverlapPost, { TitleOverlapPostProps } from './TitleOverlapPost';
-import LargePost, { LargePostProps } from './LargePost'
 import { View } from '@/components/primitives';
 import { Omit } from '@/types';
+import LargePost, { LargePostProps } from './LargePost';
+import MediumPost, { MediumPostProps } from './MediumPost';
+import OverlayPost, { OverlayPostProps } from './OverlayPost';
+import SmallPost, { SmallPostProps } from './SmallPost';
+import TitleOverlapPost, { TitleOverlapPostProps } from './TitleOverlapPost';
 
 const LAYOUT_VARIANT = {
   REDUCED: 'reduced',
@@ -37,7 +37,7 @@ export interface PostProps extends SubPostProps {
 }
 
 class Post extends PureComponent<PostProps> {
-  render() {
+  public render() {
     const { layoutVariant, link, ...rest } = this.props;
 
     const PostComponent = (POST_VARIANT_MAP[layoutVariant] as any) as ComponentType<SubPostProps>;

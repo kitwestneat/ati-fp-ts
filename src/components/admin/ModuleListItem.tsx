@@ -1,11 +1,11 @@
 import React, { PureComponent } from 'react';
-import { Button, Text, View, TouchableOpacity } from 'react-native';
+import { Button, Text, TouchableOpacity, View } from 'react-native';
 
 import { queryObj2Str } from './admin-utils';
 
-import styles from './styles';
-import { TagTileBoxModuleData, TrendingModuleData, AllModuleDataTypes } from '../../types';
+import { AllModuleDataTypes, TagTileBoxModuleData, TrendingModuleData } from '../../types';
 import { KeyedModuleSpec } from './module-list-utils';
+import styles from './styles';
 
 interface Props {
   item: KeyedModuleSpec;
@@ -60,7 +60,7 @@ function renderModuleSpecificOpts(moduleOpts: AllModuleDataTypes) {
 }
 
 export default class ModuleListItem extends PureComponent<Props> {
-  render() {
+  public render() {
     const { item, onOpenEditClick, onOpenDeleteClick, onMove, onMoveEnd } = this.props;
 
     const { module_opts, query } = item;

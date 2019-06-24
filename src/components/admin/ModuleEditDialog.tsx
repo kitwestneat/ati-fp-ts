@@ -1,22 +1,22 @@
-import React, { PureComponent } from 'react';
-import { Button, View, Switch, Text } from 'react-native';
 import Modal from 'modal-react-native-web';
+import React, { PureComponent } from 'react';
+import { Button, Switch, Text, View } from 'react-native';
 
 import { queryObj2Str, queryStr2Obj } from './admin-utils';
 
-import ModuleTypePicker from './ModuleTypePicker';
 import AdminInput from './AdminInput';
 import AdminTextInput from './AdminTextInput';
+import ModuleTypePicker from './ModuleTypePicker';
 
-import styles from './styles';
+import { SECTION_TYPES } from '@/constants';
 import {
+  AllModuleDataTypes,
   ModuleSpec,
   TagTileBoxModuleData,
-  TrendingModuleData,
-  AllModuleDataTypes
+  TrendingModuleData
 } from '../../types';
-import { SECTION_TYPES } from '@/constants';
 import { KeyedModuleSpec } from './module-list-utils';
+import styles from './styles';
 
 interface Props {
   isVisible: boolean;
@@ -37,14 +37,14 @@ export default class ModuleEditDialog extends PureComponent<Props, State> {
       newItem: { ...this.props.item, isNew: undefined }
     };
   }
-  save = () => {
+  public save = () => {
     const { onSave } = this.props;
     const { newItem } = this.state;
 
     onSave(newItem as any);
   };
 
-  updateOptions = (updates: Partial<AllModuleDataTypes>) =>
+  public updateOptions = (updates: Partial<AllModuleDataTypes>) =>
     this.setState(({ newItem }: { newItem: any }) => ({
       newItem: {
         ...newItem,
@@ -55,7 +55,7 @@ export default class ModuleEditDialog extends PureComponent<Props, State> {
       }
     }));
 
-  updateQuery = (query: string) =>
+  public updateQuery = (query: string) =>
     this.setState(({ newItem }) => ({
       newItem: {
         ...newItem,
@@ -63,7 +63,7 @@ export default class ModuleEditDialog extends PureComponent<Props, State> {
       }
     }));
 
-  renderSectionOptions = (moduleOpts: TagTileBoxModuleData | TrendingModuleData) => {
+  public renderSectionOptions = (moduleOpts: TagTileBoxModuleData | TrendingModuleData) => {
     const { sectionTitle, sectionLink, sectionColor } = moduleOpts;
 
     return (
@@ -102,7 +102,7 @@ export default class ModuleEditDialog extends PureComponent<Props, State> {
     );
   };
 
-  renderTagTileBoxOptions = (moduleOpts: TagTileBoxModuleData) => (
+  public renderTagTileBoxOptions = (moduleOpts: TagTileBoxModuleData) => (
     <AdminInput
       label="2x Box on Bottom?"
       input={
@@ -119,7 +119,7 @@ export default class ModuleEditDialog extends PureComponent<Props, State> {
     />
   );
 
-  renderModuleSpecificOptions = (moduleOpts: AllModuleDataTypes) => {
+  public renderModuleSpecificOptions = (moduleOpts: AllModuleDataTypes) => {
     switch (moduleOpts.type) {
       default:
         console.error('Unknown module type:', moduleOpts.type);
@@ -144,7 +144,7 @@ export default class ModuleEditDialog extends PureComponent<Props, State> {
     return null;
   };
 
-  render() {
+  public render() {
     const { isVisible, onCancel } = this.props;
     const { newItem } = this.state;
 

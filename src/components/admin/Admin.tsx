@@ -1,15 +1,15 @@
-import React, { PureComponent } from 'react';
 import PageSections from '@/PageFactory';
-import { ActivityIndicator, Button, Text, StyleSheet } from 'react-native';
+import React, { PureComponent } from 'react';
 import { FaCheck, FaSave } from 'react-icons/fa';
+import { ActivityIndicator, Button, StyleSheet, Text } from 'react-native';
 
-import FloatingActionButton from './FloatingActionButton';
-import { ResponsiveProvider } from '@/components/utils';
 import { View } from '@/components/primitives';
-import { generateFakeData } from './admin-utils';
-import ModuleListCtl from './ModuleListCtl';
-import { getListWithKeys, saveList, KeyedModuleSpec } from './module-list-utils';
+import { ResponsiveProvider } from '@/components/utils';
 import { ModuleSpec } from '@/types';
+import { generateFakeData } from './admin-utils';
+import FloatingActionButton from './FloatingActionButton';
+import { getListWithKeys, KeyedModuleSpec, saveList } from './module-list-utils';
+import ModuleListCtl from './ModuleListCtl';
 
 const SAVING_STATES = {
   NOT_SAVING: 0,
@@ -28,7 +28,7 @@ interface Props {
 }
 
 export default class Admin extends PureComponent<Props, State> {
-  state: State;
+  public state: State;
 
   constructor(props: Props) {
     super(props);
@@ -44,9 +44,9 @@ export default class Admin extends PureComponent<Props, State> {
     };
   }
 
-  updateModuleList = ({ moduleList }: { moduleList: KeyedModuleSpec[] }) =>
+  public updateModuleList = ({ moduleList }: { moduleList: KeyedModuleSpec[] }) =>
     this.setState({ moduleList });
-  saveModuleList = async () => {
+  public saveModuleList = async () => {
     console.log('saving');
 
     this.setState({ savingState: SAVING_STATES.SAVING });
@@ -57,7 +57,7 @@ export default class Admin extends PureComponent<Props, State> {
     console.log('done');
   };
 
-  render() {
+  public render() {
     const { moduleList, isPreview, savingState } = this.state;
 
     const data = moduleList.map(generateFakeData);

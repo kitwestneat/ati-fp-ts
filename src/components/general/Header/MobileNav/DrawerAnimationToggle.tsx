@@ -4,14 +4,14 @@ import { PureComponent, ReactNode } from 'react';
 import { Animated, Easing } from 'react-native';
 
 // XXX
-type Props = { children: (props: ChildProps) => ReactNode };
+interface Props { children: (props: ChildProps) => ReactNode }
 
-type State = {
+interface State {
   drawerAnimation: any;
   isDrawerOpen: boolean;
   isAnimatingIn: boolean;
   isAnimatingOut: boolean;
-};
+}
 
 interface ChildProps {
   drawerAnimation: Animated.Value;
@@ -20,14 +20,14 @@ interface ChildProps {
 }
 
 class DrawerAnimationToggle extends PureComponent<Props, State> {
-  state: State = {
+  public state: State = {
     drawerAnimation: new Animated.Value(0),
     isDrawerOpen: false,
     isAnimatingIn: false,
     isAnimatingOut: false
   };
 
-  toggleDrawer = () => {
+  public toggleDrawer = () => {
     const { isAnimatingIn, isAnimatingOut, isDrawerOpen } = this.state;
     if (!isDrawerOpen || isAnimatingOut) {
       this.showDrawer();
@@ -38,7 +38,7 @@ class DrawerAnimationToggle extends PureComponent<Props, State> {
     }
   };
 
-  showDrawer = () => {
+  public showDrawer = () => {
     const { drawerAnimation } = this.state;
 
     this.setState({ isDrawerOpen: true, isAnimatingIn: true }, () =>
@@ -50,7 +50,7 @@ class DrawerAnimationToggle extends PureComponent<Props, State> {
     );
   };
 
-  hideDrawer = () => {
+  public hideDrawer = () => {
     const { drawerAnimation } = this.state;
 
     this.setState({ isAnimatingOut: true }, () =>
@@ -62,7 +62,7 @@ class DrawerAnimationToggle extends PureComponent<Props, State> {
     );
   };
 
-  render() {
+  public render() {
     const { drawerAnimation, isDrawerOpen } = this.state;
 
     return this.props.children({

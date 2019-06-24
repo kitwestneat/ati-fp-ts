@@ -1,13 +1,13 @@
-import React, { PureComponent } from 'react';
-import { StyleSheet, View, Text } from 'react-native';
 import { ModuleBox, OverlapScaffold, Post } from '@/components/modules';
 import { Row } from '@/components/primitives';
 import { Capitalize } from '@/components/utils';
 import { CONTAINER_PADDING } from '@/constants';
 import { OFFSET_DIRECTION } from '@/types';
+import React, { PureComponent } from 'react';
+import { StyleSheet, Text, View } from 'react-native';
 import { RecentPostsGridDesktop, RecentPostsGridMobile } from './RecentPostsGrid';
 
-type Props = {
+interface Props {
     isDesktop: boolean;
     tag: string;
     mainPost: any;
@@ -16,7 +16,7 @@ type Props = {
 }
 
 export default class RecentPosts extends PureComponent<Props> {
-    scaffoldProps = (isDesktop: boolean) =>
+    public scaffoldProps = (isDesktop: boolean) =>
     isDesktop
       ? {
           containerPadding: 45,
@@ -27,7 +27,7 @@ export default class RecentPosts extends PureComponent<Props> {
           overlap: 15
         };
 
-    MainPostImageProps = (isDesktop: boolean) =>
+    public MainPostImageProps = (isDesktop: boolean) =>
     isDesktop
       ? {
           imageWidth: 1200,
@@ -38,7 +38,7 @@ export default class RecentPosts extends PureComponent<Props> {
           imageHeight: 250
         };
 
-    render() {
+    public render() {
         const { isDesktop, tag, mainPost, secondaryPosts, sectionColor } = this.props;
 
         const localFontStyles = isDesktop
@@ -53,7 +53,7 @@ export default class RecentPosts extends PureComponent<Props> {
                     <OverlapScaffold {...this.scaffoldProps(isDesktop)} isDesktop={isDesktop}>
                         <OverlapScaffold.Main>
                             <Post
-                            layoutVariant='overlay'
+                            layoutVariant="overlay"
                             isDesktop={isDesktop}
                             center
                             {...this.MainPostImageProps(isDesktop)}
@@ -73,7 +73,7 @@ export default class RecentPosts extends PureComponent<Props> {
                     </OverlapScaffold>
                 </Row>
             </View>
-        )
+        );
     }
 }
 
@@ -82,4 +82,4 @@ const styles = StyleSheet.create({
         fontWeight: '600',
         marginBottom: '15px',
     }
-})
+});

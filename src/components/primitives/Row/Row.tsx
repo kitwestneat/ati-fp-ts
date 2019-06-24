@@ -1,19 +1,19 @@
 // @flow
 
 import React, { PureComponent, ReactNode } from 'react';
-import { View, StyleSheet, ViewStyle, StyleProp } from 'react-native';
+import { StyleProp, StyleSheet, View, ViewStyle } from 'react-native';
 
-type Props = {
+interface Props {
   style?: StyleProp<ViewStyle>;
   children: ReactNode;
-};
+}
 
 class Row extends PureComponent<Props> {
-  static defaultProps = {
+  public static defaultProps = {
     style: {}
   };
 
-  render() {
+  public render() {
     const { style, children, ...rest } = this.props;
     return (
       <View style={[styles.row, style]} {...rest}>

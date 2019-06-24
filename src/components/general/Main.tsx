@@ -4,29 +4,29 @@ import React, { PureComponent } from 'react';
 import { ScrollView, StyleSheet, ViewStyle } from 'react-native';
 import LazyView from '../utils/LazyView';
 
-type Props = {
+interface Props {
   children: React.ReactNode;
   contentContainerStyle?: ViewStyle;
   style?: ViewStyle;
-};
+}
 
-type State = {
+interface State {
   contentHeight: number;
-};
+}
 
 class Main extends PureComponent<Props, State> {
-  static defaultProps = {
+  public static defaultProps = {
     contentContainerStyle: {},
     style: {}
   };
 
-  render() {
+  public render() {
     const { children, contentContainerStyle, style } = this.props;
     return (
       <ScrollView
         onScroll={LazyView.onScroll}
         scrollEventThrottle={32}
-        keyboardShouldPersistTaps='handled'
+        keyboardShouldPersistTaps="handled"
         style={[styles.scrollView, style]}
         contentContainerStyle={[styles.contentContainer, contentContainerStyle]}
       >

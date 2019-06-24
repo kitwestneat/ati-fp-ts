@@ -1,34 +1,34 @@
 // @flow
 
-import React, { PureComponent } from 'react';
-import PageSections from '@/PageFactory';
-import { AppWrap, Header, Footer, Main } from '@/components/general';
-import { Skybox, Floorboard } from '@/components/ads';
+import { Floorboard, Skybox } from '@/components/ads';
 import { startAds } from '@/components/ads/ad-utils';
+import { AppWrap, Footer, Header, Main } from '@/components/general';
 import { Section } from '@/components/primitives';
+import PageSections from '@/PageFactory';
+import React, { PureComponent } from 'react';
 
 import { SECTION_SPACING_VARIANTS } from '@/constants/index';
 
-import { Route } from 'react-router-dom';
 import TagPage from '@/TagPage';
+import { Route } from 'react-router-dom';
 
-type Props = {
+interface Props {
   data: any;
-};
+}
 
 class App extends PureComponent<Props> {
-  componentDidMount() {
+  public componentDidMount() {
     startAds();
   }
 
-  render() {
+  public render() {
     const { data } = this.props;
 
     if (!data) {
       throw new Error('cannot load post data');
     }
 
-    const homePageData = data.filter((el:any) => {
+    const homePageData = data.filter((el: any) => {
       const excludedTypes = ['tag', 'splitTagBox', 'tagOverlapTitle', 'recentAndTrending'];
       return !excludedTypes.includes(el.type);
     });
@@ -50,7 +50,7 @@ class App extends PureComponent<Props> {
           <Footer />
         </Main>
 
-        <Route path='/tag/history' render={() => <TagPage {...this.props}/>} />
+        <Route path="/tag/history" render={() => <TagPage {...this.props}/>} />
       </AppWrap>
     );
   }

@@ -1,6 +1,6 @@
-import React, { PureComponent } from 'react';
 import { Responsive } from '@/components/utils';
 import { BREAKPOINTS } from '@/constants/index';
+import React, { PureComponent } from 'react';
 
 interface Props {
   MobileAd: React.ComponentType;
@@ -9,7 +9,7 @@ interface Props {
 
 const MakeResponsiveAdComponent = ({ MobileAd, DesktopAd }: Props) =>
   class extends PureComponent {
-    render() {
+    public render() {
       const adBreakpoint = BREAKPOINTS.LG;
       return (
         <Responsive>

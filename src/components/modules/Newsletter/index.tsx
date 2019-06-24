@@ -8,20 +8,20 @@ import { Responsive } from '@/components/utils';
 
 import SignUpForm from './SignUpForm';
 
-import { COLOR_MAP, BREAKPOINTS } from '@/constants/index';
+import { BREAKPOINTS, COLOR_MAP } from '@/constants/index';
 
 import NewsletterImage from '@/assets/images/newsletter.png';
 
-type Props = {};
+interface Props {}
 class Newsletter extends PureComponent<Props> {
-  render() {
+  public render() {
     return (
       <Responsive>
         {({ width }) => {
           return (
             <View style={styles.wrap}>
               <Container
-                type='content'
+                type="content"
                 style={[
                   width > BREAKPOINTS.MD
                     ? styles.container
@@ -44,7 +44,7 @@ class Newsletter extends PureComponent<Props> {
                     <Image
                       width={332}
                       height={260}
-                      resizeMode='contain'
+                      resizeMode="contain"
                       source={{ uri: NewsletterImage }}
                     />
                   </View>

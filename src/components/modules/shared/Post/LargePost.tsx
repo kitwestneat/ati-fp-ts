@@ -4,9 +4,9 @@ import React, { PureComponent } from 'react';
 import { StyleSheet } from 'react-native';
 
 import { PostImage } from '@/components/modules';
-import SmallPost from './SmallPost';
 import { View } from '@/components/primitives';
-import { WebAccessibilityProps, PostType } from '@/types';
+import { PostType, WebAccessibilityProps } from '@/types';
+import SmallPost from './SmallPost';
 
 export interface LargePostProps extends Partial<PostType> {
   layoutVariant: 'large';
@@ -18,13 +18,13 @@ export interface LargePostProps extends Partial<PostType> {
 }
 
 class LargePost extends PureComponent<LargePostProps> {
-  static defaultProps = {
+  public static defaultProps = {
     style: {},
     imageWidth: 630,
     imageHeight: 250, 
   };
 
-  render() {
+  public render() {
     const { imageSrc, imageHeight, imageWidth, link, layoutVariant, ...rest } = this.props;
     const linkProps: WebAccessibilityProps = link ? { accessibilityRole: 'link', href: link } : {};
 

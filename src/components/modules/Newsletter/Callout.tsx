@@ -9,7 +9,7 @@ const COPY = {
 };
 
 class Callout extends PureComponent {
-  render() {
+  public render() {
     return (
       <>
         <View>

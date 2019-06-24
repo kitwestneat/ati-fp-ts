@@ -3,8 +3,8 @@
 import React, { PureComponent } from 'react';
 import { StyleSheet } from 'react-native';
 
-import { Text, View } from '@/components/primitives';
 import { PostImage, PostLabel } from '@/components/modules';
+import { Text, View } from '@/components/primitives';
 import { WebAccessibilityProps, WebViewStyle } from '@/types';
 import { PostType } from '@/types';
 
@@ -28,13 +28,13 @@ export interface OverlayPostProps extends PostType {
 }
 
 class OverlayPost extends PureComponent<OverlayPostProps> {
-  static defaultProps = {
+  public static defaultProps = {
     center: false,
     isDesktop: false,
     bottomOverlap: 0
   };
 
-  render() {
+  public render() {
     const {
       numberOfLines,
       fontStyles,

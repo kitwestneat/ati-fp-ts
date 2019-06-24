@@ -1,7 +1,7 @@
 // @flow
 
 import React, { PureComponent } from 'react';
-import { View, StyleSheet } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 
 import { Text } from '@/components/primitives';
 import { Responsive } from '@/components/utils';
@@ -9,20 +9,20 @@ import { Responsive } from '@/components/utils';
 import {
   BREAKPOINTS,
   FOOTER_HEIGHT,
-  SOCIAL_LINKS_REDUCED,
   HOME_LINK,
   PBH_NETWORK_LINKS,
-  SECTION_SPACING
+  SECTION_SPACING,
+  SOCIAL_LINKS_REDUCED
 } from '@/constants';
 
-type Props = {};
+interface Props {}
 
 class Footer extends PureComponent<Props> {
-  renderHomeLink = () => {
+  public renderHomeLink = () => {
     return (
       <View style={styles.linkList}>
         <Text
-          accessibilityRole='link'
+          accessibilityRole="link"
           style={[styles.text, { paddingHorizontal: 30 }]}
           href={HOME_LINK.href}
         >
@@ -32,7 +32,7 @@ class Footer extends PureComponent<Props> {
     );
   };
 
-  vwStyles = (isDesktop: boolean) => ({
+  public vwStyles = (isDesktop: boolean) => ({
     spacerTop: {
       marginTop: SECTION_SPACING[isDesktop ? 'LG' : 'SM']
     },
@@ -47,7 +47,7 @@ class Footer extends PureComponent<Props> {
     }
   });
 
-  render() {
+  public render() {
     return (
       <Responsive>
         {({ minWidth }) => {
@@ -64,7 +64,7 @@ class Footer extends PureComponent<Props> {
                     key={text}
                     href={href}
                     style={[styles.text, hPadding, siteLinkSize]}
-                    accessibilityRole='link'
+                    accessibilityRole="link"
                   >
                     {text.toUpperCase()}
                   </Text>
@@ -77,7 +77,7 @@ class Footer extends PureComponent<Props> {
                     key={text}
                     href={href}
                     style={[styles.text, hPadding, socialLinkSize]}
-                    accessibilityRole='link'
+                    accessibilityRole="link"
                   >
                     <SocialIcon />
                   </Text>

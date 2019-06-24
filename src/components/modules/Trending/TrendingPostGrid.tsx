@@ -3,9 +3,9 @@ import React, { PureComponent } from 'react';
 import { PostType } from '../../../types';
 import PostGrid, { PostComponentAttrMap } from '../shared/PostGrid';
 
-type Props = {
+interface Props {
   posts: PostType[];
-};
+}
 
 const MD_POST_COUNT = 3;
 const POST_COMPONENT_ATTRS: PostComponentAttrMap = {
@@ -20,7 +20,7 @@ const POST_COMPONENT_ATTRS: PostComponentAttrMap = {
 };
 
 class TrendingPostGrid extends PureComponent<Props> {
-  render() {
+  public render() {
     const { posts } = this.props;
     const orderSpec = posts.map((_post, index) => (index < MD_POST_COUNT ? 'MD' : 'SM'));
 

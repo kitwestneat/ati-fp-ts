@@ -1,12 +1,12 @@
-import React, { PureComponent } from 'react';
 import { ModuleBox, OverlapScaffold, Post } from '@/components/modules';
 import { Container, Row } from '@/components/primitives';
 import { Responsive } from '@/components/utils';
 import { BREAKPOINTS, CONTAINER_PADDING } from '@/constants';
-import { TagTileBoxModuleData, PostType, OFFSET_DIRECTION, GridOrder } from '@/types';
-import TitleRow from './TitleRow';
+import { GridOrder, OFFSET_DIRECTION, PostType, TagTileBoxModuleData } from '@/types';
+import React, { PureComponent } from 'react';
 import PostList from '../TagPostsSingleColumn/PostList';
 import OverlapGrid from './OverlapGrid';
+import TitleRow from './TitleRow';
 
 interface Props extends TagTileBoxModuleData {
   posts: PostType[];
@@ -15,20 +15,20 @@ interface Props extends TagTileBoxModuleData {
   sectionTitle: string;
 }
 
-type State = {
+interface State {
   titleRowWidth: number;
-};
+}
 
 export default class TagPostsOverlapTitle extends PureComponent<Props, State> {
-  static defaultProps = {
+  public static defaultProps = {
     order: 4
   };
 
-  state = {
+  public state = {
     titleRowWidth: 0
   };
 
-  scaffoldProps = (isDesktop: boolean) =>
+  public scaffoldProps = (isDesktop: boolean) =>
     isDesktop
       ? {
           containerPadding: 0,
@@ -39,7 +39,7 @@ export default class TagPostsOverlapTitle extends PureComponent<Props, State> {
           overlap: 15
         };
 
-  MainPostImageProps = (isDesktop: boolean) =>
+  public MainPostImageProps = (isDesktop: boolean) =>
     isDesktop
       ? {
           imageWidth: 1200,
@@ -50,14 +50,14 @@ export default class TagPostsOverlapTitle extends PureComponent<Props, State> {
           imageHeight: 250
         };
 
-  getWidth = (e: any) => {
+  public getWidth = (e: any) => {
     const w = e.nativeEvent.layout.width;
     this.setState({
       titleRowWidth: w
     });
   };
 
-  render() {
+  public render() {
     const {
       sectionTitle,
       sectionLink,

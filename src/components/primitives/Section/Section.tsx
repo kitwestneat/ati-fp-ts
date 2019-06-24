@@ -8,17 +8,17 @@ import { Responsive } from '@/components/utils';
 import { BREAKPOINTS, SECTION_SPACERS, SECTION_SPACING_VARIANTS } from '@/constants/index';
 import { StyleProp, ViewStyle } from 'react-native';
 
-type Props = {
+interface Props {
   topSpacing: SECTION_SPACING_VARIANTS;
   style?: StyleProp<ViewStyle>;
-};
+}
 
 class Section extends PureComponent<Props> {
-  static defaultProps = {
+  public static defaultProps = {
     topSpacing: SECTION_SPACING_VARIANTS.SMALL
   };
 
-  render() {
+  public render() {
     const { children, style, topSpacing } = this.props;
 
     return (

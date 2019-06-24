@@ -61,7 +61,7 @@ export interface InfoBoxData extends ModuleData {
 }
 
 export interface SplitTagBoxData extends ModuleData {
-  type: SECTION_TYPES.SPLIT_TAG_BOX,
+  type: SECTION_TYPES.SPLIT_TAG_BOX;
   sectionTitle: string;
   sectionLink: string;
   sectionColor: string;
@@ -106,8 +106,8 @@ export type Omit<T, K> = Pick<T, Exclude<keyof T, K>>;
 
 export interface WebViewStyle extends Omit<ViewStyle, 'transform'> {
   boxShadow?: string;
-  transform?: {
+  transform?: Array<{
     translateX?: string | number;
     translateY?: string | number;
-  }[];
+  }>;
 }

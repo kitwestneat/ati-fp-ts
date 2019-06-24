@@ -1,11 +1,11 @@
-import { Platform, StyleProp } from 'react-native';
 import { WebViewStyle } from '@/types';
+import { Platform, StyleProp } from 'react-native';
 
 const penumbraOpacity = 0.14;
 const umbraOpacity = 0.2;
 
 interface ElevationsType {
-  [t: string]: StyleProp<WebViewStyle>[];
+  [t: string]: Array<StyleProp<WebViewStyle>>;
 }
 
 const ELEVATIONS: ElevationsType = {

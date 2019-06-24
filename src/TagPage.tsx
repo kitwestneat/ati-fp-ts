@@ -1,27 +1,27 @@
 // @flow
 
-import React, { PureComponent } from 'react';
-import PageSections from '@/PageFactory';
-import { AppWrap, Header, Footer, Main } from '@/components/general';
 import { Skybox } from '@/components/ads';
 import { startAds } from '@/components/ads/ad-utils';
+import { AppWrap, Footer, Header, Main } from '@/components/general';
 import { Section } from '@/components/primitives';
+import PageSections from '@/PageFactory';
+import React, { PureComponent } from 'react';
 
 import { SECTION_SPACING_VARIANTS } from '@/constants/index';
 
-type Props = {
+interface Props {
   data: any;
-};
+}
 
 class TagPage extends PureComponent<Props> {
-  componentDidMount() {
+  public componentDidMount() {
     startAds();
   }
 
-  render() {
+  public render() {
     const { data } = this.props;
 
-    const tagPageData = data.filter((el:any) => {
+    const tagPageData = data.filter((el: any) => {
       const excludedTypes = ['recent', 'tagTileBox', 'instagram', 'newsletter'];
       return !excludedTypes.includes(el.type);
     });

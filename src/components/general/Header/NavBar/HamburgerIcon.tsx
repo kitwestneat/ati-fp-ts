@@ -1,6 +1,6 @@
 import React from 'react';
-import { StyleSheet } from 'react-native';
 import { FaBars } from 'react-icons/fa';
+import { StyleSheet } from 'react-native';
 
 import { View } from '@/components/primitives';
 

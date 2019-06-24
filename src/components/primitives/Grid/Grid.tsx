@@ -1,24 +1,24 @@
 // @flow
 
 import React, { PureComponent, ReactElement } from 'react';
-import { View, ViewStyle, StyleProp } from 'react-native';
+import { StyleProp, View, ViewStyle } from 'react-native';
 import GridSlot from './GridSlot';
 
-type Props = {
+interface Props {
   style: StyleProp<ViewStyle>;
   children: JSX.Element[];
   spacer: number;
   itemsPerRow: number;
-};
+}
 
 class Grid extends PureComponent<Props> {
-  static defaultProps = {
+  public static defaultProps = {
     spacer: 10,
     style: {},
     itemsPerRow: 3
   };
 
-  getListStyles = (): StyleProp<ViewStyle> => {
+  public getListStyles = (): StyleProp<ViewStyle> => {
     const { spacer } = this.props;
 
     return {
@@ -28,7 +28,7 @@ class Grid extends PureComponent<Props> {
     };
   };
 
-  renderChildren = () => {
+  public renderChildren = () => {
     const { children, spacer, itemsPerRow } = this.props;
     const gridSlotProps = {
       spacer,
@@ -58,7 +58,7 @@ class Grid extends PureComponent<Props> {
     });
   };
 
-  render() {
+  public render() {
     return (
       <View style={[{ position: 'relative' }]}>
         <View style={this.getListStyles()}>{this.renderChildren()}</View>

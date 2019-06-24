@@ -3,24 +3,24 @@
 import React, { PureComponent } from 'react';
 import { StyleSheet } from 'react-native';
 
-import { ModuleTitle } from '@/components/modules';
 import { Leaderboard, MobileMrec } from '@/components/ads';
+import { ModuleTitle } from '@/components/modules';
 
 import { Row, View } from '@/components/primitives';
 
 import { SECTION_SPACERS, SECTION_SPACING_VARIANTS } from '@/constants';
 
-type Props = {
+interface Props {
   patternColor: string;
   title: string;
   link: string;
   isDesktop: boolean;
   onLayout?: any;
-};
+}
 
 class TitleRow extends PureComponent<Props> {
 
-  renderMobile = () => {
+  public renderMobile = () => {
     const showPattern = false;
     return (
       <>
@@ -40,7 +40,7 @@ class TitleRow extends PureComponent<Props> {
     );
   };
 
-  renderDesktop = () => {
+  public renderDesktop = () => {
     return (
       <View style={styles.titleRow}>
         <View style={{ alignItems: 'center'}}>
@@ -52,7 +52,7 @@ class TitleRow extends PureComponent<Props> {
     );
   };
 
-  renderTitle = (showPattern?: boolean) => {
+  public renderTitle = (showPattern?: boolean) => {
     const { link, title, patternColor , onLayout } = this.props;
     return (
       <View style={{ alignItems: 'flex-start' }} accessibilityRole="link" href={link} >
@@ -68,7 +68,7 @@ class TitleRow extends PureComponent<Props> {
     );
   };
   
-  render() {
+  public render() {
     const { isDesktop } = this.props;
     return isDesktop ? this.renderDesktop() : this.renderMobile();
   }

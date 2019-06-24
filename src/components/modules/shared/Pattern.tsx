@@ -6,21 +6,21 @@ import { StyleSheet, View } from 'react-native';
 import { COLOR_MAP } from '@/constants';
 import { OFFSET_DIRECTION } from '@/types';
 
-type Props = {
+interface Props {
   color: string;
   backgroundColor: string;
   offsetDirection: OFFSET_DIRECTION;
   children: any;
-};
+}
 
 class Pattern extends PureComponent<Props> {
-  static defaultProps = {
+  public static defaultProps = {
     offsetDirection: OFFSET_DIRECTION.LEFT,
     color: COLOR_MAP.ORANGE,
     backgroundColor: COLOR_MAP.SITE_BG,
   };
 
-  getOffsetStyles = () => {
+  public getOffsetStyles = () => {
     const { offsetDirection } = this.props;
     const offsetDistance = this.getOffsetDistance();
 
@@ -30,23 +30,23 @@ class Pattern extends PureComponent<Props> {
     };
   };
 
-  getOffsetDistance = () => {
+  public getOffsetDistance = () => {
     const OFFSET = 15;
     return OFFSET;
   };
 
-  getGradient = () => {
+  public getGradient = () => {
     const { color, backgroundColor } = this.props;
     const space = 5;
 
     return {
-      backgroundColor: backgroundColor,
+      backgroundColor,
       backgroundPosition: 'center center',
       backgroundImage: `radial-gradient(${color} 10%, transparent 45%), radial-gradient(${color} 10%, transparent 45%)`,
       backgroundSize: `${space}px ${space}px`
     };
   };
-  render() {
+  public render() {
     return (
       <View style={[styles.wrap, { marginBottom: this.getOffsetDistance() }]}>
         <View style={[styles.pattern, this.getGradient(), this.getOffsetStyles()]} />
