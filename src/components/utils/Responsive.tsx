@@ -12,7 +12,7 @@ const { Provider, Consumer } = createContext<ResponsiveChildProps>({
 
 type Coordinate = [number, number];
 type GetSlope = [Coordinate, Coordinate];
-interface Slope { slope: number }
+interface Slope { slope: number; }
 type GetIntercept = { point: Coordinate } & Slope;
 interface FluidSizeType {
   min: number;

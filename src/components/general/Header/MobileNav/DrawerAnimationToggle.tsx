@@ -4,7 +4,7 @@ import { PureComponent, ReactNode } from 'react';
 import { Animated, Easing } from 'react-native';
 
 // XXX
-interface Props { children: (props: ChildProps) => ReactNode }
+interface Props { children: (props: ChildProps) => ReactNode; }
 
 interface State {
   drawerAnimation: any;
