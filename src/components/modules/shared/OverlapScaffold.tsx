@@ -1,6 +1,6 @@
 // @flow
 
-import React, { PureComponent, ReactElement, ReactNode } from 'react';
+import React, { PureComponent, ReactElement } from 'react';
 import { View } from 'react-native';
 import { Container } from '../../primitives';
 
