@@ -15,17 +15,19 @@ export interface MediumPostProps extends Partial<PostType> {
   imageHeight: number;
   numberOfLines?: number;
   isDesktop?: boolean;
+  postLine?: boolean;
 }
 
 class MediumPost extends PureComponent<MediumPostProps> {
   static defaultProps = {
     style: {},
     imageWidth: 300,
-    imageHeight: 250
+    imageHeight: 250,
+    postLine: true,
   };
 
   render() {
-    const { imageSrc, imageHeight, imageWidth, link, layoutVariant, ...rest } = this.props;
+    const { imageSrc, imageHeight, imageWidth, link, layoutVariant, postLine, ...rest } = this.props;
     const linkProps: WebAccessibilityProps = link ? { accessibilityRole: 'link', href: link } : {};
 
     return (
@@ -39,7 +41,7 @@ class MediumPost extends PureComponent<MediumPostProps> {
           }}
         >
           <SmallPost layoutVariant="reduced" {...rest} />
-          <View style={styles.postLine} />
+          {postLine && <View style={styles.postLine} />}
         </View>
       </View>
     );

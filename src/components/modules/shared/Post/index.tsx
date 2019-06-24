@@ -27,7 +27,7 @@ const POST_VARIANT_MAP = {
   [LAYOUT_VARIANT.TITLE_OVERLAP]: TitleOverlapPost,
 };
 
-type AllSubPostProps = SmallPostProps & OverlayPostProps & MediumPostProps;
+type AllSubPostProps = SmallPostProps & OverlayPostProps & MediumPostProps & TitleOverlapPostProps & LargePostProps;
 type SubPostProps = Partial<Omit<AllSubPostProps, 'layoutVariant'>>;
 
 export interface PostProps extends SubPostProps {
