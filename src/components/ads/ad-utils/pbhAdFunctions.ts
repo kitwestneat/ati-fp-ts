@@ -2,7 +2,7 @@ import { AD_FUNCS_MAP } from '../ad-constants';
 import { getAdId } from './getAdId';
 
 type AdRegisterFunc = (id: string) => void;
-interface AdRegisterFuncMap { [k: string]: AdRegisterFunc }
+interface AdRegisterFuncMap { [k: string]: AdRegisterFunc; }
 
 // These are defined on the window object as part of the PBH ad api
 interface PbhAdApi {

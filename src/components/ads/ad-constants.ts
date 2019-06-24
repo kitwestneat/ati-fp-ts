@@ -58,7 +58,7 @@ export const AD_FUNCS_MAP = {
 
 export type AdSize = [number, number];
 
-interface AdSizesMap { [k: string]: AdSize[] }
+interface AdSizesMap { [k: string]: AdSize[]; }
 
 /**
  * This maps ad types to their corresponding list of potential sizes

@@ -20,8 +20,8 @@ export const DEFAULT_POST_COMPONENT_ATTRS: PostComponentAttrMap = {
     layoutVariant: 'large',
     multiplier: 2
   },
-  MD: { layoutVariant: 'medium' }, 
-  SM : { layoutVariant: 'reduced' }
+  MD: { layoutVariant: 'medium' },
+  SM: { layoutVariant: 'reduced' }
 };
 
 export interface PostComponentAttrMap {
@@ -41,8 +41,8 @@ interface Props {
 }
 
 function validatePostCount(orderSpec: OrderSpec, posts: PostType[]) {
-  const orderSpecPostCount = orderSpec.filter(type => type != 'AD').length;
-  if (posts.length != orderSpecPostCount) {
+  const orderSpecPostCount = orderSpec.filter(type => type !== 'AD').length;
+  if (posts.length !== orderSpecPostCount) {
     console.warn(
       `mapPostsToGrid: grid requires exactly ${orderSpecPostCount} posts, found ${posts.length}`
     );
@@ -106,6 +106,7 @@ export default class PostGrid extends PureComponent<Props> {
 }
 
 export function createPostGrid(attrs: Omit<Props, 'posts'>) {
+  // tslint:disable-next-line: max-classes-per-file
   return class extends PureComponent<{ posts: PostType[] }> {
     public render() {
       const { posts } = this.props;

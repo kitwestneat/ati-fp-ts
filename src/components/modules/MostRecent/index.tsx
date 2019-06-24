@@ -12,7 +12,7 @@ import PostList from './PostList';
 import { BREAKPOINTS, CONTAINER_PADDING } from '@/constants/index';
 import { PostType } from '@/types';
 
-interface Props { posts: PostType[] }
+interface Props { posts: PostType[]; }
 
 class MostRecent extends PureComponent<Props> {
   public renderMobile = () => {
