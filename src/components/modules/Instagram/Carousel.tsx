@@ -1,16 +1,16 @@
 // @flow
 
+import Carousel, { CarouselProps, CarouselSlideRenderControlProps } from 'nuka-carousel';
 import React, { PureComponent } from 'react';
-import Carousel, { CarouselSlideRenderControlProps, CarouselProps } from 'nuka-carousel';
 
+import { PostType } from '@/types';
 import Arrow from './Arrow';
 import Slide from './Slide';
-import { PostType } from '@/types';
 
-type Props = {
+interface Props {
   posts: PostType[];
   isDesktop: boolean;
-};
+}
 
 const SPACE_BETWEEN_SLIDES = {
   MOBILE: 10,
@@ -45,7 +45,7 @@ const CONFIG_SM: CarouselProps = {
 };
 
 class Instagram extends PureComponent<Props> {
-  render() {
+  public render() {
     const { posts, isDesktop } = this.props;
 
     return (

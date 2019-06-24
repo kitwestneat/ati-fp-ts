@@ -1,7 +1,7 @@
 // @flow
 
 import React, { PureComponent } from 'react';
-import { View, StyleSheet, ViewStyle, StyleProp } from 'react-native';
+import { StyleProp, StyleSheet, View, ViewStyle } from 'react-native';
 
 const CONTAINER_TYPES = {
   READABILITY: 'readability',
@@ -15,22 +15,22 @@ const MAX_WIDTHS = {
   [CONTAINER_TYPES.DEFAULT]: '100%'
 };
 
-type Props = {
+interface Props {
   rest: any;
   style: StyleProp<ViewStyle>;
   type: string;
-};
+}
 
 class Container extends PureComponent<Props> {
-  static defaultProps = {
+  public static defaultProps = {
     style: {},
     rest: {},
     type: CONTAINER_TYPES.DEFAULT
   };
 
-  getMaxWidth = () => MAX_WIDTHS[this.props.type];
+  public getMaxWidth = () => MAX_WIDTHS[this.props.type];
 
-  render() {
+  public render() {
     const { style, ...rest } = this.props;
 
     const maxWidth = this.getMaxWidth();

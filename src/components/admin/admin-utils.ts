@@ -1,5 +1,5 @@
-import { ModuleSpec, AllModuleDataTypes, QuerySpec } from '../../types';
 import { SECTION_TYPES } from '@/constants';
+import { AllModuleDataTypes, ModuleSpec, QuerySpec } from '../../types';
 import { KeyedModuleSpec } from './module-list-utils';
 
 const faker = require('faker');
@@ -17,7 +17,7 @@ export function queryObj2Str(query?: object): string {
   );
 }
 
-const fromEntries = <T>(entries: [string, T][]) =>
+const fromEntries = <T>(entries: Array<[string, T]>) =>
   entries.reduce((acc: { [k: string]: T }, [key, value]) => ((acc[key] = value), acc), {});
 
 export function queryStr2Obj(query: string): QuerySpec | false {
@@ -28,7 +28,7 @@ export function queryStr2Obj(query: string): QuerySpec | false {
   const paramPairStrings = query.split('&');
   const paramPairEntries = paramPairStrings.map(kvp => kvp.split('='));
 
-  return fromEntries(paramPairEntries as [string, string][]);
+  return fromEntries(paramPairEntries as Array<[string, string]>);
 }
 
 // FAKERS //
@@ -79,14 +79,14 @@ const generateFakeInstagramPosts = () =>
         imageSrc:
           'https://allthatsinteresting.com/thumb/https%3A%2F%2Fscontent-lga3-1.cdninstagram.com%2Fvp%2F7739a6d40bcd5448edb729a4198b354e%2F5D03A8C7%2Ft51.2885-15%2Fe15%2Fc0.53.612.612%2F52834696_2196312767287769_8983310581318517868_n.jpg%3F_nc_ht%3Dscontent-lga3-1.cdninstagram.com',
         title:
-          "James Brown steps off a jet in 1967. For more of history's coolest vintage photos, click the link in our bio.\u2063\n\u2063\n\u2063\n\u2063\n#jamesbrown #godfatherofsoul #1967 #1960s #instacool #cool",
+          'James Brown steps off a jet in 1967. For more of history\'s coolest vintage photos, click the link in our bio.\u2063\n\u2063\n\u2063\n\u2063\n#jamesbrown #godfatherofsoul #1967 #1960s #instacool #cool',
         link: 'https://www.instagram.com/p/Bu_jMdhgrYG'
       },
       {
         imageSrc:
           'https://allthatsinteresting.com/thumb/https%3A%2F%2Fscontent-lga3-1.cdninstagram.com%2Fvp%2F98f996c87ade5d012294acb188865a29%2F5D257C0D%2Ft51.2885-15%2Fe15%2Fc120.0.480.480%2F53275073_797095414004076_3118833460271563780_n.jpg%3F_nc_ht%3Dscontent-lga3-1.cdninstagram.com',
         title:
-          "John Titor claimed to be from the future: a time traveler sent back to 2000 to ensure that the U.S. stayed intact and the world didn't descend into chaos. This is the computer he claimed would save the planet. Check out his full story at the link in our bio. \u2063\n\u2063\n\u2063\n\u2063\n\u2063\n#johntitor #timetravel #year2000 #endoftheworld #weirdhistory",
+          'John Titor claimed to be from the future: a time traveler sent back to 2000 to ensure that the U.S. stayed intact and the world didn\'t descend into chaos. This is the computer he claimed would save the planet. Check out his full story at the link in our bio. \u2063\n\u2063\n\u2063\n\u2063\n\u2063\n#johntitor #timetravel #year2000 #endoftheworld #weirdhistory',
         link: 'https://www.instagram.com/p/Bu-MucplJy6'
       },
       {
@@ -121,7 +121,7 @@ const generateFakeInstagramPosts = () =>
         imageSrc:
           'https://allthatsinteresting.com/thumb/https%3A%2F%2Fscontent-lga3-1.cdninstagram.com%2Fvp%2Fedc71f9320c82a3fa878705421957f8a%2F5D07628C%2Ft51.2885-15%2Fe15%2Fc169.0.381.381%2F52821530_436947060381169_659424387874428088_n.jpg%3F_nc_ht%3Dscontent-lga3-1.cdninstagram.com',
         title:
-          "Check out the Scold's Bridle, the Middle Ages' answer for talkative women. Women who gossiped too much faced public humiliation at the hands of their husbands when they were forced to wear the Scold's Bridle for hours on end.\u2063\n\u2063\n\u2063\n\u2063\n\u2063\n#scoldsbridle #middleages #talkativewomen #talkingtoomuch #womenshistory",
+          'Check out the Scold\'s Bridle, the Middle Ages\' answer for talkative women. Women who gossiped too much faced public humiliation at the hands of their husbands when they were forced to wear the Scold\'s Bridle for hours on end.\u2063\n\u2063\n\u2063\n\u2063\n\u2063\n#scoldsbridle #middleages #talkativewomen #talkingtoomuch #womenshistory',
         link: 'https://www.instagram.com/p/Bu4rvWuARQO'
       },
       {
@@ -135,7 +135,7 @@ const generateFakeInstagramPosts = () =>
         imageSrc:
           'https://allthatsinteresting.com/thumb/https%3A%2F%2Fscontent-lga3-1.cdninstagram.com%2Fvp%2Fea9825a96e8c7209066932b3f423c833%2F5D0D257B%2Ft51.2885-15%2Fe15%2Fc129.0.462.462%2F53476586_526183477787528_3521160327548721436_n.jpg%3F_nc_ht%3Dscontent-lga3-1.cdninstagram.com',
         title:
-          "On New Year's Day, a rare snowstorm blanketed the American southwest in a layer of snow. See photos of the Grand Canyon, the Sonoran Desert, and more covered in snow by following the link in our profile.\n\n#sedona #snow #winter #arizona #az #beautiful",
+          'On New Year\'s Day, a rare snowstorm blanketed the American southwest in a layer of snow. See photos of the Grand Canyon, the Sonoran Desert, and more covered in snow by following the link in our profile.\n\n#sedona #snow #winter #arizona #az #beautiful',
         link: 'https://www.instagram.com/p/Bu31YbLjBiP'
       },
       {
@@ -149,7 +149,7 @@ const generateFakeInstagramPosts = () =>
         imageSrc:
           'https://allthatsinteresting.com/thumb/https%3A%2F%2Fscontent-lga3-1.cdninstagram.com%2Fvp%2Faef3e0ff1454cbf76d7c9d45b777f52e%2F5D1A5558%2Ft51.2885-15%2Fe15%2Fc77.0.458.458%2F54513190_698920220510340_3033955282448826403_n.jpg%3F_nc_ht%3Dscontent-lga3-1.cdninstagram.com',
         title:
-          "Meet La Pascualita, a remarkably lifelike wedding dress mannequin from Chihuahua, Mexico. Local legend holds that La Pascualita is the preserved corpse of a shop owner's daughter who died tragically on her wedding day, though the shop says otherwise. Read her full story at the link in our bio and decide for yourself. \u2063\n\u2063\n\u2063\n\u2063\n#lapascualita #chihuahua #mexico #mannequin #lifelikemannequin #creepy",
+          'Meet La Pascualita, a remarkably lifelike wedding dress mannequin from Chihuahua, Mexico. Local legend holds that La Pascualita is the preserved corpse of a shop owner\'s daughter who died tragically on her wedding day, though the shop says otherwise. Read her full story at the link in our bio and decide for yourself. \u2063\n\u2063\n\u2063\n\u2063\n#lapascualita #chihuahua #mexico #mannequin #lifelikemannequin #creepy',
         link: 'https://www.instagram.com/p/Bu1re7vg25W'
       },
       {

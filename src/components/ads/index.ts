@@ -1,6 +1,6 @@
-import { AD_TYPES } from "./ad-constants";
-import MakeAdComponent from "./MakeAdComponent";
-import MakeResponsiveAdComponent from "./MakeResponsiveAdComponent";
+import { AD_TYPES } from './ad-constants';
+import MakeAdComponent from './MakeAdComponent';
+import MakeResponsiveAdComponent from './MakeResponsiveAdComponent';
 
 const {
   MOBILE_MREC,

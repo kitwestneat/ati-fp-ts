@@ -1,10 +1,10 @@
-import React, { PureComponent } from 'react';
-import { StyleSheet, View, Text, ImageBackground } from 'react-native';
 import { ModuleBox } from '@/components/modules';
-import { Image, Container, HtmlText } from '@/components/primitives';
-import { Responsive, Capitalize } from '@/components/utils';
-import { COLOR_MAP, BREAKPOINTS } from '@/constants';
+import { Container, HtmlText, Image } from '@/components/primitives';
+import { Capitalize, Responsive } from '@/components/utils';
+import { BREAKPOINTS, COLOR_MAP } from '@/constants';
 import { InfoBoxData, OFFSET_DIRECTION } from '@/types';
+import React, { PureComponent } from 'react';
+import { ImageBackground, StyleSheet, Text, View } from 'react-native';
 import { isDevEnv } from '../../../utils';
 
 interface Props extends InfoBoxData {
@@ -14,45 +14,45 @@ interface Props extends InfoBoxData {
     paginate?: boolean;
 }
 
-type State = {
+interface State {
     isExpanded: boolean;
     height: number;
 }
 
 export default class InfoBox extends PureComponent<Props, State> {
-    state = {
+    public state = {
         isExpanded: false,
         height: 0,
-    }
+    };
 
-    toggleReadText = (e: any) => {
+    public toggleReadText = (e: any) => {
         e.stopPropagation();
 
         this.setState(prevState => (
             { isExpanded: !prevState.isExpanded }
-        ))
+        ));
     }
 
     // On Layout
     // Get the dimensions of the element holding the tag description. Use that number to help determine height of the entire InfoBox module. Will need to add additional px to the number obtained by this function.
     // Get the window width. Use that number in conjuction with the tag description dims to determine height of background image. Will need to subtract pts.
-    getHeight = (e: any) => {
+    public getHeight = (e: any) => {
         const h = e.nativeEvent.layout.height;
         // On layout change, set state for height of description box
         // Needed to help determine the height of the container
         this.setState({ 
             height: h,
-        })
+        });
     }
 
-    isPaginated = () => isDevEnv() ? window.location.pathname.includes('/page/') : this.props.paginate;
+    public isPaginated = () => isDevEnv() ? window.location.pathname.includes('/page/') : this.props.paginate;
 
-    renderDesktop = () => {
-        const { name, imageSrc,description } = this.props;
+    public renderDesktop = () => {
+        const { name, imageSrc, description } = this.props;
         const paginate = this.isPaginated();
         return (
             <ImageBackground source={{uri: imageSrc}} style={[styles.imageDesktop, { marginBottom: paginate ? 0 : 70 }]}> 
-                <Container type='content'>
+                <Container type="content">
                     <View style={[styles.infobox, styles.infoboxDesktop]}>
                         <ModuleBox offsetDirection={OFFSET_DIRECTION.RIGHT} patternColor={COLOR_MAP.PURPLE} backgroundColor={'transparent'}>
                             {paginate ? 
@@ -69,10 +69,10 @@ export default class InfoBox extends PureComponent<Props, State> {
                     </View>
                 </Container>
             </ImageBackground>
-        )
+        );
     }
 
-    renderMobile = (isTablet: any) => {
+    public renderMobile = (isTablet: any) => {
         const { name, imageSrc, description } = this.props;
         const { isExpanded, height } = this.state;
         const toggleDescription = !isExpanded ? getDescriptionSubstring(description) : description;
@@ -97,10 +97,10 @@ export default class InfoBox extends PureComponent<Props, State> {
                     </ModuleBox>
                 </View>
             </Container>
-        )
+        );
     }
 
-    render() {
+    public render() {
         return (
             <Responsive>
                 {({ minWidth }) => {
@@ -110,7 +110,7 @@ export default class InfoBox extends PureComponent<Props, State> {
                     }
                 }
             </Responsive>
-        )
+        );
     }
 }
 
@@ -120,7 +120,7 @@ const getDescriptionSubstring = (str: string) => {
     const indexOfFirstClosingPTag = str.indexOf(closingPTag);
     const descriptionSubstring = str.substring(0, indexOfFirstClosingPTag + closingPTag.length);
     return descriptionSubstring;
-}
+};
 
 // Style for tag description
 // HtmlText component expects an object, not styles created with React Native Stylesheet
@@ -160,4 +160,4 @@ const styles = StyleSheet.create({
         color: COLOR_MAP.BLUE,
         marginTop: '1em',
     }, 
-})
+});

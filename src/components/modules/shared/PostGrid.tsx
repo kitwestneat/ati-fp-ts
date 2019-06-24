@@ -24,13 +24,13 @@ export const DEFAULT_POST_COMPONENT_ATTRS: PostComponentAttrMap = {
   SM : { layoutVariant: 'reduced' }
 };
 
-export type PostComponentAttrMap = {
+export interface PostComponentAttrMap {
   [k: string]: Omit<PostProps, keyof PostType> & { multiplier?: number };
-};
+}
 
 export type OrderSpec = string[];
 
-type Props = {
+interface Props {
   orderSpec: OrderSpec;
   posts: PostType[];
 
@@ -38,7 +38,7 @@ type Props = {
   AdComponent?: React.ComponentType;
   style?: any;
   itemsPerRow?: number;
-};
+}
 
 function validatePostCount(orderSpec: OrderSpec, posts: PostType[]) {
   const orderSpecPostCount = orderSpec.filter(type => type != 'AD').length;
@@ -50,7 +50,7 @@ function validatePostCount(orderSpec: OrderSpec, posts: PostType[]) {
 }
 
 export default class PostGrid extends PureComponent<Props> {
-  mapPostsToGrid() {
+  public mapPostsToGrid() {
     const {
       orderSpec,
       postComponentAttrMap = DEFAULT_POST_COMPONENT_ATTRS,
@@ -93,7 +93,7 @@ export default class PostGrid extends PureComponent<Props> {
       .filter(Boolean) as JSX.Element[]; // TS not smart enough to know that boolean removes false values
   }
 
-  render() {
+  public render() {
     const { style, itemsPerRow } = this.props;
     const postsArray = this.mapPostsToGrid();
 

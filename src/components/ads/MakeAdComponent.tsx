@@ -4,12 +4,12 @@ import React, { PureComponent } from 'react';
 import { StyleSheet, ViewStyle } from 'react-native';
 import LazyView from '../utils/LazyView';
 
-import { getMinAdDimensions, registerAd, displayAd } from './ad-utils';
 import { isDevEnv } from '../../utils';
+import { displayAd, getMinAdDimensions, registerAd } from './ad-utils';
 
-type Props = {
+interface Props {
   style?: ViewStyle;
-};
+}
 
 interface State {
   adId?: string;
@@ -19,13 +19,13 @@ const MakeAdComponent = (adType: string) => {
   const minDimensionsForType = getMinAdDimensions(adType);
 
   return class Ad extends PureComponent<Props, State> {
-    static defaultProps = {
+    public static defaultProps = {
       style: {}
     };
 
-    state: State = {};
+    public state: State = {};
 
-    render() {
+    public render() {
       const { style } = this.props;
       const { adId } = this.state;
       const emptyAdStyle = adId ? {} : styles.adPlaceholder;

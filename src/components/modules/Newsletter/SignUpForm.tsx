@@ -15,11 +15,11 @@ import { subscribe } from './subscribe';
 
 import { ASYNC_STATES } from '@/constants';
 
-type Props = {};
-type State = {
+interface Props {}
+interface State {
   submissionStatus: ASYNC_STATES;
   email: string;
-};
+}
 
 const COPY = {
   SUCCESS: 'Thank you for subscribing to our newsletter!',
@@ -27,14 +27,14 @@ const COPY = {
 };
 
 class SignUpForm extends PureComponent<Props, State> {
-  state: State = {
+  public state: State = {
     email: '',
     submissionStatus: ASYNC_STATES.DEFAULT
   };
 
-  setEmail = (email: string) => this.setState({ email });
+  public setEmail = (email: string) => this.setState({ email });
 
-  handleSubmit = async () => {
+  public handleSubmit = async () => {
     const { email } = this.state;
     if (!email) {
       return;
@@ -49,23 +49,23 @@ class SignUpForm extends PureComponent<Props, State> {
     });
   };
 
-  renderLoading = () => <ActivityIndicator size="large" color="white" />;
+  public renderLoading = () => <ActivityIndicator size="large" color="white" />;
 
-  renderSuccess = () => (
+  public renderSuccess = () => (
     <Text style={[styles.successMsg]}>
       <FaCheckCircle />
       {COPY.SUCCESS}
     </Text>
   );
 
-  renderError = () => (
+  public renderError = () => (
     <Text style={[styles.errorMsg]}>
       <FaExclamationTriangle />
       {COPY.ERROR}
     </Text>
   );
 
-  renderForm = () => {
+  public renderForm = () => {
     const { email } = this.state;
 
     return (
@@ -79,7 +79,7 @@ class SignUpForm extends PureComponent<Props, State> {
     );
   };
 
-  renderBySubmissionStatus = (submissionStatus: ASYNC_STATES) => {
+  public renderBySubmissionStatus = (submissionStatus: ASYNC_STATES) => {
     const MAP = {
       [ASYNC_STATES.DEFAULT]: this.renderForm(),
       [ASYNC_STATES.LOADING]: this.renderLoading(),
@@ -89,7 +89,7 @@ class SignUpForm extends PureComponent<Props, State> {
     return MAP[submissionStatus];
   };
 
-  render() {
+  public render() {
     const { submissionStatus } = this.state;
 
     return this.renderBySubmissionStatus(submissionStatus);

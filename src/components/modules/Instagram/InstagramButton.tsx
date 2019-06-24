@@ -1,13 +1,13 @@
-import React, { PureComponent } from 'react';
-import { Text, StyleSheet } from 'react-native';
-import { FaInstagram } from 'react-icons/fa';
-import { COLOR_MAP, ATI_INSTAGRAM_URL } from '@/constants';
 import { View } from '@/components/primitives';
+import { ATI_INSTAGRAM_URL, COLOR_MAP } from '@/constants';
+import React, { PureComponent } from 'react';
+import { FaInstagram } from 'react-icons/fa';
+import { StyleSheet, Text } from 'react-native';
 
 const FOLLOW_STRING = 'FOLLOW US';
 
 class InstagramButton extends PureComponent {
-  render() {
+  public render() {
     return (
       <View style={styles.button} accessibilityRole="link" href={ATI_INSTAGRAM_URL} target="_blank">
         <FaInstagram fill="white" size={18} />

@@ -1,10 +1,10 @@
 import React, { PureComponent } from 'react';
 import {
   Image as RNImage,
-  StyleSheet,
-  ImageStyle,
+  ImageResizeMode,
   ImageSourcePropType,
-  ImageResizeMode
+  ImageStyle,
+  StyleSheet
 } from 'react-native';
 
 import { Ratio } from '@/components/primitives';
@@ -32,15 +32,15 @@ interface Dimension {
  */
 
 class Image extends PureComponent<Props> {
-  static defaultProps = {
+  public static defaultProps = {
     src: 'http://placehold.it/350x150',
     resizeMode: 'cover'
   };
 
-  getValueFromStyleProp = (cssProperty: keyof ImageStyle): number | undefined =>
+  public getValueFromStyleProp = (cssProperty: keyof ImageStyle): number | undefined =>
     this.props.style && ((StyleSheet.flatten(this.props.style) as any)[cssProperty] as number);
 
-  getDimensionsFromProps = (): Dimension | null => {
+  public getDimensionsFromProps = (): Dimension | null => {
     const { width, height } = this.props;
 
     return typeof width == 'number' && typeof height == 'number'
@@ -51,7 +51,7 @@ class Image extends PureComponent<Props> {
       : null;
   };
 
-  getDimensionsFromStyles = (): Dimension | null => {
+  public getDimensionsFromStyles = (): Dimension | null => {
     const width = this.getValueFromStyleProp('width');
     const height = this.getValueFromStyleProp('height');
 
@@ -63,25 +63,25 @@ class Image extends PureComponent<Props> {
       : null;
   };
 
-  getStaticDimensions = (): Dimension | null =>
+  public getStaticDimensions = (): Dimension | null =>
     this.getDimensionsFromProps() || this.getDimensionsFromStyles();
 
-  getRatioString = ({ width, height }: Dimension) => `${width}:${height}`;
+  public getRatioString = ({ width, height }: Dimension) => `${width}:${height}`;
 
-  getRatio = () => {
+  public getRatio = () => {
     const dir = this.getStaticDimensions();
     if (dir) {
       return this.getRatioString(dir);
     }
   };
 
-  getSource = (): ImageSourcePropType => {
+  public getSource = (): ImageSourcePropType => {
     const { src, source } = this.props;
 
     return source ? source : { uri: src };
   };
 
-  render() {
+  public render() {
     const { style, alt, resizeMode, ...rest } = this.props;
 
     return (

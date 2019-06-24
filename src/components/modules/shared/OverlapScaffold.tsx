@@ -1,18 +1,18 @@
 // @flow
 
-import React, { PureComponent, ReactNode, ReactElement } from 'react';
+import React, { PureComponent, ReactElement, ReactNode } from 'react';
 import { View } from 'react-native';
 import { Container } from '../../primitives';
 
-type Props = {
+interface Props {
   overlap: number;
   containerPadding: number;
   titleOverlap?: boolean;
   titleWidth?: number;
   isDesktop?: boolean;
-};
+}
 class OverlapScaffold extends PureComponent<Props> {
-  static defaultProps = {
+  public static defaultProps = {
     overlap: 0,
     containerPadding: 0,
     titleOverlap: false,
@@ -20,11 +20,11 @@ class OverlapScaffold extends PureComponent<Props> {
     isDesktop: false,
   };
 
-  static Main = ({ children }: { children: JSX.Element }) => children;
-  static Overlap = ({ children }: { children: JSX.Element }) => children;
+  public static Main = ({ children }: { children: JSX.Element }) => children;
+  public static Overlap = ({ children }: { children: JSX.Element }) => children;
 
   // XXX this function is funky
-  getScaffoldContentByType = (type: any) => {
+  public getScaffoldContentByType = (type: any) => {
     const ScaffoldChild = React.Children.toArray(this.props.children).find(
       child => !!child && typeof child === 'object' && (child as ReactElement).type === type
     );
@@ -36,7 +36,7 @@ class OverlapScaffold extends PureComponent<Props> {
     return React.Children.toArray((ScaffoldChild as ReactElement).props.children)[0];
   };
 
-  getMainPost = () => {
+  public getMainPost = () => {
     const MainPost = this.getScaffoldContentByType(OverlapScaffold.Main);
     return React.cloneElement(MainPost, {
       bottomOverlap: this.props.overlap,
@@ -45,7 +45,7 @@ class OverlapScaffold extends PureComponent<Props> {
     });
   };
 
-  render() {
+  public render() {
     const { overlap, containerPadding, titleOverlap, titleWidth, isDesktop } = this.props;
 
     return (

@@ -1,6 +1,6 @@
 // @flow
 
-import React, { PureComponent, createContext, ReactNode } from 'react';
+import React, { createContext, PureComponent, ReactNode } from 'react';
 import { Dimensions, ScaledSize } from 'react-native';
 
 const { Provider, Consumer } = createContext<ResponsiveChildProps>({
@@ -12,17 +12,17 @@ const { Provider, Consumer } = createContext<ResponsiveChildProps>({
 
 type Coordinate = [number, number];
 type GetSlope = [Coordinate, Coordinate];
-type Slope = { slope: number };
+interface Slope { slope: number }
 type GetIntercept = { point: Coordinate } & Slope;
-type FluidSizeType = {
+interface FluidSizeType {
   min: number;
   max: number;
   lockMin?: number;
   lockMax?: number;
-};
-type Props = {
+}
+interface Props {
   children: ReactNode;
-};
+}
 
 interface ResponsiveChildProps {
   width: number;
@@ -32,26 +32,26 @@ interface ResponsiveChildProps {
 }
 
 export class ResponsiveProvider extends PureComponent<Props, ScaledSize> {
-  state: ScaledSize = Dimensions.get('window');
+  public state: ScaledSize = Dimensions.get('window');
 
-  componentWillMount() {
+  public componentWillMount() {
     Dimensions.addEventListener('change', this.handler);
   }
 
-  componentWillUnmount() {
+  public componentWillUnmount() {
     Dimensions.removeEventListener('change', this.handler);
   }
 
-  handler = ({ window: windowDims }: { window: ScaledSize }) => {
+  public handler = ({ window: windowDims }: { window: ScaledSize }) => {
     return this.setState(windowDims);
   };
 
-  minWidth = (breakpoint: number) => breakpoint <= this.state.width;
-  maxWidth = (breakpoint: number) => breakpoint > this.state.width;
+  public minWidth = (breakpoint: number) => breakpoint <= this.state.width;
+  public maxWidth = (breakpoint: number) => breakpoint > this.state.width;
 
-  getSlope = ([[x1, y1], [x2, y2]]: GetSlope) => (y2 - y1) / (x2 - x1);
-  getIntercept = ({ point: [x, y], slope }: GetIntercept) => y - slope * x;
-  makeLockFunc = () => {
+  public getSlope = ([[x1, y1], [x2, y2]]: GetSlope) => (y2 - y1) / (x2 - x1);
+  public getIntercept = ({ point: [x, y], slope }: GetIntercept) => y - slope * x;
+  public makeLockFunc = () => {
     const { width } = this.state;
 
     return ({ min: y1, max: y2, lockMin: x1 = 400, lockMax: x2 = 1000 }: FluidSizeType) => {
@@ -62,7 +62,7 @@ export class ResponsiveProvider extends PureComponent<Props, ScaledSize> {
     };
   };
 
-  render() {
+  public render() {
     const { width, height } = this.state;
 
     return (

@@ -1,6 +1,6 @@
+import { View } from '@/components/primitives';
 import React from 'react';
 import { StyleSheet } from 'react-native';
-import { View } from '@/components/primitives';
 
 import { HOME_LINK } from '@/constants';
 

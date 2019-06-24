@@ -2,22 +2,22 @@
 
 import React, { PureComponent } from 'react';
 
-import { Platform, StatusBar, KeyboardAvoidingView, StyleSheet, SafeAreaView } from 'react-native';
+import { KeyboardAvoidingView, Platform, SafeAreaView, StatusBar, StyleSheet } from 'react-native';
 
 import { ResponsiveProvider } from '@/components/utils';
 import { COLOR_MAP } from '@/constants/index';
 
-type Props = {
+interface Props {
   children: React.ReactElement[];
-};
+}
 class AppWrap extends PureComponent<Props> {
-  render() {
+  public render() {
     return (
       <ResponsiveProvider>
         <SafeAreaView style={styles.root}>
-          <StatusBar backgroundColor={'black'} barStyle='light-content' />
+          <StatusBar backgroundColor={'black'} barStyle="light-content" />
 
-          <KeyboardAvoidingView style={styles.keyboardAvoidWrap} behavior='padding'>
+          <KeyboardAvoidingView style={styles.keyboardAvoidWrap} behavior="padding">
             {this.props.children}
           </KeyboardAvoidingView>
         </SafeAreaView>

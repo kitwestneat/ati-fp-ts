@@ -68,7 +68,7 @@ class SortableFlatList extends Component {
         const tappedRow = this._pixels[
           Math.floor(this._scrollOffset + tappedPixel)
         ];
-        if (tappedRow === undefined) return false;
+        if (tappedRow === undefined) { return false; }
         this._additionalOffset =
           tappedPixel +
           this._scrollOffset -
@@ -133,7 +133,7 @@ class SortableFlatList extends Component {
         const activeMeasurements = this._measurements[activeRow];
         const spacerMeasurements = this._measurements[spacerIndex];
         const lastElementMeasurements = this._measurements[data.length - 1];
-        if (activeRow === -1) return;
+        if (activeRow === -1) { return; }
         // If user flings row up and lets go in the middle of an animation measurements can error out.
         // Give layout animations some time to complete and animate element into place before calling onMoveEnd
 
@@ -145,7 +145,7 @@ class SortableFlatList extends Component {
         const spacerElement = isLastElement
           ? lastElementMeasurements
           : spacerMeasurements;
-        if (!spacerElement) return;
+        if (!spacerElement) { return; }
         const { x, y, width, height } = spacerElement;
         const size = horizontal ? width : height;
         const offset = horizontal ? x : y;
@@ -158,7 +158,7 @@ class SortableFlatList extends Component {
           ? activeMeasurements.width
           : activeMeasurements.height;
         this._releaseVal = pos - (isAfterActive ? activeItemSize : 0);
-        if (this._releaseAnim) this._releaseAnim.stop();
+        if (this._releaseAnim) { this._releaseAnim.stop(); }
         this._releaseAnim = Animated.spring(this._moveAnim, {
           toValue: this._releaseVal,
           stiffness: 5000,
@@ -197,15 +197,15 @@ class SortableFlatList extends Component {
   };
 
   getSortedList = (data, activeRow, spacerIndex) => {
-    if (activeRow === spacerIndex) return data;
+    if (activeRow === spacerIndex) { return data; }
     const sortedData = data.reduce((acc, cur, i, arr) => {
-      if (i === activeRow) return acc;
+      if (i === activeRow) { return acc; }
       else if (i === spacerIndex) {
         acc = [...acc, arr[activeRow], cur];
-      } else acc.push(cur);
+      } else { acc.push(cur); }
       return acc;
     }, []);
-    if (spacerIndex >= data.length) sortedData.push(data[activeRow]);
+    if (spacerIndex >= data.length) { sortedData.push(data[activeRow]); }
     return sortedData;
   };
 
@@ -213,13 +213,13 @@ class SortableFlatList extends Component {
     const { activeRow } = this.state;
     const { scrollPercent, data, scrollSpeed } = this.props;
     const scrollRatio = scrollPercent / 100;
-    if (activeRow === -1) return;
+    if (activeRow === -1) { return; }
     const nextSpacerIndex = this.getSpacerIndex(this._move, activeRow);
     if (nextSpacerIndex > -1 && nextSpacerIndex !== this._spacerIndex) {
       LayoutAnimation.configureNext(layoutAnimConfig);
       this.setState({ spacerIndex: nextSpacerIndex });
       this._spacerIndex = nextSpacerIndex;
-      if (nextSpacerIndex === data.length) this._flatList.scrollToEnd();
+      if (nextSpacerIndex === data.length) { this._flatList.scrollToEnd(); }
     }
 
     // Scroll if hovering in top or bottom of container and have set a scroll %
@@ -232,17 +232,18 @@ class SortableFlatList extends Component {
         !isFirstItem && fingerPosition < this._containerSize * scrollRatio;
       const shouldScrollDown =
         !isLastItem && fingerPosition > this._containerSize * (1 - scrollRatio);
-      if (shouldScrollUp) this.scroll(-scrollSpeed, nextSpacerIndex);
-      else if (shouldScrollDown) this.scroll(scrollSpeed, nextSpacerIndex);
+      if (shouldScrollUp) { this.scroll(-scrollSpeed, nextSpacerIndex); }
+      else if (shouldScrollDown) { this.scroll(scrollSpeed, nextSpacerIndex); }
     }
 
     requestAnimationFrame(this.animate);
   };
 
   scroll = (scrollAmt, spacerIndex) => {
-    if (spacerIndex >= this.props.data.length)
+    if (spacerIndex >= this.props.data.length) {
       return this._flatList.scrollToEnd();
-    if (spacerIndex === -1) return;
+    }
+    if (spacerIndex === -1) { return; }
     const currentScrollOffset = this._scrollOffset;
     const newOffset = currentScrollOffset + scrollAmt;
     const offset = Math.max(0, newOffset);
@@ -251,7 +252,7 @@ class SortableFlatList extends Component {
 
   getSpacerIndex = (move, activeRow) => {
     const { horizontal } = this.props;
-    if (activeRow === -1 || !this._measurements[activeRow]) return -1;
+    if (activeRow === -1 || !this._measurements[activeRow]) { return -1; }
     // Find the row that contains the midpoint of the hovering item
     const hoverItemSize = this._measurements[activeRow][
       horizontal ? "width" : "height"
@@ -325,7 +326,7 @@ class SortableFlatList extends Component {
   };
 
   moveEnd = () => {
-    if (!this._hasMoved) this.setState(initialState);
+    if (!this._hasMoved) { this.setState(initialState); }
   };
 
   setRef = index => ref => {
@@ -488,9 +489,10 @@ class RowItem extends React.PureComponent {
       moveEnd,
     });
     let wrapperStyle = { opacity: 1 };
-    if (horizontal && isActiveRow) wrapperStyle = { width: 0, opacity: 0 };
-    else if (!horizontal && isActiveRow)
+    if (horizontal && isActiveRow) { wrapperStyle = { width: 0, opacity: 0 }; }
+    else if (!horizontal && isActiveRow) {
       wrapperStyle = { height: 0, opacity: 0 };
+ }
 
     // Rendering the final row requires padding to be applied at the bottom
     return (

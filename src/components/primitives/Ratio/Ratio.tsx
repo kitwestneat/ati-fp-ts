@@ -1,7 +1,7 @@
 // @flow
 
 import React, { PureComponent, ReactElement } from 'react';
-import { View, StyleSheet } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 
 /**
  * To Do
@@ -11,36 +11,36 @@ import { View, StyleSheet } from 'react-native';
  * expand API?
  */
 
-type Props = {
+interface Props {
   ratio: string;
   children?: React.ReactNode;
-};
+}
 
 const FB_RATIO = '1.88:1';
 
 class Ratio extends PureComponent<Props> {
-  static defaultProps = {
+  public static defaultProps = {
     ratio: FB_RATIO,
     children: <View style={{ backgroundColor: '#ebebeb' }} />
   };
 
-  getRatioPercentageFromRatioString = () => {
+  public getRatioPercentageFromRatioString = () => {
     const { width, height } = this.getDimensionsFromRatio();
     return (height / width) * 100 + '%';
   };
 
-  getDimensionsFromRatio = () => {
+  public getDimensionsFromRatio = () => {
     const { ratio } = this.props;
     const [width, height] = ratio.split(':').map(Number);
 
     return { width, height };
   };
 
-  getPaddingBottom = () => ({
+  public getPaddingBottom = () => ({
     paddingBottom: this.getRatioPercentageFromRatioString()
   });
 
-  renderChild = () => {
+  public renderChild = () => {
     const { children } = this.props;
 
     return children
@@ -52,7 +52,7 @@ class Ratio extends PureComponent<Props> {
       : null;
   };
 
-  render() {
+  public render() {
     return (
       <View style={{ width: '100%' }}>
         <View style={[styles.wrap, this.getPaddingBottom()]}>{this.renderChild()}</View>

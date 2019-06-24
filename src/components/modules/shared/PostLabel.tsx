@@ -5,14 +5,14 @@ import { View } from 'react-native';
 
 import { Text } from '../../primitives';
 
-type Props = {
+interface Props {
   fill?: boolean;
   categoryName: string;
   categoryColor: string;
-};
+}
 
 class PostLabel extends PureComponent<Props> {
-  render() {
+  public render() {
     const { fill, categoryColor, categoryName } = this.props;
 
     return fill ? (

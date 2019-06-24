@@ -1,6 +1,6 @@
-import PostGrid from '../shared/PostGrid';
 import { PostType } from '@/types';
 import React, { PureComponent } from 'react';
+import PostGrid from '../shared/PostGrid';
 
 interface Props {
   posts: PostType[];

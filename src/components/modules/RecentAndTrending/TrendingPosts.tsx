@@ -1,20 +1,20 @@
-import React, { PureComponent } from 'react';
-import { StyleSheet, View, Text } from 'react-native';
+import TrendingLine from '@/assets/images/trending-line.svg';
 import { ModuleBox, Pattern } from '@/components/modules';
 import { Image } from '@/components/primitives';
 import { Capitalize } from '@/components/utils';
 import { COLOR_MAP } from '@/constants';
+import React, { PureComponent } from 'react';
+import { StyleSheet, Text, View } from 'react-native';
 import { TrendingPostsGridDesktop, TrendingPostsGridMobile } from './TrendingPostsGrid';
-import TrendingLine from '@/assets/images/trending-line.svg';
 
-type Props = {
+interface Props {
     isDesktop: boolean;
     tag: string;
     trendingPosts: any;
 }
 
 export default class TrendingPosts extends PureComponent<Props> {
-    renderDesktop = () => {
+    public renderDesktop = () => {
         const { isDesktop, tag, trendingPosts } = this.props;
 
         const localFontStyles = isDesktop
@@ -26,10 +26,10 @@ export default class TrendingPosts extends PureComponent<Props> {
                 <Text style={[styles.headerText, localFontStyles]}>Trending in {Capitalize(tag)}</Text>
                 <TrendingPostsGridDesktop posts={trendingPosts} />
             </View>
-        )
+        );
     }
 
-    renderMobile = () => {
+    public renderMobile = () => {
         const { tag, trendingPosts } = this.props;
         return (
             <View style={styles.trendingMobileContainer}>
@@ -49,10 +49,10 @@ export default class TrendingPosts extends PureComponent<Props> {
                     </ModuleBox>
                 </View>
             </View>
-        )
+        );
     }
 
-    render() {
+    public render() {
         const { isDesktop } = this.props;
         return isDesktop ? this.renderDesktop() : this.renderMobile();
     }
@@ -88,4 +88,4 @@ const styles = StyleSheet.create({
         color: 'white',
         fontWeight: '600'
     }
-})
+});

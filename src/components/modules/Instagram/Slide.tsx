@@ -1,8 +1,8 @@
 // @flow
 
+import { Image, Text, View } from '@/components/primitives';
 import React, { PureComponent } from 'react';
 import { StyleSheet } from 'react-native';
-import { Text, Image, View } from '@/components/primitives';
 
 const SLIDE_SIZE = 306;
 const TEXTBOX_PADDING = {
@@ -22,15 +22,15 @@ const FONT = {
   }
 };
 
-type Props = {
+interface Props {
   imageSrc: string;
   title: string;
   link: string;
   isDesktop: boolean;
-};
+}
 
 class InstagramSlide extends PureComponent<Props> {
-  render() {
+  public render() {
     const { imageSrc, title, link, isDesktop } = this.props;
 
     const fontStyles = isDesktop

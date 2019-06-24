@@ -1,6 +1,6 @@
-import React, { PureComponent } from 'react';
-import { View, StyleSheet } from 'react-native';
 import { HEADER_HEIGHT } from '@/constants';
+import React, { PureComponent } from 'react';
+import { StyleSheet, View } from 'react-native';
 
 interface Props {
   renderRight: () => JSX.Element;
@@ -9,7 +9,7 @@ interface Props {
 }
 
 export default class NavBar extends PureComponent<Props> {
-  render() {
+  public render() {
     const { renderRight, renderCenter, renderLeft } = this.props;
     return (
       <View style={[styles.wrap]}>

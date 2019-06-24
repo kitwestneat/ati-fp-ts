@@ -1,11 +1,11 @@
 // @flow
 
 import React, { PureComponent } from 'react';
-import { Text as RNText, StyleSheet, TextProps } from 'react-native';
+import { StyleSheet, Text as RNText, TextProps } from 'react-native';
 import Clamp from './Clamp';
 
-import { FONT_FAMILIES, COLOR_MAP } from '@/constants/index';
-import { WebAccessibilityProps, Omit } from '@/types';
+import { COLOR_MAP, FONT_FAMILIES } from '@/constants/index';
+import { Omit, WebAccessibilityProps } from '@/types';
 import HtmlText from '../HtmlText/HtmlText';
 
 type WebTextProps = Omit<TextProps, 'accessibilityRole'> & WebAccessibilityProps;
@@ -18,13 +18,13 @@ interface Props extends WebTextProps {
 }
 
 class Text extends PureComponent<Props> {
-  static defaultProps = {
+  public static defaultProps = {
     style: {},
     serif: false,
     sansSerif: true
   };
 
-  render() {
+  public render() {
     const { html, numberOfLines, serif, sansSerif, style, children, ...rest } = this.props;
     const fontFamily = this.props.serif ? FONT_FAMILIES.SERIF : FONT_FAMILIES.SANS_SERIF;
 

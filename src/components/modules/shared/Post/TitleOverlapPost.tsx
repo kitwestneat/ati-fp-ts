@@ -3,8 +3,8 @@
 import React, { PureComponent } from 'react';
 import { StyleSheet } from 'react-native';
 
-import { Text, View } from '@/components/primitives';
 import { PostImage, PostLabel } from '@/components/modules';
+import { Text, View } from '@/components/primitives';
 import { WebAccessibilityProps, WebViewStyle } from '@/types';
 import { PostType } from '@/types';
 
@@ -29,14 +29,14 @@ export interface TitleOverlapPostProps extends PostType {
 }
 
 class TitleOverlapPost extends PureComponent<TitleOverlapPostProps> {
-  static defaultProps = {
+  public static defaultProps = {
     center: false,
     isDesktop: false,
     bottomOverlap: 0,
     marginTop: -45,
   };
 
-  render() {
+  public render() {
     const {
       numberOfLines,
       fontStyles,
@@ -62,7 +62,7 @@ class TitleOverlapPost extends PureComponent<TitleOverlapPostProps> {
     const linkProps: WebAccessibilityProps = link ? { accessibilityRole: 'link', href: link } : {};
 
     return (
-      <View {...linkProps} style={{ marginTop: marginTop}}>
+      <View {...linkProps} style={{ marginTop}}>
         <PostImage contrastOverlay width={imageWidth} height={imageHeight} imageSrc={imageSrc} />
 
         <View

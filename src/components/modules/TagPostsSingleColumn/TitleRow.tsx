@@ -3,22 +3,22 @@
 import React, { PureComponent } from 'react';
 import { StyleSheet } from 'react-native';
 
-import { ModuleTitle } from '@/components/modules';
 import { Leaderboard, MobileMrec } from '@/components/ads';
+import { ModuleTitle } from '@/components/modules';
 
 import { Row, View } from '@/components/primitives';
 
 import { SECTION_SPACERS, SECTION_SPACING_VARIANTS } from '@/constants';
 
-type Props = {
+interface Props {
   patternColor: string;
   title: string;
   link: string;
   isDesktop: boolean;
-};
+}
 
 class TitleRow extends PureComponent<Props> {
-  renderMobile = () => {
+  public renderMobile = () => {
     return (
       <>
         <Row style={{ alignItems: 'center' }}>
@@ -36,7 +36,7 @@ class TitleRow extends PureComponent<Props> {
       </>
     );
   };
-  renderDesktop = () => {
+  public renderDesktop = () => {
     return (
       <View style={styles.titleRow}>
         <View style={styles.titleWrap}>{this.renderTitle()}</View>
@@ -48,7 +48,7 @@ class TitleRow extends PureComponent<Props> {
     );
   };
 
-  renderTitle = () => {
+  public renderTitle = () => {
     const { link, title, patternColor } = this.props;
     // XXX should moduletitle get isDesktop?
     return (
@@ -61,7 +61,7 @@ class TitleRow extends PureComponent<Props> {
       </View>
     );
   };
-  render() {
+  public render() {
     const { isDesktop } = this.props;
     return isDesktop ? this.renderDesktop() : this.renderMobile();
   }

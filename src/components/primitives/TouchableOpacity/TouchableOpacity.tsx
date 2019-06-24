@@ -1,17 +1,17 @@
-import {
-  TouchableOpacity as RNTouchableOpacity,
-  TouchableOpacityProps,
-  StyleProp
-} from 'react-native';
-import React, { PureComponent, ComponentType } from 'react';
 import { Omit, WebViewStyle } from '@/types';
+import React, { ComponentType, PureComponent } from 'react';
+import {
+  StyleProp,
+  TouchableOpacity as RNTouchableOpacity,
+  TouchableOpacityProps
+} from 'react-native';
 
 interface Props extends Omit<TouchableOpacityProps, 'style'> {
   style?: StyleProp<WebViewStyle>;
 }
 
 export default class TouchableOpacity extends PureComponent<Props> {
-  render() {
+  public render() {
     const RNWTouchableOpacity = (RNTouchableOpacity as any) as ComponentType<Props>;
 
     return <RNWTouchableOpacity {...this.props} />;

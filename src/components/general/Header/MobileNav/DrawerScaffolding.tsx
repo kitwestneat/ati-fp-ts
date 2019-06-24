@@ -1,19 +1,19 @@
 // @flow
 
 import React, { PureComponent } from 'react';
-import { StyleSheet, Animated } from 'react-native';
+import { Animated, StyleSheet } from 'react-native';
 
-import { HEADER_HEIGHT, elevation } from '@/constants';
+import { elevation, HEADER_HEIGHT } from '@/constants';
 
-type Props = {
+interface Props {
   isDrawerOpen: boolean;
   toggleDrawer: any;
   drawerAnimation: any;
   children: any;
-};
+}
 
 class NavDrawer extends PureComponent<Props> {
-  render() {
+  public render() {
     const { isDrawerOpen, toggleDrawer, drawerAnimation, children } = this.props;
 
     const drawerPosition = drawerAnimation.interpolate({

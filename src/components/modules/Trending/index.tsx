@@ -3,8 +3,8 @@
 import React, { PureComponent } from 'react';
 import { View } from 'react-native';
 
-import { Container } from '@/components/primitives';
 import { ModuleBox } from '@/components/modules';
+import { Container } from '@/components/primitives';
 
 import PostList from './PostList';
 import PostGrid from './TrendingPostGrid';
@@ -16,15 +16,15 @@ import { Responsive } from '@/components/utils';
 import { BREAKPOINTS } from '@/constants/index';
 import { PostType } from '@/types';
 
-type Props = {
+interface Props {
   posts: PostType[];
   sectionColor: string;
   sectionLink: string;
   sectionTitle: string;
-};
+}
 
 class Trending extends PureComponent<Props> {
-  renderMobile = (titleSquare: JSX.Element) => {
+  public renderMobile = (titleSquare: JSX.Element) => {
     const { posts } = this.props;
     return (
       <Container
@@ -50,7 +50,7 @@ class Trending extends PureComponent<Props> {
       </Container>
     );
   };
-  renderDesktop = (titleSquare: JSX.Element) => {
+  public renderDesktop = (titleSquare: JSX.Element) => {
     const { posts } = this.props;
     return (
       <Container type="content">
@@ -69,7 +69,7 @@ class Trending extends PureComponent<Props> {
       </Container>
     );
   };
-  render() {
+  public render() {
     const { sectionColor, sectionLink, sectionTitle } = this.props;
 
     const titleSquare = (

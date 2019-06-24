@@ -1,15 +1,15 @@
 import React from 'react';
-import { View, StyleSheet } from 'react-native';
 import { IconType } from 'react-icons/lib/cjs/iconBase';
+import { StyleSheet, View } from 'react-native';
 
 import { Text } from '@/components/primitives';
 
 interface Props {
-  links: {
+  links: Array<{
     text: string;
     href: string;
     iconComponent: IconType;
-  }[];
+  }>;
 }
 
 const SocialLinks = ({ links }: Props) => {

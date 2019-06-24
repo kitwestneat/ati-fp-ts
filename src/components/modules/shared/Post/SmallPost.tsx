@@ -4,7 +4,7 @@ import React, { PureComponent } from 'react';
 import { StyleSheet } from 'react-native';
 
 import { PostLabel } from '@/components/modules';
-import { Text, View, Image } from '@/components/primitives';
+import { Image, Text, View } from '@/components/primitives';
 import { PostType, WebAccessibilityProps } from '@/types';
 
 export interface SmallPostProps extends Partial<PostType> {
@@ -15,12 +15,12 @@ export interface SmallPostProps extends Partial<PostType> {
 }
 
 class SmallPost extends PureComponent<SmallPostProps> {
-  static defaultProps = {
+  public static defaultProps = {
     style: {},
     showImage: false,
   };
 
-  render() {
+  public render() {
     const { numberOfLines, title, categoryName, categoryColor, link, imageSrc, showImage, isDesktop } = this.props;
 
     const fontStyles = isDesktop

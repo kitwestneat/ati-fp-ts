@@ -1,18 +1,18 @@
-import React, { PureComponent, ReactNode } from 'react';
-import { View, StyleSheet } from 'react-native';
 import { Text } from '@/components/primitives';
+import React, { PureComponent, ReactNode } from 'react';
+import { StyleSheet, View } from 'react-native';
 import DrawerScaffolding from './DrawerScaffolding';
 
-import { TAG_LINKS, SOCIAL_LINKS_STANDARD, BUG_REPORT_STRING } from '@/constants';
+import { BUG_REPORT_STRING, SOCIAL_LINKS_STANDARD, TAG_LINKS } from '@/constants';
 
-type Props = {
+interface Props {
   isDrawerOpen: boolean;
   toggleDrawer: any;
   drawerAnimation: any;
-};
+}
 
 export default class DrawerContents extends PureComponent<Props> {
-  render() {
+  public render() {
     const { isDrawerOpen, toggleDrawer, drawerAnimation } = this.props;
 
     return (
@@ -26,7 +26,7 @@ export default class DrawerContents extends PureComponent<Props> {
             <LinkGroup>
               {TAG_LINKS.map(({ type, href, text }) => (
                 <View key={type} style={styles.linkItem}>
-                  <Text style={styles.tagText} accessibilityRole='link' href={href}>
+                  <Text style={styles.tagText} accessibilityRole="link" href={href}>
                     {text}
                   </Text>
                 </View>
@@ -41,7 +41,7 @@ export default class DrawerContents extends PureComponent<Props> {
                   <View style={styles.icon}>
                     <SocialIcon size={21} />
                   </View>
-                  <Text style={styles.tagText} accessibilityRole='link' href={href}>
+                  <Text style={styles.tagText} accessibilityRole="link" href={href}>
                     {text}
                   </Text>
                 </View>
@@ -91,7 +91,7 @@ const LinkGroup = ({ children }: { children: ReactNode }) => (
 
 const AdReportLink = () => (
   <View style={styles.linkItem}>
-    <Text style={styles.tagText} accessibilityRole='link' href='/report-bad-ad'>
+    <Text style={styles.tagText} accessibilityRole="link" href="/report-bad-ad">
       {BUG_REPORT_STRING}
     </Text>
   </View>

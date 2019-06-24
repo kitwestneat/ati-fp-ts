@@ -1,21 +1,21 @@
 // @flow
 
 import React, { PureComponent } from 'react';
-import { View, StyleSheet } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 
 import { Responsive } from '@/components/utils';
 
-import MobileNav from './MobileNav/MobileNav';
 import DesktopNav from './DesktopNav/DesktopNav';
+import MobileNav from './MobileNav/MobileNav';
 
 import { BREAKPOINTS } from '@/constants';
 
 const HEADER_Z_INDEX = 999;
 
-type Props = {};
+interface Props {}
 
 class Header extends PureComponent<Props> {
-  render() {
+  public render() {
     return (
       <Responsive>
         {({ minWidth }) => {

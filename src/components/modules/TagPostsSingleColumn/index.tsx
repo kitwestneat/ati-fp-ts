@@ -2,18 +2,18 @@
 
 import React, { PureComponent } from 'react';
 
+import { ModuleBox, OverlapScaffold, Post } from '@/components/modules';
 import { Container, Row } from '@/components/primitives';
-import { Post, ModuleBox, OverlapScaffold } from '@/components/modules';
 import { Responsive } from '@/components/utils';
 import { BREAKPOINTS, CONTAINER_PADDING } from '@/constants/index';
 
-import TitleRow from './TitleRow';
-import PostList from './PostList';
+import { GridOrder, OFFSET_DIRECTION, PostType } from '@/types';
 import PostGrid from '../shared/PostGrid';
-import { OFFSET_DIRECTION, PostType, GridOrder } from '@/types';
+import PostList from './PostList';
 import SingleColumnGrid from './SingleColumnGrid';
+import TitleRow from './TitleRow';
 
-type Props = {
+interface Props {
   reverse?: boolean;
   sectionTitle: string;
   sectionLink: string;
@@ -23,10 +23,10 @@ type Props = {
 
   // XXX deprecated
   order: GridOrder;
-};
+}
 
 class TagPostsSingleColumn extends PureComponent<Props> {
-  scaffoldProps = (isDesktop: boolean) =>
+  public scaffoldProps = (isDesktop: boolean) =>
     isDesktop
       ? {
           containerPadding: 45,
@@ -37,7 +37,7 @@ class TagPostsSingleColumn extends PureComponent<Props> {
           overlap: 15
         };
 
-  MainPostImageProps = (isDesktop: boolean) =>
+  public MainPostImageProps = (isDesktop: boolean) =>
     isDesktop
       ? {
           imageWidth: 1200,
@@ -47,7 +47,7 @@ class TagPostsSingleColumn extends PureComponent<Props> {
           imageWidth: 375,
           imageHeight: 250
         };
-  render() {
+  public render() {
     const {
       sectionTitle,
       sectionLink,

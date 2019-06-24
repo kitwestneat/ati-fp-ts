@@ -1,12 +1,12 @@
-import React, { PureComponent } from 'react';
-import { StyleSheet, View } from 'react-native';
 import { ModuleBox } from '@/components/modules';
 import { Container } from '@/components/primitives';
 import { Responsive } from '@/components/utils';
 import { BREAKPOINTS } from '@/constants';
-import { SplitTagBoxData, PostType, OFFSET_DIRECTION } from '@/types';
-import TitleRow from '../TagPostsSingleColumn/TitleRow';
+import { OFFSET_DIRECTION, PostType, SplitTagBoxData } from '@/types';
+import React, { PureComponent } from 'react';
+import { StyleSheet, View } from 'react-native';
 import PostList from '../TagPostsSingleColumn/PostList';
+import TitleRow from '../TagPostsSingleColumn/TitleRow';
 import SplitTagGrid from './SplitTagGrid';
 
 interface Props extends SplitTagBoxData {
@@ -17,29 +17,29 @@ interface Props extends SplitTagBoxData {
   posts: PostType[];
 }
 
-type State = {
+interface State {
   height: number;
-};
+}
 
 export default class SplitTagBox extends PureComponent<Props, State> {
-  static defaultProps = {
+  public static defaultProps = {
     split: 'left'
   };
 
-  state = {
+  public state = {
     height: 0
   };
 
   // The two ModuleBoxes share a parent container.
   // Use the height of the parent to determine the height of the ModuleBoxes.
-  getHeight = (e: any) => {
+  public getHeight = (e: any) => {
     const h = e.nativeEvent.layout.height;
     this.setState({
       height: h
     });
   };
 
-  renderModule = (isDesktop: any) => {
+  public renderModule = (isDesktop: any) => {
     const { sectionTitle, sectionLink, sectionColor, split, posts } = this.props;
     const { height } = this.state;
     if (posts.length < 5) {
@@ -64,7 +64,7 @@ export default class SplitTagBox extends PureComponent<Props, State> {
               isDesktop={isDesktop}
             />
             {isDesktop ? (
-              <View style={[styles.parentContainer, { flexDirection: flexDirection }]}>
+              <View style={[styles.parentContainer, { flexDirection }]}>
                 <View style={styles.twoPostsBox} onLayout={this.getHeight}>
                   <ModuleBox
                     style={{ height: twoPostsBoxHeight }}
@@ -97,7 +97,7 @@ export default class SplitTagBox extends PureComponent<Props, State> {
     );
   };
 
-  render() {
+  public render() {
     return (
       <Responsive>
         {({ minWidth }) => {

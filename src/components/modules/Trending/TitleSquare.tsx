@@ -1,25 +1,25 @@
 // @flow
 
 import React, { PureComponent } from 'react';
-import { View, StyleSheet, Image } from 'react-native';
+import { Image, StyleSheet, View } from 'react-native';
 
-import { Pattern } from '@/components/modules';
-import { Ratio, Text, Row } from '@/components/primitives';
 import TrendingLine from '@/assets/images/trending-line.svg';
+import { Pattern } from '@/components/modules';
+import { Ratio, Row, Text } from '@/components/primitives';
 
-type Props = {
+interface Props {
   patternColor: string;
   title: string;
   sectionLink: string;
-};
+}
 
-type LinkProps = {
+interface LinkProps {
   accessibilityRole?: 'link';
   href?: string;
-};
+}
 
 class TitleSquare extends PureComponent<Props> {
-  render() {
+  public render() {
     const { patternColor, sectionLink, title } = this.props;
     const linkProps: LinkProps = sectionLink
       ? { accessibilityRole: 'link', href: sectionLink }
@@ -28,7 +28,7 @@ class TitleSquare extends PureComponent<Props> {
     return (
       <View {...linkProps}>
         <Pattern color={patternColor}>
-          <Ratio ratio='1:1'>
+          <Ratio ratio="1:1">
             <View style={[styles.colorBackground, { padding: 30, backgroundColor: patternColor }]}>
               <Row>
                 <Image style={{ width: 45, height: 27 }} source={{ uri: TrendingLine }} />

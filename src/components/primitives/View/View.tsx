@@ -1,8 +1,8 @@
 // @flow
 
-import React, { PureComponent, ComponentType } from 'react';
-import { View as RNView, StyleProp, ViewProps } from 'react-native';
-import { WebAccessibilityProps, WebViewStyle, Omit } from '@/types';
+import { Omit, WebAccessibilityProps, WebViewStyle } from '@/types';
+import React, { ComponentType, PureComponent } from 'react';
+import { StyleProp, View as RNView, ViewProps } from 'react-native';
 
 type WebViewProps = Omit<ViewProps, 'style' | 'accessibilityRole'> & WebAccessibilityProps;
 
@@ -14,30 +14,30 @@ interface Props extends WebViewProps {
 }
 
 class View extends PureComponent<Props> {
-  static defaultProps = {
+  public static defaultProps = {
     row: false,
     col: true,
     style: {}
   };
 
-  getFlexDirection = (): WebViewStyle => {
+  public getFlexDirection = (): WebViewStyle => {
     const { row, col } = this.props;
     return { flexDirection: col && !row ? 'column' : 'row' };
   };
 
-  getMarginTop = (): WebViewStyle => {
+  public getMarginTop = (): WebViewStyle => {
     const { spacer } = this.props;
     return { marginTop: spacer };
   };
 
-  getDerivedStyles = (): StyleProp<WebViewStyle> => {
+  public getDerivedStyles = (): StyleProp<WebViewStyle> => {
     return {
       ...this.getFlexDirection(),
       ...this.getMarginTop()
     };
   };
 
-  render() {
+  public render() {
     const { style, spacer, children, ...rest } = this.props;
     const derivedStyles = this.getDerivedStyles();
     const RNWView = (RNView as any) as ComponentType<Props>;

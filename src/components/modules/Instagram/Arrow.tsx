@@ -1,7 +1,7 @@
-import React, { PureComponent } from 'react';
-import { StyleSheet } from 'react-native';
-import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 import { TouchableOpacity } from '@/components/primitives';
+import React, { PureComponent } from 'react';
+import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
+import { StyleSheet } from 'react-native';
 
 // see CarouselSlideRenderControlProps
 interface Props {
@@ -13,7 +13,7 @@ interface Props {
 }
 
 export default class Arrow extends PureComponent<Props> {
-  render() {
+  public render() {
     const { dir, currentSlide, previousSlide, nextSlide, slideCount } = this.props;
 
     const isPrev = dir === 'prev';

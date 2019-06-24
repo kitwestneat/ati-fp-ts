@@ -1,8 +1,8 @@
-import React, { PureComponent } from 'react';
 import { Container } from '@/components/primitives';
 import { Responsive } from '@/components/utils';
 import { BREAKPOINTS } from '@/constants';
-import { TagTileBoxModuleData, PostType, GridOrder } from '@/types';
+import { GridOrder, PostType, TagTileBoxModuleData } from '@/types';
+import React, { PureComponent } from 'react';
 import RecentPosts from './RecentPosts';
 import TrendingPosts from './TrendingPosts';
 
@@ -17,7 +17,7 @@ interface Props extends TagTileBoxModuleData {
 }
 
 export default class RecentAndTrending extends PureComponent<Props> {
-    render() {
+    public render() {
         const {
             sectionColor,
             recentPosts: [mainPost, ...secondaryPosts],
@@ -30,7 +30,7 @@ export default class RecentAndTrending extends PureComponent<Props> {
             {({ minWidth }) => {
                 const isDesktop = minWidth(BREAKPOINTS.LG);
                 return (
-                    <Container type='content' style={{flexDirection: isDesktop? 'row' : 'column', justifyContent: 'space-between'}}>
+                    <Container type="content" style={{flexDirection: isDesktop ? 'row' : 'column', justifyContent: 'space-between'}}>
                         <RecentPosts 
                             isDesktop={isDesktop}
                             tag={tag}

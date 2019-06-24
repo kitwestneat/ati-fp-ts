@@ -2,12 +2,12 @@
 
 import React, { PureComponent } from 'react';
 
-import { Text } from '@/components/primitives';
 import { ModuleBox } from '@/components/modules';
+import { Text } from '@/components/primitives';
 import { COLOR_MAP } from '@/constants';
 import { ViewStyle } from 'react-native';
 
-type Props = {
+interface Props {
   children?: string;
   showPattern?: boolean;
   patternColor: string;
@@ -16,25 +16,25 @@ type Props = {
   title: string;
   isDesktop?: boolean;
   onLayout?: any;
-};
+}
 
 class ModuleTitle extends PureComponent<Props> {
-  static defaultProps = {
+  public static defaultProps = {
     showPattern: true,
     color: COLOR_MAP.TEXT_COLOR
   };
 
-  getBorderTop = () => ({
+  public getBorderTop = () => ({
     borderTopColor: this.props.patternColor,
     borderTopWidth: 2
   });
 
-  getTextStyles = () => {
+  public getTextStyles = () => {
     const { isDesktop } = this.props;
     return isDesktop ? { fontSize: 40, lineHeight: 44 } : { fontSize: 38, lineHeight: 36 };
   };
 
-  render() {
+  public render() {
     const { showPattern, patternColor, backgroundColor, style, children, title, onLayout } = this.props;
     return (
       <ModuleBox patternColor={showPattern ? patternColor : ''} backgroundColor={backgroundColor} style={[this.getBorderTop(), style]} onLayout={onLayout}>
