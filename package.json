@@ -2,7 +2,7 @@
   "name": "ati-fp-ts",
   "version": "0.1.0",
   "private": true,
-  "homepage": "wordpress/wp-content/plugins/pbh-fp-admin",
+  "homepage": "wordpress/wp-content/themes/ati-2018/frontpage",
   "dependencies": {
     "@types/jest": "24.0.11",
     "@types/node": "11.12.2",
@@ -27,14 +27,15 @@
     "preinstall": "rm -f node_modules/@",
     "postinstall": "ln -s `pwd`/src node_modules/@",
     "start": "react-scripts start",
-    "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "pre-build": "cp public/index.html public/_index.html && cp public/root-partial.html public/index.html",
     "post-build": "cp public/index.html public/root-partial.html && cp public/_index.html public/index.html && ./phpify-fp.sh",
     "pre-build2": "npm run pre-build ; NODE_ENV=dev react-scripts build ; npm run post-build",
+	"build": "npm run pre-build ; NODE_ENV=dev react-scripts build ; npm run post-build",
+    "deploy": "tar cvzf /tmp/front.tgz build && scp /tmp/front.tgz www0:/tmp",
     "admin-build": "npm run pre-build2 && rm -rf pbh-fp-admin && mv build pbh-fp-admin && cp admin.php pbh-fp-admin/index.php",
-    "admin-deploy": "tar cvzf /tmp/pbh-fp-admin.tgz pbh-fp-admin && scp /tmp/pbh-fp-admin.tgz pbh:/tmp"
+    "admin-deploy": "tar cvzf /tmp/pbh-fp-admin.tgz pbh-fp-admin && scp /tmp/pbh-fp-admin.tgz www0:/tmp"
   },
   "eslintConfig": {
     "extends": "react-app"
