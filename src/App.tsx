@@ -9,9 +9,6 @@ import React, { PureComponent } from 'react';
 
 import { SECTION_SPACING_VARIANTS } from '@/constants/index';
 
-import TagPage from '@/TagPage';
-import { Route } from 'react-router-dom';
-
 interface Props {
   data: any;
 }
@@ -28,11 +25,6 @@ class App extends PureComponent<Props> {
       throw new Error('cannot load post data');
     }
 
-    const homePageData = data.filter((el: any) => {
-      const excludedTypes = ['tag', 'splitTagBox', 'tagOverlapTitle', 'recentAndTrending'];
-      return !excludedTypes.includes(el.type);
-    });
-
     return (
       <AppWrap>
         <Header />
@@ -41,7 +33,7 @@ class App extends PureComponent<Props> {
             <Skybox />
           </Section>
 
-          <PageSections data={homePageData} />
+          <PageSections data={data} />
 
           <Section topSpacing={SECTION_SPACING_VARIANTS.LARGE}>
             <Floorboard />
@@ -49,8 +41,6 @@ class App extends PureComponent<Props> {
 
           <Footer />
         </Main>
-
-        <Route path="/tag/history" render={() => <TagPage {...this.props}/>} />
       </AppWrap>
     );
   }
