@@ -153,7 +153,7 @@ const styles = StyleSheet.create({
     top: '50px'
   },
   infoboxDesktop: {
-    width: '50%',
+    width: '60%',
     height: '100%'
   },
   infoboxMobile: {
