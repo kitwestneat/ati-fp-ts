@@ -12,6 +12,7 @@ interface Props extends InfoBoxData {
   imageSrc: string;
   description: string;
   paginate?: boolean;
+  patternColor?: string;
 }
 
 interface State {
@@ -20,6 +21,10 @@ interface State {
 }
 
 export default class InfoBox extends PureComponent<Props, State> {
+  public static defaultProps = {
+    patternColor: COLOR_MAP.PURPLE
+  };
+
   public state = {
     isExpanded: false,
     height: 0
@@ -50,7 +55,7 @@ export default class InfoBox extends PureComponent<Props, State> {
     isDevEnv() ? window.location.pathname.includes('/page/') : this.props.paginate;
 
   public renderDesktop = () => {
-    const { name, imageSrc, description } = this.props;
+    const { name, imageSrc, description, patternColor } = this.props;
     const paginate = this.isPaginated();
     return (
       <ImageBackground
@@ -61,7 +66,7 @@ export default class InfoBox extends PureComponent<Props, State> {
           <View style={[styles.infobox, styles.infoboxDesktop]}>
             <ModuleBox
               offsetDirection={OFFSET_DIRECTION.RIGHT}
-              patternColor={COLOR_MAP.PURPLE}
+              patternColor={patternColor}
               backgroundColor={'transparent'}
             >
               {paginate ? (
@@ -84,7 +89,7 @@ export default class InfoBox extends PureComponent<Props, State> {
   };
 
   public renderMobile = (isTablet: any) => {
-    const { name, imageSrc, description } = this.props;
+    const { name, imageSrc, description, patternColor } = this.props;
     const { isExpanded, height } = this.state;
     const toggleDescription = !isExpanded ? getDescriptionSubstring(description) : description;
     const toggleExpandText = !isExpanded ? 'Read More' : 'Read Less';
@@ -99,7 +104,7 @@ export default class InfoBox extends PureComponent<Props, State> {
       >
         <Image source={{ uri: imageSrc }} style={{ width: 180, height: 100 }} />
         <View style={[styles.infobox, styles.infoboxMobile, { top: paginate ? '30px' : '70px' }]}>
-          <ModuleBox patternColor={COLOR_MAP.PURPLE} backgroundColor={'transparent'}>
+          <ModuleBox patternColor={patternColor} backgroundColor={'transparent'}>
             {paginate ? (
               <View onLayout={this.getHeight}>
                 <Text style={[styles.title, styles.titlePaginate]}>{capitalize(name)}</Text>
