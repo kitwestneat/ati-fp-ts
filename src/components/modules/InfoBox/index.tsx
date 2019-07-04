@@ -1,11 +1,11 @@
 import { ModuleBox } from '@/components/modules';
-import { Container, HtmlText, Image } from '@/components/primitives';
+import { Container, HtmlText, Image, Text } from '@/components/primitives';
 import { Responsive } from '@/components/utils';
 import { BREAKPOINTS, COLOR_MAP } from '@/constants';
 import { InfoBoxData, OFFSET_DIRECTION } from '@/types';
 import { capitalize, isDevEnv } from '@/utils';
 import React, { PureComponent } from 'react';
-import { ImageBackground, StyleSheet, Text, View } from 'react-native';
+import { ImageBackground, StyleSheet, View } from 'react-native';
 
 interface Props extends InfoBoxData {
   name: string;
@@ -66,13 +66,25 @@ export default class InfoBox extends PureComponent<Props, State> {
             >
               {paginate ? (
                 <View>
-                  <Text style={[styles.title, styles.titlePaginate, { padding: '1em' }]}>
+                  <Text 
+                    accessibilityRole="heading"
+                    aria-level="1"
+                    serif
+                    style={[styles.title, styles.titlePaginate, { padding: '1em' }]}
+                  >
                     {capitalize(name)}
                   </Text>
                 </View>
               ) : (
                 <View>
-                  <Text style={styles.title}>{capitalize(name)}</Text>
+                  <Text 
+                    accessibilityRole="heading"
+                    aria-level="1"
+                    serif
+                    style={styles.title}
+                  >
+                    {capitalize(name)}
+                  </Text>
                   <HtmlText html={description} css={htmlTextStyle} />
                 </View>
               )}
@@ -169,7 +181,9 @@ const styles = StyleSheet.create({
   title: {
     fontFamily: 'Libre Baskerville, serif',
     fontSize: 36,
-    fontWeight: '700'
+    fontWeight: '700',
+    marginTop: '8px',
+    marginBottom: '8px',
   },
   titlePaginate: {
     textAlign: 'center'
