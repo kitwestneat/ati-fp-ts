@@ -57,7 +57,8 @@ export default class RecentPosts extends PureComponent<Props> {
               <Post
                 layoutVariant="overlay"
                 isDesktop={isDesktop}
-                center
+                center 
+                showLabel={false}
                 {...this.MainPostImageProps(isDesktop)}
                 {...mainPost}
               />

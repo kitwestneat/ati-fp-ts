@@ -76,7 +76,6 @@ class TitleOverlapPost extends PureComponent<TitleOverlapPostProps> {
         >
           <View style={styles.detailsInner}>
             <View style={[styles.labelWrap, labelWrapPosition]}>
-              <PostLabel fill categoryColor={categoryColor} categoryName={categoryName} />
             </View>
             <View>
               <Text
