@@ -25,13 +25,15 @@ export interface OverlayPostProps extends PostType {
   categoryColor: string;
   numberOfLines: number;
   link: string;
+  showLabel?: boolean;
 }
 
 class OverlayPost extends PureComponent<OverlayPostProps> {
   public static defaultProps = {
     center: false,
     isDesktop: false,
-    bottomOverlap: 0
+    bottomOverlap: 0,
+    showLabel: true,
   };
 
   public render() {
@@ -48,7 +50,8 @@ class OverlayPost extends PureComponent<OverlayPostProps> {
       imageHeight,
       isDesktop,
       link,
-      center
+      center, 
+      showLabel
     } = this.props;
 
     const localFontStyles = isDesktop
@@ -73,7 +76,7 @@ class OverlayPost extends PureComponent<OverlayPostProps> {
         >
           <View style={styles.detailsInner}>
             <View style={[styles.labelWrap, labelWrapPosition]}>
-              <PostLabel fill categoryColor={categoryColor} categoryName={categoryName} />
+              {showLabel && <PostLabel fill categoryColor={categoryColor} categoryName={categoryName} />}
             </View>
             <View>
               <Text

@@ -34,6 +34,7 @@ export interface PostProps extends SubPostProps {
   layoutVariant: 'reduced' | 'medium' | 'overlay' | 'large' | 'title-overlap';
   link: string;
   postLine?: boolean;
+  showLabel?: boolean;
 }
 
 class Post extends PureComponent<PostProps> {
