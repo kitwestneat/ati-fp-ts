@@ -78,7 +78,7 @@ export default TitleRow;
 
 const styles = StyleSheet.create({
   titleRow: {
-    width: '100%',
+    width: '300px',
     zIndex: 20,
   },
   titleWrap: {
