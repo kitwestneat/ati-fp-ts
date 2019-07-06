@@ -6,6 +6,7 @@ import { Container } from '../../primitives';
 
 interface Props {
   overlap: number;
+  bottomOverlap: number;
   containerPadding: number;
   titleOverlap?: boolean;
   titleWidth?: number;
@@ -14,6 +15,7 @@ interface Props {
 class OverlapScaffold extends PureComponent<Props> {
   public static defaultProps = {
     overlap: 0,
+    bottomOverlap: 0,
     containerPadding: 0,
     titleOverlap: false,
     titleWidth: 0,
@@ -39,14 +41,14 @@ class OverlapScaffold extends PureComponent<Props> {
   public getMainPost = () => {
     const MainPost = this.getScaffoldContentByType(OverlapScaffold.Main);
     return React.cloneElement(MainPost, {
-      bottomOverlap: this.props.overlap,
+      bottomOverlap: this.props.bottomOverlap,
       containerPadding: this.props.containerPadding, 
       isDesktop: this.props.isDesktop
     });
   };
 
   public render() {
-    const { overlap, containerPadding, titleOverlap, titleWidth, isDesktop } = this.props;
+    const { overlap, bottomOverlap, containerPadding, titleOverlap, titleWidth, isDesktop } = this.props;
 
     return (
       <>
@@ -56,7 +58,7 @@ class OverlapScaffold extends PureComponent<Props> {
             flexShrink: 0, 
             width: '100%', 
             alignItems: titleOverlap && !isDesktop ? 'center' : 'flex-start',
-            marginTop: titleOverlap && !isDesktop ? overlap : 0,
+            marginTop: titleOverlap ? -bottomOverlap * 2 : 0,
           }}
         >
           {titleOverlap && !isDesktop &&
@@ -66,7 +68,6 @@ class OverlapScaffold extends PureComponent<Props> {
                 backgroundColor: 'white',
                 height: 30, 
                 width: titleWidth,
-                top: -45,
                 zIndex: 10,
               }}
             />
