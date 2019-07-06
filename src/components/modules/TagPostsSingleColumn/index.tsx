@@ -30,11 +30,13 @@ class TagPostsSingleColumn extends PureComponent<Props> {
     isDesktop
       ? {
           containerPadding: 45,
-          overlap: 30
+          overlap: 30,
+          bottomOverlap: 30
         }
       : {
           containerPadding: CONTAINER_PADDING.MOBILE,
-          overlap: 15
+          overlap: 15,
+          bottomOverlap: 15
         };
 
   public MainPostImageProps = (isDesktop: boolean) =>

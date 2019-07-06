@@ -9,14 +9,12 @@ import LargePost, { LargePostProps } from './LargePost';
 import MediumPost, { MediumPostProps } from './MediumPost';
 import OverlayPost, { OverlayPostProps } from './OverlayPost';
 import SmallPost, { SmallPostProps } from './SmallPost';
-import TitleOverlapPost, { TitleOverlapPostProps } from './TitleOverlapPost';
 
 const LAYOUT_VARIANT = {
   REDUCED: 'reduced',
   MEDIUM: 'medium',
   OVERLAY: 'overlay', 
   LARGE: 'large',
-  TITLE_OVERLAP: 'title-overlap',
 };
 
 const POST_VARIANT_MAP = {
@@ -24,14 +22,13 @@ const POST_VARIANT_MAP = {
   [LAYOUT_VARIANT.OVERLAY]: OverlayPost,
   [LAYOUT_VARIANT.MEDIUM]: MediumPost,
   [LAYOUT_VARIANT.LARGE]: LargePost,
-  [LAYOUT_VARIANT.TITLE_OVERLAP]: TitleOverlapPost,
 };
 
-type AllSubPostProps = SmallPostProps & OverlayPostProps & MediumPostProps & TitleOverlapPostProps & LargePostProps;
+type AllSubPostProps = SmallPostProps & OverlayPostProps & MediumPostProps & LargePostProps;
 type SubPostProps = Partial<Omit<AllSubPostProps, 'layoutVariant'>>;
 
 export interface PostProps extends SubPostProps {
-  layoutVariant: 'reduced' | 'medium' | 'overlay' | 'large' | 'title-overlap';
+  layoutVariant: 'reduced' | 'medium' | 'overlay' | 'large' ;
   link: string;
   postLine?: boolean;
   showLabel?: boolean;
