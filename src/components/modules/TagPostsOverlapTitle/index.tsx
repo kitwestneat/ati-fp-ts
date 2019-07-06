@@ -28,11 +28,13 @@ export default class TagPostsOverlapTitle extends PureComponent<Props, State> {
     isDesktop
       ? {
           containerPadding: 0,
-          overlap: -15
+          overlap: -15,
+          bottomOverlap: 22.5
         }
       : {
           containerPadding: CONTAINER_PADDING.MOBILE,
-          overlap: 15
+          overlap: 15,
+          bottomOverlap: 15
         };
 
   public MainPostImageProps = (isDesktop: boolean) =>
@@ -85,9 +87,10 @@ export default class TagPostsOverlapTitle extends PureComponent<Props, State> {
                 >
                   <OverlapScaffold.Main>
                     <Post
-                      layoutVariant="title-overlap"
+                      layoutVariant="overlay"
                       isDesktop={isDesktop}
                       center
+                      showLabel={false}
                       {...this.MainPostImageProps(isDesktop)}
                       {...mainPost}
                     />
