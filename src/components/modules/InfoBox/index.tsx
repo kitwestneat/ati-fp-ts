@@ -6,6 +6,7 @@ import { InfoBoxData, OFFSET_DIRECTION } from '@/types';
 import { capitalize, isDevEnv } from '@/utils';
 import React, { PureComponent } from 'react';
 import { ImageBackground, StyleSheet, View } from 'react-native';
+import '../../../assets/css/infobox.css';
 
 interface Props extends InfoBoxData {
   name: string;
@@ -85,7 +86,7 @@ export default class InfoBox extends PureComponent<Props, State> {
                   >
                     {capitalize(name)}
                   </Text>
-                  <HtmlText html={description} css={htmlTextStyle} />
+                  <HtmlText html={description} css={htmlTextStyle} className="infobox"/>
                 </View>
               )}
             </ModuleBox>
@@ -119,7 +120,7 @@ export default class InfoBox extends PureComponent<Props, State> {
             ) : (
               <View onLayout={this.getHeight}>
                 <Text style={styles.title}>{capitalize(name)}</Text>
-                <HtmlText html={toggleDescription} css={htmlTextStyle} />
+                <HtmlText html={toggleDescription} css={htmlTextStyle} className="infobox" />
                 <Text style={styles.read} onPress={this.toggleReadText}>
                   {toggleExpandText}
                 </Text>
