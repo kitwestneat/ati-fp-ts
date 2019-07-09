@@ -8,6 +8,7 @@ interface Props {
     // Think in terms of React inline styles.
     // https://reactjs.org/docs/dom-elements.html#style
     css?: object; 
+    className?: string;
 }
 
 export default class HtmlText extends PureComponent<Props> {
@@ -17,10 +18,7 @@ export default class HtmlText extends PureComponent<Props> {
     }
 
     public render() {
-        const { html, css } = this.props;
-        return (
-            
-            <div dangerouslySetInnerHTML={this.createMarkup(html)} style={css}/>
-        );
+        const { html, css, className } = this.props;
+        return <div className={className} dangerouslySetInnerHTML={this.createMarkup(html)} style={css}/>;
     }
 }
