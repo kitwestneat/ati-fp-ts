@@ -9,6 +9,7 @@ export enum SECTION_TYPES {
   SPLIT_TAG_BOX = 'splitTagBox',
   TAG_OVERLAP_TITLE = 'tagOverlapTitle',
   RECENT_AND_TRENDING = 'recentAndTrending',
+  PREV_NEXT_BUTTONS = 'prevNextButtons'
 }
 
 export enum SECTION_SPACING_VARIANTS {
