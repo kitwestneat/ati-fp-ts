@@ -7,7 +7,8 @@ import {
   SplitTagBox,
   TagPostsOverlapTitle,
   TagPostsSingleColumn,
-  Trending
+  Trending, 
+  PrevNextButtons
 } from '@/components/modules';
 import { Section } from '@/components/primitives';
 import React, { Fragment, PureComponent } from 'react';
@@ -29,6 +30,7 @@ export const SECTION_TYPE_COMPONENT_MAP: ComponentMap = {
   [SECTION_TYPES.NEWSLETTER]: Newsletter,
   [SECTION_TYPES.TRENDING]: Trending,
   [SECTION_TYPES.TAG_OVERLAP_TITLE]: TagPostsOverlapTitle,
+  [SECTION_TYPES.PREV_NEXT_BUTTONS]: PrevNextButtons,
 };
 
 interface Props {
