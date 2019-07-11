@@ -16,3 +16,4 @@ export { default as InfoBox } from './InfoBox';
 export { default as SplitTagBox } from './SplitTagBox';
 export { default as TagPostsOverlapTitle } from './TagPostsOverlapTitle';
 export { default as RecentAndTrending } from './RecentAndTrending';
+export { default as PrevNextButtons } from './PrevNextButtons';
