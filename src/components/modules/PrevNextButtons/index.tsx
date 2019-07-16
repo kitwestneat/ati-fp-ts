@@ -16,7 +16,7 @@ export default class PrevNextButtons extends PureComponent<Props> {
         nextLink: '',
     } 
 
-    goToURL = (url: string, buttonText: string) => {
+    goToURL = (url: string) => {
         Linking.canOpenURL(url).then(supported => {
             if (supported) {
                 Linking.openURL(url);
@@ -29,7 +29,6 @@ export default class PrevNextButtons extends PureComponent<Props> {
     render() {
         const { prevLink, nextLink } = this.props;
 
-        console.log("prevnext state: ", this. state);
         return (
             <Responsive>
                 {({ minWidth }) => {
@@ -77,10 +76,10 @@ const styles = StyleSheet.create({
         color: '#FFF',
         textTransform: 'uppercase',
         textAlign: 'center',
+        fontWeight: 'bold',
     },
     buttonDisabled: {
         backgroundColor: 'gray',
-        // pointerEvents: 'none',
         cursor: 'default'
     }
 })
