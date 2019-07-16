@@ -55,7 +55,7 @@ class TitleRow extends PureComponent<Props> {
   public renderTitle = (showPattern?: boolean) => {
     const { link, title, patternColor , onLayout } = this.props;
     return (
-      <View style={{ alignItems: 'flex-start' }} accessibilityRole="link" href={link} >
+      <View style={{ alignItems: 'flex-start', width: '300px' }} accessibilityRole="link" href={link} >
         <ModuleTitle
           title={title}
           showPattern={showPattern}
@@ -78,7 +78,6 @@ export default TitleRow;
 
 const styles = StyleSheet.create({
   titleRow: {
-    width: '300px',
     zIndex: 20,
   },
   titleWrap: {
