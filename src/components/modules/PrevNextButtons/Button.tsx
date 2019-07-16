@@ -1,5 +1,5 @@
-import React, {PureComponent} from 'react';
-import { View, Text } from '@/components/primitives';
+import { Text, View } from '@/components/primitives';
+import React, { PureComponent } from 'react';
 import { TouchableOpacity } from 'react-native';
 
 interface Props {
@@ -11,13 +11,13 @@ interface Props {
     buttonDisabled?: any;
 }
 
-export default class Button extends PureComponent<Props>{
-    render() {
+export default class Button extends PureComponent<Props> {
+    public render() {
         const { buttonText, onPress, link, buttonWidth, buttonActive, buttonDisabled } = this.props;
         const isDisabled = link === '';
 
         return (
-            <View pointerEvents={isDisabled ? "none" : "auto"}>
+            <View pointerEvents={isDisabled ? 'none' : 'auto'}>
                 <TouchableOpacity style={buttonWidth}>
                     <Text 
                         onPress={() => onPress(link)} 
@@ -27,6 +27,6 @@ export default class Button extends PureComponent<Props>{
                     </Text>
                 </TouchableOpacity>
             </View>
-        )
+        );
     }
 }

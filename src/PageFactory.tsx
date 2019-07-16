@@ -3,12 +3,12 @@ import {
   Instagram,
   MostRecent,
   Newsletter,
+  PrevNextButtons,
   RecentAndTrending,
   SplitTagBox,
   TagPostsOverlapTitle,
-  TagPostsSingleColumn,
-  Trending, 
-  PrevNextButtons
+  TagPostsSingleColumn, 
+  Trending
 } from '@/components/modules';
 import { Section } from '@/components/primitives';
 import React, { Fragment, PureComponent } from 'react';

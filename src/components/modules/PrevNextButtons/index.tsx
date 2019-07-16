@@ -1,8 +1,8 @@
-import React, { PureComponent } from 'react';
-import { Linking, StyleSheet } from 'react-native';
 import { Container } from '@/components/primitives';
 import { Responsive } from '@/components/utils';
-import { COLOR_MAP, BREAKPOINTS } from '@/constants';
+import { BREAKPOINTS, COLOR_MAP } from '@/constants';
+import React, { PureComponent } from 'react';
+import { Linking, StyleSheet } from 'react-native';
 import Button from './Button';
 
 interface Props {
@@ -14,19 +14,19 @@ export default class PrevNextButtons extends PureComponent<Props> {
     public static defaultProps = {
         prevLink: '',
         nextLink: '',
-    } 
+    }; 
 
-    goToURL = (url: string) => {
+    public goToURL = (url: string) => {
         Linking.canOpenURL(url).then(supported => {
             if (supported) {
                 Linking.openURL(url);
             } else {
                 console.log('Don\'t know how to open URI: ' + url);
             }
-          })
+          });
     }
 
-    render() {
+    public render() {
         const { prevLink, nextLink } = this.props;
 
         return (
@@ -52,12 +52,12 @@ export default class PrevNextButtons extends PureComponent<Props> {
                                 buttonDisabled={styles.buttonDisabled} 
                             />
                         </Container>
-                    )
+                    );
                 }}
             </Responsive>
-        )
+        );
     }
-};
+}
 
 const styles = StyleSheet.create({
     container: {
@@ -82,4 +82,4 @@ const styles = StyleSheet.create({
         backgroundColor: 'gray',
         cursor: 'default'
     }
-})
+});
