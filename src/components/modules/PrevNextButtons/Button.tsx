@@ -14,15 +14,13 @@ interface Props {
 export default class Button extends PureComponent<Props>{
     render() {
         const { buttonText, onPress, link, buttonWidth, buttonActive, buttonDisabled } = this.props;
-        const isDisabled = link.length ? false : true;
-
-        console.log(buttonText, isDisabled);
+        const isDisabled = link === '' ? false : true;
 
         return (
             <View pointerEvents={isDisabled ? "none" : "auto"}>
                 <TouchableOpacity style={buttonWidth}>
                     <Text 
-                        onPress={() => onPress(link, buttonText)} 
+                        onPress={() => onPress(link)} 
                         style={[buttonActive, isDisabled ? buttonDisabled : {}]}
                     >
                         {buttonText}
