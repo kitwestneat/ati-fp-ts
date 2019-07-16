@@ -14,7 +14,7 @@ interface Props {
 export default class Button extends PureComponent<Props>{
     render() {
         const { buttonText, onPress, link, buttonWidth, buttonActive, buttonDisabled } = this.props;
-        const isDisabled = link === '' ? false : true;
+        const isDisabled = link === '';
 
         return (
             <View pointerEvents={isDisabled ? "none" : "auto"}>
