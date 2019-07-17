@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { View, StyleSheet } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 
 interface Props {
   spacer?: number;
@@ -8,7 +8,7 @@ interface Props {
 }
 
 export default class GridSlot extends React.PureComponent<Props> {
-  static isGridSlot = true;
+  public static isGridSlot = true;
 
   public getStyles = () => {
     const { itemsPerRow = 1, spacer = 10, multiplier = 1 } = this.props;
