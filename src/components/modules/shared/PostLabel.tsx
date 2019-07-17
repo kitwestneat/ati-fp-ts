@@ -15,6 +15,10 @@ class PostLabel extends PureComponent<Props> {
   public render() {
     const { fill, categoryColor, categoryName } = this.props;
 
+    if (!categoryName) {
+      return null;
+    }
+
     return fill ? (
       <View
         style={{

@@ -1,6 +1,9 @@
 import { createPostGrid } from '../shared/PostGrid';
 
+const name = 'RecentAndTrending-RecentPosts';
+
 const RecentPostsGridDesktop = createPostGrid({
+  name,
   orderSpec: ['SQ', 'SQ', 'SQ', 'SQ', 'SQ', 'SQ', 'SQ', 'SQ'],
   itemsPerRow: 2,
   postComponentAttrMap: {
@@ -13,6 +16,7 @@ const RecentPostsGridDesktop = createPostGrid({
 });
 
 const RecentPostsGridMobile = createPostGrid({
+  name,
   orderSpec: ['MD', 'MD', 'MD', 'MD', 'SM', 'SM', 'SM', 'SM'],
   itemsPerRow: 1,
   postComponentAttrMap: {

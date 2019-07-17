@@ -7,7 +7,7 @@ import { ModuleBox } from '@/components/modules';
 import { Container } from '@/components/primitives';
 
 import PostList from './PostList';
-import PostGrid from './TrendingPostGrid';
+import TrendingPostGrid from './TrendingPostGrid';
 
 import TitleSquare from './TitleSquare';
 
@@ -63,7 +63,7 @@ class Trending extends PureComponent<Props> {
           <View style={{ width: '25%', padding: 15 }}>{titleSquare}</View>
 
           <View style={{ width: '75%', padding: 15 }}>
-            <PostGrid posts={posts} />
+            <TrendingPostGrid posts={posts} />
           </View>
         </View>
       </Container>

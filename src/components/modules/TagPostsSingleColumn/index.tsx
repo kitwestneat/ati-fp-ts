@@ -8,7 +8,6 @@ import { Responsive } from '@/components/utils';
 import { BREAKPOINTS, CONTAINER_PADDING } from '@/constants/index';
 
 import { GridOrder, OFFSET_DIRECTION, PostType } from '@/types';
-import PostGrid from '../shared/PostGrid';
 import PostList from './PostList';
 import SingleColumnGrid from './SingleColumnGrid';
 import TitleRow from './TitleRow';

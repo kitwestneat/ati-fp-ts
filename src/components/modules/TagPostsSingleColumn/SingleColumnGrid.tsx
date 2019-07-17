@@ -13,6 +13,6 @@ export default class SingleColumnGrid extends PureComponent<Props> {
 
     const orderSpec = !reverse ? ['OV', 'MD', 'MD', 'MD', 'AD'] : ['MD', 'MD', 'AD', 'MD', 'OV'];
 
-    return <PostGrid posts={posts} orderSpec={orderSpec} />;
+    return <PostGrid name="SingleColumn" posts={posts} orderSpec={orderSpec} />;
   }
 }

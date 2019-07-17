@@ -25,7 +25,12 @@ class TrendingPostGrid extends PureComponent<Props> {
     const orderSpec = posts.map((_post, index) => (index < MD_POST_COUNT ? 'MD' : 'SM'));
 
     return (
-      <PostGrid orderSpec={orderSpec} postComponentAttrMap={POST_COMPONENT_ATTRS} posts={posts} />
+      <PostGrid
+        name="Trending"
+        orderSpec={orderSpec}
+        postComponentAttrMap={POST_COMPONENT_ATTRS}
+        posts={posts}
+      />
     );
   }
 }

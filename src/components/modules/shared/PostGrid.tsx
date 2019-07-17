@@ -33,6 +33,7 @@ export type OrderSpec = string[];
 interface Props {
   orderSpec: OrderSpec;
   posts: PostType[];
+  name?: string;
 
   postComponentAttrMap?: PostComponentAttrMap;
   AdComponent?: React.ComponentType;
@@ -40,11 +41,13 @@ interface Props {
   itemsPerRow?: number;
 }
 
-function validatePostCount(orderSpec: OrderSpec, posts: PostType[]) {
+function validatePostCount(orderSpec: OrderSpec, posts: PostType[], name?: string) {
   const orderSpecPostCount = orderSpec.filter(type => type !== 'AD').length;
   if (posts.length !== orderSpecPostCount) {
     console.warn(
-      `mapPostsToGrid: grid requires exactly ${orderSpecPostCount} posts, found ${posts.length}`
+      `mapPostsToGrid: ${name} grid requires exactly ${orderSpecPostCount} posts, found ${
+        posts.length
+      }`
     );
   }
 }
@@ -55,11 +58,12 @@ export default class PostGrid extends PureComponent<Props> {
       orderSpec,
       postComponentAttrMap = DEFAULT_POST_COMPONENT_ATTRS,
       posts,
-      AdComponent = DEFAULT_AD_COMPONENT
+      AdComponent = DEFAULT_AD_COMPONENT,
+      name
     } = this.props;
     const postQueue = posts.slice(0).reverse();
 
-    validatePostCount(orderSpec, posts);
+    validatePostCount(orderSpec, posts, name);
 
     return orderSpec
       .map((type: string, idx: number) => {
