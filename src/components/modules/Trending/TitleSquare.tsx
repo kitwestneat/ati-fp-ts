@@ -34,7 +34,9 @@ class TitleSquare extends PureComponent<Props> {
                 <Image style={{ width: 45, height: 27 }} source={{ uri: TrendingLine }} />
               </Row>
               <Row style={{ marginTop: 20 }}>
-                <Text style={styles.text}>{title}</Text>
+                <Text accessibilityRole="heading" aria-level="2" style={styles.text}>
+                  {title}
+                </Text>
               </Row>
             </View>
           </Ratio>

@@ -1,10 +1,10 @@
 import { ModuleBox, OverlapScaffold, Post } from '@/components/modules';
-import { Row } from '@/components/primitives';
+import { Row, Text } from '@/components/primitives';
 import { CONTAINER_PADDING } from '@/constants';
 import { OFFSET_DIRECTION } from '@/types';
 import { capitalize } from '@/utils';
 import React, { PureComponent } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import { RecentPostsGridDesktop, RecentPostsGridMobile } from './RecentPostsGrid';
 
 interface Props {
@@ -49,7 +49,11 @@ export default class RecentPosts extends PureComponent<Props> {
 
     return (
       <View style={{ width: isDesktop ? '68%' : '100%' }}>
-        <Text style={[styles.headerText, localFontStyles, { marginLeft: isDesktop ? 0 : '15px' }]}>
+        <Text
+          accessibilityRole="heading"
+          aria-level="2"
+          style={[styles.headerText, localFontStyles, { marginLeft: isDesktop ? 0 : '15px' }]}
+        >
           Recently in {capitalize(tag)}
         </Text>
 
