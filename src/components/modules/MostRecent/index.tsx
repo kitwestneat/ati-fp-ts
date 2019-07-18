@@ -3,7 +3,7 @@
 import React, { PureComponent } from 'react';
 import { StyleSheet, View } from 'react-native';
 
-import { ModuleBox, OverlapScaffold, Post } from '@/components/modules';
+import { ModuleBox, OverlapFrame, Post } from '@/components/modules';
 import { Container } from '@/components/primitives';
 import { Responsive } from '@/components/utils';
 
@@ -12,7 +12,9 @@ import PostList from './PostList';
 import { BREAKPOINTS, CONTAINER_PADDING } from '@/constants/index';
 import { PostType } from '@/types';
 
-interface Props { posts: PostType[]; }
+interface Props {
+  posts: PostType[];
+}
 
 class MostRecent extends PureComponent<Props> {
   public renderMobile = () => {
@@ -21,17 +23,11 @@ class MostRecent extends PureComponent<Props> {
     } = this.props;
 
     return (
-      <OverlapScaffold containerPadding={CONTAINER_PADDING.MOBILE} overlap={15}>
-        <OverlapScaffold.Main>
-          <Post layoutVariant="overlay" {...mainPost} />
-        </OverlapScaffold.Main>
-
-        <OverlapScaffold.Overlap>
-          <ModuleBox patternColor={mainPost.categoryColor}>
-            <PostList posts={secondaryPosts} isDesktop={false} />
-          </ModuleBox>
-        </OverlapScaffold.Overlap>
-      </OverlapScaffold>
+      <OverlapFrame mainPost={mainPost} containerPadding={CONTAINER_PADDING.MOBILE} overlap={15}>
+        <ModuleBox patternColor={mainPost.categoryColor}>
+          <PostList posts={secondaryPosts} isDesktop={false} />
+        </ModuleBox>
+      </OverlapFrame>
     );
   };
 

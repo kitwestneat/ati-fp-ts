@@ -2,12 +2,12 @@
 
 import React, { PureComponent } from 'react';
 
-import { ModuleBox, OverlapScaffold, Post } from '@/components/modules';
+import { ModuleBox, OverlapFrame } from '@/components/modules';
 import { Container, Row } from '@/components/primitives';
 import { Responsive } from '@/components/utils';
-import { BREAKPOINTS, CONTAINER_PADDING } from '@/constants/index';
+import { BREAKPOINTS } from '@/constants/index';
 
-import { GridOrder, OFFSET_DIRECTION, PostType } from '@/types';
+import { OFFSET_DIRECTION, PostType } from '@/types';
 import PostList from './PostList';
 import SingleColumnGrid from './SingleColumnGrid';
 import TitleRow from './TitleRow';
@@ -19,50 +19,53 @@ interface Props {
   sectionColor: string;
   titleTemplate: string;
   posts: PostType[];
-
-  // XXX deprecated
-  order: GridOrder;
 }
 
-class TagPostsSingleColumn extends PureComponent<Props> {
-  public scaffoldProps = (isDesktop: boolean) =>
-    isDesktop
-      ? {
-          containerPadding: 45,
-          overlap: 30,
-          bottomOverlap: 30
-        }
-      : {
-          containerPadding: CONTAINER_PADDING.MOBILE,
-          overlap: 15,
-          bottomOverlap: 15
-        };
+const frameProps = (isDesktop: boolean) =>
+  isDesktop
+    ? {
+        containerPadding: 45,
+        overlap: 30,
+        bottomOverlap: 30
+      }
+    : {
+        containerPadding: 15,
+        overlap: 15,
+        bottomOverlap: 15
+      };
 
-  public MainPostImageProps = (isDesktop: boolean) =>
-    isDesktop
-      ? {
-          imageWidth: 1200,
-          imageHeight: 627
-        }
-      : {
-          imageWidth: 375,
-          imageHeight: 250
-        };
+const mainPostImageProps = (isDesktop: boolean) =>
+  isDesktop
+    ? {
+        imageWidth: 1200,
+        imageHeight: 627
+      }
+    : {
+        imageWidth: 375,
+        imageHeight: 250
+      };
+
+class TagPostsSingleColumn extends PureComponent<Props> {
   public render() {
     const {
       sectionTitle,
       sectionLink,
       sectionColor,
-      order,
       posts: [mainPost, ...secondaryPosts]
     } = this.props;
 
-    const reverse = this.props.reverse || +order === 2;
+    const reverse = this.props.reverse || false;
 
     return (
       <Responsive>
         {({ minWidth }) => {
           const isDesktop = minWidth(BREAKPOINTS.LG);
+
+          const mainPostProps = {
+            showLabel: false,
+            center: true,
+            ...mainPostImageProps(isDesktop)
+          };
 
           return (
             <Container type="content">
@@ -74,27 +77,20 @@ class TagPostsSingleColumn extends PureComponent<Props> {
               />
 
               <Row style={{ marginTop: isDesktop ? 60 : 30 }}>
-                <OverlapScaffold {...this.scaffoldProps(isDesktop)}>
-                  <OverlapScaffold.Main>
-                    <Post
-                      layoutVariant="overlay"
-                      isDesktop={isDesktop}
-                      center
-                      {...this.MainPostImageProps(isDesktop)}
-                      {...mainPost}
-                    />
-                  </OverlapScaffold.Main>
-
-                  <OverlapScaffold.Overlap>
-                    <ModuleBox offsetDirection={OFFSET_DIRECTION.RIGHT} patternColor={sectionColor}>
-                      {isDesktop ? (
-                        <SingleColumnGrid reverse={reverse} posts={secondaryPosts} />
-                      ) : (
-                        <PostList posts={secondaryPosts} />
-                      )}
-                    </ModuleBox>
-                  </OverlapScaffold.Overlap>
-                </OverlapScaffold>
+                <OverlapFrame
+                  {...frameProps(isDesktop)}
+                  mainPost={mainPost}
+                  mainPostProps={mainPostProps}
+                  isDesktop={isDesktop}
+                >
+                  <ModuleBox offsetDirection={OFFSET_DIRECTION.RIGHT} patternColor={sectionColor}>
+                    {isDesktop ? (
+                      <SingleColumnGrid reverse={reverse} posts={secondaryPosts} />
+                    ) : (
+                      <PostList posts={secondaryPosts} />
+                    )}
+                  </ModuleBox>
+                </OverlapFrame>
               </Row>
             </Container>
           );

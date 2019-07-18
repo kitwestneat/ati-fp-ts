@@ -1,6 +1,5 @@
-import { ModuleBox, OverlapScaffold, Post } from '@/components/modules';
+import { ModuleBox, OverlapFrame } from '@/components/modules';
 import { Row, Text } from '@/components/primitives';
-import { CONTAINER_PADDING } from '@/constants';
 import { OFFSET_DIRECTION } from '@/types';
 import { capitalize } from '@/utils';
 import React, { PureComponent } from 'react';
@@ -15,37 +14,43 @@ interface Props {
   sectionColor: string;
 }
 
+const frameProps = (isDesktop: boolean) =>
+  isDesktop
+    ? {
+        containerPadding: 45,
+        overlap: 30,
+        bottomOverlap: 30
+      }
+    : {
+        containerPadding: 15,
+        overlap: 15,
+        bottomOverlap: 15
+      };
+
+const mainPostImageProps = (isDesktop: boolean) =>
+  isDesktop
+    ? {
+        imageWidth: 1200,
+        imageHeight: 627
+      }
+    : {
+        imageWidth: 375,
+        imageHeight: 250
+      };
+
 export default class RecentPosts extends PureComponent<Props> {
-  public scaffoldProps = (isDesktop: boolean) =>
-    isDesktop
-      ? {
-          containerPadding: 45,
-          overlap: 30,
-          bottomOverlap: 30
-        }
-      : {
-          containerPadding: CONTAINER_PADDING.MOBILE,
-          overlap: 15,
-          bottomOverlap: 15
-        };
-
-  public MainPostImageProps = (isDesktop: boolean) =>
-    isDesktop
-      ? {
-          imageWidth: 1200,
-          imageHeight: 627
-        }
-      : {
-          imageWidth: 375,
-          imageHeight: 250
-        };
-
   public render() {
     const { isDesktop, tag, mainPost, secondaryPosts, sectionColor } = this.props;
 
     const localFontStyles = isDesktop
       ? { fontSize: 24, lineHeight: 29 }
       : { fontSize: 20, lineHeight: 24 };
+
+    const mainPostProps = {
+      showLabel: false,
+      center: true,
+      ...mainPostImageProps(isDesktop)
+    };
 
     return (
       <View style={{ width: isDesktop ? '68%' : '100%' }}>
@@ -58,28 +63,20 @@ export default class RecentPosts extends PureComponent<Props> {
         </Text>
 
         <Row style={{}}>
-          <OverlapScaffold {...this.scaffoldProps(isDesktop)} isDesktop={isDesktop}>
-            <OverlapScaffold.Main>
-              <Post
-                layoutVariant="overlay"
-                isDesktop={isDesktop}
-                center
-                showLabel={false}
-                {...this.MainPostImageProps(isDesktop)}
-                {...mainPost}
-              />
-            </OverlapScaffold.Main>
-
-            <OverlapScaffold.Overlap>
-              <ModuleBox offsetDirection={OFFSET_DIRECTION.RIGHT} patternColor={sectionColor}>
-                {isDesktop ? (
-                  <RecentPostsGridDesktop posts={secondaryPosts} />
-                ) : (
-                  <RecentPostsGridMobile posts={secondaryPosts} />
-                )}
-              </ModuleBox>
-            </OverlapScaffold.Overlap>
-          </OverlapScaffold>
+          <OverlapFrame
+            {...frameProps(isDesktop)}
+            mainPost={mainPost}
+            mainPostProps={mainPostProps}
+            isDesktop={isDesktop}
+          >
+            <ModuleBox offsetDirection={OFFSET_DIRECTION.RIGHT} patternColor={sectionColor}>
+              {isDesktop ? (
+                <RecentPostsGridDesktop posts={secondaryPosts} />
+              ) : (
+                <RecentPostsGridMobile posts={secondaryPosts} />
+              )}
+            </ModuleBox>
+          </OverlapFrame>
         </Row>
       </View>
     );
