@@ -11,6 +11,7 @@ interface Props {
   patternColor: string;
   title: string;
   sectionLink: string;
+  showIcon: boolean;
 }
 
 interface LinkProps {
@@ -20,7 +21,7 @@ interface LinkProps {
 
 class TitleSquare extends PureComponent<Props> {
   public render() {
-    const { patternColor, sectionLink, title } = this.props;
+    const { patternColor, sectionLink, title, showIcon = true } = this.props;
     const linkProps: LinkProps = sectionLink
       ? { accessibilityRole: 'link', href: sectionLink }
       : {};
@@ -30,9 +31,11 @@ class TitleSquare extends PureComponent<Props> {
         <Pattern color={patternColor}>
           <Ratio ratio="1:1">
             <View style={[styles.colorBackground, { padding: 30, backgroundColor: patternColor }]}>
-              <Row>
-                <Image style={{ width: 45, height: 27 }} source={{ uri: TrendingLine }} />
-              </Row>
+              {showIcon && (
+                <Row>
+                  <Image style={{ width: 45, height: 27 }} source={{ uri: TrendingLine }} />
+                </Row>
+              )}
               <Row style={{ marginTop: 20 }}>
                 <Text accessibilityRole="heading" aria-level="2" style={styles.text}>
                   {title}

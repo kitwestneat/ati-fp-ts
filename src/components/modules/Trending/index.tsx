@@ -21,11 +21,14 @@ interface Props {
   sectionColor: string;
   sectionLink: string;
   sectionTitle: string;
+  mediumMobilePosts?: boolean;
+  showIcon: boolean;
 }
 
 class Trending extends PureComponent<Props> {
   public renderMobile = (titleSquare: JSX.Element) => {
-    const { posts } = this.props;
+    const { posts, mediumMobilePosts = false } = this.props;
+
     return (
       <Container
         type="content"
@@ -44,7 +47,7 @@ class Trending extends PureComponent<Props> {
         </View>
         <View style={{ marginTop: 30 }}>
           <ModuleBox>
-            <PostList posts={posts} isDesktop={false} />
+            <PostList posts={posts} isDesktop={false} mediumMobilePosts={mediumMobilePosts} />
           </ModuleBox>
         </View>
       </Container>
@@ -70,10 +73,15 @@ class Trending extends PureComponent<Props> {
     );
   };
   public render() {
-    const { sectionColor, sectionLink, sectionTitle } = this.props;
+    const { sectionColor, sectionLink, sectionTitle, showIcon = true } = this.props;
 
     const titleSquare = (
-      <TitleSquare title={sectionTitle} patternColor={sectionColor} sectionLink={sectionLink} />
+      <TitleSquare
+        title={sectionTitle}
+        patternColor={sectionColor}
+        sectionLink={sectionLink}
+        showIcon={showIcon}
+      />
     );
 
     return (
