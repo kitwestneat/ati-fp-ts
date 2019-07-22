@@ -33,7 +33,7 @@ class OverlayPost extends PureComponent<OverlayPostProps> {
     center: false,
     isDesktop: false,
     bottomOverlap: 0,
-    showLabel: true,
+    showLabel: false
   };
 
   public render() {
@@ -50,7 +50,7 @@ class OverlayPost extends PureComponent<OverlayPostProps> {
       imageHeight,
       isDesktop,
       link,
-      center, 
+      center,
       showLabel
     } = this.props;
 
@@ -60,6 +60,7 @@ class OverlayPost extends PureComponent<OverlayPostProps> {
 
     const labelWrapPosition = getLabelWrapPositionStyles(center);
     const linkProps: WebAccessibilityProps = link ? { accessibilityRole: 'link', href: link } : {};
+    const mobilePadding = isDesktop ? {} : { padding: 20 };
 
     return (
       <View {...linkProps}>
@@ -68,6 +69,7 @@ class OverlayPost extends PureComponent<OverlayPostProps> {
         <View
           style={[
             styles.detailsWrap,
+            mobilePadding,
             {
               bottom: bottomOverlap,
               paddingHorizontal: containerPadding ? containerPadding : 25
@@ -76,7 +78,9 @@ class OverlayPost extends PureComponent<OverlayPostProps> {
         >
           <View style={styles.detailsInner}>
             <View style={[styles.labelWrap, labelWrapPosition]}>
-              {showLabel && <PostLabel fill categoryColor={categoryColor} categoryName={categoryName} />}
+              {showLabel && (
+                <PostLabel fill categoryColor={categoryColor} categoryName={categoryName} />
+              )}
             </View>
             <View>
               <Text
