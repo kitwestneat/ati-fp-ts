@@ -4,7 +4,7 @@ import React, { PureComponent } from 'react';
 
 import { ModuleBox } from '@/components/modules';
 import { Text } from '@/components/primitives';
-import { COLOR_MAP } from '@/constants';
+import { COLOR_MAP, TITLE_FONT_SIZE } from '@/constants';
 import { ViewStyle } from 'react-native';
 
 interface Props {
@@ -30,14 +30,26 @@ class ModuleTitle extends PureComponent<Props> {
   });
 
   public getTextStyles = () => {
-    const { isDesktop } = this.props;
-    return isDesktop ? { fontSize: 40, lineHeight: 44 } : { fontSize: 38, lineHeight: 36 };
+    return { fontSize: TITLE_FONT_SIZE, lineHeight: TITLE_FONT_SIZE };
   };
 
   public render() {
-    const { showPattern, patternColor, backgroundColor, style, children, title, onLayout } = this.props;
+    const {
+      showPattern,
+      patternColor,
+      backgroundColor,
+      style,
+      children,
+      title,
+      onLayout
+    } = this.props;
     return (
-      <ModuleBox patternColor={showPattern ? patternColor : ''} backgroundColor={backgroundColor} style={[this.getBorderTop(), style]} onLayout={onLayout}>
+      <ModuleBox
+        patternColor={showPattern ? patternColor : ''}
+        backgroundColor={backgroundColor}
+        style={[this.getBorderTop(), style]}
+        onLayout={onLayout}
+      >
         {children ? (
           children
         ) : (
@@ -45,7 +57,7 @@ class ModuleTitle extends PureComponent<Props> {
             accessibilityRole="heading"
             aria-level="2"
             serif
-            style={[{ fontWeight: '600' }, this.getTextStyles()]}
+            style={[this.getTextStyles(), { fontWeight: '600' }]}
           >
             {title}
           </Text>

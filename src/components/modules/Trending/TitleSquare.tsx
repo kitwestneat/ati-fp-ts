@@ -6,6 +6,7 @@ import { Image, StyleSheet, View } from 'react-native';
 import TrendingLine from '@/assets/images/trending-line.svg';
 import { Pattern } from '@/components/modules';
 import { Ratio, Row, Text } from '@/components/primitives';
+import { TITLE_FONT_SIZE } from '@/constants';
 
 interface Props {
   patternColor: string;
@@ -59,8 +60,8 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-end'
   },
   text: {
-    lineHeight: 37,
-    fontSize: 40,
+    lineHeight: TITLE_FONT_SIZE,
+    fontSize: TITLE_FONT_SIZE,
     color: 'white',
     fontWeight: '600'
   }

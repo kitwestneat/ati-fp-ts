@@ -90,3 +90,5 @@ export enum ASYNC_STATES {
   ERROR = 'ERROR',
   DEFAULT = 'DEFAULT'
 }
+
+export const TITLE_FONT_SIZE = 30;

@@ -1,7 +1,7 @@
 import { ModuleBox } from '@/components/modules';
 import { Container, HtmlText, Image, Text } from '@/components/primitives';
 import { Responsive } from '@/components/utils';
-import { BREAKPOINTS, COLOR_MAP } from '@/constants';
+import { BREAKPOINTS, COLOR_MAP, TITLE_FONT_SIZE } from '@/constants';
 import { InfoBoxData, OFFSET_DIRECTION } from '@/types';
 import { capitalize, isDevEnv } from '@/utils';
 import React, { PureComponent } from 'react';
@@ -78,15 +78,10 @@ export default class InfoBox extends PureComponent<Props, State> {
                 </View>
               ) : (
                 <View>
-                  <Text 
-                    accessibilityRole="heading"
-                    aria-level="1"
-                    serif
-                    style={styles.title}
-                  >
+                  <Text accessibilityRole="heading" aria-level="1" serif style={styles.title}>
                     {capitalize(name)}
                   </Text>
-                  <HtmlText html={description} css={htmlTextStyle} className="infobox"/>
+                  <HtmlText html={description} css={htmlTextStyle} className="infobox" />
                 </View>
               )}
             </ModuleBox>
@@ -180,8 +175,9 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
   title: {
+    lineHeight: TITLE_FONT_SIZE,
     fontFamily: 'Libre Baskerville, serif',
-    fontSize: 36,
+    fontSize: TITLE_FONT_SIZE,
     fontWeight: '700'
   },
   titlePaginate: {

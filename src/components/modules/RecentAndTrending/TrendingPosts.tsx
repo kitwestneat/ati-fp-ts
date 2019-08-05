@@ -1,7 +1,7 @@
 import TrendingLine from '@/assets/images/trending-line.svg';
 import { ModuleBox, Pattern } from '@/components/modules';
 import { Image } from '@/components/primitives';
-import { COLOR_MAP } from '@/constants';
+import { COLOR_MAP, TITLE_FONT_SIZE } from '@/constants';
 import { capitalize } from '@/utils';
 import React, { PureComponent } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
@@ -83,8 +83,8 @@ const styles = StyleSheet.create({
     padding: '15px'
   },
   text: {
-    lineHeight: 37,
-    fontSize: 40,
+    lineHeight: TITLE_FONT_SIZE,
+    fontSize: TITLE_FONT_SIZE,
     color: 'white',
     fontWeight: '600'
   }
