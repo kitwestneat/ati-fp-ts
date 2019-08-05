@@ -1,9 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
-// import Admin from "@/components/admin/Admin";
-
+import codegen from 'codegen.macro';
 import { isDevEnv } from './utils';
+
+codegen`
+let isAdmin = process.env.IS_ADMIN;
+if (isAdmin) {
+  module.exports = "require('./index-admin.js');\\n";
+} else {
+  module.exports = '';
+}`;
 
 function startFP(data) {
   ReactDOM.render(
@@ -14,16 +21,14 @@ function startFP(data) {
 window.startFP = startFP;
 
 /*
-function startAdmin(moduleList) {
-  ReactDOM.render(
-    <Admin moduleList={moduleList} />,
-    document.getElementById("root"),
-  );
-}
-window.startAdmin = startAdmin;
 */
 
 if (isDevEnv()) {
-  startFP(window.fp_data);
-  //startAdmin(window.admin_data);
+  if (window.document.location.href.includes('/tag/')) {
+    startFP(window.tag_data);
+  } else if (window.startAdmin && window.document.location.href.includes('/admin')) {
+    window.startAdmin(window.admin_data);
+  } else {
+    startFP(window.fp_data);
+  }
 }
