@@ -8,7 +8,7 @@ const {
   EMBEDDED_LEADERBOARD,
   SUPER_LEADERBOARD,
   FLOORBOARD,
-  SKYBOX,
+  SKYBOX
 } = AD_TYPES;
 
 export const Mrec = MakeAdComponent(EMBEDDED_MREC);
@@ -21,5 +21,5 @@ export const SuperLeaderboard = MakeAdComponent(SUPER_LEADERBOARD);
 export const MobileMrec = MakeAdComponent(MOBILE_MREC);
 export const ResponsiveSuperLeaderboard = MakeResponsiveAdComponent({
   MobileAd: MobileMrec,
-  DesktopAd: SuperLeaderboard,
+  DesktopAd: SuperLeaderboard
 });

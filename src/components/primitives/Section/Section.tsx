@@ -28,8 +28,13 @@ class Section extends PureComponent<Props> {
           const spacing = isDesktop
             ? SECTION_SPACERS[topSpacing]
             : SECTION_SPACERS[SECTION_SPACING_VARIANTS.SMALL];
+          const halfSpacing = Math.floor(spacing / 2);
           return (
-            <Row style={[{ alignItems: 'center', marginTop: spacing }, style]}>{children}</Row>
+            <Row
+              style={[{ alignItems: 'center', marginTop: halfSpacing, marginBottom: 15 }, style]}
+            >
+              {children}
+            </Row>
           );
         }}
       </Responsive>

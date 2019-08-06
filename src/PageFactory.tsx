@@ -7,7 +7,7 @@ import {
   RecentAndTrending,
   SplitTagBox,
   TagPostsOverlapTitle,
-  TagPostsSingleColumn, 
+  TagPostsSingleColumn,
   Trending
 } from '@/components/modules';
 import { Section } from '@/components/primitives';
@@ -30,7 +30,7 @@ export const SECTION_TYPE_COMPONENT_MAP: ComponentMap = {
   [SECTION_TYPES.NEWSLETTER]: Newsletter,
   [SECTION_TYPES.TRENDING]: Trending,
   [SECTION_TYPES.TAG_OVERLAP_TITLE]: TagPostsOverlapTitle,
-  [SECTION_TYPES.PREV_NEXT_BUTTONS]: PrevNextButtons,
+  [SECTION_TYPES.PREV_NEXT_BUTTONS]: PrevNextButtons
 };
 
 interface Props {
@@ -42,8 +42,8 @@ class PageSections extends PureComponent<Props> {
     const { data } = this.props;
     return (
       <Fragment>
-        {data.map((item, index, array) => {
-          const spacingVariant = getSequenceAwareSpacingVariant(item, index, array);
+        {data.map((item, index) => {
+          const spacingVariant = getSpacingVariant(item, index);
 
           const Module = getSectionComponentBySectionType(item.type);
 
@@ -62,20 +62,12 @@ export default PageSections;
 
 export const isSmallType = ({ type }: ModuleData): boolean => SMALL_SECTIONS.includes(type);
 
-export const getSequenceAwareSpacingVariant = (
-  currentSection: ModuleData,
-  index: number,
-  array: ModuleData[]
-) => {
-  if (index === 0) {
+export const getSpacingVariant = (currentSection: ModuleData, index: number) => {
+  if (index === 0 || isSmallType(currentSection)) {
     return SECTION_SPACING_VARIANTS.SMALL;
   }
 
-  const prevSection: ModuleData | null = index === 0 ? null : array[index - 1];
-
-  return isSmallType(currentSection) || (prevSection && isSmallType(prevSection))
-    ? SECTION_SPACING_VARIANTS.SMALL
-    : SECTION_SPACING_VARIANTS.LARGE;
+  return SECTION_SPACING_VARIANTS.LARGE;
 };
 
 export const getSectionComponentBySectionType = (sectionType: SECTION_TYPES) =>

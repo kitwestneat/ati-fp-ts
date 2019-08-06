@@ -15,6 +15,7 @@ import { Responsive } from '@/components/utils';
 
 import { BREAKPOINTS } from '@/constants/index';
 import { PostType } from '@/types';
+import BetweenModuleAd from '../shared/BetweenModuleAd';
 
 interface Props {
   posts: PostType[];
@@ -85,12 +86,15 @@ class Trending extends PureComponent<Props> {
     );
 
     return (
-      <Responsive>
-        {({ minWidth }) => {
-          const isDesktop = minWidth(BREAKPOINTS.LG);
-          return isDesktop ? this.renderDesktop(titleSquare) : this.renderMobile(titleSquare);
-        }}
-      </Responsive>
+      <>
+        <BetweenModuleAd />
+        <Responsive>
+          {({ minWidth }) => {
+            const isDesktop = minWidth(BREAKPOINTS.LG);
+            return isDesktop ? this.renderDesktop(titleSquare) : this.renderMobile(titleSquare);
+          }}
+        </Responsive>
+      </>
     );
   }
 }

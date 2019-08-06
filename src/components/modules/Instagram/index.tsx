@@ -9,6 +9,7 @@ import Title from './Title';
 import { Responsive } from '@/components/utils';
 import { BREAKPOINTS } from '@/constants/index';
 import { PostType } from '@/types';
+import BetweenModuleAd from '../shared/BetweenModuleAd';
 
 interface Props {
   posts: PostType[];
@@ -19,27 +20,30 @@ export default class Instagram extends PureComponent<Props> {
     const { posts } = this.props;
 
     return (
-      <Responsive>
-        {({ minWidth }) => {
-          const isDesktop = minWidth(BREAKPOINTS.LG);
-          return (
-            <Container type="content">
-              <ModuleBox style={styles.moduleBox}>
-                <View style={styles.row}>
-                  <View>
-                    <Title isDesktop={isDesktop} />
+      <>
+        <BetweenModuleAd />
+        <Responsive>
+          {({ minWidth }) => {
+            const isDesktop = minWidth(BREAKPOINTS.LG);
+            return (
+              <Container type="content">
+                <ModuleBox style={styles.moduleBox}>
+                  <View style={styles.row}>
+                    <View>
+                      <Title isDesktop={isDesktop} />
+                    </View>
+                    <View>
+                      <InstagramButton />
+                    </View>
                   </View>
-                  <View>
-                    <InstagramButton />
-                  </View>
-                </View>
 
-                <Carousel isDesktop={isDesktop} posts={posts} />
-              </ModuleBox>
-            </Container>
-          );
-        }}
-      </Responsive>
+                  <Carousel isDesktop={isDesktop} posts={posts} />
+                </ModuleBox>
+              </Container>
+            );
+          }}
+        </Responsive>
+      </>
     );
   }
 }

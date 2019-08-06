@@ -29,13 +29,13 @@ class App extends PureComponent<Props> {
       <AppWrap>
         <Header />
         <Main>
-          <Section>
+          <Section style={{ marginBottom: 0 }}>
             <Skybox />
           </Section>
 
           <PageSections data={data} />
 
-          <Section topSpacing={SECTION_SPACING_VARIANTS.LARGE}>
+          <Section topSpacing={SECTION_SPACING_VARIANTS.SMALL}>
             <Floorboard />
           </Section>
 

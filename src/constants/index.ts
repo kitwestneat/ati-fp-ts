@@ -51,11 +51,6 @@ export const BREAKPOINTS = {
   XL: 1200
 };
 
-export const SECTION_SPACING = {
-  LG: 70,
-  SM: 30
-};
-
 export const CONTAINER_PADDING = {
   MOBILE: 15
 };
@@ -72,18 +67,6 @@ export const IMG_DIMS = {
   }
 };
 
-export const THEME_SPACING = {
-  MOBILE_CONTAINER_PADDING: 15,
-  MOBILE_OVERLAY_IMG_DIMS: {
-    width: 375,
-    height: 250
-  },
-  SECTION_SPACING: {
-    LG: 70,
-    SM: 30
-  }
-};
-
 export enum ASYNC_STATES {
   LOADING = 'LOADING',
   SUCCESS = 'SUCCESS',
@@ -91,4 +74,5 @@ export enum ASYNC_STATES {
   DEFAULT = 'DEFAULT'
 }
 
-export const TITLE_FONT_SIZE = 30;
+// 27 is max size for "Archaeological Discoveries"
+export const TITLE_FONT_SIZE = 27;

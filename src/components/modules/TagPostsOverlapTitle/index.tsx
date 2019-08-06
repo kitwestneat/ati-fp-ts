@@ -4,6 +4,7 @@ import { Responsive } from '@/components/utils';
 import { BREAKPOINTS } from '@/constants';
 import { OFFSET_DIRECTION, PostType, TagTileBoxModuleData } from '@/types';
 import React, { PureComponent } from 'react';
+import BetweenModuleAd from '../shared/BetweenModuleAd';
 import PostList from '../TagPostsSingleColumn/PostList';
 import OverlapGrid from './OverlapGrid';
 import TitleRow from './TitleRow';
@@ -65,48 +66,51 @@ export default class TagPostsOverlapTitle extends PureComponent<Props, State> {
     const { titleRowWidth } = this.state;
 
     return (
-      <Responsive>
-        {({ minWidth }) => {
-          const isDesktop = minWidth(BREAKPOINTS.LG);
+      <>
+        <BetweenModuleAd />
+        <Responsive>
+          {({ minWidth }) => {
+            const isDesktop = minWidth(BREAKPOINTS.LG);
 
-          const mainPostProps = {
-            center: true,
-            showLabel: false,
-            ...mainPostImageProps(isDesktop)
-          };
+            const mainPostProps = {
+              center: true,
+              showLabel: false,
+              ...mainPostImageProps(isDesktop)
+            };
 
-          return (
-            <Container type="content">
-              <TitleRow
-                patternColor={sectionColor}
-                link={sectionLink}
-                title={sectionTitle}
-                isDesktop={isDesktop}
-                onLayout={this.getWidth}
-              />
-
-              <Row style={{}}>
-                <OverlapFrame
-                  {...frameProps(isDesktop)}
-                  titleOverlap
-                  titleWidth={titleRowWidth}
+            return (
+              <Container type="content">
+                <TitleRow
+                  patternColor={sectionColor}
+                  link={sectionLink}
+                  title={sectionTitle}
                   isDesktop={isDesktop}
-                  mainPost={mainPost}
-                  mainPostProps={mainPostProps}
-                >
-                  <ModuleBox offsetDirection={OFFSET_DIRECTION.RIGHT} patternColor={sectionColor}>
-                    {isDesktop ? (
-                      <OverlapGrid posts={secondaryPosts} />
-                    ) : (
-                      <PostList posts={secondaryPosts} />
-                    )}
-                  </ModuleBox>
-                </OverlapFrame>
-              </Row>
-            </Container>
-          );
-        }}
-      </Responsive>
+                  onLayout={this.getWidth}
+                />
+
+                <Row style={{}}>
+                  <OverlapFrame
+                    {...frameProps(isDesktop)}
+                    titleOverlap
+                    titleWidth={titleRowWidth}
+                    isDesktop={isDesktop}
+                    mainPost={mainPost}
+                    mainPostProps={mainPostProps}
+                  >
+                    <ModuleBox offsetDirection={OFFSET_DIRECTION.RIGHT} patternColor={sectionColor}>
+                      {isDesktop ? (
+                        <OverlapGrid posts={secondaryPosts} />
+                      ) : (
+                        <PostList posts={secondaryPosts} />
+                      )}
+                    </ModuleBox>
+                  </OverlapFrame>
+                </Row>
+              </Container>
+            );
+          }}
+        </Responsive>
+      </>
     );
   }
 }

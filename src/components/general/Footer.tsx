@@ -11,7 +11,8 @@ import {
   FOOTER_HEIGHT,
   HOME_LINK,
   PBH_NETWORK_LINKS,
-  SECTION_SPACING,
+  SECTION_SPACERS,
+  SECTION_SPACING_VARIANTS,
   SOCIAL_LINKS_REDUCED
 } from '@/constants';
 
@@ -34,7 +35,7 @@ class Footer extends PureComponent<Props> {
 
   public vwStyles = (isDesktop: boolean) => ({
     spacerTop: {
-      marginTop: SECTION_SPACING[isDesktop ? 'LG' : 'SM']
+      marginTop: 15
     },
     hPadding: {
       paddingHorizontal: isDesktop ? 30 : 8
