@@ -11,6 +11,7 @@ import '../../../assets/css/infobox.css';
 interface Props extends InfoBoxData {
   name: string;
   imageSrc: string;
+  imageAlt?: string;
   description: string;
   paginate?: boolean;
   patternColor?: string;
@@ -56,11 +57,12 @@ export default class InfoBox extends PureComponent<Props, State> {
     isDevEnv() ? window.location.pathname.includes('/page/') : this.props.paginate;
 
   public renderDesktop = () => {
-    const { name, imageSrc, description, patternColor } = this.props;
+    const { name, imageSrc, imageAlt, description, patternColor } = this.props;
     const paginate = this.isPaginated();
     return (
       <ImageBackground
         source={{ uri: imageSrc }}
+        accessibilityLabel={imageAlt}
         style={[styles.imageDesktop, { marginBottom: paginate ? 0 : 70 }]}
       >
         <Container type="content">
@@ -92,7 +94,7 @@ export default class InfoBox extends PureComponent<Props, State> {
   };
 
   public renderMobile = (isTablet: any) => {
-    const { name, imageSrc, description, patternColor } = this.props;
+    const { name, imageSrc, imageAlt, description, patternColor } = this.props;
     const { isExpanded, height } = this.state;
     const toggleDescription = !isExpanded ? getDescriptionSubstring(description) : description;
     const toggleExpandText = !isExpanded ? 'Read More' : 'Read Less';
@@ -105,7 +107,7 @@ export default class InfoBox extends PureComponent<Props, State> {
           marginBottom: 30
         }}
       >
-        <Image source={{ uri: imageSrc }} style={{ width: 180, height: 100 }} />
+        <Image source={{ uri: imageSrc }} style={{ width: 180, height: 100 }} alt={imageAlt} />
         <View style={[styles.infobox, styles.infoboxMobile, { top: paginate ? '30px' : '70px' }]}>
           <ModuleBox patternColor={patternColor} backgroundColor={'transparent'}>
             {paginate ? (
