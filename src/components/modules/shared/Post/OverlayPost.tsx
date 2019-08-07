@@ -42,6 +42,7 @@ class OverlayPost extends PureComponent<OverlayPostProps> {
       fontStyles,
       containerPadding,
       title,
+      authorName,
       categoryName,
       categoryColor,
       bottomOverlap,
@@ -60,7 +61,7 @@ class OverlayPost extends PureComponent<OverlayPostProps> {
 
     const labelWrapPosition = getLabelWrapPositionStyles(center);
     const linkProps: WebAccessibilityProps = link ? { accessibilityRole: 'link', href: link } : {};
-    const mobilePadding = isDesktop ? {} : { padding: 20 };
+    const mobilePadding = isDesktop ? {} : { padding: 20, paddingBottom: 10 };
 
     return (
       <View {...linkProps}>
@@ -94,6 +95,21 @@ class OverlayPost extends PureComponent<OverlayPostProps> {
                 html={title}
               />
             </View>
+            {authorName && (
+              <View>
+                <Text
+                  numberOfLines={1}
+                  style={[
+                    localFontStyles,
+                    fontStyles,
+                    center && { textAlign: 'center' },
+                    styles.authorText
+                  ]}
+                >
+                  {'By ' + authorName}
+                </Text>
+              </View>
+            )}
           </View>
         </View>
       </View>
@@ -112,6 +128,10 @@ const styles = StyleSheet.create({
   titleText: {
     color: 'white',
     fontWeight: '600'
+  },
+  authorText: {
+    color: '#CCCCCC',
+    fontSize: 15
   },
   detailsWrap: {
     position: 'absolute',

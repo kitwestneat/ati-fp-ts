@@ -31,7 +31,17 @@ class TitleSquare extends PureComponent<Props> {
       <View {...linkProps}>
         <Pattern color={patternColor}>
           <Ratio ratio="1:1">
-            <View style={[styles.colorBackground, { padding: 30, backgroundColor: patternColor }]}>
+            <View
+              style={[
+                styles.colorBackground,
+                {
+                  paddingBottom: 30,
+                  paddingLeft: 15,
+                  paddingRight: 15,
+                  backgroundColor: patternColor
+                }
+              ]}
+            >
               {showIcon && (
                 <Row>
                   <Image style={{ width: 45, height: 27 }} source={{ uri: TrendingLine }} />

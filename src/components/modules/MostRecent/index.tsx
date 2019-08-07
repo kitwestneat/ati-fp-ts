@@ -23,7 +23,12 @@ class MostRecent extends PureComponent<Props> {
     } = this.props;
 
     return (
-      <OverlapFrame mainPost={mainPost} containerPadding={CONTAINER_PADDING.MOBILE} overlap={15}>
+      <OverlapFrame
+        mainPost={mainPost}
+        containerPadding={CONTAINER_PADDING.MOBILE}
+        bottomOverlap={15}
+        overlap={15}
+      >
         <ModuleBox patternColor={mainPost.categoryColor}>
           <PostList posts={secondaryPosts} isDesktop={false} />
         </ModuleBox>

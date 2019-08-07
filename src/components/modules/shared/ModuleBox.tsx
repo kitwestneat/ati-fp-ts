@@ -27,14 +27,29 @@ class ModuleBox extends PureComponent<Props> {
   };
 
   public render() {
-    const { children, patternColor, backgroundColor, offsetDirection, style, onLayout } = this.props;
+    const {
+      children,
+      patternColor,
+      backgroundColor,
+      offsetDirection,
+      style,
+      onLayout
+    } = this.props;
 
     return patternColor ? (
-      <Pattern offsetDirection={offsetDirection} color={patternColor} backgroundColor={backgroundColor}>
-        <Box style={style} onLayout={onLayout}>{children}</Box>
+      <Pattern
+        offsetDirection={offsetDirection}
+        color={patternColor}
+        backgroundColor={backgroundColor}
+      >
+        <Box style={style} onLayout={onLayout}>
+          {children}
+        </Box>
       </Pattern>
     ) : (
-      <Box style={style} onLayout={onLayout}>{children}</Box>
+      <Box style={style} onLayout={onLayout}>
+        {children}
+      </Box>
     );
   }
 }
@@ -44,13 +59,26 @@ export default ModuleBox;
 const styles = StyleSheet.create({
   box: {
     ...(elevation(1) as object),
-    padding: 30,
+    paddingTop: 30,
+    paddingBottom: 30,
+    paddingLeft: 15,
+    paddingRight: 15,
     width: '100%',
     maxWidth: '100%',
     backgroundColor: 'white'
   }
 });
 
-const Box = ({ children, style, onLayout }: { children: ReactNode; style: StyleProp<ViewStyle>; onLayout?: any }) => (
-  <View style={[styles.box, style]} onLayout={onLayout}>{children}</View>
+const Box = ({
+  children,
+  style,
+  onLayout
+}: {
+  children: ReactNode;
+  style: StyleProp<ViewStyle>;
+  onLayout?: any;
+}) => (
+  <View style={[styles.box, style]} onLayout={onLayout}>
+    {children}
+  </View>
 );
