@@ -112,3 +112,5 @@ export interface WebViewStyle extends Omit<ViewStyle, 'transform'> {
     translateY?: string | number;
   }>;
 }
+
+export type ShowAuthorNameType = 'always' | 'never' | 'desktop' | 'mobile';

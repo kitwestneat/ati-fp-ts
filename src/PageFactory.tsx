@@ -13,8 +13,9 @@ import {
 import { Section } from '@/components/primitives';
 import React, { Fragment, PureComponent } from 'react';
 
-import { SECTION_SPACING_VARIANTS, SECTION_TYPES, SMALL_SECTIONS } from '@/constants';
-import { ModuleData } from './types';
+import { Responsive } from '@/components/utils';
+import { BREAKPOINTS, SECTION_SPACING_VARIANTS, SECTION_TYPES, SMALL_SECTIONS } from '@/constants';
+import { ModuleData, PostType, ShowAuthorNameType } from './types';
 
 interface ComponentMap {
   [t: string]: React.ElementType;
@@ -37,6 +38,26 @@ interface Props {
   data: ModuleData[];
 }
 
+function filterAuthorName({
+  posts,
+  isDesktop,
+  showAuthorName = 'never'
+}: {
+  posts: PostType[];
+  isDesktop: boolean;
+  showAuthorName?: ShowAuthorNameType;
+}) {
+  const shouldFilter =
+    showAuthorName === 'never' ||
+    (isDesktop && showAuthorName === 'mobile') ||
+    (!isDesktop && showAuthorName === 'desktop');
+
+  const newPosts =
+    posts && shouldFilter ? posts.map(({ authorName, ...post }: any) => post) : posts;
+
+  return newPosts;
+}
+
 class PageSections extends PureComponent<Props> {
   public render() {
     const { data } = this.props;
@@ -49,7 +70,21 @@ class PageSections extends PureComponent<Props> {
 
           return (
             <Section key={index + item.type} topSpacing={spacingVariant}>
-              <Module {...item} />
+              <Responsive>
+                {({ minWidth }) => {
+                  const isDesktop = minWidth(BREAKPOINTS.LG);
+                  const isTablet = minWidth(BREAKPOINTS.MD);
+
+                  const moduleData = item as any;
+                  const { posts, showAuthorName, ...rest } = moduleData;
+
+                  const newPosts = filterAuthorName({ posts, showAuthorName, isDesktop });
+
+                  return (
+                    <Module {...rest} posts={newPosts} isDesktop={isDesktop} isTablet={isTablet} />
+                  );
+                }}
+              </Responsive>
             </Section>
           );
         })}
