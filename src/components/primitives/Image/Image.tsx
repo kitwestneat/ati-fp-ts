@@ -43,7 +43,7 @@ class Image extends PureComponent<Props> {
   public getDimensionsFromProps = (): Dimension | null => {
     const { width, height } = this.props;
 
-    return typeof width == 'number' && typeof height == 'number'
+    return typeof width === 'number' && typeof height === 'number'
       ? {
           width,
           height
@@ -55,7 +55,7 @@ class Image extends PureComponent<Props> {
     const width = this.getValueFromStyleProp('width');
     const height = this.getValueFromStyleProp('height');
 
-    return typeof width == 'number' && typeof height == 'number'
+    return typeof width === 'number' && typeof height === 'number'
       ? {
           width,
           height

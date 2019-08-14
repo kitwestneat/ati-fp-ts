@@ -6,7 +6,8 @@ import { StyleSheet, View } from 'react-native';
 import { Container, Image } from '@/components/primitives';
 import { Responsive } from '@/components/utils';
 
-import SignUpForm from './SignUpForm';
+import Callout from '../shared/SignUpForm/Callout';
+import SignUpForm from '../shared/SignUpForm/SignUpForm';
 
 import { BREAKPOINTS, COLOR_MAP } from '@/constants/index';
 
@@ -50,7 +51,14 @@ class Newsletter extends PureComponent<Props> {
                   </View>
                 </View>
                 <View style={styles.column}>
-                  <SignUpForm />
+                  <SignUpForm>
+                    <Callout
+                      copy={{
+                        headline: `Sign up to our newsletter`,
+                        subheadline: `Just enter your email and stay updated`
+                      }}
+                    />
+                  </SignUpForm>
                 </View>
               </Container>
             </View>

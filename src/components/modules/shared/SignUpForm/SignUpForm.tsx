@@ -3,28 +3,29 @@
 import React, { PureComponent } from 'react';
 import { ActivityIndicator, StyleSheet, View } from 'react-native';
 
-import { Text } from '../../primitives';
+import { Text } from '../../../primitives';
 
 import { FaCheckCircle, FaExclamationTriangle } from 'react-icons/fa';
-
-import Callout from './Callout';
-import EmailInput from './EmailInput';
-import SubmitButton from './SubmitButton';
 
 import { subscribe } from './subscribe';
 
 import { ASYNC_STATES } from '@/constants';
+import EmailInput from './EmailInput';
+import SubmitButton from './SubmitButton';
 
-interface Props {}
+const COPY_DEFAULT = {
+  SUCCESS: 'Thank you for subscribing to our newsletter!',
+  ERROR: 'There was an error subscribing to the newsletter. Please try again later.'
+};
+
+interface Props {
+  subscribeExtraOpts?: any;
+}
+
 interface State {
   submissionStatus: ASYNC_STATES;
   email: string;
 }
-
-const COPY = {
-  SUCCESS: 'Thank you for subscribing to our newsletter!',
-  ERROR: 'There was an error subscribing to the newsletter. Please try again later.'
-};
 
 class SignUpForm extends PureComponent<Props, State> {
   public state: State = {
@@ -42,7 +43,8 @@ class SignUpForm extends PureComponent<Props, State> {
 
     this.setState({ submissionStatus: ASYNC_STATES.LOADING });
 
-    const { status } = await subscribe(email);
+    const { subscribeExtraOpts } = this.props;
+    const { status } = await subscribe(email, subscribeExtraOpts);
 
     this.setState({
       submissionStatus: status === 200 ? ASYNC_STATES.SUCCESS : ASYNC_STATES.ERROR
@@ -54,14 +56,14 @@ class SignUpForm extends PureComponent<Props, State> {
   public renderSuccess = () => (
     <Text style={[styles.successMsg]}>
       <FaCheckCircle />
-      {COPY.SUCCESS}
+      {COPY_DEFAULT.SUCCESS}
     </Text>
   );
 
   public renderError = () => (
     <Text style={[styles.errorMsg]}>
       <FaExclamationTriangle />
-      {COPY.ERROR}
+      {COPY_DEFAULT.ERROR}
     </Text>
   );
 
@@ -70,7 +72,7 @@ class SignUpForm extends PureComponent<Props, State> {
 
     return (
       <View>
-        <Callout />
+        {this.props.children}
         <View style={styles.signupWrap}>
           <EmailInput value={email} onChangeText={this.setEmail} onSubmit={this.handleSubmit} />
           <SubmitButton onPress={this.handleSubmit} />

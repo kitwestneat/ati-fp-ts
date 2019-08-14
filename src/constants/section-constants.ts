@@ -4,6 +4,7 @@ export enum SECTION_TYPES {
   TAG_TILE_BOX = 'tagTileBox',
   INSTAGRAM = 'instagram',
   NEWSLETTER = 'newsletter',
+  HISTORY_NEWSLETTER = 'history-newsletter',
   TRENDING = 'trending',
   TAG = 'tag',
   SPLIT_TAG_BOX = 'splitTagBox',

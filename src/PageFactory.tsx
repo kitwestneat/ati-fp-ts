@@ -13,6 +13,7 @@ import {
 import { Section } from '@/components/primitives';
 import React, { Fragment, PureComponent } from 'react';
 
+import HistoryNewsletter from '@/components/modules/HistoryNewsletter';
 import { Responsive } from '@/components/utils';
 import { BREAKPOINTS, SECTION_SPACING_VARIANTS, SECTION_TYPES, SMALL_SECTIONS } from '@/constants';
 import { ModuleData, PostType, ShowAuthorNameType } from './types';
@@ -29,6 +30,7 @@ export const SECTION_TYPE_COMPONENT_MAP: ComponentMap = {
   [SECTION_TYPES.TAG_TILE_BOX]: TagPostsSingleColumn,
   [SECTION_TYPES.INSTAGRAM]: Instagram,
   [SECTION_TYPES.NEWSLETTER]: Newsletter,
+  [SECTION_TYPES.HISTORY_NEWSLETTER]: HistoryNewsletter,
   [SECTION_TYPES.TRENDING]: Trending,
   [SECTION_TYPES.TAG_OVERLAP_TITLE]: TagPostsOverlapTitle,
   [SECTION_TYPES.PREV_NEXT_BUTTONS]: PrevNextButtons

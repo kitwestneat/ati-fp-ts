@@ -3,7 +3,7 @@
 import React from 'react';
 import { StyleSheet, TouchableOpacity, View } from 'react-native';
 
-import { Text } from '../../primitives';
+import { Text } from '../../../primitives';
 
 const BUTTON_TEXT = 'Sign Up';
 
