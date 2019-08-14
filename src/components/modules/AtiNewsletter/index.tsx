@@ -1,20 +1,20 @@
 // @flow
 
 import React, { PureComponent } from 'react';
-import { Image, ImageBackground, StyleSheet, View } from 'react-native';
+import { ImageBackground, StyleSheet, View } from 'react-native';
 
-import { Container } from '@/components/primitives';
+import { Container, Image } from '@/components/primitives';
 import { Responsive } from '@/components/utils';
 
 import { BREAKPOINTS } from '@/constants';
 
-import DesktopBackground from '@/assets/images/hu-newsletter-desktop-bg.jpg';
-import MobileBackground from '@/assets/images/hu-newsletter-mobile-bg.jpg';
-import Rasputin from '@/assets/images/hu-newsletter-rasputin.png';
+import DesktopBackground from '@/assets/images/ati-newsletter-desktop-bg.jpg';
+import MobileBackground from '@/assets/images/ati-newsletter-desktop-bg.jpg'; // XXX
+import Planet from '@/assets/images/ati-newsletter-planet.png';
 import Callout from '../shared/SignUpForm/Callout';
 import SignUpForm from '../shared/SignUpForm/SignUpForm';
 
-class HistoryNewsletter extends PureComponent {
+class AtiNewsletter extends PureComponent {
   public render() {
     return (
       <Responsive>
@@ -22,18 +22,17 @@ class HistoryNewsletter extends PureComponent {
           const isDesktop = width > BREAKPOINTS.MD;
 
           const copy = {
-            headline: 'Learn About The History They Don\'t Want You To Know',
+            headline: 'See The World You Weren\'t Meant To See',
             subheadline: isDesktop
-              ? 'Join the History Uncovered newsletter, see history through a whole new lens.'
-              : 'Join the History Uncovered newsletter.'
+              ? 'Join the All That\'s Interesting newsletter and see the world like never before.'
+              : 'Join the All That\'s Interesting newsletter.'
           };
           const calloutStyles = {
             headline: {
-              lineHeight: 30,
-              fontSize: 25
+              lineHeight: 30
             },
             subheadline: {
-              marginTop: 10,
+              marginTop: 5,
               lineHeight: 20,
               fontSize: 20
             }
@@ -51,9 +50,14 @@ class HistoryNewsletter extends PureComponent {
                   { height: '100%' },
                   isDesktop
                     ? styles.container
-                    : { paddingVertical: 60, width: 448, maxWidth: '100%' }
+                    : { paddingVertical: 30, width: 448, maxWidth: '100%' }
                 ]}
               >
+                <View style={styles.column}>
+                  <SignUpForm>
+                    <Callout copy={copy} styles={calloutStyles} />
+                  </SignUpForm>
+                </View>
                 {isDesktop && (
                   <View
                     style={[
@@ -67,23 +71,10 @@ class HistoryNewsletter extends PureComponent {
                     ]}
                   >
                     <View style={styles.imageWrap}>
-                      <Image
-                        resizeMode="contain"
-                        source={{ uri: Rasputin }}
-                        style={{ position: 'absolute', top: -30, bottom: 0, left: 0, right: 0 }}
-                      />
+                      <Image resizeMode="contain" source={{ uri: Planet }} />
                     </View>
                   </View>
                 )}
-                <View
-                  style={[styles.column, isDesktop ? styles.signupDesktop : styles.signupMobile]}
-                >
-                  <View>
-                    <SignUpForm>
-                      <Callout copy={copy} styles={calloutStyles} />
-                    </SignUpForm>
-                  </View>
-                </View>
               </Container>
             </ImageBackground>
           );
@@ -93,7 +84,7 @@ class HistoryNewsletter extends PureComponent {
   }
 }
 
-export default HistoryNewsletter;
+export default AtiNewsletter;
 
 const styles = StyleSheet.create({
   wrap: {
@@ -105,26 +96,16 @@ const styles = StyleSheet.create({
   },
   container: {
     flexDirection: 'row',
-    flexWrap: 'nowrap',
-    padding: 0
+    flexWrap: 'nowrap'
   },
   imageWrap: {
     marginTop: -30,
     width: '100%',
-    height: '100%',
-    position: 'relative'
+    marginBottom: -10
   },
   column: {
     flex: 1,
+    paddingHorizontal: 20,
     justifyContent: 'center'
-  },
-  signupMobile: {
-    paddingRight: 80,
-    paddingLeft: 35,
-    paddingVertical: 20
-  },
-  signupDesktop: {
-    paddingVertical: 50,
-    paddingRight: 200
   }
 });

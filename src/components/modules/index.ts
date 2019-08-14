@@ -9,6 +9,8 @@ export { default as Post } from './shared/Post';
 export { default as MostRecent } from './MostRecent';
 export { default as TagPostsSingleColumn } from './TagPostsSingleColumn';
 export { default as Newsletter } from './Newsletter';
+export { default as HistoryNewsletter } from './HistoryNewsletter';
+export { default as AtiNewsletter } from './AtiNewsletter';
 export { default as Trending } from './Trending';
 export { default as Instagram } from './Instagram';
 

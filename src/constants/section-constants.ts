@@ -5,6 +5,7 @@ export enum SECTION_TYPES {
   INSTAGRAM = 'instagram',
   NEWSLETTER = 'newsletter',
   HISTORY_NEWSLETTER = 'history-newsletter',
+  ATI_NEWSLETTER = 'ati-newsletter',
   TRENDING = 'trending',
   TAG = 'tag',
   SPLIT_TAG_BOX = 'splitTagBox',
