@@ -1,15 +1,15 @@
 // @flow
 
 import React, { PureComponent } from 'react';
-import { ImageBackground, StyleSheet, View } from 'react-native';
+import { Image, ImageBackground, StyleSheet, View } from 'react-native';
 
-import { Container, Image } from '@/components/primitives';
+import { Container } from '@/components/primitives';
 import { Responsive } from '@/components/utils';
 
 import { BREAKPOINTS } from '@/constants';
 
 import DesktopBackground from '@/assets/images/ati-newsletter-desktop-bg.jpg';
-import MobileBackground from '@/assets/images/ati-newsletter-desktop-bg.jpg'; // XXX
+import MobileBackground from '@/assets/images/ati-newsletter-mobile-bg.jpg';
 import Planet from '@/assets/images/ati-newsletter-planet.png';
 import Callout from '../shared/SignUpForm/Callout';
 import SignUpForm from '../shared/SignUpForm/SignUpForm';
@@ -23,16 +23,18 @@ class AtiNewsletter extends PureComponent {
 
           const copy = {
             headline: 'See The World You Weren\'t Meant To See',
+
             subheadline: isDesktop
               ? 'Join the All That\'s Interesting newsletter and see the world like never before.'
               : 'Join the All That\'s Interesting newsletter.'
           };
           const calloutStyles = {
             headline: {
-              lineHeight: 30
+              lineHeight: 30,
+              fontSize: 25
             },
             subheadline: {
-              marginTop: 5,
+              marginTop: 10,
               lineHeight: 20,
               fontSize: 20
             }
@@ -50,13 +52,17 @@ class AtiNewsletter extends PureComponent {
                   { height: '100%' },
                   isDesktop
                     ? styles.container
-                    : { paddingVertical: 30, width: 448, maxWidth: '100%' }
+                    : { paddingVertical: 60, width: 448, maxWidth: '100%' }
                 ]}
               >
-                <View style={styles.column}>
-                  <SignUpForm>
-                    <Callout copy={copy} styles={calloutStyles} />
-                  </SignUpForm>
+                <View
+                  style={[styles.column, isDesktop ? styles.signupDesktop : styles.signupMobile]}
+                >
+                  <View>
+                    <SignUpForm>
+                      <Callout copy={copy} styles={calloutStyles} />
+                    </SignUpForm>
+                  </View>
                 </View>
                 {isDesktop && (
                   <View
@@ -71,7 +77,11 @@ class AtiNewsletter extends PureComponent {
                     ]}
                   >
                     <View style={styles.imageWrap}>
-                      <Image resizeMode="contain" source={{ uri: Planet }} />
+                      <Image
+                        resizeMode="contain"
+                        source={{ uri: Planet }}
+                        style={{ position: 'absolute', top: -10, bottom: 20, left: 0, right: 0 }}
+                      />
                     </View>
                   </View>
                 )}
@@ -96,16 +106,26 @@ const styles = StyleSheet.create({
   },
   container: {
     flexDirection: 'row',
-    flexWrap: 'nowrap'
+    flexWrap: 'nowrap',
+    padding: 0
   },
   imageWrap: {
     marginTop: -30,
     width: '100%',
-    marginBottom: -10
+    height: '100%',
+    position: 'relative'
   },
   column: {
     flex: 1,
-    paddingHorizontal: 20,
     justifyContent: 'center'
+  },
+  signupMobile: {
+    paddingRight: 80,
+    paddingLeft: 35,
+    paddingVertical: 20
+  },
+  signupDesktop: {
+    paddingVertical: 50,
+    paddingLeft: 200
   }
 });
