@@ -4,8 +4,10 @@ import React, { PureComponent } from 'react';
 import { StyleSheet, View } from 'react-native';
 
 import { ModuleBox, OverlapFrame, Post } from '@/components/modules';
-import { Container } from '@/components/primitives';
+import { Container, Image } from '@/components/primitives';
 import { Responsive } from '@/components/utils';
+
+import Banner from '@/assets/images/ati-banner.png';
 
 import PostList from './PostList';
 
@@ -30,7 +32,19 @@ class MostRecent extends PureComponent<Props> {
         overlap={15}
       >
         <ModuleBox patternColor={mainPost.categoryColor}>
-          <PostList posts={secondaryPosts} isDesktop={false} />
+          <>
+            <View style={{ width: '70%', marginBottom: 20, marginTop: -5 }}>
+              <Image
+                alt="All That's Interesting, Something Interesting To Read Everyday"
+                style={
+                  { width: 586, height: 112, maxHeight: 30, backgroundPosition: 'left' } as any
+                }
+                resizeMode="contain"
+                source={{ uri: Banner }}
+              />
+            </View>
+            <PostList posts={secondaryPosts} isDesktop={false} />
+          </>
         </ModuleBox>
       </OverlapFrame>
     );
@@ -54,6 +68,14 @@ class MostRecent extends PureComponent<Props> {
               />
             </View>
             <View style={styles.right}>
+              <View style={{ height: 50, marginBottom: 30, marginTop: -10 }}>
+                <Image
+                  alt="All That's Interesting, Something Interesting To Read Everyday"
+                  style={{ width: 586, height: 112, backgroundPosition: 'left' } as any}
+                  resizeMode="contain"
+                  source={{ uri: Banner }}
+                />
+              </View>
               <PostList posts={secondaryPosts} isDesktop={true} />
             </View>
           </View>
