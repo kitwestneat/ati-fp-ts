@@ -1,15 +1,26 @@
 import { View } from '@/components/primitives';
-import { ATI_INSTAGRAM_URL, COLOR_MAP } from '@/constants';
+import { COLOR_MAP } from '@/constants';
 import React, { PureComponent } from 'react';
 import { FaInstagram } from 'react-icons/fa';
 import { StyleSheet, Text } from 'react-native';
 
 const FOLLOW_STRING = 'FOLLOW US';
 
-class InstagramButton extends PureComponent {
+interface Props {
+  url: string;
+  color?: string;
+}
+
+class InstagramButton extends PureComponent<Props> {
   public render() {
+    const { color, url } = this.props;
     return (
-      <View style={styles.button} accessibilityRole="link" href={ATI_INSTAGRAM_URL} target="_blank">
+      <View
+        style={[styles.button, { backgroundColor: color }]}
+        accessibilityRole="link"
+        href={url}
+        target="_blank"
+      >
         <FaInstagram fill="white" size={18} />
         <Text style={styles.text}>{FOLLOW_STRING}</Text>
       </View>

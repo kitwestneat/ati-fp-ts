@@ -5,25 +5,38 @@ import { Text } from '../../primitives';
 
 interface Props {
   isDesktop: boolean;
+  isHU?: boolean;
+  hashColor?: string;
 }
 
 class Title extends PureComponent<Props> {
   public renderInstagram = () => <Text style={styles.text}>Instagram</Text>;
 
   public render() {
-    const { isDesktop } = this.props;
+    const { isDesktop, isHU = false, hashColor } = this.props;
+
+    const title = !isHU ? 'ati' : 'history uncovered';
+    const extraStyles = isHU
+      ? {
+          fontSize: 23
+        }
+      : {};
 
     return (
       <View>
         {isDesktop ? (
-          <Text serif style={styles.text}>
-            #ati on{' '}
+          <Text serif style={[styles.text, extraStyles]}>
+            <Text style={[styles.text, extraStyles, { color: hashColor }]}>#</Text>
+            {title} on{' '}
             <Text serif style={[styles.text, styles.instagram]}>
               instagram
             </Text>
           </Text>
         ) : (
-          <Text style={styles.text}>#ati</Text>
+          <Text serif={isHU} style={[styles.text, extraStyles]}>
+            <Text style={[styles.text, extraStyles, { color: hashColor }]}>#</Text>
+            {title}
+          </Text>
         )}
       </View>
     );

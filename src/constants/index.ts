@@ -7,6 +7,7 @@ export const HEADER_HEIGHT = 50;
 export const FOOTER_HEIGHT = HEADER_HEIGHT;
 
 export const ATI_INSTAGRAM_URL = 'https://www.instagram.com/all_thats_interesting/';
+export const HU_INSTAGRAM_URL = 'https://www.instagram.com/realhistoryuncovered/';
 export const THUMBER_URL = 'https://allthatsinteresting.com/thumb';
 
 export const POST_CATEGORIES = {
