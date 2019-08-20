@@ -13,6 +13,7 @@ import {
   Trending
 } from '@/components/modules';
 import { Section } from '@/components/primitives';
+import _ from 'lodash';
 import React, { Fragment, PureComponent } from 'react';
 
 import { Responsive } from '@/components/utils';
@@ -80,12 +81,19 @@ class PageSections extends PureComponent<Props> {
                   const isTablet = minWidth(BREAKPOINTS.MD);
 
                   const moduleData = item as any;
-                  const { posts, showAuthorName, ...rest } = moduleData;
+                  const { posts, recentPosts, trendingPosts, showAuthorName, ...rest } = moduleData;
 
-                  const newPosts = filterAuthorName({ posts, showAuthorName, isDesktop });
+                  const newPosts = _.mapValues(
+                    {
+                      posts,
+                      recentPosts,
+                      trendingPosts
+                    },
+                    (v: PostType[]) => filterAuthorName({ posts: v, showAuthorName, isDesktop })
+                  );
 
                   return (
-                    <Module {...rest} posts={newPosts} isDesktop={isDesktop} isTablet={isTablet} />
+                    <Module {...rest} {...newPosts} isDesktop={isDesktop} isTablet={isTablet} />
                   );
                 }}
               </Responsive>
