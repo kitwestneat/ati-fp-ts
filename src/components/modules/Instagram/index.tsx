@@ -1,5 +1,5 @@
 import { ModuleBox } from '@/components/modules';
-import { Container } from '@/components/primitives';
+import { Container, TouchableOpacity } from '@/components/primitives';
 import React, { PureComponent } from 'react';
 import { StyleSheet, View } from 'react-native';
 import Carousel from './Carousel';
@@ -33,9 +33,9 @@ export default class Instagram extends PureComponent<Props> {
             return (
               <Container type="content">
                 <ModuleBox style={styles.moduleBox}>
-                  <View style={styles.row}>
+                  <View style={[styles.row, isHU ? {} : { paddingHorizontal: 30 }]}>
                     <View>
-                      <Title isHU={isHU} hashColor={themeColor} isDesktop={isDesktop} />
+                      <Title isHU={isHU} hashColor={themeColor} isDesktop={isDesktop} href={url} />
                     </View>
                     <View>
                       <InstagramButton color={themeColor} url={url} />
