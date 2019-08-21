@@ -5,9 +5,9 @@ import { BREAKPOINTS } from '@/constants';
 import { OFFSET_DIRECTION, PostType, TagTileBoxModuleData } from '@/types';
 import React, { PureComponent } from 'react';
 import BetweenModuleAd from '../shared/BetweenModuleAd';
+import TitleRow from '../shared/TitleRow';
 import PostList from '../TagPostsSingleColumn/PostList';
 import OverlapGrid from './OverlapGrid';
-import TitleRow from './TitleRow';
 
 interface Props extends TagTileBoxModuleData {
   posts: PostType[];
@@ -81,6 +81,7 @@ export default class TagPostsOverlapTitle extends PureComponent<Props, State> {
             return (
               <Container type="content">
                 <TitleRow
+                  withAd={false}
                   patternColor={sectionColor}
                   link={sectionLink}
                   title={sectionTitle}

@@ -5,8 +5,10 @@ import { BREAKPOINTS } from '@/constants';
 import { OFFSET_DIRECTION, PostType, SplitTagBoxData } from '@/types';
 import React, { PureComponent } from 'react';
 import { StyleSheet, View } from 'react-native';
+import BetweenModuleAd from '../shared/BetweenModuleAd';
+import TitleRow from '../shared/TitleRow';
 import PostList from '../TagPostsSingleColumn/PostList';
-import TitleRow from '../TagPostsSingleColumn/TitleRow';
+import FeaturedSplitTagGrid from './FeaturedSplitTagGrid';
 import SplitTagGrid from './SplitTagGrid';
 
 interface Props extends SplitTagBoxData {
@@ -14,6 +16,7 @@ interface Props extends SplitTagBoxData {
   sectionLink: string;
   sectionColor: string;
   split?: string;
+  hasFeaturedPost?: boolean;
   posts: PostType[];
 }
 
@@ -26,74 +29,86 @@ export default class SplitTagBox extends PureComponent<Props, State> {
     split: 'left'
   };
 
-  public state = {
-    height: 0
-  };
+  public renderDesktop = (titleRow: JSX.Element) => {
+    const { hasFeaturedPost, sectionColor, split, posts } = this.props;
 
-  // The two ModuleBoxes share a parent container.
-  // Use the height of the parent to determine the height of the ModuleBoxes.
-  public getHeight = (e: any) => {
-    const h = e.nativeEvent.layout.height;
-    this.setState({
-      height: h
-    });
+    const twoPosts = posts.slice(0, 2);
+    const threePosts = posts.slice(2, 5); // Make sure we stop at 5 posts on Desktop
+
+    const flexDirection = split === 'left' ? 'row' : 'row-reverse';
+
+    return (
+      <>
+        {!hasFeaturedPost && titleRow}
+        <View style={[styles.parentContainer, { flexDirection }]}>
+          <View style={styles.twoPostsBox}>
+            {hasFeaturedPost && (
+              <View style={{ marginBottom: 15, marginHorizontal: 'auto' }}>{titleRow}</View>
+            )}
+            <ModuleBox
+              patternColor={split === 'right' ? sectionColor : ''}
+              offsetDirection={OFFSET_DIRECTION.RIGHT}
+            >
+              <PostList posts={twoPosts} />
+            </ModuleBox>
+          </View>
+          <View style={styles.threePostsBox}>
+            <ModuleBox
+              patternColor={split === 'left' ? sectionColor : ''}
+              offsetDirection={OFFSET_DIRECTION.RIGHT}
+            >
+              {hasFeaturedPost ? (
+                <FeaturedSplitTagGrid posts={threePosts} />
+              ) : (
+                <SplitTagGrid posts={threePosts} />
+              )}
+            </ModuleBox>
+          </View>
+        </View>
+      </>
+    );
   };
 
   public renderModule = (isDesktop: any) => {
-    const { sectionTitle, sectionLink, sectionColor, split, posts } = this.props;
-    const { height } = this.state;
-    if (posts.length < 5) {
-      console.warn(`SplitTagBox: module requires a minimum of 5 posts, found ${posts.length}.`);
+    const { hasFeaturedPost, sectionTitle, sectionLink, sectionColor, posts } = this.props;
+
+    const requiredPostCount = hasFeaturedPost ? 4 : 5;
+    if (posts.length !== requiredPostCount) {
+      console.warn(
+        `SplitTagBox: module requires ${requiredPostCount} posts, found ${posts.length}.`
+      );
     }
-    const twoPosts = posts.slice(0, 2);
-    const threePosts = posts.slice(2, 5); // Make sure we stop at 5 posts on Desktop
-    const fivePosts = posts.slice(0, 5); // Make sure we stop at 5 posts on Mobile
-    const flexDirection = split === 'left' ? 'row' : 'row-reverse';
-    // ModuleBox height. To compensate for the box with a patterncolor, subtract 15 from that box.
-    const twoPostsBoxHeight = split === 'left' ? `${height - 15}px` : 'auto';
-    const threePostsBoxHeight = split === 'left' ? 'auto' : `${height - 15}px`;
+
+    const titleRow = (
+      <TitleRow
+        withAd={!hasFeaturedPost}
+        patternColor={sectionColor}
+        link={sectionLink}
+        title={sectionTitle}
+        isDesktop={isDesktop}
+      />
+    );
 
     return (
-      <Container type="content">
-        {posts.length >= 5 && (
+      <>
+        {hasFeaturedPost && <BetweenModuleAd />}
+        <Container type="content">
           <View>
-            <TitleRow
-              patternColor={sectionColor}
-              link={sectionLink}
-              title={sectionTitle}
-              isDesktop={isDesktop}
-            />
             {isDesktop ? (
-              <View style={[styles.parentContainer, { flexDirection }]}>
-                <View style={styles.twoPostsBox} onLayout={this.getHeight}>
-                  <ModuleBox
-                    style={{ height: twoPostsBoxHeight }}
-                    patternColor={split === 'right' ? sectionColor : ''}
-                    offsetDirection={OFFSET_DIRECTION.RIGHT}
-                  >
-                    <PostList posts={twoPosts} />
-                  </ModuleBox>
-                </View>
-                <View style={styles.threePostsBox}>
-                  <ModuleBox
-                    style={{ height: threePostsBoxHeight }}
-                    patternColor={split === 'left' ? sectionColor : ''}
-                    offsetDirection={OFFSET_DIRECTION.RIGHT}
-                  >
-                    <SplitTagGrid posts={threePosts} />
-                  </ModuleBox>
-                </View>
-              </View>
+              this.renderDesktop(titleRow)
             ) : (
-              <View style={[styles.parentContainer, { paddingHorizontal: 15 }]}>
-                <ModuleBox patternColor={sectionColor} offsetDirection={OFFSET_DIRECTION.RIGHT}>
-                  <PostList posts={fivePosts} />
-                </ModuleBox>
-              </View>
+              <>
+                {titleRow}
+                <View style={[styles.parentContainer, { paddingHorizontal: 15 }]}>
+                  <ModuleBox patternColor={sectionColor} offsetDirection={OFFSET_DIRECTION.RIGHT}>
+                    <PostList posts={posts} />
+                  </ModuleBox>
+                </View>
+              </>
             )}
           </View>
-        )}
-      </Container>
+        </Container>
+      </>
     );
   };
 

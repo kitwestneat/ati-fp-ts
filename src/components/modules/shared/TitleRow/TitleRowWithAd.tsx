@@ -9,15 +9,9 @@ import { ModuleTitle } from '@/components/modules';
 import { Row, View } from '@/components/primitives';
 
 import { SECTION_SPACERS, SECTION_SPACING_VARIANTS } from '@/constants';
+import { TitleRowProps } from '.';
 
-interface Props {
-  patternColor: string;
-  title: string;
-  link: string;
-  isDesktop: boolean;
-}
-
-class TitleRow extends PureComponent<Props> {
+class TitleRowWithAd extends PureComponent<TitleRowProps> {
   public renderMobile = () => {
     return (
       <>
@@ -49,14 +43,15 @@ class TitleRow extends PureComponent<Props> {
   };
 
   public renderTitle = () => {
-    const { link, title, patternColor } = this.props;
-    // XXX should moduletitle get isDesktop?
+    const { link, title, isDesktop, patternColor, onLayout } = this.props;
     return (
       <View style={{ width: '100%' }} accessibilityRole="link" href={link}>
         <ModuleTitle
+          isDesktop={isDesktop}
           title={title}
           patternColor={patternColor}
           style={{ minHeight: 110, justifyContent: 'center' }}
+          onLayout={onLayout}
         />
       </View>
     );
@@ -67,7 +62,7 @@ class TitleRow extends PureComponent<Props> {
   }
 }
 
-export default TitleRow;
+export default TitleRowWithAd;
 
 const styles = StyleSheet.create({
   titleRow: {

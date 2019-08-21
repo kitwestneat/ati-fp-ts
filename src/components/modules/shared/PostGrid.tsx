@@ -16,6 +16,10 @@ export const DEFAULT_POST_COMPONENT_ATTRS: PostComponentAttrMap = {
     imageHeight: 430,
     multiplier: 2
   },
+  XL: {
+    layoutVariant: 'extraLarge',
+    multiplier: 2
+  },
   LG: {
     layoutVariant: 'large',
     multiplier: 2

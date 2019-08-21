@@ -8,9 +8,9 @@ import { Responsive } from '@/components/utils';
 import { BREAKPOINTS } from '@/constants/index';
 
 import { OFFSET_DIRECTION, PostType } from '@/types';
+import TitleRow from '../shared/TitleRow';
 import PostList from './PostList';
 import SingleColumnGrid from './SingleColumnGrid';
-import TitleRow from './TitleRow';
 
 interface Props {
   reverse?: boolean;
@@ -70,6 +70,7 @@ class TagPostsSingleColumn extends PureComponent<Props> {
           return (
             <Container type="content">
               <TitleRow
+                withAd={true}
                 patternColor={sectionColor}
                 link={sectionLink}
                 title={sectionTitle}

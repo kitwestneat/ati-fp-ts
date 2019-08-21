@@ -6,19 +6,9 @@ import { StyleSheet } from 'react-native';
 import { ModuleTitle } from '@/components/modules';
 
 import { Row, View } from '@/components/primitives';
+import { TitleRowProps } from '.';
 
-import { SECTION_SPACERS, SECTION_SPACING_VARIANTS } from '@/constants';
-import BetweenModuleAd from '../shared/BetweenModuleAd';
-
-interface Props {
-  patternColor: string;
-  title: string;
-  link: string;
-  isDesktop: boolean;
-  onLayout?: any;
-}
-
-class TitleRow extends PureComponent<Props> {
+class TitleRowNoAd extends PureComponent<TitleRowProps> {
   public renderMobile = () => {
     const showPattern = false;
     return (
@@ -63,7 +53,7 @@ class TitleRow extends PureComponent<Props> {
   }
 }
 
-export default TitleRow;
+export default TitleRowNoAd;
 
 const styles = StyleSheet.create({
   titleRow: {
