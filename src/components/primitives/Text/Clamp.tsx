@@ -29,7 +29,7 @@ export default class Clamp extends PureComponent<Props, State> {
     const { numberOfLines, children: text } = this.props;
     const { containerWidth } = this.state;
 
-    if (typeof text != 'string') {
+    if (typeof text !== 'string') {
       return;
     }
 
@@ -129,16 +129,16 @@ const getLineBreakIndex = ({ charsPerLine, text }: { charsPerLine: number; text:
   return text.slice(0, charsPerLine).lastIndexOf(' ');
 };
 
-interface getTextProps {
+interface GetTextProps {
   text: string;
   numberOfLines: number;
   averageCharsPerLine: number;
 }
-interface getTextReturn {
+interface GetTextReturn {
   preEllipsisText: string;
   restOfText: string;
 }
-const getText = (config: getTextProps): getTextReturn => {
+const getText = (config: GetTextProps): GetTextReturn => {
   const { text: fullText, numberOfLines, averageCharsPerLine } = config;
 
   const preEllipsisLineCountArray = Array.from({ length: numberOfLines - 1 });
@@ -154,7 +154,7 @@ const getText = (config: getTextProps): getTextReturn => {
 const getReducer = (charsPerLine: number) => ({
   preEllipsisText,
   restOfText
-}: getTextReturn): getTextReturn => {
+}: GetTextReturn): GetTextReturn => {
   const lineBreakIndex =
     restOfText.length < charsPerLine
       ? restOfText.length

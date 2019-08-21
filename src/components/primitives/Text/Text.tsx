@@ -38,16 +38,8 @@ class Text extends PureComponent<Props> {
       );
     }
 
-    if (numberOfLines) {
-      return (
-        <Clamp numberOfLines={numberOfLines} {...rest} style={[styles.text, { fontFamily }, style]}>
-          {children}
-        </Clamp>
-      );
-    }
-
     return (
-      <RNWText {...rest} style={[styles.text, { fontFamily }, style]}>
+      <RNWText numberOfLines={numberOfLines} {...rest} style={[styles.text, { fontFamily }, style]}>
         {children}
       </RNWText>
     );
