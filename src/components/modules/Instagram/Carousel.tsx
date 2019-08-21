@@ -5,11 +5,12 @@ import React, { PureComponent } from 'react';
 
 import { PostType } from '@/types';
 import Arrow from './Arrow';
-import Slide from './Slide';
+import Slide, { CaptionStyle } from './Slide';
 
 interface Props {
   posts: PostType[];
   isDesktop: boolean;
+  captionStyle?: CaptionStyle;
 }
 
 const SPACE_BETWEEN_SLIDES = {
@@ -17,12 +18,14 @@ const SPACE_BETWEEN_SLIDES = {
   DESKTOP: 30
 };
 
+// tslint:disable-next-line:no-empty
+const EMPTY_FN = () => {};
 const CONFIG_LG: CarouselProps = {
   slidesToShow: 3,
   slidesToScroll: 3,
   wrapAround: true,
   heightMode: 'first',
-  renderBottomCenterControls: undefined,
+  renderBottomCenterControls: EMPTY_FN as any,
   renderCenterLeftControls: (props: CarouselSlideRenderControlProps) => (
     <Arrow dir="prev" {...props} />
   ),
@@ -31,7 +34,6 @@ const CONFIG_LG: CarouselProps = {
   ),
   cellSpacing: SPACE_BETWEEN_SLIDES.DESKTOP
 };
-const EMPTY_FN = () => {};
 const CONFIG_SM: CarouselProps = {
   frameOverflow: 'visible',
   slidesToShow: 1,
@@ -46,13 +48,18 @@ const CONFIG_SM: CarouselProps = {
 
 class Instagram extends PureComponent<Props> {
   public render() {
-    const { posts, isDesktop } = this.props;
+    const { posts, isDesktop, captionStyle } = this.props;
 
     return (
       posts && (
         <Carousel {...(isDesktop ? CONFIG_LG : CONFIG_SM)}>
           {posts.map(({ id, ...post }, index: number) => (
-            <Slide key={`slide-${index}`} isDesktop={isDesktop} {...post} />
+            <Slide
+              key={`slide-${index}`}
+              captionStyle={captionStyle}
+              isDesktop={isDesktop}
+              {...post}
+            />
           ))}
         </Carousel>
       )

@@ -24,6 +24,8 @@ export default class Instagram extends PureComponent<Props> {
 
     const url = isHU ? HU_INSTAGRAM_URL : ATI_INSTAGRAM_URL;
 
+    const captionStyle = isHU ? 'black-on-white' : 'white-on-black';
+
     return (
       <>
         <BetweenModuleAd />
@@ -33,7 +35,7 @@ export default class Instagram extends PureComponent<Props> {
             return (
               <Container type="content">
                 <ModuleBox style={styles.moduleBox}>
-                  <View style={[styles.row, isHU ? {} : { paddingHorizontal: 30 }]}>
+                  <View style={[styles.row, isHU && !isDesktop ? {} : { paddingHorizontal: 30 }]}>
                     <View>
                       <Title isHU={isHU} hashColor={themeColor} isDesktop={isDesktop} href={url} />
                     </View>
@@ -43,7 +45,7 @@ export default class Instagram extends PureComponent<Props> {
                   </View>
 
                   <View style={{ paddingHorizontal: 30 }}>
-                    <Carousel isDesktop={isDesktop} posts={posts} />
+                    <Carousel isDesktop={isDesktop} posts={posts} captionStyle={captionStyle} />
                   </View>
                 </ModuleBox>
               </Container>

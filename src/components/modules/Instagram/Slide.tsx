@@ -2,7 +2,7 @@
 
 import { Image, Text, View } from '@/components/primitives';
 import React, { PureComponent } from 'react';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, TextStyle } from 'react-native';
 
 const SLIDE_SIZE = 306;
 const TEXTBOX_PADDING = {
@@ -12,36 +12,52 @@ const TEXTBOX_PADDING = {
 const TEXTBOX_HEIGHT = 110;
 
 const FONT = {
-  MOBILE: {
-    SIZE: 18,
-    LINE_HEIGHT: 20
+  WOB: {
+    MOBILE: {
+      fontSize: 18,
+      lineHeight: 20
+    },
+    DESKTOP: {
+      fontSize: 20,
+      lineHeight: 26
+    }
   },
-  DESKTOP: {
-    SIZE: 20,
-    LINE_HEIGHT: 26
+  BOW: {
+    MOBILE: {
+      fontSize: 16,
+      lineHeight: 20
+    },
+    DESKTOP: {
+      fontSize: 16,
+      lineHeight: 20
+    }
   }
 };
+
+export type CaptionStyle = 'black-on-white' | 'white-on-black';
 
 interface Props {
   imageSrc: string;
   title: string;
   link: string;
   isDesktop: boolean;
+  captionStyle?: CaptionStyle;
 }
 
 class InstagramSlide extends PureComponent<Props> {
   public render() {
-    const { imageSrc, title, link, isDesktop } = this.props;
+    const { imageSrc, title, link, isDesktop, captionStyle = 'white-on-black' } = this.props;
 
-    const fontStyles = isDesktop
-      ? {
-          fontSize: FONT.DESKTOP.SIZE,
-          lineHeight: FONT.DESKTOP.LINE_HEIGHT
-        }
-      : {
-          fontSize: FONT.MOBILE.SIZE,
-          lineHeight: FONT.MOBILE.LINE_HEIGHT
-        };
+    const isWob = captionStyle === 'white-on-black';
+
+    const textColorStyle: TextStyle = isWob ? styles.wobText : styles.bowText;
+
+    const fontDeviceKey = isDesktop ? 'DESKTOP' : 'MOBILE';
+    const fontStyleKey = isWob ? 'WOB' : 'BOW';
+    const fontStyles = FONT[fontStyleKey][fontDeviceKey];
+
+    const textBoxStyle = isWob ? styles.wobTextBox : styles.bowTextBox;
+    const lineCount = isWob ? 3 : 5;
     return (
       <View style={[styles.wrap]} accessibilityRole="link" href={link}>
         <Image
@@ -51,8 +67,8 @@ class InstagramSlide extends PureComponent<Props> {
           }}
         />
 
-        <View style={styles.textBox}>
-          <Text numberOfLines={3} style={[styles.text, fontStyles]}>
+        <View style={textBoxStyle}>
+          <Text numberOfLines={lineCount} style={[textColorStyle, fontStyles]}>
             {title}
           </Text>
         </View>
@@ -74,7 +90,7 @@ const styles = StyleSheet.create({
     height: SLIDE_SIZE,
     width: SLIDE_SIZE
   },
-  textBox: {
+  wobTextBox: {
     backgroundColor: 'black',
     paddingVertical: TEXTBOX_PADDING.VERTICAL,
     paddingHorizontal: TEXTBOX_PADDING.HORIZONTAL,
@@ -83,9 +99,25 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center'
   },
-  text: {
+  bowTextBox: {
+    backgroundColor: '#f7f7f7',
+    paddingVertical: TEXTBOX_PADDING.VERTICAL,
+    paddingHorizontal: TEXTBOX_PADDING.HORIZONTAL,
+    width: '90%',
+    marginTop: -15,
+    marginHorizontal: 'auto',
+    height: TEXTBOX_HEIGHT + 20,
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+  wobText: {
     color: 'white',
     fontStyle: 'italic',
     fontWeight: '100'
+  },
+  bowText: {
+    color: 'black',
+    fontStyle: 'normal',
+    fontWeight: '600'
   }
 });
