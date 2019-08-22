@@ -33,7 +33,8 @@ class ExtraLargePost extends PureComponent<ExtraLargePostProps> {
       link,
       categoryColor,
       categoryName,
-      title
+      title,
+      authorName
     } = this.props;
 
     const linkProps: WebAccessibilityProps = link ? { accessibilityRole: 'link', href: link } : {};
@@ -49,7 +50,14 @@ class ExtraLargePost extends PureComponent<ExtraLargePostProps> {
           <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
             <PostLabel fill categoryColor={categoryColor} categoryName={categoryName} />
           </View>
-          <Text numberOfLines={3} style={[styles.headline]} html={title} />
+          <View style={styles.headlineView}>
+            <Text numberOfLines={3} style={[styles.headline]} html={title} />
+            {authorName && (
+              <View>
+                <Text style={styles.authorText}>{'By ' + authorName}</Text>
+              </View>
+            )}
+          </View>
         </View>
         <PostImage width={imageWidth} height={imageHeight} imageSrc={imageSrc} />
       </View>
@@ -63,10 +71,17 @@ const styles = StyleSheet.create({
   headline: {
     fontSize: 20,
     lineHeight: 26,
-    fontWeight: '600',
+    fontWeight: '600'
+  },
+  headlineView: {
     marginHorizontal: 70,
     marginTop: 10,
     marginBottom: 25,
     textAlign: 'center'
+  },
+  authorText: {
+    marginTop: 6,
+    fontSize: 15,
+    color: '#333333'
   }
 });

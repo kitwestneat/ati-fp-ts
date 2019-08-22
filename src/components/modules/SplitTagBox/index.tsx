@@ -32,8 +32,8 @@ export default class SplitTagBox extends PureComponent<Props, State> {
   public renderDesktop = (titleRow: JSX.Element) => {
     const { hasFeaturedPost, sectionColor, split, posts } = this.props;
 
-    const twoPosts = posts.slice(0, 2);
-    const threePosts = posts.slice(2, 5); // Make sure we stop at 5 posts on Desktop
+    const firstPosts = posts.slice(0, 2);
+    const lastPosts = posts.slice(2, 5); // Make sure we stop at 5 posts on Desktop
 
     const flexDirection = split === 'left' ? 'row' : 'row-reverse';
 
@@ -49,7 +49,7 @@ export default class SplitTagBox extends PureComponent<Props, State> {
               patternColor={split === 'right' ? sectionColor : ''}
               offsetDirection={OFFSET_DIRECTION.RIGHT}
             >
-              <PostList posts={twoPosts} />
+              <PostList posts={hasFeaturedPost ? lastPosts : firstPosts} />
             </ModuleBox>
           </View>
           <View style={styles.threePostsBox}>
@@ -58,9 +58,9 @@ export default class SplitTagBox extends PureComponent<Props, State> {
               offsetDirection={OFFSET_DIRECTION.RIGHT}
             >
               {hasFeaturedPost ? (
-                <FeaturedSplitTagGrid posts={threePosts} />
+                <FeaturedSplitTagGrid posts={firstPosts} />
               ) : (
-                <SplitTagGrid posts={threePosts} />
+                <SplitTagGrid posts={lastPosts} />
               )}
             </ModuleBox>
           </View>
