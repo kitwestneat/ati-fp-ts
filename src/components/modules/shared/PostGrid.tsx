@@ -2,12 +2,12 @@ import React, { PureComponent } from 'react';
 
 import { Grid, GridSlot } from '../../primitives';
 
-import { Mrec } from '@/components/ads';
 import { Omit, PostType } from '@/types';
 
+import GridMrec from './GridMrec';
 import Post, { PostProps } from './Post';
 
-export const DEFAULT_AD_COMPONENT = Mrec;
+export const DEFAULT_AD_COMPONENT = GridMrec;
 export const DEFAULT_POST_COMPONENT_ATTRS: PostComponentAttrMap = {
   OV: {
     layoutVariant: 'overlay',

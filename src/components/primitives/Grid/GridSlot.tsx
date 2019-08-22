@@ -1,17 +1,18 @@
 import * as React from 'react';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, View, ViewStyle } from 'react-native';
 
 interface Props {
   spacer?: number;
   multiplier?: number;
   itemsPerRow?: number;
+  style?: ViewStyle;
 }
 
 export default class GridSlot extends React.PureComponent<Props> {
   public static isGridSlot = true;
 
   public getStyles = () => {
-    const { itemsPerRow = 1, spacer = 10, multiplier = 1 } = this.props;
+    const { style, itemsPerRow = 1, spacer = 10, multiplier = 1 } = this.props;
 
     const styles = StyleSheet.create({
       item: {
@@ -20,7 +21,7 @@ export default class GridSlot extends React.PureComponent<Props> {
       }
     });
 
-    return styles.item;
+    return [styles.item, style];
   };
 
   public render() {
