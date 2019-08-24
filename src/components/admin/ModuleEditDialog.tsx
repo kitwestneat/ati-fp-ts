@@ -66,7 +66,7 @@ export default class ModuleEditDialog extends PureComponent<Props, State> {
       }
     }));
 
-  public renderSectionOptions = (moduleOpts: any ) => {
+  public renderSectionOptions = (moduleOpts: any) => {
     const { sectionTitle, sectionLink, sectionColor, split } = moduleOpts;
 
     return (
@@ -105,13 +105,15 @@ export default class ModuleEditDialog extends PureComponent<Props, State> {
           <AdminInput
             label="Split:"
             input={
-              <input
-                onChange={ev => {
-                  this.updateOptions({ split: ev.target.value });
+              <Picker 
+                selectedValue={split}
+                onValueChange={split => {
+                  this.updateOptions({ split });
                 }}
-                type="split"
-                value={split}
-              />
+              >
+                <Picker.Item label="left" value="left"></Picker.Item>
+                <Picker.Item label="right" value="right"></Picker.Item>
+              </Picker>
             }
           />
         }

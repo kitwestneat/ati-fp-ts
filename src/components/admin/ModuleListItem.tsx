@@ -15,8 +15,8 @@ interface Props {
   onMoveEnd: VoidFunction;
 }
 
-function renderSectionOptions(moduleOpts: TagTileBoxModuleData | TrendingModuleData | SplitTagBoxData) {
-  const { sectionLink, sectionColor, sectionTitle } = moduleOpts;
+function renderSectionOptions(moduleOpts: any) {
+  const { sectionLink, sectionColor, sectionTitle, split } = moduleOpts;
   return (
     <View>
       <Text>Section Title: {sectionTitle}</Text>
@@ -25,6 +25,9 @@ function renderSectionOptions(moduleOpts: TagTileBoxModuleData | TrendingModuleD
         Section Color: <Text>{sectionColor}</Text>
         <View style={{ width: '1em', backgroundColor: sectionColor, height: '1em' }} />
       </Text>
+      {moduleOpts.split && 
+        <Text>Split: {split}</Text>
+      }
     </View>
   );
 }
