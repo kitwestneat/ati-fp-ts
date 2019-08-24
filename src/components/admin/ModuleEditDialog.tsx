@@ -1,6 +1,6 @@
 import Modal from 'modal-react-native-web';
 import React, { PureComponent } from 'react';
-import { Button, Switch, Text, View } from 'react-native';
+import { Button, Switch, Text, View, Picker } from 'react-native';
 
 import { queryObj2Str, queryStr2Obj } from './admin-utils';
 
@@ -13,7 +13,8 @@ import {
   AllModuleDataTypes,
   ModuleSpec,
   TagTileBoxModuleData,
-  TrendingModuleData
+  TrendingModuleData,
+  SplitTagBoxData
 } from '../../types';
 import { KeyedModuleSpec } from './module-list-utils';
 import styles from './styles';
@@ -27,6 +28,7 @@ interface Props {
 
 interface State {
   newItem: KeyedModuleSpec;
+  moduleCategory: string;
 }
 
 export default class ModuleEditDialog extends PureComponent<Props, State> {
@@ -34,7 +36,8 @@ export default class ModuleEditDialog extends PureComponent<Props, State> {
     super(props);
 
     this.state = {
-      newItem: { ...this.props.item, isNew: undefined }
+      newItem: { ...this.props.item, isNew: undefined },
+      moduleCategory: "link"
     };
   }
   public save = () => {
@@ -63,7 +66,7 @@ export default class ModuleEditDialog extends PureComponent<Props, State> {
       }
     }));
 
-  public renderSectionOptions = (moduleOpts: TagTileBoxModuleData | TrendingModuleData) => {
+  public renderSectionOptions = (moduleOpts: TagTileBoxModuleData | TrendingModuleData | SplitTagBoxData ) => {
     const { sectionTitle, sectionLink, sectionColor } = moduleOpts;
 
     return (
@@ -119,7 +122,7 @@ export default class ModuleEditDialog extends PureComponent<Props, State> {
     />
   );
 
-  public renderModuleSpecificOptions = (moduleOpts: AllModuleDataTypes) => {
+  public renderModuleSpecificOptions = (moduleOpts: any) => {
     switch (moduleOpts.type) {
       default:
         console.error('Unknown module type:', moduleOpts.type);
@@ -127,12 +130,15 @@ export default class ModuleEditDialog extends PureComponent<Props, State> {
       case SECTION_TYPES.RECENT:
         break;
       case 'instagram':
-        break;
       case 'newsletter':
         break;
       case 'trending':
+      case 'tag':
         return this.renderSectionOptions(moduleOpts);
       case 'tagTileBox':
+      case 'tagOverlapTitle':
+      case 'splitTagBox':
+      case 'recentAndTrending':
         return (
           <>
             {this.renderSectionOptions(moduleOpts)}
@@ -146,7 +152,7 @@ export default class ModuleEditDialog extends PureComponent<Props, State> {
 
   public render() {
     const { isVisible, onCancel } = this.props;
-    const { newItem } = this.state;
+    const { newItem, moduleCategory } = this.state;
 
     const queryStr = queryObj2Str(newItem.query);
     const typeHasQuery =
@@ -174,9 +180,27 @@ export default class ModuleEditDialog extends PureComponent<Props, State> {
               }}
             >
               <AdminInput
+                label="Module Category"
+                input={
+                  <Picker 
+                    selectedValue={moduleCategory}
+                    onValueChange={
+                      (moduleCategory) => 
+                        this.setState(
+                          { moduleCategory }
+                        )
+                    }
+                  >
+                    <Picker.Item label="link" value="link"></Picker.Item>
+                    <Picker.Item label="acquisition" value="acquisition"></Picker.Item>
+                  </Picker>
+                }
+              />
+              <AdminInput
                 label="Type"
                 input={
                   <ModuleTypePicker
+                    moduleCategory={moduleCategory}
                     selectedValue={newItem.module_opts && newItem.module_opts.type}
                     onValueChange={
                       (type: SECTION_TYPES) =>

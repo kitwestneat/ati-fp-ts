@@ -3,7 +3,7 @@ import { Button, Text, TouchableOpacity, View } from 'react-native';
 
 import { queryObj2Str } from './admin-utils';
 
-import { AllModuleDataTypes, TagTileBoxModuleData, TrendingModuleData } from '../../types';
+import { AllModuleDataTypes, TagTileBoxModuleData, TrendingModuleData, SplitTagBoxData } from '../../types';
 import { KeyedModuleSpec } from './module-list-utils';
 import styles from './styles';
 
@@ -15,7 +15,7 @@ interface Props {
   onMoveEnd: VoidFunction;
 }
 
-function renderSectionOptions(moduleOpts: TagTileBoxModuleData | TrendingModuleData) {
+function renderSectionOptions(moduleOpts: TagTileBoxModuleData | TrendingModuleData | SplitTagBoxData) {
   const { sectionLink, sectionColor, sectionTitle } = moduleOpts;
   return (
     <View>
@@ -29,20 +29,22 @@ function renderSectionOptions(moduleOpts: TagTileBoxModuleData | TrendingModuleD
   );
 }
 
-function renderModuleSpecificOpts(moduleOpts: AllModuleDataTypes) {
+function renderModuleSpecificOpts(moduleOpts: any) {
   switch (moduleOpts.type) {
     default:
       console.error('Unknown module type:', moduleOpts.type);
       break;
     case 'recent':
-      break;
     case 'instagram':
-      break;
     case 'newsletter':
       break;
     case 'trending':
+    case 'tag':
       return renderSectionOptions(moduleOpts);
     case 'tagTileBox':
+    case 'tagOverlapTitle':
+    case 'splitTagBox':
+    case 'recentAndTrending':
       const sectionOpts = renderSectionOptions(moduleOpts);
       const { order } = moduleOpts;
 
