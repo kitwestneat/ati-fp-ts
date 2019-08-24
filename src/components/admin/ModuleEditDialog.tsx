@@ -66,8 +66,8 @@ export default class ModuleEditDialog extends PureComponent<Props, State> {
       }
     }));
 
-  public renderSectionOptions = (moduleOpts: TagTileBoxModuleData | TrendingModuleData | SplitTagBoxData ) => {
-    const { sectionTitle, sectionLink, sectionColor } = moduleOpts;
+  public renderSectionOptions = (moduleOpts: any ) => {
+    const { sectionTitle, sectionLink, sectionColor, split } = moduleOpts;
 
     return (
       <>
@@ -101,6 +101,20 @@ export default class ModuleEditDialog extends PureComponent<Props, State> {
             />
           }
         />
+        {moduleOpts.type === SECTION_TYPES.SPLIT_TAG_BOX && 
+          <AdminInput
+            label="Split:"
+            input={
+              <input
+                onChange={ev => {
+                  this.updateOptions({ split: ev.target.value });
+                }}
+                type="split"
+                value={split}
+              />
+            }
+          />
+        }
       </>
     );
   };
