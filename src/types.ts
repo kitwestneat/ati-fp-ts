@@ -70,12 +70,25 @@ export interface SplitTagBoxData extends ModuleData {
   posts: PostType[];
 }
 
+export interface RecentAndTrendingModuleData extends ModuleData {
+  type: SECTION_TYPES.RECENT_AND_TRENDING;
+  recentPosts: PostType[];
+  trendingPosts: PostType[];
+  sectionLink: string;
+  sectionColor: string;
+  order?: GridOrder;
+  tag: string;
+}
+
 export type AllModuleDataTypes =
   | TrendingModuleData
   | NewsletterModuleData
   | TagTileBoxModuleData
   | RecentModuleData
-  | InstagramModuleData;
+  | InstagramModuleData
+  | SplitTagBoxData
+  | InfoBoxData
+  | RecentAndTrendingModuleData;
 
 export type ModuleOptsSpec = Omit<AllModuleDataTypes, 'posts'>;
 export interface QuerySpec {

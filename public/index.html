@@ -783,6 +783,14 @@ window.fp_data = [
       window.admin_data = [
         {
           module_opts: {
+            type: 'tag',
+          },
+          query: {
+            tag: 'history+infobox'
+          }
+        },
+        {
+          module_opts: {
             type: 'recent'
           },
           query: {}
@@ -851,7 +859,7 @@ window.fp_data = [
           module_opts: {
             sectionLink: '/tag/women+history',
             sectionColor: '#ff3000',
-            type: 'tagTileBox',
+            type: 'splitTagBox',
             order: 2,
             typeVariant: 3,
             sectionTitle: 'Women In History'
@@ -859,6 +867,17 @@ window.fp_data = [
           query: {
             tag: 'women+history'
           }
+        },
+        {
+            module_opts: {
+                sectionLink: '/tag/history',
+                sectionColor: '#673fb4',
+                type: 'recentAndTrending',
+                tag: "history"
+            },
+            query: {
+                tag: "recent+and+trending"
+            }
         }
       ];
     </script>

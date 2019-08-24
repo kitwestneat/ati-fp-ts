@@ -1,18 +1,17 @@
 import { Container, Row } from '@/components/primitives';
 import { Responsive } from '@/components/utils';
 import { BREAKPOINTS, SECTION_SPACERS, SECTION_SPACING_VARIANTS } from '@/constants';
-import { GridOrder, PostType, TagTileBoxModuleData } from '@/types';
+import { GridOrder, PostType, RecentAndTrendingModuleData } from '@/types';
 import React, { PureComponent } from 'react';
 import BetweenModuleAd from '../shared/BetweenModuleAd';
 import RecentPosts from './RecentPosts';
 import TrendingPosts from './TrendingPosts';
 
-interface Props extends TagTileBoxModuleData {
+interface Props extends RecentAndTrendingModuleData {
   recentPosts: PostType[];
   trendingPosts: PostType[];
   sectionLink: string;
   sectionColor: string;
-  sectionTitle: string;
   order?: GridOrder;
   tag: string;
 }
