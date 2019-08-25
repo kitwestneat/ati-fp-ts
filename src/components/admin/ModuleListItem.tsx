@@ -40,9 +40,9 @@ function renderModuleSpecificOpts(moduleOpts: any) {
     case 'recent':
     case 'instagram':
     case 'newsletter':
+    case 'tag':
       break;
     case 'trending':
-    case 'tag':
       return renderSectionOptions(moduleOpts);
     case 'tagTileBox':
     case 'tagOverlapTitle':
