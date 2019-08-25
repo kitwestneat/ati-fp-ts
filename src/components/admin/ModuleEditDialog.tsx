@@ -161,12 +161,11 @@ export default class ModuleEditDialog extends PureComponent<Props, State> {
         console.error('Unknown module type:', moduleOpts.type);
         break;
       case SECTION_TYPES.RECENT:
-        break;
       case 'instagram':
       case 'newsletter':
+      case 'tag':
         break;
       case 'trending':
-      case 'tag':
         return this.renderSectionOptions(moduleOpts);
       case 'tagTileBox':
       case 'tagOverlapTitle':
