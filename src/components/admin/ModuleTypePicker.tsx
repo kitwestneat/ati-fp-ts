@@ -1,22 +1,6 @@
 import React, { PureComponent } from 'react';
 import { Picker, PickerProps } from 'react-native';
-
-const MODULE_ACQUISITION_TYPES = [
-  'instagram', 
-  'newsletter'
-]
-
-const MODULE_LINK_TYPES = [
-  'recent', 
-  'tagTileBox', 
-  'tagSideRail', 
-  'trending', 
-  'tag', 
-  'recentAndTrending', 
-  'splitTagBox', 
-  'tagOverlapTitle', 
-  'prevNextButtons'
-];
+import { MODULE_ACQUISITION_TYPES, MODULE_LINK_TYPES } from '@/constants';
 
 interface Props {
   selectedValue: any,
