@@ -66,8 +66,8 @@ export default class ModuleEditDialog extends PureComponent<Props, State> {
       }
     }));
 
-  public renderSectionOptions = (moduleOpts: any) => {
-    const { sectionTitle, sectionLink, sectionColor, split } = moduleOpts;
+  public renderSectionOptions = (moduleOpts: TagTileBoxModuleData | TrendingModuleData) => {
+    const { sectionTitle, sectionLink, sectionColor } = moduleOpts;
 
     return (
       <>
@@ -101,7 +101,7 @@ export default class ModuleEditDialog extends PureComponent<Props, State> {
             />
           }
         />
-        {moduleOpts.type === SECTION_TYPES.SPLIT_TAG_BOX && 
+        {/* {moduleOpts.type === SECTION_TYPES.SPLIT_TAG_BOX && 
           <AdminInput
             label="Split:"
             input={
@@ -116,10 +116,27 @@ export default class ModuleEditDialog extends PureComponent<Props, State> {
               </Picker>
             }
           />
-        }
+        } */}
       </>
     );
   };
+
+  public renderSplitTagBoxOptions = ( moduleOpts: SplitTagBoxData ) => (
+    <AdminInput
+      label="Split:"
+      input={
+        <Picker 
+          selectedValue={moduleOpts.split}
+          onValueChange={split => {
+            this.updateOptions({ split });
+          }}
+        >
+          <Picker.Item label="left" value="left"></Picker.Item>
+          <Picker.Item label="right" value="right"></Picker.Item>
+        </Picker>
+      }
+    />
+  )
 
   public renderTagTileBoxOptions = (moduleOpts: TagTileBoxModuleData) => (
     <AdminInput
@@ -153,7 +170,6 @@ export default class ModuleEditDialog extends PureComponent<Props, State> {
         return this.renderSectionOptions(moduleOpts);
       case 'tagTileBox':
       case 'tagOverlapTitle':
-      case 'splitTagBox':
       case 'recentAndTrending':
         return (
           <>
@@ -161,6 +177,14 @@ export default class ModuleEditDialog extends PureComponent<Props, State> {
             {this.renderTagTileBoxOptions(moduleOpts)}
           </>
         );
+      case 'splitTagBox':
+          return (
+            <>
+              {this.renderSectionOptions(moduleOpts)}
+              {this.renderSplitTagBoxOptions(moduleOpts)}
+              {this.renderTagTileBoxOptions(moduleOpts)}
+            </>
+          );
     }
 
     return null;
