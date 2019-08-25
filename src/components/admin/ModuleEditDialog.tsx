@@ -8,7 +8,7 @@ import AdminInput from './AdminInput';
 import AdminTextInput from './AdminTextInput';
 import ModuleTypePicker from './ModuleTypePicker';
 
-import { SECTION_TYPES } from '@/constants';
+import { SECTION_TYPES, MODULE_ACQUISITION_TYPES } from '@/constants';
 import {
   AllModuleDataTypes,
   ModuleSpec,
@@ -37,7 +37,7 @@ export default class ModuleEditDialog extends PureComponent<Props, State> {
 
     this.state = {
       newItem: { ...this.props.item, isNew: undefined },
-      moduleCategory: "link"
+      moduleCategory: this.props.item.module_opts && MODULE_ACQUISITION_TYPES.includes(this.props.item.module_opts.type) ? "acquisition" : "link"
     };
   }
   public save = () => {

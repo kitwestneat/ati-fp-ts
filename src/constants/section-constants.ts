@@ -12,6 +12,23 @@ export enum SECTION_TYPES {
   PREV_NEXT_BUTTONS = 'prevNextButtons'
 }
 
+export const MODULE_ACQUISITION_TYPES = [
+  'instagram', 
+  'newsletter'
+]
+
+export const MODULE_LINK_TYPES = [
+  'recent', 
+  'tagTileBox', 
+  'tagSideRail', 
+  'trending', 
+  'tag', 
+  'recentAndTrending', 
+  'splitTagBox', 
+  'tagOverlapTitle', 
+  'prevNextButtons'
+];
+
 export enum SECTION_SPACING_VARIANTS {
   NONE = 'none',
   SMALL = 'small',
