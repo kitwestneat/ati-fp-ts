@@ -10,7 +10,7 @@ export const PBH_NETWORK_LINKS = [
   },
   {
     text: "Advertise",
-    href: "https://about.pbh-network.com/",
+    href: "/about-all-thats-interesting",
   },
   {
     text: "Jobs",
