@@ -101,22 +101,6 @@ export default class ModuleEditDialog extends PureComponent<Props, State> {
             />
           }
         />
-        {/* {moduleOpts.type === SECTION_TYPES.SPLIT_TAG_BOX && 
-          <AdminInput
-            label="Split:"
-            input={
-              <Picker 
-                selectedValue={split}
-                onValueChange={split => {
-                  this.updateOptions({ split });
-                }}
-              >
-                <Picker.Item label="left" value="left"></Picker.Item>
-                <Picker.Item label="right" value="right"></Picker.Item>
-              </Picker>
-            }
-          />
-        } */}
       </>
     );
   };
