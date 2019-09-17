@@ -9,6 +9,7 @@ import { Container } from '@/components/primitives';
 import PostList from './PostList';
 import TrendingPostGrid from './TrendingPostGrid';
 
+import TitleMobile from './TitleMobile';
 import TitleSquare from './TitleSquare';
 
 import { Responsive } from '@/components/utils';
@@ -27,8 +28,9 @@ interface Props {
 }
 
 class Trending extends PureComponent<Props> {
-  public renderMobile = (titleSquare: JSX.Element) => {
+  public renderMobile = () => {
     const { posts, mediumMobilePosts = false } = this.props;
+    const { sectionColor, sectionLink, sectionTitle, showIcon = true } = this.props;
 
     return (
       <Container
@@ -44,7 +46,12 @@ class Trending extends PureComponent<Props> {
             width: '100%'
           }}
         >
-          {titleSquare}
+          <TitleMobile
+            title={sectionTitle}
+            patternColor={sectionColor}
+            sectionLink={sectionLink}
+            showIcon={showIcon}
+          />
         </View>
         <View style={{ marginTop: 30 }}>
           <ModuleBox>
@@ -54,7 +61,8 @@ class Trending extends PureComponent<Props> {
       </Container>
     );
   };
-  public renderDesktop = (titleSquare: JSX.Element) => {
+  public renderDesktop = () => {
+    const { sectionColor, sectionLink, sectionTitle, showIcon = true } = this.props;
     const { posts } = this.props;
     return (
       <Container type="content">
@@ -64,7 +72,14 @@ class Trending extends PureComponent<Props> {
             margin: -15
           }}
         >
-          <View style={{ width: '25%', padding: 15 }}>{titleSquare}</View>
+          <View style={{ width: '25%', padding: 15 }}>
+            <TitleSquare
+              title={sectionTitle}
+              patternColor={sectionColor}
+              sectionLink={sectionLink}
+              showIcon={showIcon}
+            />
+          </View>
 
           <View style={{ width: '75%', padding: 15 }}>
             <TrendingPostGrid posts={posts} />
@@ -74,24 +89,13 @@ class Trending extends PureComponent<Props> {
     );
   };
   public render() {
-    const { sectionColor, sectionLink, sectionTitle, showIcon = true } = this.props;
-
-    const titleSquare = (
-      <TitleSquare
-        title={sectionTitle}
-        patternColor={sectionColor}
-        sectionLink={sectionLink}
-        showIcon={showIcon}
-      />
-    );
-
     return (
       <>
         <BetweenModuleAd />
         <Responsive>
           {({ minWidth }) => {
             const isDesktop = minWidth(BREAKPOINTS.LG);
-            return isDesktop ? this.renderDesktop(titleSquare) : this.renderMobile(titleSquare);
+            return isDesktop ? this.renderDesktop() : this.renderMobile();
           }}
         </Responsive>
       </>
