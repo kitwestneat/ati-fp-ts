@@ -11,7 +11,7 @@ export const DEFAULT_AD_COMPONENT = GridMrec;
 export const DEFAULT_POST_COMPONENT_ATTRS: PostComponentAttrMap = {
   OV: {
     layoutVariant: 'overlay',
-    fontStyles: { fontSize: 24, lineHeight: 30 },
+    fontStyles: { fontSize: 24, lineHeight: 30, fontWeight: 500 },
     imageWidth: 735,
     imageHeight: 430,
     multiplier: 2
@@ -49,9 +49,7 @@ function validatePostCount(orderSpec: OrderSpec, posts: PostType[], name?: strin
   const orderSpecPostCount = orderSpec.filter(type => type !== 'AD').length;
   if (posts.length !== orderSpecPostCount) {
     console.warn(
-      `mapPostsToGrid: ${name} grid requires exactly ${orderSpecPostCount} posts, found ${
-        posts.length
-      }`
+      `mapPostsToGrid: ${name} grid requires exactly ${orderSpecPostCount} posts, found ${posts.length}`
     );
   }
 }
