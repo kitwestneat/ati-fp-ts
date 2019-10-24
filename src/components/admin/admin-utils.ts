@@ -39,6 +39,12 @@ export function generateFakeData({ module_opts, query }: KeyedModuleSpec): AllMo
   } else if (module_opts.type === SECTION_TYPES.INSTAGRAM) {
     return generateFakeInstagramPosts();
   }
+  if (module_opts.type === SECTION_TYPES.TAG) {
+    return generateFakeInfoBoxData();
+  }
+  if (module_opts.type === SECTION_TYPES.RECENT_AND_TRENDING) {
+    return generateFakeRecentAndTrendingData(module_opts);
+  }
   if (!query) {
     console.warn('generateFakeData: expected query to not be null');
   }
@@ -162,3 +168,26 @@ const generateFakeInstagramPosts = () =>
     ],
     type: 'instagram'
   } as AllModuleDataTypes);
+
+  function generateFakeInfoBoxData() {
+    return {
+      type: 'tag' as SECTION_TYPES.TAG, // Tried 'tag' and SECTION_TYPES.TAG without declaring the type and excluding this property, got an error.
+      name: faker.random.word(),
+      description: faker.lorem.paragraphs(),
+      imageSrc: faker.image.image(),
+    };
+  }
+
+  function generateFakeRecentAndTrendingData(module_opts: any) {
+
+    const recentPosts = [...Array(9)].map(generateFakePost);
+
+    const trendingPosts = [...Array(6)].map(generateFakePost);
+
+    return {
+      recentPosts,
+      trendingPosts,
+      tag: faker.random.word(),
+      ...module_opts
+    } as AllModuleDataTypes;
+  }

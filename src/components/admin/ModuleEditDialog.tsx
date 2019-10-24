@@ -1,6 +1,6 @@
 import Modal from 'modal-react-native-web';
 import React, { PureComponent } from 'react';
-import { Button, Switch, Text, View } from 'react-native';
+import { Button, Switch, Text, View, Picker } from 'react-native';
 
 import { queryObj2Str, queryStr2Obj } from './admin-utils';
 
@@ -8,12 +8,13 @@ import AdminInput from './AdminInput';
 import AdminTextInput from './AdminTextInput';
 import ModuleTypePicker from './ModuleTypePicker';
 
-import { SECTION_TYPES } from '@/constants';
+import { SECTION_TYPES, MODULE_ACQUISITION_TYPES } from '@/constants';
 import {
   AllModuleDataTypes,
   ModuleSpec,
   TagTileBoxModuleData,
-  TrendingModuleData
+  TrendingModuleData,
+  SplitTagBoxData
 } from '../../types';
 import { KeyedModuleSpec } from './module-list-utils';
 import styles from './styles';
@@ -27,6 +28,7 @@ interface Props {
 
 interface State {
   newItem: KeyedModuleSpec;
+  moduleCategory: string;
 }
 
 export default class ModuleEditDialog extends PureComponent<Props, State> {
@@ -34,7 +36,8 @@ export default class ModuleEditDialog extends PureComponent<Props, State> {
     super(props);
 
     this.state = {
-      newItem: { ...this.props.item, isNew: undefined }
+      newItem: { ...this.props.item, isNew: undefined },
+      moduleCategory: this.props.item.module_opts && MODULE_ACQUISITION_TYPES.includes(this.props.item.module_opts.type) ? "acquisition" : "link"
     };
   }
   public save = () => {
@@ -102,6 +105,23 @@ export default class ModuleEditDialog extends PureComponent<Props, State> {
     );
   };
 
+  public renderSplitTagBoxOptions = ( moduleOpts: SplitTagBoxData ) => (
+    <AdminInput
+      label="Split:"
+      input={
+        <Picker 
+          selectedValue={moduleOpts.split}
+          onValueChange={split => {
+            this.updateOptions({ split });
+          }}
+        >
+          <Picker.Item label="left" value="left"></Picker.Item>
+          <Picker.Item label="right" value="right"></Picker.Item>
+        </Picker>
+      }
+    />
+  )
+
   public renderTagTileBoxOptions = (moduleOpts: TagTileBoxModuleData) => (
     <AdminInput
       label="2x Box on Bottom?"
@@ -119,26 +139,35 @@ export default class ModuleEditDialog extends PureComponent<Props, State> {
     />
   );
 
-  public renderModuleSpecificOptions = (moduleOpts: AllModuleDataTypes) => {
+  public renderModuleSpecificOptions = (moduleOpts: any) => {
     switch (moduleOpts.type) {
       default:
         console.error('Unknown module type:', moduleOpts.type);
         break;
       case SECTION_TYPES.RECENT:
-        break;
       case 'instagram':
-        break;
       case 'newsletter':
+      case 'tag':
         break;
       case 'trending':
         return this.renderSectionOptions(moduleOpts);
       case 'tagTileBox':
+      case 'tagOverlapTitle':
+      case 'recentAndTrending':
         return (
           <>
             {this.renderSectionOptions(moduleOpts)}
             {this.renderTagTileBoxOptions(moduleOpts)}
           </>
         );
+      case 'splitTagBox':
+          return (
+            <>
+              {this.renderSectionOptions(moduleOpts)}
+              {this.renderSplitTagBoxOptions(moduleOpts)}
+              {this.renderTagTileBoxOptions(moduleOpts)}
+            </>
+          );
     }
 
     return null;
@@ -146,7 +175,7 @@ export default class ModuleEditDialog extends PureComponent<Props, State> {
 
   public render() {
     const { isVisible, onCancel } = this.props;
-    const { newItem } = this.state;
+    const { newItem, moduleCategory } = this.state;
 
     const queryStr = queryObj2Str(newItem.query);
     const typeHasQuery =
@@ -174,9 +203,27 @@ export default class ModuleEditDialog extends PureComponent<Props, State> {
               }}
             >
               <AdminInput
+                label="Module Category"
+                input={
+                  <Picker 
+                    selectedValue={moduleCategory}
+                    onValueChange={
+                      (moduleCategory) => 
+                        this.setState(
+                          { moduleCategory }
+                        )
+                    }
+                  >
+                    <Picker.Item label="link" value="link"></Picker.Item>
+                    <Picker.Item label="acquisition" value="acquisition"></Picker.Item>
+                  </Picker>
+                }
+              />
+              <AdminInput
                 label="Type"
                 input={
                   <ModuleTypePicker
+                    moduleCategory={moduleCategory}
                     selectedValue={newItem.module_opts && newItem.module_opts.type}
                     onValueChange={
                       (type: SECTION_TYPES) =>

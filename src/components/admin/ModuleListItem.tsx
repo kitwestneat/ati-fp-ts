@@ -3,7 +3,7 @@ import { Button, Text, TouchableOpacity, View } from 'react-native';
 
 import { queryObj2Str } from './admin-utils';
 
-import { AllModuleDataTypes, TagTileBoxModuleData, TrendingModuleData } from '../../types';
+import { AllModuleDataTypes, TagTileBoxModuleData, TrendingModuleData, SplitTagBoxData } from '../../types';
 import { KeyedModuleSpec } from './module-list-utils';
 import styles from './styles';
 
@@ -15,8 +15,8 @@ interface Props {
   onMoveEnd: VoidFunction;
 }
 
-function renderSectionOptions(moduleOpts: TagTileBoxModuleData | TrendingModuleData) {
-  const { sectionLink, sectionColor, sectionTitle } = moduleOpts;
+function renderSectionOptions(moduleOpts: any) {
+  const { sectionLink, sectionColor, sectionTitle, split } = moduleOpts;
   return (
     <View>
       <Text>Section Title: {sectionTitle}</Text>
@@ -25,24 +25,29 @@ function renderSectionOptions(moduleOpts: TagTileBoxModuleData | TrendingModuleD
         Section Color: <Text>{sectionColor}</Text>
         <View style={{ width: '1em', backgroundColor: sectionColor, height: '1em' }} />
       </Text>
+      {moduleOpts.split && 
+        <Text>Split: {split}</Text>
+      }
     </View>
   );
 }
 
-function renderModuleSpecificOpts(moduleOpts: AllModuleDataTypes) {
+function renderModuleSpecificOpts(moduleOpts: any) {
   switch (moduleOpts.type) {
     default:
       console.error('Unknown module type:', moduleOpts.type);
       break;
     case 'recent':
-      break;
     case 'instagram':
-      break;
     case 'newsletter':
+    case 'tag':
       break;
     case 'trending':
       return renderSectionOptions(moduleOpts);
     case 'tagTileBox':
+    case 'tagOverlapTitle':
+    case 'splitTagBox':
+    case 'recentAndTrending':
       const sectionOpts = renderSectionOptions(moduleOpts);
       const { order } = moduleOpts;
 
