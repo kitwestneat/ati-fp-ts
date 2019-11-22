@@ -1,21 +1,21 @@
 import Modal from 'modal-react-native-web';
 import React, { PureComponent } from 'react';
-import { Button, Switch, Text, View, Picker } from 'react-native';
+import { Button, Picker, Switch, Text, View } from 'react-native';
 
+import {
+  AllModuleDataTypes,
+  ModuleSpec,
+  SplitTagBoxData,
+  TagTileBoxModuleData,
+  TrendingModuleData
+} from '../../types';
 import { queryObj2Str, queryStr2Obj } from './admin-utils';
 
 import AdminInput from './AdminInput';
 import AdminTextInput from './AdminTextInput';
 import ModuleTypePicker from './ModuleTypePicker';
 
-import { SECTION_TYPES, MODULE_ACQUISITION_TYPES } from '@/constants';
-import {
-  AllModuleDataTypes,
-  ModuleSpec,
-  TagTileBoxModuleData,
-  TrendingModuleData,
-  SplitTagBoxData
-} from '../../types';
+import { MODULE_ACQUISITION_TYPES, SECTION_TYPES } from '@/constants';
 import { KeyedModuleSpec } from './module-list-utils';
 import styles from './styles';
 
@@ -37,7 +37,7 @@ export default class ModuleEditDialog extends PureComponent<Props, State> {
 
     this.state = {
       newItem: { ...this.props.item, isNew: undefined },
-      moduleCategory: this.props.item.module_opts && MODULE_ACQUISITION_TYPES.includes(this.props.item.module_opts.type) ? "acquisition" : "link"
+      moduleCategory: this.props.item.module_opts && MODULE_ACQUISITION_TYPES.includes(this.props.item.module_opts.type) ? 'acquisition' : 'link'
     };
   }
   public save = () => {
@@ -115,12 +115,12 @@ export default class ModuleEditDialog extends PureComponent<Props, State> {
             this.updateOptions({ split });
           }}
         >
-          <Picker.Item label="left" value="left"></Picker.Item>
-          <Picker.Item label="right" value="right"></Picker.Item>
+          <Picker.Item label="left" value="left"/>
+          <Picker.Item label="right" value="right"/>
         </Picker>
       }
     />
-  )
+  );
 
   public renderTagTileBoxOptions = (moduleOpts: TagTileBoxModuleData) => (
     <AdminInput
@@ -161,13 +161,13 @@ export default class ModuleEditDialog extends PureComponent<Props, State> {
           </>
         );
       case 'splitTagBox':
-          return (
+        return (
             <>
               {this.renderSectionOptions(moduleOpts)}
               {this.renderSplitTagBoxOptions(moduleOpts)}
               {this.renderTagTileBoxOptions(moduleOpts)}
             </>
-          );
+        );
     }
 
     return null;
@@ -214,8 +214,8 @@ export default class ModuleEditDialog extends PureComponent<Props, State> {
                         )
                     }
                   >
-                    <Picker.Item label="link" value="link"></Picker.Item>
-                    <Picker.Item label="acquisition" value="acquisition"></Picker.Item>
+                    <Picker.Item label="link" value="link"/>
+                    <Picker.Item label="acquisition" value="acquisition"/>
                   </Picker>
                 }
               />
@@ -229,7 +229,7 @@ export default class ModuleEditDialog extends PureComponent<Props, State> {
                       (type: SECTION_TYPES) =>
                         this.updateOptions({
                           type
-                        } as any) // not sure why enum isn't working
+                        } as any) // Not sure why enum isn't working
                     }
                   />
                 }

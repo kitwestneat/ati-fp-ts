@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './App';
 import codegen from 'codegen.macro';
+import App from './App';
 import { isDevEnv } from './utils';
 
 codegen`
