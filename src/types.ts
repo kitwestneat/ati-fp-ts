@@ -20,19 +20,22 @@ export interface ModuleData {
   type: SECTION_TYPES;
 }
 
+export interface SectionData {
+  sectionLink: string;
+  sectionColor: string;
+  sectionTitle: string;
+  posts: PostType[];
+}
+
 export interface RecentModuleData extends ModuleData {
   type: SECTION_TYPES.RECENT;
   posts: PostType[];
 }
 
-export interface TagTileBoxModuleData extends ModuleData {
+export interface TagTileBoxModuleData extends ModuleData, SectionData {
   type: SECTION_TYPES.TAG_TILE_BOX;
-  posts: PostType[];
 
-  sectionLink: string;
-  sectionColor: string;
-  sectionTitle: string;
-  // order?: 1 | 2;
+  // Order?: 1 | 2;
   order?: GridOrder;
 }
 
@@ -45,12 +48,8 @@ export interface InstagramModuleData extends ModuleData {
   posts: PostType[];
 }
 
-export interface TrendingModuleData extends ModuleData {
+export interface TrendingModuleData extends ModuleData, SectionData {
   type: SECTION_TYPES.TRENDING;
-
-  sectionLink: string;
-  sectionColor: string;
-  sectionTitle: string;
 }
 
 export interface InfoBoxData extends ModuleData {
@@ -61,13 +60,9 @@ export interface InfoBoxData extends ModuleData {
   paginate?: boolean;
 }
 
-export interface SplitTagBoxData extends ModuleData {
+export interface SplitTagBoxData extends ModuleData, SectionData {
   type: SECTION_TYPES.SPLIT_TAG_BOX;
-  sectionTitle: string;
-  sectionLink: string;
-  sectionColor: string;
   split?: string;
-  posts: PostType[];
 }
 
 export interface RecentAndTrendingModuleData extends ModuleData {
@@ -105,14 +100,14 @@ export type GridOrder = 1 | 2 | 3 | 4;
 export interface WebAccessibilityProps {
   accessibilityRole?: 'link' | 'heading' | 'button';
 
-  // link
+  // Link
   href?: string;
   target?: string;
 
-  // heading
+  // Heading
   'aria-level'?: string;
 
-  // button
+  // Button
   onClick?: () => void;
 }
 
@@ -120,10 +115,10 @@ export type Omit<T, K> = Pick<T, Exclude<keyof T, K>>;
 
 export interface WebViewStyle extends Omit<ViewStyle, 'transform'> {
   boxShadow?: string;
-  transform?: Array<{
+  transform?: {
     translateX?: string | number;
     translateY?: string | number;
-  }>;
+  }[];
 }
 
 export type ShowAuthorNameType = 'always' | 'never' | 'desktop' | 'mobile';

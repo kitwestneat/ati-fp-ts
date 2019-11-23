@@ -1,14 +1,8 @@
 import Modal from 'modal-react-native-web';
 import React, { PureComponent } from 'react';
-import { Button, Picker, Switch, Text, View } from 'react-native';
+import { Button, Picker, View } from 'react-native';
 
-import {
-  AllModuleDataTypes,
-  ModuleSpec,
-  SplitTagBoxData,
-  TagTileBoxModuleData,
-  TrendingModuleData
-} from '../../types';
+import { AllModuleDataTypes } from '../../types';
 import { queryObj2Str, queryStr2Obj } from './admin-utils';
 
 import AdminInput from './AdminInput';
@@ -17,6 +11,9 @@ import ModuleTypePicker from './ModuleTypePicker';
 
 import { MODULE_ACQUISITION_TYPES, SECTION_TYPES } from '@/constants';
 import { KeyedModuleSpec } from './module-list-utils';
+import SectionOptions from './ModuleOptions/SectionOptions';
+import SplitTagBoxOptions from './ModuleOptions/SplitTagBoxOptions';
+import TagTileBoxOptions from './ModuleOptions/TagTileBoxOptions';
 import styles from './styles';
 
 interface Props {
@@ -32,12 +29,16 @@ interface State {
 }
 
 export default class ModuleEditDialog extends PureComponent<Props, State> {
-  constructor(props: Props) {
+  public constructor(props: Props) {
     super(props);
 
     this.state = {
-      newItem: { ...this.props.item, isNew: undefined },
-      moduleCategory: this.props.item.module_opts && MODULE_ACQUISITION_TYPES.includes(this.props.item.module_opts.type) ? 'acquisition' : 'link'
+      newItem: { ...this.props.item, isNew: false },
+      moduleCategory:
+        this.props.item.module_opts &&
+        MODULE_ACQUISITION_TYPES.includes(this.props.item.module_opts.type)
+          ? 'acquisition'
+          : 'link'
     };
   }
   public save = () => {
@@ -51,6 +52,7 @@ export default class ModuleEditDialog extends PureComponent<Props, State> {
     this.setState(({ newItem }: { newItem: any }) => ({
       newItem: {
         ...newItem,
+        // eslint-disable-next-line camelcase
         module_opts: {
           ...newItem.module_opts,
           ...updates
@@ -62,82 +64,10 @@ export default class ModuleEditDialog extends PureComponent<Props, State> {
     this.setState(({ newItem }) => ({
       newItem: {
         ...newItem,
+        // eslint-disable-next-line id-blacklist
         query: queryStr2Obj(query) || undefined
       }
     }));
-
-  public renderSectionOptions = (moduleOpts: TagTileBoxModuleData | TrendingModuleData) => {
-    const { sectionTitle, sectionLink, sectionColor } = moduleOpts;
-
-    return (
-      <>
-        <AdminInput
-          label="Section Title:"
-          input={
-            <AdminTextInput
-              onChangeText={(sectionTitle: string) => this.updateOptions({ sectionTitle })}
-              value={sectionTitle}
-            />
-          }
-        />
-        <AdminInput
-          label="Section Link:"
-          input={
-            <AdminTextInput
-              onChangeText={(sectionLink: string) => this.updateOptions({ sectionLink })}
-              value={sectionLink}
-            />
-          }
-        />
-        <AdminInput
-          label="Section Color:"
-          input={
-            <input
-              onChange={ev => {
-                this.updateOptions({ sectionColor: ev.target.value });
-              }}
-              type="color"
-              value={sectionColor}
-            />
-          }
-        />
-      </>
-    );
-  };
-
-  public renderSplitTagBoxOptions = ( moduleOpts: SplitTagBoxData ) => (
-    <AdminInput
-      label="Split:"
-      input={
-        <Picker 
-          selectedValue={moduleOpts.split}
-          onValueChange={split => {
-            this.updateOptions({ split });
-          }}
-        >
-          <Picker.Item label="left" value="left"/>
-          <Picker.Item label="right" value="right"/>
-        </Picker>
-      }
-    />
-  );
-
-  public renderTagTileBoxOptions = (moduleOpts: TagTileBoxModuleData) => (
-    <AdminInput
-      label="2x Box on Bottom?"
-      input={
-        <>
-          <Switch
-            onValueChange={isOrder2 => this.updateOptions({ order: isOrder2 ? 2 : 1 })}
-            value={moduleOpts.order === 2}
-          />
-          <Text style={{ fontSize: 'smaller', fontStyle: 'italic', marginLeft: 10 } as any}>
-            (defaults to top)
-          </Text>
-        </>
-      }
-    />
-  );
 
   public renderModuleSpecificOptions = (moduleOpts: any) => {
     switch (moduleOpts.type) {
@@ -150,24 +80,13 @@ export default class ModuleEditDialog extends PureComponent<Props, State> {
       case 'tag':
         break;
       case 'trending':
-        return this.renderSectionOptions(moduleOpts);
+        return <SectionOptions data={moduleOpts} updateOptions={this.updateOptions} />;
       case 'tagTileBox':
       case 'tagOverlapTitle':
       case 'recentAndTrending':
-        return (
-          <>
-            {this.renderSectionOptions(moduleOpts)}
-            {this.renderTagTileBoxOptions(moduleOpts)}
-          </>
-        );
+        return <TagTileBoxOptions data={moduleOpts} updateOptions={this.updateOptions} />;
       case 'splitTagBox':
-        return (
-            <>
-              {this.renderSectionOptions(moduleOpts)}
-              {this.renderSplitTagBoxOptions(moduleOpts)}
-              {this.renderTagTileBoxOptions(moduleOpts)}
-            </>
-        );
+        return <SplitTagBoxOptions data={moduleOpts} updateOptions={this.updateOptions} />;
     }
 
     return null;
@@ -205,17 +124,12 @@ export default class ModuleEditDialog extends PureComponent<Props, State> {
               <AdminInput
                 label="Module Category"
                 input={
-                  <Picker 
+                  <Picker
                     selectedValue={moduleCategory}
-                    onValueChange={
-                      (moduleCategory) => 
-                        this.setState(
-                          { moduleCategory }
-                        )
-                    }
+                    onValueChange={moduleCategory => this.setState({ moduleCategory })}
                   >
-                    <Picker.Item label="link" value="link"/>
-                    <Picker.Item label="acquisition" value="acquisition"/>
+                    <Picker.Item label="link" value="link" />
+                    <Picker.Item label="acquisition" value="acquisition" />
                   </Picker>
                 }
               />
