@@ -186,7 +186,8 @@ module.exports = {
         "no-unreachable": "warn",
         "no-unused-expressions": "warn",
         "no-unused-labels": "warn",
-        "no-unused-vars": [
+        "no-unused-vars": "off",
+        "@typescript-eslint/no-unused-vars": [
             "warn",
             {
                 "args": "none",
@@ -415,12 +416,14 @@ module.exports = {
         "no-invalid-this": "off",
         "no-irregular-whitespace": "off",
         "no-multiple-empty-lines": "warn",
+        /*
         "no-shadow": [
             "warn",
             {
                 "hoist": "all"
             }
         ],
+        */
         "no-trailing-spaces": "off",
         "no-undef-init": "warn",
         "no-underscore-dangle": [
