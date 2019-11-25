@@ -3,67 +3,71 @@ import { isDevEnv } from '@/utils';
 import { ModuleSpec } from '../../types';
 
 export interface KeyedModuleSpec extends Partial<ModuleSpec> {
-  key: number;
-  isNew?: boolean;
+    key: number;
+    isNew?: boolean;
 }
 
 let nextKey = 0;
 function getModuleKey() {
-  return nextKey++;
+    return nextKey++;
 }
 
 export function getListWithKeys<T>(list: T[]) {
-  return list.map(i => ({
-    ...i,
-    key: getModuleKey()
-  }));
+    return list.map(i => ({
+        ...i,
+        key: getModuleKey()
+    }));
 }
 
 export function getNewModule() {
-  const key = getModuleKey();
+    const key = getModuleKey();
 
-  const newModule: KeyedModuleSpec = {
-    module_opts: {
-      type: SECTION_TYPES.NEWSLETTER
-    },
-    key,
-    isNew: true
-  };
+    const newModule: KeyedModuleSpec = {
+        module_opts: {
+            type: SECTION_TYPES.NEWSLETTER
+        },
+        key,
+        isNew: true
+    };
 
-  return newModule;
+    return newModule;
 }
 
 export interface ReplaceItemOpts {
-  doDelete?: boolean;
+    doDelete?: boolean;
 }
 export function replaceItem<T extends { key: any }>(
-  list: T[],
-  newItem: T,
-  opts: ReplaceItemOpts = {}
+    list: T[],
+    newItem: T,
+    opts: ReplaceItemOpts = {}
 ) {
-  const idx = list.findIndex(({ key }) => newItem.key === key);
-  const newList = list.slice(0);
+    const idx = list.findIndex(({ key }) => newItem.key === key);
+    const newList = list.slice(0);
 
-  if (opts.doDelete) {
-    newList.splice(idx, 1);
-  } else {
-    newList[idx] = newItem;
-  }
+    if (opts.doDelete) {
+        newList.splice(idx, 1);
+    } else {
+        newList[idx] = newItem;
+    }
 
-  return newList;
+    return newList;
 }
 
-export async function saveList<T>(list: T[]) {
-  const API_ENDPOINT = document.location.href;
-  const formData = new FormData();
-  formData.append('module_list', JSON.stringify(list));
+export async function saveList<T>(list: T[], tagId?: number) {
+    const API_ENDPOINT = document.location.href;
+    const formData = new FormData();
+    formData.append('module_list', JSON.stringify(list));
 
-  await fetch(API_ENDPOINT, {
-    method: 'POST',
-    body: formData
-  });
+    if (tagId) {
+        formData.append('tag_id', '' + tagId);
+    }
 
-  if (isDevEnv()) {
-    return new Promise(resolve => setTimeout(resolve, 10000));
-  }
+    await fetch(API_ENDPOINT, {
+        method: 'POST',
+        body: formData
+    });
+
+    if (isDevEnv()) {
+        return new Promise(resolve => setTimeout(resolve, 10000));
+    }
 }

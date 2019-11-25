@@ -5,6 +5,7 @@
 defined('ABSPATH') or die('No script kiddies please!');
 
 define('PBH_FP_MODULE_LIST_KEY', 'pbh_fp_module_list_key');
+define('PBH_FP_TAG_MODULE_LIST_KEY', 'pbh_tag_module_list_key');
 define('PBH_FP_DEFAULT_MODULE_LIST', '[{"module_opts":{"type":"recent"},"query":[]},{"module_opts":{"sectionLink":"\/tag\/history","sectionColor":"#ff3000","type":"tagTileBox","typeVariant":1,"sectionTitle":"History Uncovered"},"query":{"tag":"history"}},{"module_opts":{"type":"instagram"},"query":"instagram"},{"module_opts":{"sectionLink":"\/tag\/sentiment-weird","sectionColor":"#f72666","type":"tagTileBox","order":2,"sectionTitle":"Our Weird World"},"query":{"tag":"sentiment-weird","tag__not_in":389}},{"module_opts":{"type":"newsletter"}},{"module_opts":{"sectionLink":"\/tag\/news","sectionColor":"#ffbb2c","type":"trending","sectionTitle":"Trending News"},"query":{"tag":"news","posts_per_page":9}},{"module_opts":{"sectionLink":"\/tag\/crime","sectionColor":"#0098f9","type":"tagTileBox","typeVariant":2,"sectionTitle":"Real True Crime"},"query":{"tag":"crime"}},{"module_opts":{"sectionLink":"\/tag\/women+history","sectionColor":"#2abd68","type":"tagTileBox","order":2,"typeVariant":3,"sectionTitle":"Women In History"},"query":{"tag":"women+history"}}]');
 
 add_action('admin_menu', function () {
@@ -28,10 +29,30 @@ function pbh_fp_save_module_list($module_list) {
     update_option(PBH_FP_MODULE_LIST_KEY, $module_list, false);
 }
 
+function pbh_fp_get_tag_module_list($tag_id) {
+    return get_term_meta($tag_id, PBH_FP_TAG_MODULE_LIST_KEY, true) ?: false;
+}
+
+function pbh_fp_save_tag_module_list($tag_id, $module_list) {
+    update_term_meta($tag_id, PBH_FP_TAG_MODULE_LIST_KEY, $module_list);
+}
+
+add_action('post_tag_edit_form_fields', function($tag, $tax) {
+?>
+    <div class="form-field">
+      <a href="/wordpress/wp-admin/admin.php?page=pbh-fp-admin&tag_id=<?php echo $tag->term_id ?>">Edit Tag Page Layout</a>
+    </div>
+<?php
+}, 40, 2);
+
 function pbh_fp_admin_page() {
     if ($_POST['module_list']) {
         $module_list = stripslashes($_POST['module_list']);
-        pbh_fp_save_module_list($module_list);
+        if ($_POST['tag_id']) {
+            pbh_fp_save_tag_module_list($_POST['tag_id'], $module_list);
+        } else {
+            pbh_fp_save_module_list($module_list);
+        }
         wp_die("OK", 200);
     }
 
@@ -41,6 +62,7 @@ function pbh_fp_admin_page() {
 
   <script>
     window.module_list = <?php echo PBH_FP_DEFAULT_MODULE_LIST ?>;
+    window.tag_id = <?php echo $_GET['tag_id'] ?: 'undefined' ?>;
   </script>
   <script>
   try {
@@ -51,10 +73,11 @@ function pbh_fp_admin_page() {
   </script>
   <script>
   jQuery(function() {
-      startAdmin(window.module_list);
+      startAdmin(window.module_list, window.tag_id);
   });
   </script>
 
   <div id="root"></div>
 <?php
 }
+
