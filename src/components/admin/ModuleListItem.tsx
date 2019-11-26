@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import { Button, Text, TouchableOpacity, View } from 'react-native';
 
-import { queryObj2Str } from './admin-utils';
+import { queryObj2Str, getModuleTypeLabel } from './admin-utils';
 
 import { AllModuleDataTypes, TagTileBoxModuleData, TrendingModuleData, SplitTagBoxData } from '../../types';
 import { KeyedModuleSpec } from './module-list-utils';
@@ -87,7 +87,7 @@ export default class ModuleListItem extends PureComponent<Props> {
       <TouchableOpacity style={styles.card} onPressIn={onMove} onPressOut={onMoveEnd}>
         <View style={handle}>
           <View>
-            <Text>Type: {type}</Text>
+            <Text>Type: {getModuleTypeLabel(type)}</Text>
           </View>
           {moduleOptsBox}
           {showQuery && (

@@ -101,7 +101,7 @@ export default class ModuleEditDialog extends PureComponent<Props, State> {
                             }}
                         >
                             <AdminInput
-                                label="Module Category"
+                                label='Module Category'
                                 input={
                                     <Picker
                                         selectedValue={moduleCategory}
@@ -109,13 +109,13 @@ export default class ModuleEditDialog extends PureComponent<Props, State> {
                                             this.setState({ moduleCategory })
                                         }
                                     >
-                                        <Picker.Item label="link" value="link" />
-                                        <Picker.Item label="acquisition" value="acquisition" />
+                                        <Picker.Item label='link' value='link' />
+                                        <Picker.Item label='acquisition' value='acquisition' />
                                     </Picker>
                                 }
                             />
                             <AdminInput
-                                label="Type"
+                                label='Type'
                                 input={
                                     <ModuleTypePicker
                                         moduleCategory={moduleCategory}
@@ -134,29 +134,18 @@ export default class ModuleEditDialog extends PureComponent<Props, State> {
                             {newItem.module_opts && (
                                 <ModuleOptions
                                     moduleOpts={newItem.module_opts}
+                                    queryStr={queryStr}
                                     updateOptions={this.updateOptions}
-                                />
-                            )}
-                            {typeHasQuery && (
-                                <AdminInput
-                                    label="Query:"
-                                    input={
-                                        <AdminTextInput
-                                            onChangeText={(query: string) =>
-                                                this.updateQuery(query)
-                                            }
-                                            value={queryStr}
-                                        />
-                                    }
+                                    updateQuery={this.updateQuery}
                                 />
                             )}
                             <View style={{ flexGrow: 3 }}>
                                 <View style={{ flexDirection: 'row', ...styles.centerItems }}>
                                     <View style={{ margin: '1rem' }}>
-                                        <Button title="Save" onPress={this.save} />
+                                        <Button title='Save' onPress={this.save} />
                                     </View>
                                     <View style={{ margin: '1rem' }}>
-                                        <Button title="Cancel" color="#CCC" onPress={onCancel} />
+                                        <Button title='Cancel' color='#CCC' onPress={onCancel} />
                                     </View>
                                 </View>
                             </View>
