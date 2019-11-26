@@ -9,7 +9,6 @@ define('PBH_FP_TAG_MODULE_LIST_KEY', 'pbh_tag_module_list_key');
 define('PBH_FP_DEFAULT_MODULE_LIST', '[{"module_opts":{"type":"recent"},"query":[]},{"module_opts":{"sectionLink":"\/tag\/history","sectionColor":"#ff3000","type":"tagTileBox","typeVariant":1,"sectionTitle":"History Uncovered"},"query":{"tag":"history"}},{"module_opts":{"type":"instagram"},"query":"instagram"},{"module_opts":{"sectionLink":"\/tag\/sentiment-weird","sectionColor":"#f72666","type":"tagTileBox","order":2,"sectionTitle":"Our Weird World"},"query":{"tag":"sentiment-weird","tag__not_in":389}},{"module_opts":{"type":"newsletter"}},{"module_opts":{"sectionLink":"\/tag\/news","sectionColor":"#ffbb2c","type":"trending","sectionTitle":"Trending News"},"query":{"tag":"news","posts_per_page":9}},{"module_opts":{"sectionLink":"\/tag\/crime","sectionColor":"#0098f9","type":"tagTileBox","typeVariant":2,"sectionTitle":"Real True Crime"},"query":{"tag":"crime"}},{"module_opts":{"sectionLink":"\/tag\/women+history","sectionColor":"#2abd68","type":"tagTileBox","order":2,"typeVariant":3,"sectionTitle":"Women In History"},"query":{"tag":"women+history"}}]');
 
 
-require('module-functions.php');
 require('tag-default-functions.php');
 
 add_action('admin_menu', function () {
@@ -38,7 +37,6 @@ function pbh_fp_get_tag_module_list($tag_id) {
     if ($saved_modules) {
         return $saved_modules;
     }
-
 
     $tag = get_tag($tag_id);
 	switch ($tag->slug) {

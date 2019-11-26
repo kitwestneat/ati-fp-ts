@@ -26,3 +26,5 @@ yarn-error.log*
 .*.sw*
 *.orig
 *.rej
+
+public/_index.html

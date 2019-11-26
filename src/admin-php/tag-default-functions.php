@@ -1,4 +1,6 @@
 <?php
+require 'module-functions.php'
+
 function get_tag_title($tag, $taxonomy = 'post_tag') {
     // array is used if it's a multi tag page
     if (is_array($tag)) {
