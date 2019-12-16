@@ -1,9 +1,9 @@
 import React, { PureComponent } from 'react';
 import { Button, Text, TouchableOpacity, View } from 'react-native';
 
+import { AllModuleDataTypes, } from '../../types';
 import { queryObj2Str, getModuleTypeLabel } from './admin-utils';
 
-import { AllModuleDataTypes, TagTileBoxModuleData, TrendingModuleData, SplitTagBoxData } from '../../types';
 import { KeyedModuleSpec } from './module-list-utils';
 import styles from './styles';
 
@@ -37,8 +37,9 @@ function renderModuleSpecificOpts(moduleOpts: any) {
     default:
       console.error('Unknown module type:', moduleOpts.type);
       break;
-    case 'recent':
     case 'instagram':
+      return (<><Text>Account: {moduleOpts.isHU ? 'History Uncovered' : 'ATI'}</Text></>);
+    case 'recent':
     case 'newsletter':
     case 'tag':
       break;
@@ -55,7 +56,7 @@ function renderModuleSpecificOpts(moduleOpts: any) {
         <>
           {sectionOpts}
           <View>
-            <Text>2x Box on Bottom?: {order === 2 ? 'yes' : 'no'}</Text>
+            <Text>2x Box Location: {order === 2 ? 'bottom' : 'top'}</Text>
           </View>
         </>
       );
