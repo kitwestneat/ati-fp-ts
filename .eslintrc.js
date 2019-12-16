@@ -21,7 +21,7 @@ module.exports = {
         'array-callback-return': 'warn',
         'default-case': 'warn',
         'dot-location': ['warn', 'property'],
-        eqeqeq: ['warn', 'smart'],
+        eqeqeq: ['off', 'smart'],
         'new-parens': 'off',
         'no-array-constructor': 'warn',
         'no-caller': 'warn',

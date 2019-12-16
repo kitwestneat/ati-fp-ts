@@ -27,7 +27,7 @@ if (isDevEnv()) {
   if (window.document.location.href.includes('/tag/')) {
     startFP(window.tag_data);
   } else if (window.startAdmin && window.document.location.href.includes('/admin')) {
-    window.startAdmin(window.admin_data);
+    window.startAdmin(window.admin_data, 76);
   } else {
     startFP(window.fp_data);
   }

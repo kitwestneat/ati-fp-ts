@@ -1,11 +1,11 @@
 // @flow
 
+import React, { PureComponent } from 'react';
 import { Floorboard, Skybox } from '@/components/ads';
 import { startAds } from '@/components/ads/ad-utils';
 import { AppWrap, Footer, Header, Main } from '@/components/general';
 import { Section } from '@/components/primitives';
 import PageSections from '@/PageFactory';
-import React, { PureComponent } from 'react';
 
 import { SECTION_SPACING_VARIANTS } from '@/constants/index';
 
