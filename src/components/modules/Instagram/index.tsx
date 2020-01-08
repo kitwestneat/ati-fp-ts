@@ -1,15 +1,15 @@
-import { ModuleBox } from '@/components/modules';
-import { Container, TouchableOpacity } from '@/components/primitives';
 import React, { PureComponent } from 'react';
 import { StyleSheet, View } from 'react-native';
+import BetweenModuleAd from '../shared/BetweenModuleAd';
 import Carousel from './Carousel';
 import InstagramButton from './InstagramButton';
 import Title from './Title';
+import { ModuleBox } from '@/components/modules';
+import { Container } from '@/components/primitives';
 
 import { Responsive } from '@/components/utils';
 import { ATI_INSTAGRAM_URL, BREAKPOINTS, COLOR_MAP, HU_INSTAGRAM_URL } from '@/constants/index';
 import { PostType } from '@/types';
-import BetweenModuleAd from '../shared/BetweenModuleAd';
 
 interface Props {
   posts: PostType[];
@@ -18,7 +18,7 @@ interface Props {
 
 export default class Instagram extends PureComponent<Props> {
   public render() {
-    const { posts, isHU = false } = this.props;
+    const { posts = [], isHU = false } = this.props;
 
     const themeColor = isHU ? COLOR_MAP.RED : COLOR_MAP.VERMILION;
 
@@ -26,33 +26,53 @@ export default class Instagram extends PureComponent<Props> {
 
     const captionStyle = isHU ? 'black-on-white' : 'white-on-black';
 
-    return (
-      <>
-        <BetweenModuleAd />
-        <Responsive>
-          {({ minWidth }) => {
-            const isDesktop = minWidth(BREAKPOINTS.LG);
-            return (
-              <Container type="content">
-                <ModuleBox style={styles.moduleBox}>
-                  <View style={[styles.row, isHU && !isDesktop ? {} : { paddingHorizontal: 30 }]}>
-                    <View>
-                      <Title isHU={isHU} hashColor={themeColor} isDesktop={isDesktop} href={url} />
-                    </View>
-                    <View>
-                      <InstagramButton color={themeColor} url={url} />
-                    </View>
-                  </View>
+    if (!posts.length) {
+      console.error('No Instagram posts defined.');
 
-                  <View style={{ paddingHorizontal: 30 }}>
-                    <Carousel isDesktop={isDesktop} posts={posts} captionStyle={captionStyle} />
-                  </View>
-                </ModuleBox>
-              </Container>
-            );
-          }}
-        </Responsive>
-      </>
+      return null;
+    }
+
+    return (
+            <>
+                <BetweenModuleAd />
+                <Responsive>
+                  {({ minWidth }) => {
+                    const isDesktop = minWidth(BREAKPOINTS.LG);
+                    return (
+                      <Container type='content'>
+                        <ModuleBox style={styles.moduleBox}>
+                          <View
+                            style={[
+                              styles.row,
+                              isHU && !isDesktop ? {} : { paddingHorizontal: 30 }
+                            ]}
+                          >
+                            <View>
+                              <Title
+                                isHU={isHU}
+                                hashColor={themeColor}
+                                isDesktop={isDesktop}
+                                href={url}
+                              />
+                            </View>
+                            <View>
+                              <InstagramButton color={themeColor} url={url} />
+                            </View>
+                          </View>
+
+                          <View style={{ paddingHorizontal: 30 }}>
+                            <Carousel
+                              isDesktop={isDesktop}
+                              posts={posts}
+                              captionStyle={captionStyle}
+                            />
+                          </View>
+                        </ModuleBox>
+                      </Container>
+                    );
+                  }}
+                </Responsive>
+            </>
     );
   }
 }

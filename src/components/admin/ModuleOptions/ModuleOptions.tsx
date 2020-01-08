@@ -15,35 +15,46 @@ interface Props {
   queryStr: string;
 }
 
+const HU_INSTAGRAM_QUERY = 'hu-instagram' ;
+const ATI_INSTAGRAM_QUERY = 'instagram';
+
 export default class ModuleOptions extends React.PureComponent<Props> {
   public render() {
     const { moduleOpts, updateOptions, queryStr, updateQuery } = this.props;
 
     let optionComp: JSX.Element | null = null;
 
-    const optionProps = { data: moduleOpts, updateOptions };
+    const optionProps = { data: moduleOpts, updateOptions, };
 
     switch (moduleOpts.type) {
       default:
         console.error('Unknown module type:', moduleOpts.type);
         break;
       case 'instagram':
-        optionComp = <InstagramOptions {...optionProps} />;
-        break;
+        const instaUpdateOpts = ({ isHU }: { isHU: boolean}) => { 
+          updateOptions({ isHU });
+          updateQuery(isHU ? HU_INSTAGRAM_QUERY : ATI_INSTAGRAM_QUERY);
+        };
+
+        return <InstagramOptions data={moduleOpts} updateOptions={instaUpdateOpts} />;
       case 'newsletter':
       case 'ati-newsletter':
       case 'history-newsletter':
         return null;
       case 'recent':
       case 'tag':
+      case 'recentAndTrending':
         break;
       case 'trending':
         optionComp = <SectionOptions {...optionProps} />;
         break;
       case 'tagTileBox':
       case 'tagOverlapTitle':
-      case 'recentAndTrending':
-        optionComp = <TagTileBoxOptions {...optionProps} />;
+        optionComp = (
+          <TagTileBoxOptions
+            {...optionProps}
+          />
+        );
         break;
       case 'splitTagBox':
         optionComp = <SplitTagBoxOptions {...optionProps} />;

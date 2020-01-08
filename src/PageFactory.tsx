@@ -1,3 +1,6 @@
+import _ from 'lodash';
+import React, { Fragment, PureComponent } from 'react';
+import { ModuleData, PostType, ShowAuthorNameType } from './types';
 import {
   AtiNewsletter,
   HistoryNewsletter,
@@ -13,12 +16,9 @@ import {
   Trending
 } from '@/components/modules';
 import { Section } from '@/components/primitives';
-import _ from 'lodash';
-import React, { Fragment, PureComponent } from 'react';
 
 import { Responsive } from '@/components/utils';
 import { BREAKPOINTS, SECTION_SPACING_VARIANTS, SECTION_TYPES, SMALL_SECTIONS } from '@/constants';
-import { ModuleData, PostType, ShowAuthorNameType } from './types';
 
 interface ComponentMap {
   [t: string]: React.ElementType;
@@ -53,12 +53,12 @@ function filterAuthorName({
   showAuthorName?: ShowAuthorNameType;
 }) {
   const shouldFilter =
-    showAuthorName === 'never' ||
-    (isDesktop && showAuthorName === 'mobile') ||
-    (!isDesktop && showAuthorName === 'desktop');
+        showAuthorName === 'never' ||
+        (isDesktop && showAuthorName === 'mobile') ||
+        (!isDesktop && showAuthorName === 'desktop');
 
   const newPosts =
-    posts && shouldFilter ? posts.map(({ authorName, ...post }: any) => post) : posts;
+        posts && shouldFilter ? posts.map(({ authorName, ...post }: any) => post) : posts;
 
   return newPosts;
 }
@@ -81,7 +81,13 @@ class PageSections extends PureComponent<Props> {
                   const isTablet = minWidth(BREAKPOINTS.MD);
 
                   const moduleData = item as any;
-                  const { posts, recentPosts, trendingPosts, showAuthorName, ...rest } = moduleData;
+                  const {
+                    posts,
+                    recentPosts,
+                    trendingPosts,
+                    showAuthorName,
+                    ...rest
+                  } = moduleData;
 
                   const newPosts = _.mapValues(
                     {
@@ -89,11 +95,21 @@ class PageSections extends PureComponent<Props> {
                       recentPosts,
                       trendingPosts
                     },
-                    (v: PostType[]) => filterAuthorName({ posts: v, showAuthorName, isDesktop })
+                    (v: PostType[]) =>
+                      filterAuthorName({
+                        posts: v,
+                        showAuthorName,
+                        isDesktop
+                      })
                   );
 
                   return (
-                    <Module {...rest} {...newPosts} isDesktop={isDesktop} isTablet={isTablet} />
+                    <Module
+                      {...rest}
+                      {...newPosts}
+                      isDesktop={isDesktop}
+                      isTablet={isTablet}
+                    />
                   );
                 }}
               </Responsive>

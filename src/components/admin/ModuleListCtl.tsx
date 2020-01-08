@@ -1,4 +1,3 @@
-import DraggableFlatList from '@/third-party/react-native-draggable-flatlist';
 import React, { PureComponent } from 'react';
 import { View } from 'react-native';
 
@@ -9,6 +8,7 @@ import ModuleListItem from './ModuleListItem';
 
 import { getNewModule, KeyedModuleSpec, replaceItem, ReplaceItemOpts } from './module-list-utils';
 import styles from './styles';
+import DraggableFlatList from '@/third-party/react-native-draggable-flatlist';
 
 interface Props {
   moduleList: KeyedModuleSpec[];
@@ -51,7 +51,7 @@ export default class ModuleListCtl extends PureComponent<Props, State> {
   public closeDelete = () => this.setState({ currentlyDeleting: -1 });
 
   public cancel = (item: KeyedModuleSpec) => {
-    // if we were editing a new item, have cancel delete it
+    // If we were editing a new item, have cancel delete it
     if (item.isNew) {
       this.deleteItem(item);
     }

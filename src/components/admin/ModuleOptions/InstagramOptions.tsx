@@ -19,14 +19,13 @@ export default class InstagramOptions extends React.PureComponent<Props> {
       <AdminInput
         label="Account:"
         input={
+          // Picker doesn't like boolean values very much
           <Picker
-            selectedValue={data.isHU}
-            onValueChange={isHU => {
-              updateOptions({ isHU });
-            }}
+            selectedValue={data.isHU ? 'HU' : 'ATI'}
+            onValueChange={isHU => updateOptions({ isHU: isHU == 'HU' })}
           >
-            <Picker.Item label="ATI" value={false} />
-            <Picker.Item label="HU" value={true} />
+            <Picker.Item label="ATI" value="ATI" />
+            <Picker.Item label="HU" value="HU" />
           </Picker>
         }
       />);

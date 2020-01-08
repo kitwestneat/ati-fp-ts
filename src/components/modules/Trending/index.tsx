@@ -3,15 +3,14 @@
 import React, { PureComponent } from 'react';
 import { View } from 'react-native';
 
-import { ModuleBox } from '@/components/modules';
-import { Container } from '@/components/primitives';
-
 import BetweenModuleAd from '../shared/BetweenModuleAd';
 import PostList from './PostList';
 import TrendingPostGrid from './TrendingPostGrid';
 
 import TitleMobile from './TitleMobile';
 import TitleSquare from './TitleSquare';
+import { Container } from '@/components/primitives';
+import { ModuleBox } from '@/components/modules';
 
 import { Responsive } from '@/components/utils';
 

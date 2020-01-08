@@ -64,15 +64,17 @@ export default class Admin extends PureComponent<Props, State> {
 
     const data = moduleList.map(generateFakeData);
 
+    const tag = (window as any).tag_slug || this.props.tagId;
+
     return (
       <View>
-        {this.props.tagId && (
+        {tag &&
           <View style={styles.centerItems}>
             <View style={[styles.card, styles.centerItems]}>
-              <Text style={styles.headline}>Editing Tag {this.props.tagId}</Text>
+              <Text style={styles.headline}>Editing Tag: {tag}</Text>
             </View>
           </View>
-        )}
+        }
         <Button
           onPress={() => this.setState({ isPreview: !isPreview })}
           title={isPreview ? 'Close' : 'Preview'}

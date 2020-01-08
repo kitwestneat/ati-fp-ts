@@ -16,6 +16,10 @@ interface Props {
 }
 
 function renderSectionOptions(moduleOpts: any) {
+  if (moduleOpts.type == 'recentAndTrending') {
+    return null;
+  }
+
   const { sectionLink, sectionColor, sectionTitle, split } = moduleOpts;
   return (
     <View>
@@ -42,13 +46,13 @@ function renderModuleSpecificOpts(moduleOpts: any) {
     case 'recent':
     case 'newsletter':
     case 'tag':
+    case 'recentAndTrending':
       break;
     case 'trending':
       return renderSectionOptions(moduleOpts);
     case 'tagTileBox':
     case 'tagOverlapTitle':
     case 'splitTagBox':
-    case 'recentAndTrending':
       const sectionOpts = renderSectionOptions(moduleOpts);
       const { order } = moduleOpts;
 
@@ -69,9 +73,12 @@ export default class ModuleListItem extends PureComponent<Props> {
   public render() {
     const { item, onOpenEditClick, onOpenDeleteClick, onMove, onMoveEnd } = this.props;
 
+    // eslint-disable-next-line camelcase
     const { module_opts, query } = item;
+    // eslint-disable-next-line camelcase
     const moduleOpts = (module_opts || {}) as AllModuleDataTypes;
     const { type } = moduleOpts;
+    // eslint-disable-next-line camelcase
     const moduleOptsBox = module_opts ? renderModuleSpecificOpts(moduleOpts) : null;
 
     const handle = {
@@ -81,8 +88,8 @@ export default class ModuleListItem extends PureComponent<Props> {
       marginLeft: -5
     };
 
-    const showQuery = typeof query === 'object';
     const queryStr = queryObj2Str(query);
+    const showQuery = queryStr != '' && !queryStr.includes('instagram');
 
     return (
       <TouchableOpacity style={styles.card} onPressIn={onMove} onPressOut={onMoveEnd}>
