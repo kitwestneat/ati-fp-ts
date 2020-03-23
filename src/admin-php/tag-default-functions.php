@@ -5,7 +5,7 @@ function get_tag_title($tag, $taxonomy = 'post_tag') {
     // array is used if it's a multi tag page
     if (is_array($tag)) {
       list($tags_mode, $tags) = $tag;
-      $tag_titles = array_map(get_tag_title, $tags);
+      $tag_titles = array_map('get_tag_title', $tags);
 
       return implode(' & ', $tag_titles);
     }
