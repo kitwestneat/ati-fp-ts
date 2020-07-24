@@ -45,9 +45,9 @@ class Image extends PureComponent<Props> {
 
     return typeof width === 'number' && typeof height === 'number'
       ? {
-          width,
-          height
-        }
+        width,
+        height
+      }
       : null;
   };
 
@@ -57,9 +57,9 @@ class Image extends PureComponent<Props> {
 
     return typeof width === 'number' && typeof height === 'number'
       ? {
-          width,
-          height
-        }
+        width,
+        height
+      }
       : null;
   };
 
@@ -82,7 +82,8 @@ class Image extends PureComponent<Props> {
   };
 
   public render() {
-    const { style, alt, resizeMode, ...rest } = this.props;
+    // RNImage complains if src is passed in, so pull it out here
+    const { style, alt, resizeMode, src, ...rest } = this.props;
 
     return (
       <Ratio ratio={this.getRatio()}>

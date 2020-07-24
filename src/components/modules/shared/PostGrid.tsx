@@ -11,21 +11,21 @@ export const DEFAULT_AD_COMPONENT = GridMrec;
 export const DEFAULT_POST_COMPONENT_ATTRS: PostComponentAttrMap = {
   OV: {
     layoutVariant: 'overlay',
-    fontStyles: { fontSize: 24, lineHeight: 30, fontWeight: 500 },
+    fontStyles: { fontSize: 24, lineHeight: 30, fontWeight: '500' },
     imageWidth: 735,
     imageHeight: 430,
-    multiplier: 2
+    multiplier: 2,
   },
   XL: {
     layoutVariant: 'extraLarge',
-    multiplier: 2
+    multiplier: 2,
   },
   LG: {
     layoutVariant: 'large',
-    multiplier: 2
+    multiplier: 2,
   },
   MD: { layoutVariant: 'medium' },
-  SM: { layoutVariant: 'reduced' }
+  SM: { layoutVariant: 'reduced' },
 };
 
 export interface PostComponentAttrMap {
@@ -46,7 +46,7 @@ interface Props {
 }
 
 function validatePostCount(orderSpec: OrderSpec, posts: PostType[], name?: string) {
-  const orderSpecPostCount = orderSpec.filter(type => type !== 'AD').length;
+  const orderSpecPostCount = orderSpec.filter((type) => type !== 'AD').length;
   if (posts.length !== orderSpecPostCount) {
     console.warn(
       `mapPostsToGrid: ${name} grid requires exactly ${orderSpecPostCount} posts, found ${posts.length}`
@@ -61,7 +61,7 @@ export default class PostGrid extends PureComponent<Props> {
       postComponentAttrMap = DEFAULT_POST_COMPONENT_ATTRS,
       posts,
       AdComponent = DEFAULT_AD_COMPONENT,
-      name
+      name,
     } = this.props;
     const postQueue = posts.slice(0).reverse();
 
@@ -112,7 +112,7 @@ export default class PostGrid extends PureComponent<Props> {
 }
 
 export function createPostGrid(attrs: Omit<Props, 'posts'>) {
-  // tslint:disable-next-line: max-classes-per-file
+  // Tslint:disable-next-line: max-classes-per-file
   return class extends PureComponent<{ posts: PostType[] }> {
     public render() {
       const { posts } = this.props;

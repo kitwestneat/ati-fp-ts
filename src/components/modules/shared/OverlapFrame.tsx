@@ -1,10 +1,10 @@
 // @flow
 
-import { PostType } from '@/types';
 import React, { PureComponent } from 'react';
 import { View } from 'react-native';
 import { Container } from '../../primitives';
 import Post from './Post';
+import { PostType } from '@/types';
 
 interface Props {
   overlap: number;
@@ -95,7 +95,8 @@ class OverlapScaffold extends PureComponent<Props> {
       <Container
         style={{
           marginTop: -overlap,
-          paddingHorizontal: containerPadding
+          paddingHorizontal: containerPadding,
+          zIndex: 99
         }}
         type="content"
       >

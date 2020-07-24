@@ -1,9 +1,9 @@
 // @flow
 
-import { Pattern } from '@/components/modules';
-import { elevation } from '@/constants';
 import React, { PureComponent, ReactNode } from 'react';
 import { StyleProp, StyleSheet, View, ViewStyle } from 'react-native';
+import { Pattern } from '@/components/modules';
+import { elevation } from '@/constants';
 
 import { OFFSET_DIRECTION } from '@/types';
 

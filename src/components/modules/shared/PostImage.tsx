@@ -1,8 +1,8 @@
 // @flow
 
-import { LazyView } from '@/components/utils';
 import React, { PureComponent } from 'react';
 import { StyleSheet, View } from 'react-native';
+import { LazyView } from '@/components/utils';
 
 import { Image } from '@/components/primitives';
 import { THUMBER_URL } from '@/constants/index';
@@ -18,7 +18,15 @@ class PostImage extends PureComponent<Props> {
   public render() {
     const { imageSrc, width, height, contrastOverlay } = this.props;
 
-    const src = `${THUMBER_URL}/${width}.${height}.${imageSrc}`;
+    let wh = '';
+    if (width) {
+      wh += `${width}.`;
+      if (height) {
+        wh += `${height}.`;
+      }
+    }
+
+    const src = `${THUMBER_URL}/${wh}${imageSrc}`;
 
     return (
       <LazyView>
