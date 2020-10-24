@@ -19,12 +19,13 @@ class AtiNewsletter extends PureComponent {
     return (
       <Responsive>
         {({ width }) => {
-          const isDesktop = width > BREAKPOINTS.MD;
+          const isDesktop = width >= BREAKPOINTS.LG;
+          const isTablet = width >= BREAKPOINTS.MD && width < BREAKPOINTS.LG;
 
           const copy = {
             headline: 'See The World You Weren\'t Meant To See',
 
-            subheadline: isDesktop
+            subheadline: isTablet || isDesktop
               ? 'Join the All That\'s Interesting newsletter and see the world like never before.'
               : 'Join the All That\'s Interesting newsletter.'
           };
@@ -47,19 +48,19 @@ class AtiNewsletter extends PureComponent {
             <ImageBackground
               style={styles.wrap}
               imageStyle={{ resizeMode: 'cover' }}
-              source={{ uri: isDesktop ? DesktopBackground : MobileBackground }}
+              source={{ uri: isTablet || isDesktop ? DesktopBackground : MobileBackground }}
             >
               <Container
                 type="content"
                 style={[
                   { height: '100%' },
-                  isDesktop
+                  isTablet || isDesktop
                     ? styles.container
                     : { paddingVertical: 60, width: 448, maxWidth: '100%' }
                 ]}
               >
                 <View
-                  style={[styles.column, isDesktop ? styles.signupDesktop : styles.signupMobile]}
+                  style={[styles.column, isDesktop ? styles.signupDesktop : isTablet ? styles.signUpTablet : styles.signupMobile]}
                 >
                   <View>
                     <SignUpForm moreStyles={calloutStyles.emailInput}>
@@ -67,11 +68,11 @@ class AtiNewsletter extends PureComponent {
                     </SignUpForm>
                   </View>
                 </View>
-                {isDesktop && (
+                {(isTablet || isDesktop) && (
                   <View
                     style={[
                       styles.column,
-                      isDesktop
+                      isTablet || isDesktop
                         ? {
                             justifyContent: 'flex-end',
                             alignItems: 'flex-end'
@@ -126,6 +127,10 @@ const styles = StyleSheet.create({
     paddingRight: 80,
     paddingLeft: 35,
     paddingVertical: 20
+  },
+  signUpTablet: {
+    paddingVertical: 50,
+    paddingLeft: 75
   },
   signupDesktop: {
     paddingVertical: 50,
