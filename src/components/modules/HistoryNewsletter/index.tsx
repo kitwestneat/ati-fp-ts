@@ -29,13 +29,16 @@ class HistoryNewsletter extends PureComponent {
           };
           const calloutStyles = {
             headline: {
-              lineHeight: 30,
+              lineHeight: 25,
               fontSize: 25
             },
             subheadline: {
-              marginTop: 10,
-              lineHeight: 20,
+              marginTop: 15,
+              lineHeight: 23,
               fontSize: 20
+            }, 
+            emailInput: {
+              marginTop: 25
             }
           };
 
@@ -79,7 +82,7 @@ class HistoryNewsletter extends PureComponent {
                   style={[styles.column, isDesktop ? styles.signupDesktop : styles.signupMobile]}
                 >
                   <View>
-                    <SignUpForm>
+                    <SignUpForm moreStyles={calloutStyles.emailInput}>
                       <Callout copy={copy} styles={calloutStyles} />
                     </SignUpForm>
                   </View>
