@@ -20,6 +20,7 @@ const COPY_DEFAULT = {
 
 interface Props {
   subscribeExtraOpts?: any;
+  moreStyles?: any;
 }
 
 interface State {
@@ -69,11 +70,12 @@ class SignUpForm extends PureComponent<Props, State> {
 
   public renderForm = () => {
     const { email } = this.state;
+    const { moreStyles } = this.props;
 
     return (
       <View>
         {this.props.children}
-        <View style={styles.signupWrap}>
+        <View style={[styles.signupWrap, moreStyles]}>
           <EmailInput value={email} onChangeText={this.setEmail} onSubmit={this.handleSubmit} />
           <SubmitButton onPress={this.handleSubmit} />
         </View>
