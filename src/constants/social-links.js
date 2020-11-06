@@ -29,7 +29,7 @@ export const SOCIAL_MAP = {
     iconComponent: FaPinterest,
   },
   [SOCIAL_TYPES.NEWSLETTER]: {
-    href: 'http://interestin.gg/AN2pn3',
+    href: 'https://allthatsinteresting.com/signup/',
     text: 'Newsletter',
     iconComponent: FaEnvelope,
   },
