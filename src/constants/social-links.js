@@ -19,7 +19,7 @@ export const SOCIAL_MAP = {
     iconComponent: FaFacebookF,
   },
   [SOCIAL_TYPES.TWITTER]: {
-    href: 'https://twitter.com/ATInteresting',
+    href: 'https://twitter.com/' + (window.pbh_config_get('twitter_account') || 'AllThatsIntere1'),
     text: 'Twitter',
     iconComponent: FaTwitter,
   },
