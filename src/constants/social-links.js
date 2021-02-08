@@ -2,13 +2,13 @@ import {
   FaFacebookF,
   FaTwitter,
   FaEnvelope,
-  FaPinterest,
+  FaPodcast,
 } from 'react-icons/fa';
 
 export const SOCIAL_TYPES = {
   FACEBOOK: 'facebook',
   TWITTER: 'twitter',
-  PINTEREST: 'pinterest',
+  PODCAST: 'podcast',
   NEWSLETTER: 'newsletter',
 };
 
@@ -19,14 +19,14 @@ export const SOCIAL_MAP = {
     iconComponent: FaFacebookF,
   },
   [SOCIAL_TYPES.TWITTER]: {
-    href: 'https://twitter.com/' + (window.pbh_config_get('twitter_account') || 'AllThatsIntere1'),
+    href: 'https://twitter.com/' + ((window.pbh_config_get && window.pbh_config_get('twitter_account')) || 'AllThatsIntere1'),
     text: 'Twitter',
     iconComponent: FaTwitter,
   },
-  [SOCIAL_TYPES.PINTEREST]: {
-    href: 'https://www.pinterest.com/allthatisintere/',
-    text: 'Pinterest',
-    iconComponent: FaPinterest,
+  [SOCIAL_TYPES.PODCAST]: {
+    href: 'https://spoti.fi/34uoEzF',
+    text: 'Podcast',
+    iconComponent: FaPodcast,
   },
   [SOCIAL_TYPES.NEWSLETTER]: {
     href: 'https://allthatsinteresting.com/signup/',
@@ -42,7 +42,7 @@ export const SOCIAL_LINKS_REDUCED = [
 
 export const SOCIAL_LINKS_STANDARD = [
   SOCIAL_MAP[SOCIAL_TYPES.FACEBOOK],
-  SOCIAL_MAP[SOCIAL_TYPES.PINTEREST],
+  SOCIAL_MAP[SOCIAL_TYPES.PODCAST],
   SOCIAL_MAP[SOCIAL_TYPES.TWITTER],
   SOCIAL_MAP[SOCIAL_TYPES.NEWSLETTER],
 ];
