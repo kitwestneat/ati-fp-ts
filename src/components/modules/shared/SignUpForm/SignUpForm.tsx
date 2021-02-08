@@ -3,23 +3,22 @@
 import React, { PureComponent } from 'react';
 import { ActivityIndicator, StyleSheet, View } from 'react-native';
 
-import { Text } from '../../../primitives';
-
 import { FaCheckCircle, FaExclamationTriangle } from 'react-icons/fa';
+import { Text } from '../../../primitives';
 
 import { subscribe } from './subscribe';
 
-import { ASYNC_STATES } from '@/constants';
 import EmailInput from './EmailInput';
 import SubmitButton from './SubmitButton';
+import { ASYNC_STATES } from '@/constants';
 
 const COPY_DEFAULT = {
   SUCCESS: 'Thank you for subscribing to our newsletter!',
-  ERROR: 'There was an error subscribing to the newsletter. Please try again later.'
+  ERROR: 'There was an error subscribing to the newsletter. Please try again later.',
 };
 
 interface Props {
-  subscribeExtraOpts?: any;
+  newsletter: 'HU' | 'ATI' | 'both';
   moreStyles?: any;
 }
 
@@ -31,7 +30,7 @@ interface State {
 class SignUpForm extends PureComponent<Props, State> {
   public state: State = {
     email: '',
-    submissionStatus: ASYNC_STATES.DEFAULT
+    submissionStatus: ASYNC_STATES.DEFAULT,
   };
 
   public setEmail = (email: string) => this.setState({ email });
@@ -44,11 +43,11 @@ class SignUpForm extends PureComponent<Props, State> {
 
     this.setState({ submissionStatus: ASYNC_STATES.LOADING });
 
-    const { subscribeExtraOpts } = this.props;
-    const { status } = await subscribe(email, subscribeExtraOpts);
+    const { newsletter } = this.props;
+    const { status } = await subscribe(email, { type: newsletter });
 
     this.setState({
-      submissionStatus: status === 200 ? ASYNC_STATES.SUCCESS : ASYNC_STATES.ERROR
+      submissionStatus: status == 200 ? ASYNC_STATES.SUCCESS : ASYNC_STATES.ERROR,
     });
   };
 
@@ -88,7 +87,7 @@ class SignUpForm extends PureComponent<Props, State> {
       [ASYNC_STATES.DEFAULT]: this.renderForm(),
       [ASYNC_STATES.LOADING]: this.renderLoading(),
       [ASYNC_STATES.SUCCESS]: this.renderSuccess(),
-      [ASYNC_STATES.ERROR]: this.renderError()
+      [ASYNC_STATES.ERROR]: this.renderError(),
     };
     return MAP[submissionStatus];
   };
@@ -105,18 +104,18 @@ export default SignUpForm;
 const styles = StyleSheet.create({
   signupWrap: {
     marginTop: 20,
-    position: 'relative'
+    position: 'relative',
   },
   errorMsg: {
     color: 'white',
     fontSize: 30,
     lineHeight: 40,
-    fontWeight: '600'
+    fontWeight: '600',
   },
   successMsg: {
     color: 'white',
     fontSize: 24,
     lineHeight: 31,
-    fontWeight: '300'
-  }
+    fontWeight: '300',
+  },
 });

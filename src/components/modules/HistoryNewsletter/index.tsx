@@ -83,7 +83,7 @@ class HistoryNewsletter extends PureComponent {
                   style={[styles.column, isDesktop ? styles.signupDesktop : isTablet ? styles.signupMobile : styles.signupMobile]}
                 >
                   <View>
-                    <SignUpForm moreStyles={calloutStyles.emailInput}>
+                    <SignUpForm moreStyles={calloutStyles.emailInput} newsletter='HU'>
                       <Callout copy={copy} styles={calloutStyles} />
                     </SignUpForm>
                   </View>

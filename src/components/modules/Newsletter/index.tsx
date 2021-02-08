@@ -51,7 +51,7 @@ class Newsletter extends PureComponent<Props> {
                   </View>
                 </View>
                 <View style={styles.column}>
-                  <SignUpForm>
+                  <SignUpForm newsletter='both'>
                     <Callout
                       copy={{
                         headline: `Sign up to our newsletter`,

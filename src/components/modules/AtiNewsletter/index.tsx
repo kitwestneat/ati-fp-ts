@@ -63,7 +63,7 @@ class AtiNewsletter extends PureComponent {
                   style={[styles.column, isDesktop ? styles.signupDesktop : isTablet ? styles.signUpTablet : styles.signupMobile]}
                 >
                   <View>
-                    <SignUpForm moreStyles={calloutStyles.emailInput}>
+                    <SignUpForm moreStyles={calloutStyles.emailInput} newsletter='ATI'>
                       <Callout copy={copy} styles={calloutStyles} />
                     </SignUpForm>
                   </View>

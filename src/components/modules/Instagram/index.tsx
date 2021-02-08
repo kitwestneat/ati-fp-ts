@@ -26,7 +26,7 @@ export default class Instagram extends PureComponent<Props> {
 
     const captionStyle = isHU ? 'black-on-white' : 'white-on-black';
 
-    if (!posts.length) {
+    if (!posts || !posts.length) {
       console.error('No Instagram posts defined.');
 
       return null;
