@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import { Omit, SectionData } from '../../../types';
+import { SectionData } from '../../../types';
 import AdminInput from '../AdminInput';
 import AdminTextInput from '../AdminTextInput';
 

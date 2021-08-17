@@ -43,6 +43,7 @@ class DrawerAnimationToggle extends PureComponent<Props, State> {
 
     this.setState({ isDrawerOpen: true, isAnimatingIn: true }, () =>
       Animated.timing(drawerAnimation, {
+        useNativeDriver: true,
         toValue: 1,
         duration: 250,
         easing: Easing.bezier(0.4, 0, 0.2, 1)
@@ -55,6 +56,7 @@ class DrawerAnimationToggle extends PureComponent<Props, State> {
 
     this.setState({ isAnimatingOut: true }, () =>
       Animated.timing(drawerAnimation, {
+        useNativeDriver: true,
         toValue: 0,
         duration: 250,
         easing: Easing.bezier(0.4, 0, 0.2, 1)

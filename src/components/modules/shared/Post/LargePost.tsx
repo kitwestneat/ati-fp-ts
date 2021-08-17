@@ -10,7 +10,6 @@ import SmallPost from './SmallPost';
 
 export interface LargePostProps extends Partial<PostType> {
   layoutVariant: 'large';
-  imageSrc: string;
   imageWidth: number;
   imageHeight: number;
   numberOfLines?: number;

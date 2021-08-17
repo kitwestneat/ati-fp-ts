@@ -3,13 +3,12 @@
 import React, { ComponentType, PureComponent } from 'react';
 import { StyleSheet } from 'react-native';
 
-import { View } from '@/components/primitives';
-import { Omit } from '@/types';
 import ExtraLargePost, { ExtraLargePostProps } from './ExtraLargePost';
 import LargePost, { LargePostProps } from './LargePost';
 import MediumPost, { MediumPostProps } from './MediumPost';
 import OverlayPost, { OverlayPostProps } from './OverlayPost';
 import SmallPost, { SmallPostProps } from './SmallPost';
+import { View } from '@/components/primitives';
 
 const LAYOUT_VARIANT = {
   REDUCED: 'reduced',
@@ -27,19 +26,18 @@ const POST_VARIANT_MAP = {
   [LAYOUT_VARIANT.EXTRA_LARGE]: ExtraLargePost
 };
 
-type AllSubPostProps = SmallPostProps &
-  OverlayPostProps &
-  MediumPostProps &
-  LargePostProps &
-  ExtraLargePost;
-type SubPostProps = Partial<Omit<AllSubPostProps, 'layoutVariant'>>;
+export type LayoutVariants = 'reduced' | 'medium' | 'overlay' | 'large' | 'extraLarge';
 
-export interface PostProps extends SubPostProps {
-  layoutVariant: 'reduced' | 'medium' | 'overlay' | 'large' | 'extraLarge';
-  link: string;
+type AllSubPostProps = SmallPostProps | OverlayPostProps | MediumPostProps | LargePostProps | ExtraLargePost;
+
+type SubPostProps = Partial<AllSubPostProps>;
+
+export type PostProps = SubPostProps & {
+  layoutVariant: LayoutVariants;
+  link?: string;
   postLine?: boolean;
   showLabel?: boolean;
-}
+};
 
 class Post extends PureComponent<PostProps> {
   public render() {

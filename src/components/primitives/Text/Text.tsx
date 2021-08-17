@@ -5,7 +5,7 @@ import { StyleSheet, Text as RNText, TextProps } from 'react-native';
 import Clamp from './Clamp';
 
 import { COLOR_MAP, FONT_FAMILIES } from '@/constants/index';
-import { Omit, WebAccessibilityProps } from '@/types';
+import { WebAccessibilityProps } from '@/types';
 import HtmlText from '../HtmlText/HtmlText';
 
 type WebTextProps = Omit<TextProps, 'accessibilityRole'> & WebAccessibilityProps;

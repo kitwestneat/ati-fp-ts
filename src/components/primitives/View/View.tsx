@@ -1,6 +1,6 @@
 // @flow
 
-import { Omit, WebAccessibilityProps, WebViewStyle } from '@/types';
+import { WebAccessibilityProps, WebViewStyle } from '@/types';
 import React, { ComponentType, PureComponent } from 'react';
 import { StyleProp, View as RNView, ViewProps } from 'react-native';
 

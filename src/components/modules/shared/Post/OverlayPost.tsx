@@ -8,24 +8,22 @@ import { Text, View } from '@/components/primitives';
 import { WebAccessibilityProps, WebViewStyle } from '@/types';
 import { PostType } from '@/types';
 
-export interface OverlayPostProps extends PostType {
+export interface OverlayPostProps extends Partial<PostType> {
   layoutVariant: 'overlay';
 
+  isDesktop?: boolean;
   style: WebViewStyle;
   bottomOverlap: number;
   center: boolean;
-  imageSrc: string;
   imageWidth: number;
   imageHeight: number;
-  isDesktop: boolean;
   fontStyles: any;
   containerPadding: string;
+  numberOfLines?: number;
   title: string;
+  showLabel?: boolean;
   categoryName: string;
   categoryColor: string;
-  numberOfLines: number;
-  link: string;
-  showLabel?: boolean;
 }
 
 class OverlayPost extends PureComponent<OverlayPostProps> {

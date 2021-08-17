@@ -14,6 +14,7 @@ export interface PostType {
   link: string;
   categoryName: string;
   categoryColor: string;
+  isDesktop?: boolean;
 }
 
 export interface ModuleData {
@@ -110,8 +111,6 @@ export interface WebAccessibilityProps {
   // Button
   onClick?: () => void;
 }
-
-export type Omit<T, K> = Pick<T, Exclude<keyof T, K>>;
 
 export interface WebViewStyle extends Omit<ViewStyle, 'transform'> {
   boxShadow?: string;

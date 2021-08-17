@@ -30,7 +30,7 @@ class NavDrawer extends PureComponent<Props> {
       <>
         {isDrawerOpen && (
           <Animated.View
-            onClick={toggleDrawer}
+            onTouchStart={toggleDrawer}
             style={[styles.overlay, { opacity: overlayOpacity }]}
           />
         )}

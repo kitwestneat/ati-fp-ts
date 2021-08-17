@@ -1,11 +1,12 @@
+/* eslint-disable max-classes-per-file */
 import React, { PureComponent } from 'react';
 
 import { Grid, GridSlot } from '../../primitives';
 
-import { Omit, PostType } from '@/types';
+import { PostType } from '@/types';
 
 import GridMrec from './GridMrec';
-import Post, { PostProps } from './Post';
+import Post, { LayoutVariants, PostProps } from './Post';
 
 export const DEFAULT_AD_COMPONENT = GridMrec;
 export const DEFAULT_POST_COMPONENT_ATTRS: PostComponentAttrMap = {
@@ -29,7 +30,7 @@ export const DEFAULT_POST_COMPONENT_ATTRS: PostComponentAttrMap = {
 };
 
 export interface PostComponentAttrMap {
-  [k: string]: Omit<PostProps, keyof PostType> & { multiplier?: number };
+  [k: string]: PostProps & { layoutVariant: LayoutVariants, multiplier?: number };
 }
 
 export type OrderSpec = string[];

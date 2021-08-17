@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import { Picker } from 'react-native';
-import { Omit, SplitTagBoxData } from '../../../types';
+import { SplitTagBoxData } from '../../../types';
 import AdminInput from '../AdminInput';
 import TagTileBoxOptions from './TagTileBoxOptions';
 

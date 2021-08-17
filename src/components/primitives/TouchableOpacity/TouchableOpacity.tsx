@@ -1,4 +1,4 @@
-import { Omit, WebViewStyle } from '@/types';
+import { WebViewStyle } from '@/types';
 import React, { ComponentType, PureComponent } from 'react';
 import {
   StyleProp,

@@ -10,11 +10,9 @@ import SmallPost from './SmallPost';
 
 export interface MediumPostProps extends Partial<PostType> {
   layoutVariant: 'medium';
-  imageSrc: string;
   imageWidth: number;
   imageHeight: number;
   numberOfLines?: number;
-  isDesktop?: boolean;
   postLine?: boolean;
 }
 
