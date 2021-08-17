@@ -16,6 +16,9 @@ module.exports = {
     },
     plugins: ['@typescript-eslint', '@typescript-eslint/tslint', 'import'],
     root: true,
+    globals: {
+        JSX: true,
+    },
     rules: {
         'import/order': ['error', { alphabetize: { order: "asc"} }],
         'array-callback-return': 'warn',
@@ -270,7 +273,6 @@ module.exports = {
         '@typescript-eslint/adjacent-overload-signatures': 'warn',
         '@typescript-eslint/array-type': 'warn',
         '@typescript-eslint/ban-types': 'warn',
-        '@typescript-eslint/class-name-casing': 'warn',
         '@typescript-eslint/consistent-type-assertions': 'warn',
         '@typescript-eslint/consistent-type-definitions': 'warn',
         '@typescript-eslint/explicit-member-accessibility': [
@@ -294,7 +296,6 @@ module.exports = {
                 }
             }
         ],
-        '@typescript-eslint/interface-name-prefix': 'warn',
         '@typescript-eslint/member-ordering': 'off',
         '@typescript-eslint/no-empty-function': 'warn',
         '@typescript-eslint/no-empty-interface': 'off',
@@ -343,6 +344,7 @@ module.exports = {
         ],
         'id-match': 'warn',
         'import/order': 'warn',
+        'import/namespace': 'off',
         'linebreak-style': 'off',
         'max-classes-per-file': ['warn', 1],
         'max-len': [
