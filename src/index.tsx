@@ -12,23 +12,25 @@ if (isAdmin) {
   module.exports = '';
 }`;
 
-function startFP(data) {
+function startFP(data: any) {
   ReactDOM.render(
     <App data={data} />,
     document.getElementById('root')
   );
 }
-window.startFP = startFP;
+debugger;
+const global = window as any;
+global.startFP = startFP;
 
 /*
 */
 
 if (isDevEnv()) {
   if (window.document.location.href.includes('/tag/')) {
-    startFP(window.tag_data);
-  } else if (window.startAdmin && window.document.location.href.includes('/admin')) {
-    window.startAdmin(window.admin_data, 76);
+    startFP(global.tag_data);
+  } else if (global.startAdmin && window.document.location.href.includes('/admin')) {
+    global.startAdmin(global.admin_data, 76);
   } else {
-    startFP(window.fp_data);
+    startFP(global.fp_data);
   }
 }

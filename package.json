@@ -35,7 +35,7 @@
     "eject": "react-scripts eject",
     "pre-build": "cp public/index.html public/_index.html && cp public/root-partial.html public/index.html",
     "post-build": "cp public/index.html public/root-partial.html && cp public/_index.html public/index.html && ./phpify-fp.sh",
-    "build": "npm run pre-build ; NODE_ENV=dev react-scripts build ; npm run post-build",
+    "build": "npm run pre-build ; NODE_ENV=production react-scripts build ; npm run post-build",
     "deploy": "tar cvzf /tmp/front.tgz build && scp /tmp/front.tgz be0:/tmp",
     "admin-start": "IS_ADMIN=true react-scripts start",
     "admin-build": "IS_ADMIN=true PUBLIC_URL=https://example.org/wordpress/wp-content/plugins/pbh-fp-admin npm run build && rm -rf pbh-fp-admin && mv build pbh-fp-admin && cp src/admin-php/*.php pbh-fp-admin",

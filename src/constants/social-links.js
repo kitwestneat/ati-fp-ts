@@ -17,7 +17,7 @@ export const SOCIAL_MAP = {
     iconComponent: FaFacebookF,
   },
   [SOCIAL_TYPES.PODCAST]: {
-    href: 'https://spoti.fi/34uoEzF',
+    href: 'https://allthatsinteresting.com/history-uncovered',
     text: 'Podcast',
     iconComponent: FaPodcast,
   },

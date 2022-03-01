@@ -19,7 +19,7 @@ class PostImage extends PureComponent<Props> {
     const { imageSrc, width, height, contrastOverlay } = this.props;
     if (!imageSrc) {
       console.warn('empty image src');
-      return;
+      return null;
     }
 
     let wh = '';
