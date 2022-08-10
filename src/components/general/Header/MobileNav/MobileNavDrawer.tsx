@@ -1,5 +1,8 @@
-import { Text } from '@/components/primitives';
 import React, { PureComponent, ReactNode } from 'react';
+import {
+  FaUser,
+} from 'react-icons/fa';
+import { Text } from '@/components/primitives';
 import { StyleSheet, View } from 'react-native';
 import DrawerScaffolding from './DrawerScaffolding';
 
@@ -39,7 +42,9 @@ export default class DrawerContents extends PureComponent<Props> {
               {SOCIAL_LINKS_STANDARD.map(({ href, text, iconComponent: SocialIcon }) => (
                 <View key={text} style={styles.linkItem}>
                   <View style={styles.icon}>
-                    <SocialIcon size={21} />
+                    {SocialIcon
+                        ? <SocialIcon size={21} />
+                        : <FaUser size={21} />}
                   </View>
                   <Text style={styles.tagText} accessibilityRole="link" href={href}>
                     {text}

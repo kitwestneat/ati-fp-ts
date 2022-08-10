@@ -80,7 +80,7 @@ class Footer extends PureComponent<Props> {
                     style={[styles.text, hPadding, socialLinkSize]}
                     accessibilityRole="link"
                   >
-                    <SocialIcon />
+                    {SocialIcon && <SocialIcon />}
                   </Text>
                 ))}
               </View>
