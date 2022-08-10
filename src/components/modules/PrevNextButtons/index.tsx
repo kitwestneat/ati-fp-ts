@@ -19,7 +19,8 @@ export default class PrevNextButtons extends PureComponent<Props> {
     public goToURL = (url: string) => {
         Linking.canOpenURL(url).then(supported => {
             if (supported) {
-                Linking.openURL(url);
+                // XXX is there a better way to use react-native-web only args?
+                (Linking as any).openURL(url, '_self');
             } else {
                 console.log('Don\'t know how to open URI: ' + url);
             }
