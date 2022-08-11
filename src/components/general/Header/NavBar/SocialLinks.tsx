@@ -58,5 +58,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     paddingHorizontal: 15,
     borderRadius: 5,
+    lineHeight: '25px' as any,
+    fontSize: '.75em' as any,
   },
 });
