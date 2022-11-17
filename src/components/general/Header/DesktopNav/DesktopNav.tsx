@@ -26,6 +26,7 @@ const TagLinks = ({ links }: { links: Links[] }) => {
   return (
     <View style={[styles.tagLinks]}>
       {links.map(({ type, text, href }) => (
+          <>
         <Text
           key={type}
           style={[styles.headerText, styles.linkItem]}
@@ -34,12 +35,28 @@ const TagLinks = ({ links }: { links: Links[] }) => {
         >
           {text}
         </Text>
+        <Text
+            key={type + 'sep'}
+            style={[styles.headerText, styles.linkItem, styles.separator]}
+        >|</Text>
+    </>
       ))}
+        <Text
+          key="tih"
+          style={[styles.headerText, styles.linkItem, {'whiteSpace': 'nowrap'} as any]}
+          accessibilityRole="link"
+          href="/today-in-history"
+        >
+          Today In History
+        </Text>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
+  separator: {
+      paddingHorizontal: 0,
+  },
   tagLinks: {
     flexDirection: 'row'
   },

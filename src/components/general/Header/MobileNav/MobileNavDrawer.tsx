@@ -34,6 +34,16 @@ export default class DrawerContents extends PureComponent<Props> {
                   </Text>
                 </View>
               ))}
+            <View key="tih" style={styles.linkItem}>
+                <Text
+                  key="tih"
+                  style={[styles.tagText, {'whiteSpace': 'nowrap'} as any]}
+                  accessibilityRole="link"
+                  href="/today-in-history"
+                >
+                  Today In History
+                </Text>
+            </View>
             </LinkGroup>
 
             <Line />
