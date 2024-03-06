@@ -34,7 +34,18 @@ function pbh_fp_save_module_list($module_list) {
 function pbh_fp_get_tag_module_list($tag) {
     $saved_modules = get_term_meta($tag->term_id, PBH_FP_TAG_MODULE_LIST_KEY, true) ?: false;
     if ($saved_modules) {
-        return $saved_modules;
+        $modules = array_map(function ($mod) use ($tag) {
+            if ($mod['module_opts']['type'] != 'tag') {
+                return $mod;
+            }
+
+            $mod['module_opts']['description'] = $tag->description;
+            $mod['module_opts']['name'] = get_tag_title($tag);
+
+            return $mod;
+        }, json_decode($saved_modules, true));
+
+        return json_encode($modules);
     }
 
     switch ($tag->slug) {
@@ -72,7 +83,7 @@ function pbh_fp_get_tag_module_list($tag) {
         $module_defs = get_default_weird_news_tag_modules($tag);
         break;
     default:
-        $module_defs = pbh_fp_get_module_list();
+        $module_defs = get_default_tag_modules($tag);
         break;
     }
 
@@ -103,10 +114,8 @@ function pbh_fp_admin_page() {
     }
 
     $tag_id = $_GET['tag_id'];
-    $tag_slug = '';
     if ($tag_id) {
         $tag = get_tag($tag_id);
-        $tag_slug = $tag->slug;
         $module_list = pbh_fp_get_tag_module_list($tag);
     } else {
         $module_list = pbh_fp_get_module_list();
@@ -116,8 +125,7 @@ function pbh_fp_admin_page() {
 
   <script>
     window.module_list = <?php echo PBH_FP_DEFAULT_MODULE_LIST ?>;
-    window.tag_id = <?php echo $tag_id ?: 'undefined' ?>;
-    window.tag_slug = "<?php echo $tag_slug; ?>";
+    window.tag = <?php echo $tag ? json_encode($tag) : 'undefined' ?>;
   </script>
   <script>
   try {
@@ -128,7 +136,7 @@ function pbh_fp_admin_page() {
   </script>
   <script>
   jQuery(function() {
-      startAdmin(window.module_list, window.tag_id);
+      startAdmin(window.module_list, window.tag);
   });
   </script>
 
