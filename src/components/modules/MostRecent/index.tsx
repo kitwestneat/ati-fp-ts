@@ -20,9 +20,13 @@ interface Props {
 
 class MostRecent extends PureComponent<Props> {
   public renderMobile = () => {
-    const {
-      posts: [mainPost, ...secondaryPosts]
-    } = this.props;
+    const { posts } = this.props;
+    if (!posts) {
+        console.error('posts is undefined');
+        return null;
+    }
+
+    const [mainPost, ...secondaryPosts] = posts;
 
     return (
       <OverlapFrame
@@ -51,9 +55,14 @@ class MostRecent extends PureComponent<Props> {
   };
 
   public renderDesktop = () => {
-    const {
-      posts: [mainPost, ...secondaryPosts]
-    } = this.props;
+    const { posts } = this.props;
+    if (!posts) {
+        console.error('posts is undefined');
+        return null;
+    }
+
+    const [mainPost, ...secondaryPosts] = posts;
+
     return (
       <Container type="content">
         <ModuleBox patternColor={mainPost.categoryColor}>

@@ -15,7 +15,7 @@ interface Props {
 
 class App extends PureComponent<Props> {
   public componentDidMount() {
-    startAds();
+    setTimeout(startAds);
   }
 
   public render() {

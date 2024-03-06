@@ -20,7 +20,7 @@ export default class RecentAndTrending extends PureComponent<Props> {
   public render() {
     const {
       sectionColor,
-      recentPosts: [mainPost, ...secondaryPosts],
+      recentPosts,
       trendingPosts,
       tag
     } = this.props;
@@ -29,6 +29,18 @@ export default class RecentAndTrending extends PureComponent<Props> {
       <Responsive>
         {({ minWidth }) => {
           const isDesktop = minWidth(BREAKPOINTS.LG);
+
+          let RecentPostsModule: any = null;
+          if (recentPosts && recentPosts.length > 0) {
+              const [mainPost, ...secondaryPosts] = recentPosts;
+              RecentPostsModule = (<RecentPosts
+                        isDesktop={isDesktop}
+                        tag={tag}
+                        mainPost={mainPost}
+                        secondaryPosts={secondaryPosts}
+                        sectionColor={sectionColor}
+                      />);
+          }
 
           return (
             <>
@@ -40,14 +52,10 @@ export default class RecentAndTrending extends PureComponent<Props> {
                   justifyContent: 'space-between'
                 }}
               >
-                <RecentPosts
-                  isDesktop={isDesktop}
-                  tag={tag}
-                  mainPost={mainPost}
-                  secondaryPosts={secondaryPosts}
-                  sectionColor={sectionColor}
-                />
-                <TrendingPosts isDesktop={isDesktop} tag={tag} trendingPosts={trendingPosts} />
+                {RecentPostsModule}
+                {(trendingPosts && trendingPosts.length > 0)
+                  ? <TrendingPosts isDesktop={isDesktop} tag={tag} trendingPosts={trendingPosts} />
+                  : null}
               </Container>
             </>
           );

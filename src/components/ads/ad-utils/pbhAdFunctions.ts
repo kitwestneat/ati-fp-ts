@@ -4,6 +4,9 @@ import { getAdId } from './getAdId';
 type AdRegisterFunc = (id: string) => void;
 interface AdRegisterFuncMap { [k: string]: AdRegisterFunc; }
 
+// Don't load ads until we have at least this many registered
+const MIN_AD_COUNT = 2;
+
 // These are defined on the window object as part of the PBH ad api
 interface PbhAdApi {
   PbhAdUnit_cmd: VoidFunction[];
@@ -17,7 +20,7 @@ interface PbhAdApi {
 }
 
 /**
- * getCreateAdFuncForType
+ * GetCreateAdFuncForType
  *
  * This function takes an adType, resolves the associated pbh ad function name
  * and tries to resolve it from the window object.
@@ -38,8 +41,10 @@ const getCreateAdFuncForType = (adType: string): AdRegisterFunc | undefined => {
   console.error(`getCreateAdFuncForType: function ${adFunc} not found`);
 };
 
+let registered_ad_count = 0;
+
 /**
- * getIdFromGlobalAdRegistration
+ * GetIdFromGlobalAdRegistration
  *
  * Registers instance of PBH ad function for given ad type and returns the
  * associated ID. Used in the MakeAdComponent HOC.
@@ -50,12 +55,15 @@ const getCreateAdFuncForType = (adType: string): AdRegisterFunc | undefined => {
 export const registerAd = (adType: string): string | undefined => {
   const adFunc = getCreateAdFuncForType(adType);
   if (!adFunc) {
+    console.error('loading ad', adType, 'adFunc not found');
     return;
   }
 
   const adId = getAdId();
 
   setTimeout(() => {
+    console.log('register', adId);
+    registered_ad_count++;
     registerIdWithAdFunction(adFunc, adId);
   });
 
@@ -63,19 +71,24 @@ export const registerAd = (adType: string): string | undefined => {
 };
 
 /**
- * startAds
+ * StartAds
  *
  * Appends pbh_start_ads to the end of the PbhAdUnit_load queue array.
  * Used in the App component's componentDidMount method
  */
 export const startAds = () => {
+  if (registered_ad_count < MIN_AD_COUNT) {
+    setTimeout(startAds);
+    return;
+  }
   const w = getAdApi();
 
+  console.log('start');
   registerAdLoadCallback(w.pbh_start_ads);
 };
 
 /**
- * displayAd
+ * DisplayAd
  *
  * Appends display function for the ad instance to the end of the PbhAdUnit_cmd
  * queue array.
@@ -84,6 +97,8 @@ export const startAds = () => {
 export const displayAd = (adId: string) => {
   registerAdCommand(() => {
     const w = getAdApi();
+
+    console.log('display', adId);
 
     try {
       w.pbh_ad_units[adId].display();
@@ -94,7 +109,7 @@ export const displayAd = (adId: string) => {
 };
 
 /**
- * registerAdFunctionWithId
+ * RegisterAdFunctionWithId
  *
  * Appends create function to the PbhAdUnit_load queue array
  * @param {Function} adFunc
