@@ -9,8 +9,12 @@ export const PBH_NETWORK_LINKS = [
     href: '/about-all-thats-interesting',
   },
   {
-    text: 'Advertise',
-    href: '/about-all-thats-interesting',
+    text: 'Contact',
+    href: '/contact',
+  },
+  {
+    text: 'Editorial Standards',
+    href: '/editorial-standards',
   },
   {
     text: 'Jobs',
@@ -22,7 +26,7 @@ export const PBH_NETWORK_LINKS = [
   },
 ];
 
-export const BUG_REPORT_STRING = 'Report a Bad Ad';
+export const BUG_REPORT_STRING = 'Remove Ads';
 
 export const TAG_LINKS = [
   {

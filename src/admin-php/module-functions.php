@@ -84,9 +84,9 @@ namespace HomeModules {
     function wp_posts_to_fp_posts($posts) {
         return array_map(function ($post) {
             $featured_img = false;
-            $og_cache = get_post_meta($post->ID, '_pbh_og_cache', true);
-            if ($og_cache) {
-                $featured_img = $og_cache[0];
+            $share_images = get_post_pbh_images($post->ID, 'share');
+            if ($share_images && count($share_images) > 0) {
+                $featured_img = $share_images[0][0];
             }
             if (!$featured_img) {
                 $featured_img_id = get_post_thumbnail_id($post);
@@ -299,7 +299,7 @@ namespace {
 
         if ($module_type == 'instagram') {
             $query = ($opts['module_opts']['isHU'] ?? false) ? 'hu-instagram' : 'instagram';
-        } else if (!$query) {
+        } else if (!$query && $module_type != 'recent') {
             return $opts['module_opts'];
         } else if ($module_type == 'recentAndTrending') {
           global $paged;

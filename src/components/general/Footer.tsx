@@ -19,18 +19,6 @@ import {
 interface Props {}
 
 class Footer extends PureComponent<Props> {
-  public renderHomeLink = () => (
-    <View style={styles.linkList}>
-      <Text
-        accessibilityRole="link"
-        style={[styles.text, { paddingHorizontal: 30 }]}
-        href={HOME_LINK.href}
-      >
-        {HOME_LINK.text.toUpperCase()}
-      </Text>
-    </View>
-  );
-
   public vwStyles = (isDesktop: boolean) => ({
     spacerTop: {
       marginTop: 15
@@ -56,8 +44,6 @@ class Footer extends PureComponent<Props> {
           return (
             <>
               <View style={[styles.wrap, spacerTop]}>
-                {isDesktop && this.renderHomeLink()}
-
                 <View style={styles.linkList}>
                   {PBH_NETWORK_LINKS.map(({ href, text }) => (
                     <Text
@@ -67,19 +53,6 @@ class Footer extends PureComponent<Props> {
                       accessibilityRole="link"
                     >
                       {text.toUpperCase()}
-                    </Text>
-                  ))}
-                </View>
-
-                <View style={styles.linkList}>
-                  {SOCIAL_LINKS_REDUCED.map(({ text, href, iconComponent: SocialIcon }) => (
-                    <Text
-                      key={text}
-                      href={href}
-                      style={[styles.text, hPadding, socialLinkSize]}
-                      accessibilityRole="link"
-                    >
-                      {SocialIcon && <SocialIcon />}
                     </Text>
                   ))}
                 </View>
