@@ -30,15 +30,18 @@
   "scripts": {
     "preinstall": "rm -f node_modules/@",
     "postinstall": "ln -s `pwd`/src node_modules/@",
-    "start": "ln -fs src/index-app.tsx src/index.tsx && react-scripts --openssl-legacy-provider start",
+    "link-admin": "ln -fs index-admin.tsx src/index.tsx",
+    "link-app": "ln -fs index-app.tsx src/index.tsx",
+    "start": "npm run link-app && react-scripts --openssl-legacy-provider start",
     "test": "react-scripts --openssl-legacy-provider test",
     "eject": "react-scripts --openssl-legacy-provider eject",
     "pre-build": "cp public/index.html public/_index.html && cp public/root-partial.html public/index.html",
     "post-build": "cp public/index.html public/root-partial.html && cp public/_index.html public/index.html && ./phpify-fp.sh",
-    "build": "npm run pre-build ; ln -fs src/index-app.tsx src/index.tsx ; NODE_ENV=production react-scripts --openssl-legacy-provider build ; npm run post-build",
+    "_build": "npm run pre-build ; NODE_ENV=production react-scripts --openssl-legacy-provider build ; npm run post-build",
+    "build": "npm run link-app; npm run _build",
     "deploy": "tar cvzf /tmp/front.tgz build && scp /tmp/front.tgz be0:/tmp",
-    "admin-start": "ln -fs src/index-admin.tsx src/index.tsx ; react-scripts --openssl-legacy-provider start",
-    "admin-build": "ln -fs src/index-admin.tsx src/index.tsx; PUBLIC_URL=https://example.org/wordpress/wp-content/plugins/pbh-fp-admin npm run build && rm -rf pbh-fp-admin && mv build pbh-fp-admin && cp src/admin-php/*.php pbh-fp-admin",
+    "admin-start": "npm run link-admin; react-scripts --openssl-legacy-provider start",
+    "admin-build": "npm run link-admin; PUBLIC_URL=https://example.org/wordpress/wp-content/plugins/pbh-fp-admin npm run _build && rm -rf pbh-fp-admin && mv build pbh-fp-admin && cp src/admin-php/*.php pbh-fp-admin",
     "admin-deploy": "tar cvzf /tmp/pbh-fp-admin.tgz pbh-fp-admin && scp /tmp/pbh-fp-admin.tgz be0:/tmp"
   },
   "eslintConfig": {

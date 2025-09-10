@@ -28,3 +28,6 @@ yarn-error.log*
 *.rej
 
 public/_index.html
+
+# symlink set by package.json script
+src/index.tsx

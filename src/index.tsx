@@ -1,1 +1,1 @@
-src/index-app.tsx
+index-admin.tsx
