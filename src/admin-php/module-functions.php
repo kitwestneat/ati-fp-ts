@@ -83,19 +83,12 @@ namespace HomeModules {
 
     function wp_posts_to_fp_posts($posts) {
         return array_map(function ($post) {
-            $featured_img = false;
-            $share_images = get_post_pbh_images($post->ID, 'share');
-            if ($share_images && count($share_images) > 0) {
-                $featured_img = $share_images[0][0];
-            }
-            if (!$featured_img) {
-                $featured_img_id = get_post_thumbnail_id($post);
-                $fi_arr = wp_get_attachment_image_src($featured_img_id, 'full');
-                if (is_array($fi_arr)) {
-                    $featured_img = $fi_arr[0];
-                } else {
-                    $featured_img = '/thumb-default.jpg';
-                }
+            $featured_img_id = get_post_thumbnail_id($post);
+            $fi_arr = wp_get_attachment_image_src($featured_img_id, 'full');
+            if (is_array($fi_arr)) {
+                $featured_img = $fi_arr[0];
+            } else {
+                $featured_img = '/thumb-default.jpg';
             }
 
             $category = get_post_category($post->ID);
@@ -294,7 +287,12 @@ namespace HomeModules {
 /** EXPORTS **/
 namespace {
     function make_module($opts) {
-        $module_type = $opts['module_opts']['type'];
+        $module_type = $opts['module_opts']['type'] ?? false;
+        if (!$module_type) {
+            error_log('error getting module type, $opts='.print_r($opts, true));
+            return false;
+        }
+
         $query = $opts['query'] ?? false;
 
         if ($module_type == 'instagram') {
@@ -306,11 +304,12 @@ namespace {
 
           $recent_query = array_merge(array('paged' => $paged), $query, $opts['query_recent'] ?: array());
           $trending_query = array_merge(array('query_type' => 'hot_posts'), $query, $opts['query_trending'] ?: array());
+          $tag = $query['tag'] ?? '';
 
           $module = array_merge(array(
             'recentPosts' => HomeModules\get_module_posts($recent_query),
             'trendingPosts' => HomeModules\get_module_posts($trending_query),
-            'tag' => $query['tag'],
+            'tag' => $tag,
           ), $opts['module_opts']);
 
           return $module;
@@ -341,6 +340,9 @@ namespace {
             $term_key = 'tag';
         }
         $term = get_term_by('slug', $slug, $taxonomy);
+        if (!$term) {
+            return false;
+        }
         $module_opts = array_merge(array(
                 'sectionLink' => "/$term_path/$slug",
                 'sectionColor' => HomeModules\get_category_color($slug, $term->term_id),
