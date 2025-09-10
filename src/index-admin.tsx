@@ -2,11 +2,12 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 import Admin from '@/components/admin/Admin';
+import { ModuleSpec } from '@/types';
 
-function startAdmin(moduleList, tagId) {
+function startAdmin(moduleList: ModuleSpec[], tagId?: number) {
   ReactDOM.render(
     <Admin moduleList={moduleList} tagId={tagId} />,
     document.getElementById('root'),
   );
 }
-window.startAdmin = startAdmin;
+(window as any).startAdmin = startAdmin;
